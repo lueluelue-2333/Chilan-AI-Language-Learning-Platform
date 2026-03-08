@@ -1,0 +1,40 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+
+// 导入组件
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import Auth from './pages/Auth';
+import Learning_Overview from './pages/Learning_Overview';
+import Personal_Setting from './pages/Personal_Setting';
+import Classroom from './pages/Classroom';
+
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem('chilan_token');
+  return token ? children : <Navigate to="/auth" />;
+};
+
+function App() {
+  return (
+    <Router>
+      {/* 核心改动：Navbar 放在这里，它将出现在每一个页面顶部 */}
+      <Navbar /> 
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/register" element={<Auth />} />
+        <Route path="/login" element={<Auth />} />
+
+        {/* 受保护路由 */}
+        <Route path="/classroom" element={<ProtectedRoute><Classroom /></ProtectedRoute>} />
+        <Route path="/overview" element={<ProtectedRoute><Learning_Overview /></ProtectedRoute>} />
+        <Route path="/settings" element={<ProtectedRoute><Personal_Setting /></ProtectedRoute>} />
+
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;

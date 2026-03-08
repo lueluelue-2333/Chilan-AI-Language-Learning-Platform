@@ -1,0 +1,243 @@
+{
+  "lesson_metadata": {
+    "course_id": 1,
+    "lesson_id": 1,
+    "title": "Lesson 1: Greetings"
+  },
+  "course_content": {
+    "dialogues": [
+      {
+        "speaker": "Wang Peng",
+        "line": "你好！"
+      },
+      {
+        "speaker": "Li You",
+        "line": "你好！"
+      },
+      {
+        "speaker": "Wang Peng",
+        "line": "请问, 你贵姓？"
+      },
+      {
+        "speaker": "Li You",
+        "line": "我姓李。你呢？"
+      },
+      {
+        "speaker": "Wang Peng",
+        "line": "我姓王。李小姐, 你叫什么名字？"
+      },
+      {
+        "speaker": "Li You",
+        "line": "我叫李友。王先生, 你叫什么名字？"
+      },
+      {
+        "speaker": "Wang Peng",
+        "line": "我叫王朋。"
+      }
+    ],
+    "vocabulary": [
+      {
+        "word": "你",
+        "pinyin": "nǐ",
+        "part_of_speech": "pr",
+        "definition": "you"
+      },
+      {
+        "word": "好",
+        "pinyin": "hǎo",
+        "part_of_speech": "adj",
+        "definition": "fine, good, nice, OK, it's settled"
+      },
+      {
+        "word": "请",
+        "pinyin": "qǐng",
+        "part_of_speech": "v",
+        "definition": "please (polite form of request), to treat or to invite (somebody)"
+      },
+      {
+        "word": "问",
+        "pinyin": "wèn",
+        "part_of_speech": "v",
+        "definition": "to ask (a question)"
+      },
+      {
+        "word": "贵",
+        "pinyin": "guì",
+        "part_of_speech": "adj",
+        "definition": "honorable, expensive"
+      },
+      {
+        "word": "姓",
+        "pinyin": "xìng",
+        "part_of_speech": "v/n",
+        "definition": "(one's) family name is...; family name"
+      },
+      {
+        "word": "我",
+        "pinyin": "wǒ",
+        "part_of_speech": "pr",
+        "definition": "I, me"
+      },
+      {
+        "word": "呢",
+        "pinyin": "ne",
+        "part_of_speech": "qp",
+        "definition": "(question particle)"
+      },
+      {
+        "word": "小姐",
+        "pinyin": "xiǎojiě",
+        "part_of_speech": "n",
+        "definition": "Miss, young lady"
+      },
+      {
+        "word": "叫",
+        "pinyin": "jiào",
+        "part_of_speech": "v",
+        "definition": "to be called, to call"
+      },
+      {
+        "word": "什么",
+        "pinyin": "shénme",
+        "part_of_speech": "qpr",
+        "definition": "what"
+      },
+      {
+        "word": "名字",
+        "pinyin": "míngzi",
+        "part_of_speech": "n",
+        "definition": "name"
+      },
+      {
+        "word": "先生",
+        "pinyin": "xiānsheng",
+        "part_of_speech": "n",
+        "definition": "Mr., husband, teacher"
+      },
+      {
+        "word": "李友",
+        "pinyin": "Lǐ Yǒu",
+        "part_of_speech": "pn",
+        "definition": "(a personal name)"
+      },
+      {
+        "word": "李",
+        "pinyin": "lǐ",
+        "part_of_speech": "pn/n",
+        "definition": "(a family name); plum"
+      },
+      {
+        "word": "王朋",
+        "pinyin": "Wáng Péng",
+        "part_of_speech": "pn",
+        "definition": "(a personal name)"
+      },
+      {
+        "word": "王",
+        "pinyin": "wáng",
+        "part_of_speech": "pn/n",
+        "definition": "(a family name); king"
+      }
+    ]
+  },
+  "database_items": [
+    {
+      "question_type": "CN_TO_EN",
+      "original_text": "你",
+      "standard_answers": [
+        "you"
+      ]
+    },
+    {
+      "question_type": "CN_TO_EN",
+      "original_text": "先生",
+      "standard_answers": [
+        "Mr.",
+        "Mister",
+        "husband",
+        "teacher"
+      ]
+    },
+    {
+      "question_type": "CN_TO_EN",
+      "original_text": "叫",
+      "standard_answers": [
+        "to be called",
+        "to call"
+      ]
+    },
+    {
+      "question_type": "EN_TO_CN",
+      "original_text": "I, me",
+      "standard_answers": [
+        "我"
+      ]
+    },
+    {
+      "question_type": "EN_TO_CN",
+      "original_text": "name",
+      "standard_answers": [
+        "名字"
+      ]
+    },
+    {
+      "question_type": "EN_TO_CN",
+      "original_text": "what",
+      "standard_answers": [
+        "什么"
+      ]
+    },
+    {
+      "question_type": "CN_TO_EN",
+      "original_text": "你好！",
+      "standard_answers": [
+        "Hello!",
+        "Hi!"
+      ]
+    },
+    {
+      "question_type": "CN_TO_EN",
+      "original_text": "你叫什么名字？",
+      "standard_answers": [
+        "What is your name?"
+      ]
+    },
+    {
+      "question_type": "CN_TO_EN",
+      "original_text": "我姓王。",
+      "standard_answers": [
+        "My family name is Wang."
+      ]
+    },
+    {
+      "question_type": "EN_TO_CN",
+      "original_text": "Hello!",
+      "standard_answers": [
+        "你好！"
+      ]
+    },
+    {
+      "question_type": "EN_TO_CN",
+      "original_text": "What is your name?",
+      "standard_answers": [
+        "你叫什么名字？"
+      ]
+    },
+    {
+      "question_type": "EN_TO_CN",
+      "original_text": "My name is Li You.",
+      "standard_answers": [
+        "我叫李友。"
+      ]
+    },
+    {
+      "question_type": "CN_TO_EN",
+      "original_text": "请问, 你贵姓？",
+      "standard_answers": [
+        "Excuse me, what's your honorable family name?",
+        "May I ask your honorable surname?"
+      ]
+    }
+  ],
+  "aigc_visual_prompt": "Two young Chinese university students, one male (Wang Peng) and one female (Li You), meeting for the first time on a beautiful university campus in Beijing. They are smiling and talking, exchanging greetings. Sunny day, modern Chinese architecture in the background. Photorealistic style, natural lighting, candid shot with a 50mm lens. --ar 16:9 --style raw"
+}

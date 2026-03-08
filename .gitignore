@@ -1,0 +1,19 @@
+# Python 虚拟环境和缓存
+__pycache__/
+.venv/
+.env
+
+# Node.js 依赖
+node_modules/
+build/
+dist/
+
+# 编辑器配置
+.vscode/
+
+# 巨大的教材文件（建议不要直接传 PDF 到 GitHub）
+textbook/*.pdf
+textbook/*.zip
+
+# 数据库连接文件
+database/__pycache__/
