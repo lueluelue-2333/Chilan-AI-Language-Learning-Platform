@@ -8,6 +8,7 @@ import Auth from './pages/Auth';
 import Learning_Overview from './pages/Learning_Overview';
 import Personal_Setting from './pages/Personal_Setting';
 import Classroom from './pages/Classroom';
+import StudyPage from './pages/StudyPage';
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('chilan_token');
@@ -30,7 +31,7 @@ function App() {
         <Route path="/classroom" element={<ProtectedRoute><Classroom /></ProtectedRoute>} />
         <Route path="/overview" element={<ProtectedRoute><Learning_Overview /></ProtectedRoute>} />
         <Route path="/settings" element={<ProtectedRoute><Personal_Setting /></ProtectedRoute>} />
-
+        <Route path="/study/:courseId" element={<ProtectedRoute><StudyPage /></ProtectedRoute>} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>

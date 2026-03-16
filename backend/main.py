@@ -2,7 +2,7 @@ import os
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from routers import auth
+from routers import auth, study
 from database.connection import get_connection
 from core.evaluator import Evaluator
 from core.scheduler import FSRSScheduler
@@ -20,6 +20,9 @@ app.add_middleware(
 
 # 挂载认证模块
 app.include_router(auth.router)
+
+# 挂载学习模块
+app.include_router(study.router)
 
 # 初始化业务组件
 evaluator = Evaluator(api_key=os.getenv("GEMINI_API_KEY"))
@@ -56,7 +59,7 @@ async def get_my_courses(user_id: str, db=Depends(get_db)):
         FROM courses c
         JOIN user_courses uc ON c.course_id = uc.course_id
         LEFT JOIN language_items li ON c.course_id = li.course_id
-        LEFT JOIN user_progress p ON li.question_id = p.question_id AND p.user_id::text = %s
+        LEFT JOIN user_progress_of_language_items p ON li.question_id = p.question_id AND p.user_id::text = %s
         WHERE uc.user_id::text = %s
         GROUP BY c.course_id;
     """
@@ -76,7 +79,7 @@ async def enroll_course(req: EnrollReq, db=Depends(get_db)):
 async def get_classroom_stats(user_id: str, db=Depends(get_db)):
     cur = db.cursor()
     try:
-        cur.execute("SELECT COUNT(*) FROM user_progress WHERE user_id::text = %s AND next_review <= CURRENT_TIMESTAMP", (user_id,))
+        cur.execute("SELECT COUNT(*) FROM user_progress_of_language_items WHERE user_id::text = %s AND next_review <= CURRENT_TIMESTAMP", (user_id,))
         rem = cur.fetchone()[0]
         cur.execute("SELECT COUNT(DISTINCT question_id) FROM review_logs WHERE user_id::text = %s AND review_time >= CURRENT_DATE", (user_id,))
         rev = cur.fetchone()[0]
@@ -91,7 +94,7 @@ async def get_daily_tasks(user_id: str, db=Depends(get_db)):
     try:
         query = """
             SELECT q.question_id, q.question_type, q.original_text FROM language_items q
-            JOIN user_progress p ON q.question_id = p.question_id
+            JOIN user_progress_of_language_items p ON q.question_id = p.question_id
             WHERE p.user_id::text = %s AND p.next_review <= CURRENT_TIMESTAMP ORDER BY p.next_review ASC LIMIT 20;
         """
         cur.execute(query, (user_id,))
@@ -103,7 +106,7 @@ async def evaluate(req: AnswerReq, db=Depends(get_db)):
     cur = db.cursor()
     try:
         user_vec = evaluator.get_embedding(req.user_input)
-        cur.execute("SELECT q.original_text, q.standard_answers, q.question_type, p.stability, p.difficulty, p.recent_history, 1 - (q.primary_embedding <=> %s::vector) AS score FROM language_items q LEFT JOIN user_progress p ON q.question_id = p.question_id AND p.user_id::text = %s WHERE q.question_id = %s;", (user_vec, req.user_id, req.question_id))
+        cur.execute("SELECT q.original_text, q.standard_answers, q.question_type, p.stability, p.difficulty, p.recent_history, 1 - (q.primary_embedding <=> %s::vector) AS score FROM language_items q LEFT JOIN user_progress_of_language_items p ON q.question_id = p.question_id AND p.user_id::text = %s WHERE q.question_id = %s;", (user_vec, req.user_id, req.question_id))
         row = cur.fetchone()
         if not row: raise HTTPException(status_code=404, detail="Question not found")
         orig_text, std_ans, q_type, s, d, hist, sim = row
@@ -112,7 +115,7 @@ async def evaluate(req: AnswerReq, db=Depends(get_db)):
         new_s, new_d, next_r = scheduler.calc_next_review(s or 0.5, d or 5.0, fsrs_rating)
         new_hist = ((hist or []) + [fsrs_rating])[-5:]
         cur.execute("INSERT INTO review_logs (user_id, question_id, rating, state, stability, difficulty) VALUES (%s, %s, %s, %s, %s, %s)", (req.user_id, req.question_id, fsrs_rating, 2 if s else 0, new_s, new_d))
-        cur.execute("INSERT INTO user_progress (user_id, question_id, stability, difficulty, recent_history, is_mastered, last_review, next_review) VALUES (%s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP, %s) ON CONFLICT (user_id, question_id) DO UPDATE SET stability=EXCLUDED.stability, difficulty=EXCLUDED.difficulty, recent_history=EXCLUDED.recent_history, is_mastered=EXCLUDED.is_mastered, last_review=CURRENT_TIMESTAMP, next_review=EXCLUDED.next_review;", (req.user_id, req.question_id, new_s, new_d, new_hist, scheduler.check_mastery(new_hist), next_r))
+        cur.execute("INSERT INTO user_progress_of_language_items (user_id, question_id, stability, difficulty, recent_history, is_mastered, last_review, next_review) VALUES (%s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP, %s) ON CONFLICT (user_id, question_id) DO UPDATE SET stability=EXCLUDED.stability, difficulty=EXCLUDED.difficulty, recent_history=EXCLUDED.recent_history, is_mastered=EXCLUDED.is_mastered, last_review=CURRENT_TIMESTAMP, next_review=EXCLUDED.next_review;", (req.user_id, req.question_id, new_s, new_d, new_hist, scheduler.check_mastery(new_hist), next_r))
         db.commit()
         return {"verdict": "Correct" if res["is_correct"] else "Incorrect", "explanation": res["explanation"], "level": res["level"]}
     except Exception as e: db.rollback(); raise HTTPException(status_code=500, detail=str(e))

@@ -108,7 +108,7 @@ export default function Classroom() {
                             <motion.div 
                                 key={course.id}
                                 whileHover={{ y: -8, scale: 1.01 }}
-                                onClick={() => navigate(`/study/${course.category}`)}
+                                onClick={() => navigate(`/study/${course.id}`)}
                                 // 核心：背景色直接使用数据库中的 cover_color (如 bg-[#E11D48])
                                 className={`relative h-64 rounded-[2.5rem] ${course.color} p-8 text-white shadow-2xl shadow-slate-300/40 cursor-pointer overflow-hidden group border-2 border-white/10`}
                                 style={{ 
@@ -118,9 +118,6 @@ export default function Classroom() {
                             >
                                 <div className="relative h-full flex flex-col justify-between z-10">
                                     <div>
-                                        <div className="inline-flex items-center gap-1 px-3 py-1 bg-white/20 rounded-full text-[10px] font-black backdrop-blur-md mb-4 uppercase">
-                                            {course.category}
-                                        </div>
                                         <h3 className="text-3xl font-black mb-1 tracking-tight">{course.name}</h3>
                                         
                                         {/* 进度条 */}
@@ -160,7 +157,7 @@ export default function Classroom() {
                                                 <div className={`w-16 h-16 rounded-2xl ${course.color} shadow-sm shadow-black/10`} />
                                                 <div>
                                                     <p className="font-black text-lg text-slate-800">{course.name}</p>
-                                                    <p className="text-xs font-bold text-slate-400 uppercase">{course.category}</p>
+                                                    <p className="text-xs font-bold text-slate-400 uppercase">{course.id}</p>
                                                 </div>
                                             </div>
                                             <button onClick={() => handleEnroll(course.id)} className="mr-2 px-6 py-2 bg-slate-900 text-white text-sm font-bold rounded-xl hover:bg-blue-600 transition-all">
