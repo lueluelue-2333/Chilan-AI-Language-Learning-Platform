@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
-import { Loader2, Send, CheckCircle2, XCircle } from 'lucide-react';
+import { Loader2, Send, CheckCircle2, XCircle, Sparkles } from 'lucide-react';
 
 const fadeInUp = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 }
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 20 } }
 };
 
 export default function PracticeSection({ questions, isReview, onAllDone }) {
@@ -13,8 +13,22 @@ export default function PracticeSection({ questions, isReview, onAllDone }) {
     const [userAnswer, setUserAnswer] = useState('');
     const [isEvaluating, setIsEvaluating] = useState(false);
     const [feedback, setFeedback] = useState(null);
+    
+    // 🌟 1. 引用答题框，用于控制聚焦
+    const inputRef = useRef(null);
 
     const currentQuestion = questions[currentIndex];
+
+    // 🌟 2. 自动聚焦逻辑：进入新题或清除反馈后，立刻聚焦
+    useEffect(() => {
+        if (!feedback && !isEvaluating && inputRef.current) {
+            // 给微小的延迟确保 DOM 已经渲染完毕
+            const timer = setTimeout(() => {
+                inputRef.current.focus();
+            }, 100);
+            return () => clearTimeout(timer);
+        }
+    }, [currentIndex, feedback, isEvaluating]);
 
     // 监听键盘 Enter
     useEffect(() => {
@@ -43,7 +57,7 @@ export default function PracticeSection({ questions, isReview, onAllDone }) {
             });
             setFeedback(res.data.data);
         } catch (e) {
-            setFeedback({ isCorrect: false, message: "判题服务连接失败" });
+            setFeedback({ isCorrect: false, message: "判题服务连接失败，请重试。" });
         } finally {
             setIsEvaluating(false);
         }
@@ -62,56 +76,92 @@ export default function PracticeSection({ questions, isReview, onAllDone }) {
     if (!currentQuestion) return null;
 
     return (
-        <div className="max-w-3xl mx-auto px-6">
-            <motion.div variants={fadeInUp} initial="hidden" animate="show" className="text-center mb-10">
-                <h1 className="text-4xl font-black text-slate-800 mb-2">{isReview ? "智能巩固复习" : "随堂强化练习"}</h1>
-                <div className="mt-4 inline-block px-4 py-1 bg-slate-200 rounded-full text-xs font-bold text-slate-500">
-                    题目 {currentIndex + 1} / {questions.length}
+        // 🌟 3. 增加 pt-32 确保远离 Navbar，max-w-4xl 让布局更开阔
+        <div className="max-w-4xl mx-auto px-6 pt-32 pb-20">
+            {/* 顶部标题：字号加大，增加呼吸感 */}
+            <motion.div variants={fadeInUp} initial="hidden" animate="show" className="text-center mb-16">
+                <div className="flex items-center justify-center gap-3 mb-4">
+                    <Sparkles className="text-blue-500" size={28} />
+                    <h1 className="text-5xl font-black text-slate-900 tracking-tight">
+                        {isReview ? "智能巩固复习" : "随堂强化练习"}
+                    </h1>
+                </div>
+                <div className="inline-block px-6 py-2 bg-slate-200/50 rounded-full text-sm font-black text-slate-500 tracking-widest uppercase">
+                    Task {currentIndex + 1} of {questions.length}
                 </div>
             </motion.div>
 
-            <motion.div variants={fadeInUp} initial="hidden" animate="show" className="text-center mb-10">
-                <span className="text-sm font-bold text-blue-500 uppercase tracking-widest block mb-2">
-                    {currentQuestion.question_type === 'CN_TO_EN' ? 'Translate to English' : '翻译成中文'}
+            {/* 题目展示：字号大幅提升至 text-5xl */}
+            <motion.div variants={fadeInUp} initial="hidden" animate="show" className="text-center mb-16">
+                <span className="text-base font-bold text-blue-500 uppercase tracking-[0.3em] block mb-4">
+                    {currentQuestion.question_type === 'CN_TO_EN' ? 'Translate to English' : '请翻译成中文'}
                 </span>
-                <p className="text-3xl font-extrabold text-slate-900">“{currentQuestion.original_text}”</p>
+                <p className="text-4xl md:text-5xl font-black text-slate-900 leading-tight px-4">
+                    “{currentQuestion.original_text}”
+                </p>
             </motion.div>
 
-            <motion.div variants={fadeInUp} initial="hidden" animate="show" className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+            {/* 输入区域：加厚阴影和更大的内边距 */}
+            <motion.div variants={fadeInUp} initial="hidden" animate="show" className="bg-white p-10 md:p-12 rounded-[3rem] shadow-xl shadow-slate-200/50 border border-slate-100">
                 <textarea 
-                    autoFocus
+                    ref={inputRef} // 🌟 挂载 Ref
                     value={userAnswer}
                     onChange={(e) => setUserAnswer(e.target.value)}
                     disabled={isEvaluating || feedback}
-                    placeholder="在这里输入你的翻译..."
-                    className="w-full h-32 p-4 bg-slate-50 border border-slate-200 rounded-2xl text-xl focus:ring-2 focus:ring-blue-500 outline-none mb-6 resize-none"
+                    placeholder="在这里输入你的答案..."
+                    // 🌟 字号提升至 text-2xl，增加行高
+                    className="w-full h-40 p-6 bg-slate-50 border-2 border-slate-100 rounded-[2rem] text-2xl font-medium focus:border-blue-500 focus:bg-white transition-all outline-none mb-8 resize-none leading-relaxed"
                 />
 
-                {!feedback ? (
-                    <button 
-                        onClick={handleSubmit}
-                        disabled={!userAnswer.trim() || isEvaluating}
-                        className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-lg hover:bg-blue-700 disabled:bg-slate-300 transition flex items-center justify-center gap-2"
-                    >
-                        {isEvaluating ? <Loader2 className="animate-spin" /> : <Send size={20} />}
-                        {isEvaluating ? 'AI 导师正在阅卷...' : '提交答案'}
-                    </button>
-                ) : (
-                    <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-                        <div className={`p-6 rounded-2xl mb-6 border ${feedback.isCorrect ? 'bg-green-50 border-green-100' : 'bg-red-50 border-red-100'}`}>
-                            <div className="flex gap-3">
-                                {feedback.isCorrect ? <CheckCircle2 className="text-green-500" /> : <XCircle className="text-red-500" />}
-                                <div>
-                                    <h4 className={`font-bold ${feedback.isCorrect ? 'text-green-800' : 'text-red-800'}`}>{feedback.isCorrect ? '太棒了！' : 'AI 导师点评'}</h4>
-                                    <p className="text-slate-700 text-sm mt-1">{feedback.message}</p>
+                <AnimatePresence mode="wait">
+                    {!feedback ? (
+                        <motion.button 
+                            key="submit-btn"
+                            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                            onClick={handleSubmit}
+                            disabled={!userAnswer.trim() || isEvaluating}
+                            className="w-full py-6 bg-slate-900 text-white rounded-[1.5rem] font-black text-xl hover:bg-blue-600 disabled:bg-slate-200 transition-all flex items-center justify-center gap-3 shadow-lg shadow-slate-200"
+                        >
+                            {isEvaluating ? <Loader2 className="animate-spin" /> : <Send size={24} />}
+                            {isEvaluating ? 'AI 导师正在阅卷...' : '提交答案'}
+                        </motion.button>
+                    ) : (
+                        <motion.div 
+                            key="feedback-area"
+                            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                            className="space-y-6"
+                        >
+                            <div className={`p-8 rounded-[2rem] border-2 ${
+                                feedback.isCorrect 
+                                ? 'bg-green-50 border-green-100' 
+                                : 'bg-red-50 border-red-100'
+                            }`}>
+                                <div className="flex gap-5">
+                                    {feedback.isCorrect 
+                                        ? <CheckCircle2 className="text-green-500 shrink-0" size={32} /> 
+                                        : <XCircle className="text-red-500 shrink-0" size={32} />
+                                    }
+                                    <div>
+                                        <h4 className={`text-xl font-black mb-2 ${feedback.isCorrect ? 'text-green-800' : 'text-red-800'}`}>
+                                            {feedback.isCorrect ? '太棒了，完全正确！' : 'AI 导师的优化建议'}
+                                        </h4>
+                                        {/* 评价文字也同步放大 */}
+                                        <p className="text-slate-700 text-lg leading-relaxed font-medium">
+                                            {feedback.message}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <button onClick={handleNext} className="w-full py-4 bg-slate-900 text-white rounded-xl font-bold text-lg flex items-center justify-center">
-                            {currentIndex === questions.length - 1 ? '完成练习' : '下一题'} <span className="ml-2 text-slate-400 font-normal text-sm">(Enter)</span>
-                        </button>
-                    </div>
-                )}
+                            <button 
+                                onClick={handleNext} 
+                                className="w-full py-6 bg-blue-600 text-white rounded-[1.5rem] font-black text-xl hover:bg-blue-700 transition-all flex items-center justify-center shadow-lg shadow-blue-100"
+                            >
+                                {currentIndex === questions.length - 1 ? '完成所有练习' : '进入下一题'} 
+                                <span className="ml-3 text-blue-200 font-normal text-sm tracking-widest uppercase">Press Enter</span>
+                            </button>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </motion.div>
         </div>
     );
