@@ -2,7 +2,7 @@
   "lesson_metadata": {
     "course_id": 1,
     "lesson_id": 302,
-    "title": "Lesson 302: 邀请吃晚饭"
+    "title": "Lesson 302: 请吃晚饭"
   },
   "course_content": {
     "dialogues": [
@@ -116,7 +116,7 @@
           },
           {
             "role": "白英爱",
-            "english": "You are very busy today. Are you busy tomorrow?",
+            "english": "You are busy today. Are you busy tomorrow?",
             "words": [
               {
                 "cn": "你",
@@ -236,7 +236,7 @@
           },
           {
             "role": "白英爱",
-            "english": "I'd like to invite you to dinner tomorrow. How about it?",
+            "english": "I'd like to treat you to dinner tomorrow. How about it?",
             "words": [
               {
                 "cn": "明天",
@@ -280,7 +280,7 @@
           },
           {
             "role": "王朋",
-            "english": "Why are you inviting me to dinner?",
+            "english": "Why are you treating me to dinner?",
             "words": [
               {
                 "cn": "你",
@@ -610,7 +610,7 @@
       {
         "word": "现在",
         "pinyin": "xiànzài",
-        "part_of_speech": "t",
+        "part_of_speech": "Time",
         "definition": "now",
         "example_sentence": {
           "cn": "现在几点？",
@@ -621,40 +621,40 @@
       {
         "word": "刻",
         "pinyin": "kè",
-        "part_of_speech": "m",
+        "part_of_speech": "Measure Word",
         "definition": "quarter (of an hour)",
         "example_sentence": {
           "cn": "现在是五点三刻。",
           "py": "Xiànzài shì wǔ diǎn sān kè.",
-          "en": "It's 5:45 now."
+          "en": "It's a quarter to six now."
         }
       },
       {
         "word": "事(儿)",
         "pinyin": "shì(r)",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "matter, affair, event",
         "example_sentence": {
-          "cn": "我明天有事儿。",
-          "py": "Wǒ míngtiān yǒu shìr.",
-          "en": "I have something to do tomorrow."
+          "cn": "我六点一刻有事儿。",
+          "py": "Wǒ liù diǎn yí kè yǒu shìr.",
+          "en": "I have something to do at 6:15."
         }
       },
       {
         "word": "今天",
         "pinyin": "jīntiān",
-        "part_of_speech": "t",
+        "part_of_speech": "Time",
         "definition": "today",
         "example_sentence": {
-          "cn": "你今天忙吗？",
-          "py": "Nǐ jīntiān máng ma?",
+          "cn": "你今天忙不忙？",
+          "py": "Nǐ jīntiān máng bu máng?",
           "en": "Are you busy today?"
         }
       },
       {
         "word": "很",
         "pinyin": "hěn",
-        "part_of_speech": "adv",
+        "part_of_speech": "Adverb",
         "definition": "very",
         "example_sentence": {
           "cn": "我今天很忙。",
@@ -665,18 +665,18 @@
       {
         "word": "忙",
         "pinyin": "máng",
-        "part_of_speech": "adj",
+        "part_of_speech": "Adjective",
         "definition": "busy",
         "example_sentence": {
-          "cn": "明天我不忙。",
-          "py": "Míngtiān wǒ bù máng.",
-          "en": "I am not busy tomorrow."
+          "cn": "可是明天不忙。",
+          "py": "Kěshì míngtiān bù máng.",
+          "en": "But I am not busy tomorrow."
         }
       },
       {
         "word": "明天",
         "pinyin": "míngtiān",
-        "part_of_speech": "t",
+        "part_of_speech": "Time",
         "definition": "tomorrow",
         "example_sentence": {
           "cn": "明天我请你吃晚饭。",
@@ -687,78 +687,78 @@
       {
         "word": "晚饭",
         "pinyin": "wǎnfàn",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "dinner, supper",
         "example_sentence": {
-          "cn": "我们几点吃晚饭？",
-          "py": "Wǒmen jǐ diǎn chī wǎnfàn?",
-          "en": "What time do we have dinner?"
+          "cn": "明天我请你吃晚饭，怎么样？",
+          "py": "Míngtiān wǒ qǐng nǐ chī wǎnfàn, zěnmeyàng?",
+          "en": "I'll treat you to dinner tomorrow, how about that?"
         }
       },
       {
         "word": "为什么",
         "pinyin": "wèishénme",
-        "part_of_speech": "qpr",
+        "part_of_speech": "Question Pronoun",
         "definition": "why",
         "example_sentence": {
-          "cn": "你为什么不吃饭？",
-          "py": "Nǐ wèishénme bù chī fàn?",
-          "en": "Why aren't you eating?"
+          "cn": "你为什么请我吃饭？",
+          "py": "Nǐ wèishénme qǐng wǒ chī fàn?",
+          "en": "Why are you inviting me to dinner?"
         }
       },
       {
         "word": "因为",
         "pinyin": "yīnwèi",
-        "part_of_speech": "conj",
+        "part_of_speech": "Conjunction",
         "definition": "because",
         "example_sentence": {
-          "cn": "因为我不饿。",
-          "py": "Yīnwèi wǒ bú è.",
-          "en": "Because I'm not hungry."
+          "cn": "因为明天是高文中的生日。",
+          "py": "Yīnwèi míngtiān shì Gāo Wénzhōng de shēngrì.",
+          "en": "Because tomorrow is Gao Wenzhong's birthday."
         }
       },
       {
         "word": "还",
         "pinyin": "hái",
-        "part_of_speech": "adv",
+        "part_of_speech": "Adverb",
         "definition": "also, too, as well",
         "example_sentence": {
-          "cn": "我还请了王朋。",
-          "py": "Wǒ hái qǐng le Wáng Péng.",
-          "en": "I also invited Wang Peng."
+          "cn": "还请谁？",
+          "py": "Hái qǐng shéi?",
+          "en": "Who else are you inviting?"
         }
       },
       {
         "word": "同学",
         "pinyin": "tóngxué",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "classmate",
         "example_sentence": {
-          "cn": "他是我的同学。",
-          "py": "Tā shì wǒ de tóngxué.",
-          "en": "He is my classmate."
+          "cn": "还请我的同学李友。",
+          "py": "Hái qǐng wǒ de tóngxué Lǐ Yǒu.",
+          "en": "I'm also inviting my classmate Li You."
         }
       },
       {
         "word": "认识",
         "pinyin": "rènshi",
-        "part_of_speech": "v",
+        "part_of_speech": "Verb",
         "definition": "to be acquainted with, to recognize",
         "example_sentence": {
-          "cn": "你认识她吗？",
-          "py": "Nǐ rènshi tā ma?",
-          "en": "Do you know her?"
+          "cn": "我认识李友。",
+          "py": "Wǒ rènshi Lǐ Yǒu.",
+          "en": "I know Li You."
         }
       },
       {
         "word": "朋友",
         "pinyin": "péngyou",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "friend",
         "example_sentence": {
-          "cn": "李友是我的好朋友。",
-          "py": "Lǐ Yǒu shì wǒ de hǎo péngyou.",
-          "en": "Li You is my good friend."
+          "cn": "她也是我的朋友。",
+          "py": "Tā yě shì wǒ de péngyou.",
+          "en": "She is also my friend."
         }
       }
     ]
@@ -896,7 +896,7 @@
       "question_type": "CN_TO_EN",
       "original_text": "认识",
       "standard_answers": [
-        "to know (someone)",
+        "to know",
         "to recognize",
         "to be acquainted with"
       ]
@@ -1037,7 +1037,7 @@
       "question_id": 27,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "to know (someone), to recognize",
+      "original_text": "to know, to recognize",
       "standard_answers": [
         "认识"
       ]
@@ -1067,9 +1067,10 @@
       "question_id": 30,
       "course_id": 1,
       "question_type": "CN_TO_EN",
-      "original_text": "我今天很忙。",
+      "original_text": "我六点一刻有事儿。",
       "standard_answers": [
-        "I am very busy today."
+        "I have something to do at 6:15.",
+        "I am busy at a quarter past six."
       ]
     },
     {
@@ -1077,15 +1078,35 @@
       "question_id": 31,
       "course_id": 1,
       "question_type": "CN_TO_EN",
-      "original_text": "明天我请你吃晚饭。",
+      "original_text": "你今天忙不忙？",
       "standard_answers": [
-        "I'll treat you to dinner tomorrow.",
-        "I am inviting you to dinner tomorrow."
+        "Are you busy today?"
       ]
     },
     {
       "lesson_id": 302,
       "question_id": 32,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "我今天很忙，可是明天不忙。",
+      "standard_answers": [
+        "I am very busy today, but not busy tomorrow."
+      ]
+    },
+    {
+      "lesson_id": 302,
+      "question_id": 33,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "明天我请你吃晚饭，怎么样？",
+      "standard_answers": [
+        "I'll treat you to dinner tomorrow, how about that?",
+        "How about I treat you to dinner tomorrow?"
+      ]
+    },
+    {
+      "lesson_id": 302,
+      "question_id": 34,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "你为什么请我吃饭？",
@@ -1095,27 +1116,37 @@
     },
     {
       "lesson_id": 302,
-      "question_id": 33,
-      "course_id": 1,
-      "question_type": "CN_TO_EN",
-      "original_text": "因为明天是他的生日。",
-      "standard_answers": [
-        "Because tomorrow is his birthday."
-      ]
-    },
-    {
-      "lesson_id": 302,
-      "question_id": 34,
-      "course_id": 1,
-      "question_type": "CN_TO_EN",
-      "original_text": "我认识他，他也是我的朋友。",
-      "standard_answers": [
-        "I know him, he is also my friend."
-      ]
-    },
-    {
-      "lesson_id": 302,
       "question_id": 35,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "还请谁？",
+      "standard_answers": [
+        "Who else are you inviting?"
+      ]
+    },
+    {
+      "lesson_id": 302,
+      "question_id": 36,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "我认识李友，她也是我的朋友。",
+      "standard_answers": [
+        "I know Li You, she is also my friend."
+      ]
+    },
+    {
+      "lesson_id": 302,
+      "question_id": 37,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "明天晚上七点半见。",
+      "standard_answers": [
+        "See you tomorrow at 7:30 PM."
+      ]
+    },
+    {
+      "lesson_id": 302,
+      "question_id": 38,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "What time is it now?",
@@ -1125,27 +1156,48 @@
     },
     {
       "lesson_id": 302,
-      "question_id": 36,
+      "question_id": 39,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "I am very busy today.",
+      "original_text": "I have something to do at 6:15.",
       "standard_answers": [
-        "我今天很忙。"
+        "我六点一刻有事儿。"
       ]
     },
     {
       "lesson_id": 302,
-      "question_id": 37,
+      "question_id": 40,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "I'll treat you to dinner tomorrow.",
+      "original_text": "Are you busy today?",
       "standard_answers": [
-        "明天我请你吃晚饭。"
+        "你今天忙不忙？",
+        "你今天忙吗？"
       ]
     },
     {
       "lesson_id": 302,
-      "question_id": 38,
+      "question_id": 41,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "I am very busy today, but not busy tomorrow.",
+      "standard_answers": [
+        "我今天很忙，可是明天不忙。"
+      ]
+    },
+    {
+      "lesson_id": 302,
+      "question_id": 42,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "I'll treat you to dinner tomorrow, how about that?",
+      "standard_answers": [
+        "明天我请你吃晚饭，怎么样？"
+      ]
+    },
+    {
+      "lesson_id": 302,
+      "question_id": 43,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "Why are you inviting me to dinner?",
@@ -1155,24 +1207,44 @@
     },
     {
       "lesson_id": 302,
-      "question_id": 39,
+      "question_id": 44,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "Because tomorrow is his birthday.",
+      "original_text": "Because tomorrow is Gao Wenzhong's birthday.",
       "standard_answers": [
-        "因为明天是他的生日。"
+        "因为明天是高文中的生日。"
       ]
     },
     {
       "lesson_id": 302,
-      "question_id": 40,
+      "question_id": 45,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "I know her, she is also my friend.",
+      "original_text": "Who else are you inviting?",
       "standard_answers": [
-        "我认识她，她也是我的朋友。"
+        "还请谁？"
+      ]
+    },
+    {
+      "lesson_id": 302,
+      "question_id": 46,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "I know Li You, she is also my friend.",
+      "standard_answers": [
+        "我认识李友，她也是我的朋友。"
+      ]
+    },
+    {
+      "lesson_id": 302,
+      "question_id": 47,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "See you tomorrow at 7:30 PM.",
+      "standard_answers": [
+        "明天晚上七点半见。"
       ]
     }
   ],
-  "aigc_visual_prompt": "Two young East Asian friends, a man and a woman, happily chatting and making plans for dinner in a cozy, modern cafe. The atmosphere is warm and friendly, suggesting a pleasant invitation. Realistic style, vibrant colors, cinematic lighting. --ar 16:9"
+  "aigc_visual_prompt": "Two young Chinese friends, a man and a woman, having a friendly conversation on a bustling modern Shanghai street in the late afternoon. The woman is smiling and inviting the man to a birthday dinner party. The style should be a warm, cinematic, candid photograph, with soft lighting. --ar 16:9 --style raw --v 6.0"
 }

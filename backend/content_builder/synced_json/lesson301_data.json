@@ -68,7 +68,7 @@
             "words": [
               {
                 "cn": "是",
-                "py": "shì"
+                "py": "Shì"
               },
               {
                 "cn": "星期四",
@@ -87,7 +87,7 @@
             "words": [
               {
                 "cn": "那",
-                "py": "nà"
+                "py": "Nà"
               },
               {
                 "cn": "天",
@@ -123,7 +123,7 @@
             "words": [
               {
                 "cn": "是",
-                "py": "shì"
+                "py": "Shì"
               },
               {
                 "cn": "吗",
@@ -135,7 +135,7 @@
               },
               {
                 "cn": "你",
-                "py": "nǐ"
+                "py": "Nǐ"
               },
               {
                 "cn": "今年",
@@ -164,7 +164,7 @@
             "words": [
               {
                 "cn": "十八",
-                "py": "shíbā",
+                "py": "Shíbā",
                 "highlight": true
               },
               {
@@ -179,12 +179,12 @@
             ]
           },
           {
-            "role": "白英爱",
-            "english": "I'll treat you to a meal on Thursday, how about that?",
+            "role": "高文中",
+            "english": "I'll treat you to a meal on Thursday, how about it?",
             "words": [
               {
                 "cn": "我",
-                "py": "wǒ"
+                "py": "Wǒ"
               },
               {
                 "cn": "星期四",
@@ -225,12 +225,12 @@
             ]
           },
           {
-            "role": "高文中",
+            "role": "白英爱",
             "english": "That's great! Thank you, thank you.",
             "words": [
               {
                 "cn": "太",
-                "py": "tài",
+                "py": "Tài",
                 "highlight": true
               },
               {
@@ -248,7 +248,7 @@
               },
               {
                 "cn": "谢谢",
-                "py": "xièxie",
+                "py": "Xièxie",
                 "highlight": true
               },
               {
@@ -267,12 +267,12 @@
             ]
           },
           {
-            "role": "白英爱",
+            "role": "高文中",
             "english": "Do you like to eat Chinese food or American food?",
             "words": [
               {
                 "cn": "你",
-                "py": "nǐ"
+                "py": "Nǐ"
               },
               {
                 "cn": "喜欢",
@@ -314,12 +314,12 @@
             ]
           },
           {
-            "role": "高文中",
+            "role": "白英爱",
             "english": "I'm British, but I like to eat Chinese food.",
             "words": [
               {
                 "cn": "我",
-                "py": "wǒ"
+                "py": "Wǒ"
               },
               {
                 "cn": "是",
@@ -373,12 +373,12 @@
             ]
           },
           {
-            "role": "白英爱",
+            "role": "高文中",
             "english": "Great, we'll eat Chinese food.",
             "words": [
               {
                 "cn": "好",
-                "py": "hǎo"
+                "py": "Hǎo"
               },
               {
                 "cn": "，",
@@ -410,12 +410,12 @@
             ]
           },
           {
-            "role": "高文中",
+            "role": "白英爱",
             "english": "What time on Thursday?",
             "words": [
               {
                 "cn": "星期四",
-                "py": "xīngqīsì",
+                "py": "Xīngqīsì",
                 "highlight": true
               },
               {
@@ -434,12 +434,12 @@
             ]
           },
           {
-            "role": "白英爱",
+            "role": "高文中",
             "english": "How about half past seven?",
             "words": [
               {
                 "cn": "七",
-                "py": "qī"
+                "py": "Qī"
               },
               {
                 "cn": "点",
@@ -463,12 +463,12 @@
             ]
           },
           {
-            "role": "高文中",
-            "english": "Great, see you on Thursday evening.",
+            "role": "白英爱",
+            "english": "Okay, see you Thursday evening.",
             "words": [
               {
                 "cn": "好",
-                "py": "hǎo"
+                "py": "Hǎo"
               },
               {
                 "cn": "，",
@@ -496,12 +496,12 @@
             ]
           },
           {
-            "role": "白英爱",
+            "role": "高文中",
             "english": "Goodbye!",
             "words": [
               {
                 "cn": "再见",
-                "py": "zàijiàn",
+                "py": "Zàijiàn",
                 "highlight": true
               },
               {
@@ -517,51 +517,51 @@
       {
         "word": "九月",
         "pinyin": "jiǔyuè",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "September",
         "example_sentence": {
-          "cn": "九月十二号是我的生日。",
-          "py": "Jiǔyuè shí'èr hào shì wǒ de shēngrì.",
-          "en": "September 12th is my birthday."
+          "cn": "九月是开学的季节。",
+          "py": "Jiǔyuè shì kāixué de jìjié.",
+          "en": "September is the season for starting school."
         }
       },
       {
         "word": "月",
         "pinyin": "yuè",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "month",
         "example_sentence": {
-          "cn": "这个月我很忙。",
-          "py": "Zhè ge yuè wǒ hěn máng.",
-          "en": "I am very busy this month."
+          "cn": "一年有十二个月。",
+          "py": "Yì nián yǒu shí'èr gè yuè.",
+          "en": "There are twelve months in a year."
         }
       },
       {
         "word": "十二",
         "pinyin": "shí'èr",
-        "part_of_speech": "nu",
+        "part_of_speech": "Numeral",
         "definition": "twelve",
         "example_sentence": {
-          "cn": "一年有十二个月。",
-          "py": "Yì nián yǒu shí'èr ge yuè.",
-          "en": "There are twelve months in a year."
+          "cn": "今天是九月十二号。",
+          "py": "Jīntiān shì jiǔyuè shí'èr hào.",
+          "en": "Today is September 12th."
         }
       },
       {
         "word": "号",
         "pinyin": "hào",
-        "part_of_speech": "m",
+        "part_of_speech": "Measure Word",
         "definition": "(measure word for position in a numerical series, day of the month)",
         "example_sentence": {
-          "cn": "今天是几号？",
-          "py": "Jīntiān shì jǐ hào?",
-          "en": "What is the date today?"
+          "cn": "你的生日是几月几号？",
+          "py": "Nǐ de shēngrì shì jǐ yuè jǐ hào?",
+          "en": "What date is your birthday?"
         }
       },
       {
         "word": "星期",
         "pinyin": "xīngqī",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "week",
         "example_sentence": {
           "cn": "一个星期有七天。",
@@ -572,7 +572,7 @@
       {
         "word": "星期四",
         "pinyin": "xīngqīsì",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "Thursday",
         "example_sentence": {
           "cn": "我星期四请你吃饭。",
@@ -583,18 +583,18 @@
       {
         "word": "天",
         "pinyin": "tiān",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "day",
         "example_sentence": {
-          "cn": "我今天很忙。",
-          "py": "Wǒ jīntiān hěn máng.",
-          "en": "I am very busy today."
+          "cn": "那天是我的生日。",
+          "py": "Nà tiān shì wǒ de shēngrì.",
+          "en": "That day is my birthday."
         }
       },
       {
         "word": "生日",
         "pinyin": "shēngrì",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "birthday",
         "example_sentence": {
           "cn": "祝你生日快乐！",
@@ -603,9 +603,31 @@
         }
       },
       {
+        "word": "生",
+        "pinyin": "shēng",
+        "part_of_speech": "Verb",
+        "definition": "to give birth to, to be born",
+        "example_sentence": {
+          "cn": "他是一个好学生。",
+          "py": "Tā shì yí gè hǎo xuésheng.",
+          "en": "He is a good student."
+        }
+      },
+      {
+        "word": "日",
+        "pinyin": "rì",
+        "part_of_speech": "Noun",
+        "definition": "day, sun",
+        "example_sentence": {
+          "cn": "今天是几月几日？",
+          "py": "Jīntiān shì jǐ yuè jǐ rì?",
+          "en": "What is the date today?"
+        }
+      },
+      {
         "word": "今年",
         "pinyin": "jīnnián",
-        "part_of_speech": "t",
+        "part_of_speech": "Time Word",
         "definition": "this year",
         "example_sentence": {
           "cn": "你今年多大？",
@@ -614,9 +636,20 @@
         }
       },
       {
+        "word": "年",
+        "pinyin": "nián",
+        "part_of_speech": "Noun",
+        "definition": "year",
+        "example_sentence": {
+          "cn": "新年快乐！",
+          "py": "Xīnnián kuàilè!",
+          "en": "Happy New Year!"
+        }
+      },
+      {
         "word": "多",
         "pinyin": "duō",
-        "part_of_speech": "adv",
+        "part_of_speech": "Adverb",
         "definition": "how many/much, to what extent",
         "example_sentence": {
           "cn": "你今年多大？",
@@ -627,18 +660,18 @@
       {
         "word": "大",
         "pinyin": "dà",
-        "part_of_speech": "adj",
+        "part_of_speech": "Adjective",
         "definition": "big, old",
         "example_sentence": {
-          "cn": "你多大？",
-          "py": "Nǐ duō dà?",
-          "en": "How old are you?"
+          "cn": "这个苹果很大。",
+          "py": "Zhège píngguǒ hěn dà.",
+          "en": "This apple is very big."
         }
       },
       {
         "word": "十八",
         "pinyin": "shíbā",
-        "part_of_speech": "nu",
+        "part_of_speech": "Numeral",
         "definition": "eighteen",
         "example_sentence": {
           "cn": "他今年十八岁。",
@@ -649,7 +682,7 @@
       {
         "word": "岁",
         "pinyin": "suì",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "year (of age)",
         "example_sentence": {
           "cn": "我弟弟今年八岁。",
@@ -660,7 +693,7 @@
       {
         "word": "吃",
         "pinyin": "chī",
-        "part_of_speech": "v",
+        "part_of_speech": "Verb",
         "definition": "to eat",
         "example_sentence": {
           "cn": "你喜欢吃什么？",
@@ -671,7 +704,7 @@
       {
         "word": "饭",
         "pinyin": "fàn",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "meal, (cooked) rice",
         "example_sentence": {
           "cn": "我们去吃饭吧。",
@@ -682,7 +715,7 @@
       {
         "word": "怎么样",
         "pinyin": "zěnmeyàng",
-        "part_of_speech": "qpr",
+        "part_of_speech": "Question Pronoun",
         "definition": "Is it OK? How is that? How does that sound?",
         "example_sentence": {
           "cn": "我们去看电影，怎么样？",
@@ -692,19 +725,19 @@
       },
       {
         "word": "太...了",
-        "pinyin": "tài...le",
-        "part_of_speech": "",
+        "pinyin": "tài... le",
+        "part_of_speech": "Adverb",
         "definition": "too, extremely",
         "example_sentence": {
-          "cn": "这个菜太好吃了！",
-          "py": "Zhè ge cài tài hǎo chī le!",
-          "en": "This dish is so delicious!"
+          "cn": "太好了！",
+          "py": "Tài hǎo le!",
+          "en": "That's great!"
         }
       },
       {
         "word": "谢谢",
         "pinyin": "xièxie",
-        "part_of_speech": "v",
+        "part_of_speech": "Verb",
         "definition": "to thank",
         "example_sentence": {
           "cn": "谢谢你的帮助。",
@@ -715,7 +748,7 @@
       {
         "word": "喜欢",
         "pinyin": "xǐhuan",
-        "part_of_speech": "v",
+        "part_of_speech": "Verb",
         "definition": "to like",
         "example_sentence": {
           "cn": "我喜欢中国菜。",
@@ -726,40 +759,40 @@
       {
         "word": "菜",
         "pinyin": "cài",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "dish, cuisine",
         "example_sentence": {
-          "cn": "你喜欢美国菜吗？",
-          "py": "Nǐ xǐhuan Měiguó cài ma?",
-          "en": "Do you like American food?"
+          "cn": "你喜欢吃什么菜？",
+          "py": "Nǐ xǐhuan chī shénme cài?",
+          "en": "What kind of cuisine do you like to eat?"
         }
       },
       {
         "word": "还是",
         "pinyin": "háishi",
-        "part_of_speech": "conj",
+        "part_of_speech": "Conjunction",
         "definition": "or",
         "example_sentence": {
-          "cn": "你喝茶还是咖啡？",
-          "py": "Nǐ hē chá háishi kāfēi?",
+          "cn": "你喝茶还是喝咖啡？",
+          "py": "Nǐ hē chá háishi hē kāfēi?",
           "en": "Do you drink tea or coffee?"
         }
       },
       {
         "word": "可是",
         "pinyin": "kěshì",
-        "part_of_speech": "conj",
+        "part_of_speech": "Conjunction",
         "definition": "but",
         "example_sentence": {
-          "cn": "我想去，可是我没有时间。",
-          "py": "Wǒ xiǎng qù, kěshì wǒ méiyǒu shíjiān.",
-          "en": "I want to go, but I don't have time."
+          "cn": "我很想去，可是我没有时间。",
+          "py": "Wǒ hěn xiǎng qù, kěshì wǒ méiyǒu shíjiān.",
+          "en": "I really want to go, but I don't have time."
         }
       },
       {
         "word": "我们",
         "pinyin": "wǒmen",
-        "part_of_speech": "pr",
+        "part_of_speech": "Pronoun",
         "definition": "we, us",
         "example_sentence": {
           "cn": "我们是好朋友。",
@@ -770,7 +803,7 @@
       {
         "word": "点",
         "pinyin": "diǎn",
-        "part_of_speech": "m",
+        "part_of_speech": "Measure Word",
         "definition": "o'clock",
         "example_sentence": {
           "cn": "现在几点了？",
@@ -781,7 +814,7 @@
       {
         "word": "半",
         "pinyin": "bàn",
-        "part_of_speech": "nu",
+        "part_of_speech": "Numeral",
         "definition": "half, half an hour",
         "example_sentence": {
           "cn": "现在是七点半。",
@@ -792,7 +825,7 @@
       {
         "word": "晚上",
         "pinyin": "wǎnshang",
-        "part_of_speech": "t",
+        "part_of_speech": "Time Word",
         "definition": "evening, night",
         "example_sentence": {
           "cn": "我们晚上见。",
@@ -803,7 +836,7 @@
       {
         "word": "见",
         "pinyin": "jiàn",
-        "part_of_speech": "v",
+        "part_of_speech": "Verb",
         "definition": "to see",
         "example_sentence": {
           "cn": "明天见！",
@@ -814,7 +847,7 @@
       {
         "word": "再见",
         "pinyin": "zàijiàn",
-        "part_of_speech": "v",
+        "part_of_speech": "Verb",
         "definition": "goodbye, see you again",
         "example_sentence": {
           "cn": "老师，再见！",
@@ -823,14 +856,25 @@
         }
       },
       {
+        "word": "再",
+        "pinyin": "zài",
+        "part_of_speech": "Adverb",
+        "definition": "again",
+        "example_sentence": {
+          "cn": "请再说一次。",
+          "py": "Qǐng zài shuō yí cì.",
+          "en": "Please say it again."
+        }
+      },
+      {
         "word": "英国",
         "pinyin": "Yīngguó",
-        "part_of_speech": "pn",
+        "part_of_speech": "Proper Noun",
         "definition": "Britain",
         "example_sentence": {
-          "cn": "他是英国人。",
-          "py": "Tā shì Yīngguó rén.",
-          "en": "He is British."
+          "cn": "他来自英国。",
+          "py": "Tā láizì Yīngguó.",
+          "en": "He comes from Britain."
         }
       }
     ]
@@ -922,9 +966,10 @@
       "question_id": 9,
       "course_id": 1,
       "question_type": "CN_TO_EN",
-      "original_text": "今年",
+      "original_text": "生",
       "standard_answers": [
-        "this year"
+        "to be born",
+        "to give birth to"
       ]
     },
     {
@@ -932,16 +977,48 @@
       "question_id": 10,
       "course_id": 1,
       "question_type": "CN_TO_EN",
-      "original_text": "多",
+      "original_text": "日",
       "standard_answers": [
-        "how many",
-        "how much",
-        "to what extent"
+        "day",
+        "sun"
       ]
     },
     {
       "lesson_id": 301,
       "question_id": 11,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "今年",
+      "standard_answers": [
+        "this year"
+      ]
+    },
+    {
+      "lesson_id": 301,
+      "question_id": 12,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "年",
+      "standard_answers": [
+        "year"
+      ]
+    },
+    {
+      "lesson_id": 301,
+      "question_id": 13,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "多",
+      "standard_answers": [
+        "how many",
+        "how much",
+        "many",
+        "much"
+      ]
+    },
+    {
+      "lesson_id": 301,
+      "question_id": 14,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "大",
@@ -952,7 +1029,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 12,
+      "question_id": 15,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "十八",
@@ -962,7 +1039,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 13,
+      "question_id": 16,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "岁",
@@ -972,7 +1049,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 14,
+      "question_id": 17,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "吃",
@@ -982,7 +1059,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 15,
+      "question_id": 18,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "饭",
@@ -993,30 +1070,19 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 16,
+      "question_id": 19,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "怎么样",
       "standard_answers": [
-        "Is it OK?",
-        "How is that?",
-        "How about it?"
+        "how is it?",
+        "how about it?",
+        "how does that sound?"
       ]
     },
     {
       "lesson_id": 301,
-      "question_id": 17,
-      "course_id": 1,
-      "question_type": "CN_TO_EN",
-      "original_text": "太...了",
-      "standard_answers": [
-        "too",
-        "extremely"
-      ]
-    },
-    {
-      "lesson_id": 301,
-      "question_id": 18,
+      "question_id": 20,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "谢谢",
@@ -1027,7 +1093,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 19,
+      "question_id": 21,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "喜欢",
@@ -1037,7 +1103,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 20,
+      "question_id": 22,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "菜",
@@ -1048,7 +1114,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 21,
+      "question_id": 23,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "还是",
@@ -1058,7 +1124,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 22,
+      "question_id": 24,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "可是",
@@ -1068,7 +1134,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 23,
+      "question_id": 25,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "我们",
@@ -1079,7 +1145,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 24,
+      "question_id": 26,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "点",
@@ -1089,18 +1155,17 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 25,
+      "question_id": 27,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "半",
       "standard_answers": [
-        "half",
-        "half an hour"
+        "half"
       ]
     },
     {
       "lesson_id": 301,
-      "question_id": 26,
+      "question_id": 28,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "晚上",
@@ -1111,7 +1176,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 27,
+      "question_id": 29,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "见",
@@ -1121,18 +1186,27 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 28,
+      "question_id": 30,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "再见",
       "standard_answers": [
-        "goodbye",
-        "see you again"
+        "goodbye"
       ]
     },
     {
       "lesson_id": 301,
-      "question_id": 29,
+      "question_id": 31,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "再",
+      "standard_answers": [
+        "again"
+      ]
+    },
+    {
+      "lesson_id": 301,
+      "question_id": 32,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "英国",
@@ -1143,7 +1217,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 30,
+      "question_id": 33,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "September",
@@ -1153,7 +1227,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 31,
+      "question_id": 34,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "month",
@@ -1163,7 +1237,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 32,
+      "question_id": 35,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "twelve",
@@ -1173,7 +1247,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 33,
+      "question_id": 36,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "day of the month",
@@ -1183,7 +1257,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 34,
+      "question_id": 37,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "week",
@@ -1193,7 +1267,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 35,
+      "question_id": 38,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "Thursday",
@@ -1203,17 +1277,18 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 36,
+      "question_id": 39,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "day",
       "standard_answers": [
-        "天"
+        "天",
+        "日"
       ]
     },
     {
       "lesson_id": 301,
-      "question_id": 37,
+      "question_id": 40,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "birthday",
@@ -1223,7 +1298,17 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 38,
+      "question_id": 41,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "to be born",
+      "standard_answers": [
+        "生"
+      ]
+    },
+    {
+      "lesson_id": 301,
+      "question_id": 42,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "this year",
@@ -1233,7 +1318,17 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 39,
+      "question_id": 43,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "year",
+      "standard_answers": [
+        "年"
+      ]
+    },
+    {
+      "lesson_id": 301,
+      "question_id": 44,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "how many",
@@ -1243,17 +1338,17 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 40,
+      "question_id": 45,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "big, old",
+      "original_text": "big",
       "standard_answers": [
         "大"
       ]
     },
     {
       "lesson_id": 301,
-      "question_id": 41,
+      "question_id": 46,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "eighteen",
@@ -1263,7 +1358,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 42,
+      "question_id": 47,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "year of age",
@@ -1273,7 +1368,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 43,
+      "question_id": 48,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "to eat",
@@ -1283,37 +1378,27 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 44,
+      "question_id": 49,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "meal, cooked rice",
+      "original_text": "meal",
       "standard_answers": [
         "饭"
       ]
     },
     {
       "lesson_id": 301,
-      "question_id": 45,
+      "question_id": 50,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "How about it?",
+      "original_text": "how about it?",
       "standard_answers": [
         "怎么样"
       ]
     },
     {
       "lesson_id": 301,
-      "question_id": 46,
-      "course_id": 1,
-      "question_type": "EN_TO_CN",
-      "original_text": "too, extremely",
-      "standard_answers": [
-        "太...了"
-      ]
-    },
-    {
-      "lesson_id": 301,
-      "question_id": 47,
+      "question_id": 51,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "to thank",
@@ -1323,7 +1408,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 48,
+      "question_id": 52,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "to like",
@@ -1333,7 +1418,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 49,
+      "question_id": 53,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "dish, cuisine",
@@ -1343,7 +1428,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 50,
+      "question_id": 54,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "or",
@@ -1353,7 +1438,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 51,
+      "question_id": 55,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "but",
@@ -1363,7 +1448,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 52,
+      "question_id": 56,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "we, us",
@@ -1373,7 +1458,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 53,
+      "question_id": 57,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "o'clock",
@@ -1383,7 +1468,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 54,
+      "question_id": 58,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "half",
@@ -1393,17 +1478,17 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 55,
+      "question_id": 59,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "evening, night",
+      "original_text": "evening",
       "standard_answers": [
         "晚上"
       ]
     },
     {
       "lesson_id": 301,
-      "question_id": 56,
+      "question_id": 60,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "to see",
@@ -1413,7 +1498,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 57,
+      "question_id": 61,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "goodbye",
@@ -1423,7 +1508,17 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 58,
+      "question_id": 62,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "again",
+      "standard_answers": [
+        "再"
+      ]
+    },
+    {
+      "lesson_id": 301,
+      "question_id": 63,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "Britain",
@@ -1433,7 +1528,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 59,
+      "question_id": 64,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "九月十二号是星期几？",
@@ -1443,7 +1538,17 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 60,
+      "question_id": 65,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "那天是我的生日。",
+      "standard_answers": [
+        "That day is my birthday."
+      ]
+    },
+    {
+      "lesson_id": 301,
+      "question_id": 66,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "你今年多大？",
@@ -1453,18 +1558,27 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 61,
+      "question_id": 67,
       "course_id": 1,
       "question_type": "CN_TO_EN",
-      "original_text": "我星期四请你吃饭，怎么样？",
+      "original_text": "我十八岁。",
       "standard_answers": [
-        "I'll treat you to a meal on Thursday, how about that?",
-        "I will invite you to eat on Thursday, how does that sound?"
+        "I am eighteen years old."
       ]
     },
     {
       "lesson_id": 301,
-      "question_id": 62,
+      "question_id": 68,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "我星期四请你吃饭，怎么样？",
+      "standard_answers": [
+        "I'll treat you to a meal on Thursday, how about it?"
+      ]
+    },
+    {
+      "lesson_id": 301,
+      "question_id": 69,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "你喜欢吃中国菜还是美国菜？",
@@ -1474,7 +1588,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 63,
+      "question_id": 70,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "星期四几点？",
@@ -1484,7 +1598,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 64,
+      "question_id": 71,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "七点半怎么样？",
@@ -1494,7 +1608,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 65,
+      "question_id": 72,
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "星期四晚上见。",
@@ -1504,7 +1618,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 66,
+      "question_id": 73,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "What day of the week is September 12th?",
@@ -1514,7 +1628,17 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 67,
+      "question_id": 74,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "That day is my birthday.",
+      "standard_answers": [
+        "那天是我的生日。"
+      ]
+    },
+    {
+      "lesson_id": 301,
+      "question_id": 75,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "How old are you this year?",
@@ -1524,17 +1648,27 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 68,
+      "question_id": 76,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "I'll treat you to a meal on Thursday, how about that?",
+      "original_text": "I am eighteen years old.",
+      "standard_answers": [
+        "我十八岁。"
+      ]
+    },
+    {
+      "lesson_id": 301,
+      "question_id": 77,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "I'll treat you to a meal on Thursday, how about it?",
       "standard_answers": [
         "我星期四请你吃饭，怎么样？"
       ]
     },
     {
       "lesson_id": 301,
-      "question_id": 69,
+      "question_id": 78,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "Do you like to eat Chinese food or American food?",
@@ -1544,7 +1678,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 70,
+      "question_id": 79,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "What time on Thursday?",
@@ -1554,7 +1688,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 71,
+      "question_id": 80,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "How about half past seven?",
@@ -1564,7 +1698,7 @@
     },
     {
       "lesson_id": 301,
-      "question_id": 72,
+      "question_id": 81,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "See you on Thursday evening.",
@@ -1573,5 +1707,5 @@
       ]
     }
   ],
-  "aigc_visual_prompt": "A vibrant, warm scene of two young East Asian friends, a man and a woman, celebrating a birthday dinner in a modern but cozy Chinese restaurant. A small birthday cake with a single candle is on the table, along with delicious-looking Chinese dishes like dumplings and noodles. They are smiling and chatting happily. The style should be a mix of anime and digital painting, with soft lighting. --ar 16:9 --v 6.0"
+  "aigc_visual_prompt": "A vibrant and warm scene in a modern Chinese restaurant, two young Asian friends, a man and a woman, are happily chatting over a table full of delicious Chinese dishes like dumplings and noodles. A small birthday cake with a single candle is on the table. The atmosphere is celebratory and friendly. Soft, warm lighting. Detailed illustration, anime style, cinematic. --ar 16:9"
 }

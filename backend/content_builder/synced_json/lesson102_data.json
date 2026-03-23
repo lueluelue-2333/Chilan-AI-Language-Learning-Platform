@@ -13,8 +13,12 @@
             "english": "Mr. Wang, are you a teacher?",
             "words": [
               {
-                "cn": "王先生",
-                "py": "Wáng xiānsheng"
+                "cn": "王",
+                "py": "Wáng"
+              },
+              {
+                "cn": "先生",
+                "py": "xiānsheng"
               },
               {
                 "cn": "，",
@@ -47,7 +51,7 @@
           },
           {
             "role": "王朋",
-            "english": "I am not a teacher, I am a student.",
+            "english": "I'm not a teacher, I'm a student. Li You, how about you?",
             "words": [
               {
                 "cn": "我",
@@ -89,16 +93,14 @@
               {
                 "cn": "。",
                 "py": ""
-              }
-            ]
-          },
-          {
-            "role": "王朋",
-            "english": "Li You, what about you?",
-            "words": [
+              },
               {
-                "cn": "李友",
-                "py": "Lǐ Yǒu"
+                "cn": "李",
+                "py": "Lǐ"
+              },
+              {
+                "cn": "友",
+                "py": "Yǒu"
               },
               {
                 "cn": "，",
@@ -120,7 +122,7 @@
           },
           {
             "role": "李友",
-            "english": "I am a student, too. Are you Chinese?",
+            "english": "I'm a student, too. Are you Chinese?",
             "words": [
               {
                 "cn": "我",
@@ -177,11 +179,11 @@
           },
           {
             "role": "王朋",
-            "english": "Yes, I am from Beijing. Are you American?",
+            "english": "Yes, I'm from Beijing. Are you American?",
             "words": [
               {
                 "cn": "是",
-                "py": "shì",
+                "py": "Shì",
                 "highlight": true
               },
               {
@@ -243,11 +245,11 @@
           },
           {
             "role": "李友",
-            "english": "Yes, I am from New York.",
+            "english": "Yes, I'm from New York.",
             "words": [
               {
                 "cn": "是",
-                "py": "shì",
+                "py": "Shì",
                 "highlight": true
               },
               {
@@ -286,8 +288,19 @@
       {
         "word": "是",
         "pinyin": "shì",
-        "part_of_speech": "Verb",
+        "part_of_speech": "v",
         "definition": "to be",
+        "example_sentence": {
+          "cn": "我是学生。",
+          "py": "Wǒ shì xuésheng.",
+          "en": "I am a student."
+        }
+      },
+      {
+        "word": "老师",
+        "pinyin": "lǎoshī",
+        "part_of_speech": "n",
+        "definition": "teacher",
         "example_sentence": {
           "cn": "你是老师吗？",
           "py": "Nǐ shì lǎoshī ma?",
@@ -295,20 +308,9 @@
         }
       },
       {
-        "word": "老师",
-        "pinyin": "lǎoshī",
-        "part_of_speech": "Noun",
-        "definition": "teacher",
-        "example_sentence": {
-          "cn": "我不是老师。",
-          "py": "Wǒ bú shì lǎoshī.",
-          "en": "I am not a teacher."
-        }
-      },
-      {
         "word": "吗",
         "pinyin": "ma",
-        "part_of_speech": "Question Particle",
+        "part_of_speech": "qp",
         "definition": "(question particle)",
         "example_sentence": {
           "cn": "你是中国人吗？",
@@ -319,18 +321,18 @@
       {
         "word": "不",
         "pinyin": "bù",
-        "part_of_speech": "Adverb",
+        "part_of_speech": "adv",
         "definition": "not, no",
         "example_sentence": {
-          "cn": "我不是学生。",
-          "py": "Wǒ bú shì xuésheng.",
-          "en": "I am not a student."
+          "cn": "我不是老师。",
+          "py": "Wǒ bú shì lǎoshī.",
+          "en": "I am not a teacher."
         }
       },
       {
         "word": "学生",
         "pinyin": "xuésheng",
-        "part_of_speech": "Noun",
+        "part_of_speech": "n",
         "definition": "student",
         "example_sentence": {
           "cn": "我也是学生。",
@@ -341,29 +343,29 @@
       {
         "word": "也",
         "pinyin": "yě",
-        "part_of_speech": "Adverb",
+        "part_of_speech": "adv",
         "definition": "too, also",
         "example_sentence": {
-          "cn": "我也是中国人。",
-          "py": "Wǒ yě shì Zhōngguó rén.",
-          "en": "I am also Chinese."
+          "cn": "我也是学生。",
+          "py": "Wǒ yě shì xuésheng.",
+          "en": "I am a student, too."
         }
       },
       {
         "word": "人",
         "pinyin": "rén",
-        "part_of_speech": "Noun",
+        "part_of_speech": "n",
         "definition": "people, person",
         "example_sentence": {
-          "cn": "我是北京人。",
-          "py": "Wǒ shì Běijīng rén.",
-          "en": "I am from Beijing."
+          "cn": "我是美国人。",
+          "py": "Wǒ shì Měiguó rén.",
+          "en": "I am American."
         }
       },
       {
         "word": "中国",
         "pinyin": "Zhōngguó",
-        "part_of_speech": "Proper Noun",
+        "part_of_speech": "pn",
         "definition": "China",
         "example_sentence": {
           "cn": "我是中国人。",
@@ -374,18 +376,18 @@
       {
         "word": "北京",
         "pinyin": "Běijīng",
-        "part_of_speech": "Proper Noun",
+        "part_of_speech": "pn",
         "definition": "Beijing",
         "example_sentence": {
-          "cn": "我不是北京人。",
-          "py": "Wǒ bú shì Běijīng rén.",
-          "en": "I am not from Beijing."
+          "cn": "我是北京人。",
+          "py": "Wǒ shì Běijīng rén.",
+          "en": "I am from Beijing."
         }
       },
       {
         "word": "美国",
         "pinyin": "Měiguó",
-        "part_of_speech": "Proper Noun",
+        "part_of_speech": "pn",
         "definition": "America",
         "example_sentence": {
           "cn": "你是美国人吗？",
@@ -396,7 +398,7 @@
       {
         "word": "纽约",
         "pinyin": "Niǔyuē",
-        "part_of_speech": "Proper Noun",
+        "part_of_speech": "pn",
         "definition": "New York",
         "example_sentence": {
           "cn": "我是纽约人。",
@@ -557,7 +559,7 @@
       "question_id": 15,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "also",
+      "original_text": "too",
       "standard_answers": [
         "也"
       ]
@@ -627,9 +629,9 @@
       "question_id": 22,
       "course_id": 1,
       "question_type": "CN_TO_EN",
-      "original_text": "我不是老师，我是学生。",
+      "original_text": "我不是老师。",
       "standard_answers": [
-        "I am not a teacher, I am a student."
+        "I am not a teacher."
       ]
     },
     {
@@ -637,9 +639,9 @@
       "question_id": 23,
       "course_id": 1,
       "question_type": "CN_TO_EN",
-      "original_text": "你是中国人吗？",
+      "original_text": "我是学生。",
       "standard_answers": [
-        "Are you Chinese?"
+        "I am a student."
       ]
     },
     {
@@ -649,8 +651,8 @@
       "question_type": "CN_TO_EN",
       "original_text": "我也是学生。",
       "standard_answers": [
-        "I am a student, too.",
-        "I am also a student."
+        "I am also a student.",
+        "I'm a student, too."
       ]
     },
     {
@@ -658,14 +660,35 @@
       "question_id": 25,
       "course_id": 1,
       "question_type": "CN_TO_EN",
-      "original_text": "我是美国人。",
+      "original_text": "你是中国人吗？",
       "standard_answers": [
-        "I am American."
+        "Are you Chinese?"
       ]
     },
     {
       "lesson_id": 102,
       "question_id": 26,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "我是北京人。",
+      "standard_answers": [
+        "I am from Beijing.",
+        "I am a Beijinger."
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 27,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "你是美国人吗？",
+      "standard_answers": [
+        "Are you American?"
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 28,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "Are you a teacher?",
@@ -675,17 +698,37 @@
     },
     {
       "lesson_id": 102,
-      "question_id": 27,
+      "question_id": 29,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "I am not a teacher, I am a student.",
+      "original_text": "I am not a teacher.",
       "standard_answers": [
-        "我不是老师，我是学生。"
+        "我不是老师。"
       ]
     },
     {
       "lesson_id": 102,
-      "question_id": 28,
+      "question_id": 30,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "I am a student.",
+      "standard_answers": [
+        "我是学生。"
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 31,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "I'm a student, too.",
+      "standard_answers": [
+        "我也是学生。"
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 32,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "Are you Chinese?",
@@ -695,17 +738,27 @@
     },
     {
       "lesson_id": 102,
-      "question_id": 29,
+      "question_id": 33,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "I am a student, too.",
+      "original_text": "Are you American?",
       "standard_answers": [
-        "我也是学生。"
+        "你是美国人吗？"
       ]
     },
     {
       "lesson_id": 102,
-      "question_id": 30,
+      "question_id": 34,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "I am from Beijing.",
+      "standard_answers": [
+        "我是北京人。"
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 35,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "I am from New York.",
@@ -714,5 +767,5 @@
       ]
     }
   ],
-  "aigc_visual_prompt": "Two university students, one Asian male and one Caucasian female, bump into each other and start a friendly conversation on a beautiful, modern university campus, green lawn and academic buildings in the background, sunny day, vibrant and welcoming atmosphere, digital art, detailed, cinematic lighting."
+  "aigc_visual_prompt": "A friendly encounter between a young Chinese man and a young American woman on a vibrant university campus in China. They are smiling and chatting. The background shows a mix of modern and traditional Chinese architecture. Bright, welcoming, educational illustration style, soft lighting. --ar 16:9 --v 6.0"
 }
