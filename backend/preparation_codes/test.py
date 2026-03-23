@@ -2,7 +2,7 @@ import requests
 import json
 
 # 后端地址
-URL = "https://chilan-ai-language-learning-platform.onrender.com/evaluate"
+URL = "https://api.chilanlearning.com/evaluate"
 
 def run_tests():
     # 你想要测试的各种变体

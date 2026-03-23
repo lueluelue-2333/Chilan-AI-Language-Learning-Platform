@@ -10,14 +10,13 @@ from database.connection import get_connection
 
 app = FastAPI(title="Chilan LRS - Core Service")
 
+cors_origins_str = os.getenv("CORS_ORIGINS", "http://localhost:5173")
+origins = cors_origins_str.split(",")
+
 # --- ⚙️ 中间件配置 ---
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "https://chilan-ai-language-learning-platform.vercel.app",
-        "https://chilan-ai-language-learning-platfor.vercel.app"
-    ], 
+    allow_origins=origins, 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
