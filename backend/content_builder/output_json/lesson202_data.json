@@ -2,7 +2,7 @@
   "lesson_metadata": {
     "course_id": 1,
     "lesson_id": 202,
-    "title": "Lesson 202: 讨论家庭"
+    "title": "Lesson 202: 你家有几口人？"
   },
   "course_content": {
     "dialogues": [
@@ -63,16 +63,15 @@
           },
           {
             "role": "白英爱",
-            "english": "There are six people in my family: my dad, my mom, one older brother, two younger sisters, and me. Li You, how many people are in your family?",
+            "english": "There are six people in my family: my dad, my mom, an older brother, two younger sisters, and me. Li You, how many people are in your family?",
             "words": [
               {
                 "cn": "我",
-                "py": "wǒ"
+                "py": "Wǒ"
               },
               {
                 "cn": "家",
-                "py": "jiā",
-                "highlight": true
+                "py": "jiā"
               },
               {
                 "cn": "有",
@@ -84,8 +83,7 @@
               },
               {
                 "cn": "口",
-                "py": "kǒu",
-                "highlight": true
+                "py": "kǒu"
               },
               {
                 "cn": "人",
@@ -181,8 +179,7 @@
               },
               {
                 "cn": "家",
-                "py": "jiā",
-                "highlight": true
+                "py": "jiā"
               },
               {
                 "cn": "有",
@@ -190,13 +187,11 @@
               },
               {
                 "cn": "几",
-                "py": "jǐ",
-                "highlight": true
+                "py": "jǐ"
               },
               {
                 "cn": "口",
-                "py": "kǒu",
-                "highlight": true
+                "py": "kǒu"
               },
               {
                 "cn": "人",
@@ -214,12 +209,11 @@
             "words": [
               {
                 "cn": "我",
-                "py": "wǒ"
+                "py": "Wǒ"
               },
               {
                 "cn": "家",
-                "py": "jiā",
-                "highlight": true
+                "py": "jiā"
               },
               {
                 "cn": "有",
@@ -231,8 +225,7 @@
               },
               {
                 "cn": "口",
-                "py": "kǒu",
-                "highlight": true
+                "py": "kǒu"
               },
               {
                 "cn": "人",
@@ -274,8 +267,7 @@
               },
               {
                 "cn": "和",
-                "py": "hé",
-                "highlight": true
+                "py": "hé"
               },
               {
                 "cn": "我",
@@ -287,7 +279,7 @@
               },
               {
                 "cn": "你",
-                "py": "nǐ"
+                "py": "Nǐ"
               },
               {
                 "cn": "爸爸",
@@ -323,7 +315,7 @@
             "words": [
               {
                 "cn": "我",
-                "py": "wǒ"
+                "py": "Wǒ"
               },
               {
                 "cn": "爸爸",
@@ -365,8 +357,7 @@
               },
               {
                 "cn": "哥哥",
-                "py": "gēge",
-                "highlight": true
+                "py": "gēge"
               },
               {
                 "cn": "、",
@@ -374,8 +365,7 @@
               },
               {
                 "cn": "妹妹",
-                "py": "mèimei",
-                "highlight": true
+                "py": "mèimei"
               },
               {
                 "cn": "都",
@@ -399,11 +389,11 @@
           },
           {
             "role": "李友",
-            "english": "My mom is also a teacher, and my dad is a doctor.",
+            "english": "My mom is also a teacher, my dad is a doctor.",
             "words": [
               {
                 "cn": "我",
-                "py": "wǒ"
+                "py": "Wǒ"
               },
               {
                 "cn": "妈妈",
@@ -455,18 +445,18 @@
       {
         "word": "家",
         "pinyin": "jiā",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "family, home",
         "example_sentence": {
           "cn": "我家有五口人。",
           "py": "Wǒ jiā yǒu wǔ kǒu rén.",
-          "en": "There are five people in my family."
+          "en": "My family has five people."
         }
       },
       {
         "word": "几",
         "pinyin": "jǐ",
-        "part_of_speech": "nu",
+        "part_of_speech": "Numeral",
         "definition": "how many, some, a few",
         "example_sentence": {
           "cn": "你家有几口人？",
@@ -477,29 +467,29 @@
       {
         "word": "口",
         "pinyin": "kǒu",
-        "part_of_speech": "m",
+        "part_of_speech": "Measure Word",
         "definition": "measure word for number of family members",
         "example_sentence": {
-          "cn": "他们家有四口人。",
-          "py": "Tāmen jiā yǒu sì kǒu rén.",
-          "en": "There are four people in their family."
+          "cn": "我家有三口人。",
+          "py": "Wǒ jiā yǒu sān kǒu rén.",
+          "en": "There are three people in my family."
         }
       },
       {
         "word": "哥哥",
         "pinyin": "gēge",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "older brother",
         "example_sentence": {
           "cn": "我有一个哥哥。",
           "py": "Wǒ yǒu yí ge gēge.",
-          "en": "I have one older brother."
+          "en": "I have an older brother."
         }
       },
       {
         "word": "两",
         "pinyin": "liǎng",
-        "part_of_speech": "nu",
+        "part_of_speech": "Numeral",
         "definition": "two, a couple of",
         "example_sentence": {
           "cn": "我有两个妹妹。",
@@ -510,18 +500,18 @@
       {
         "word": "妹妹",
         "pinyin": "mèimei",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "younger sister",
         "example_sentence": {
-          "cn": "她没有妹妹。",
-          "py": "Tā méiyǒu mèimei.",
-          "en": "She doesn't have a younger sister."
+          "cn": "她是我的妹妹。",
+          "py": "Tā shì wǒ de mèimei.",
+          "en": "She is my younger sister."
         }
       },
       {
         "word": "和",
         "pinyin": "hé",
-        "part_of_speech": "conj",
+        "part_of_speech": "Conjunction",
         "definition": "and",
         "example_sentence": {
           "cn": "我爸爸和我妈妈都是医生。",
@@ -532,29 +522,29 @@
       {
         "word": "大姐",
         "pinyin": "dàjiě",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "eldest/oldest sister",
         "example_sentence": {
-          "cn": "她的大姐是律师。",
-          "py": "Tā de dàjiě shì lǜshī.",
-          "en": "Her oldest sister is a lawyer."
+          "cn": "我没有大姐。",
+          "py": "Wǒ méiyǒu dàjiě.",
+          "en": "I don't have an oldest sister."
         }
       },
       {
         "word": "二姐",
         "pinyin": "èrjiě",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "second oldest sister",
         "example_sentence": {
-          "cn": "这是我的二姐。",
-          "py": "Zhè shì wǒ de èrjiě.",
-          "en": "This is my second oldest sister."
+          "cn": "我的二姐是大学生。",
+          "py": "Wǒ de èrjiě shì dàxuéshēng.",
+          "en": "My second oldest sister is a college student."
         }
       },
       {
         "word": "做",
         "pinyin": "zuò",
-        "part_of_speech": "v",
+        "part_of_speech": "Verb",
         "definition": "to do",
         "example_sentence": {
           "cn": "你做什么工作？",
@@ -565,7 +555,7 @@
       {
         "word": "工作",
         "pinyin": "gōngzuò",
-        "part_of_speech": "n/v",
+        "part_of_speech": "Noun/Verb",
         "definition": "job; to work",
         "example_sentence": {
           "cn": "我喜欢我的工作。",
@@ -576,7 +566,7 @@
       {
         "word": "律师",
         "pinyin": "lǜshī",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "lawyer",
         "example_sentence": {
           "cn": "我爸爸是律师。",
@@ -587,7 +577,7 @@
       {
         "word": "英文",
         "pinyin": "Yīngwén",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "the English language",
         "example_sentence": {
           "cn": "我妈妈是英文老师。",
@@ -598,7 +588,7 @@
       {
         "word": "都",
         "pinyin": "dōu",
-        "part_of_speech": "adv",
+        "part_of_speech": "Adverb",
         "definition": "both, all",
         "example_sentence": {
           "cn": "我们都是学生。",
@@ -609,7 +599,7 @@
       {
         "word": "大学生",
         "pinyin": "dàxuéshēng",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "college student",
         "example_sentence": {
           "cn": "我哥哥是大学生。",
@@ -620,18 +610,18 @@
       {
         "word": "大学",
         "pinyin": "dàxué",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "university, college",
         "example_sentence": {
-          "cn": "他在哪个大学工作？",
-          "py": "Tā zài nǎge dàxué gōngzuò?",
-          "en": "Which university does he work at?"
+          "cn": "他在大学工作。",
+          "py": "Tā zài dàxué gōngzuò.",
+          "en": "He works at a university."
         }
       },
       {
         "word": "医生",
         "pinyin": "yīshēng",
-        "part_of_speech": "n",
+        "part_of_speech": "Noun",
         "definition": "doctor, physician",
         "example_sentence": {
           "cn": "我爸爸是医生。",
@@ -660,9 +650,7 @@
       "question_type": "CN_TO_EN",
       "original_text": "几",
       "standard_answers": [
-        "how many",
-        "some",
-        "a few"
+        "how many"
       ]
     },
     {
@@ -776,8 +764,7 @@
       "question_type": "CN_TO_EN",
       "original_text": "英文",
       "standard_answers": [
-        "the English language",
-        "English"
+        "English language"
       ]
     },
     {
@@ -869,7 +856,7 @@
       "question_id": 22,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "two (used with measure words)",
+      "original_text": "two, a couple of",
       "standard_answers": [
         "两"
       ]
@@ -899,7 +886,7 @@
       "question_id": 25,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "eldest sister",
+      "original_text": "eldest sister, oldest sister",
       "standard_answers": [
         "大姐"
       ]
@@ -929,7 +916,7 @@
       "question_id": 28,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "job, work",
+      "original_text": "job; to work",
       "standard_answers": [
         "工作"
       ]
@@ -949,7 +936,7 @@
       "question_id": 30,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "English language",
+      "original_text": "the English language",
       "standard_answers": [
         "英文"
       ]
@@ -989,7 +976,7 @@
       "question_id": 34,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "doctor",
+      "original_text": "doctor, physician",
       "standard_answers": [
         "医生"
       ]
@@ -1011,9 +998,8 @@
       "question_type": "CN_TO_EN",
       "original_text": "你爸爸妈妈做什么工作？",
       "standard_answers": [
-        "What do your dad and mom do?",
-        "What is your parents' job?",
-        "What do your parents do for work?"
+        "What do your dad and mom do for work?",
+        "What is your father and mother's job?"
       ]
     },
     {
@@ -1032,10 +1018,10 @@
       "question_id": 38,
       "course_id": 1,
       "question_type": "CN_TO_EN",
-      "original_text": "哥哥和妹妹都是大学生。",
+      "original_text": "哥哥、妹妹都是大学生。",
       "standard_answers": [
-        "The older brother and younger sister are both college students.",
-        "Older brother and younger sister are both college students."
+        "Older brother and younger sister are both college students.",
+        "My older brother and younger sister are both university students."
       ]
     },
     {
@@ -1043,9 +1029,10 @@
       "question_id": 39,
       "course_id": 1,
       "question_type": "CN_TO_EN",
-      "original_text": "我妈妈也是老师。",
+      "original_text": "我爸爸是医生。",
       "standard_answers": [
-        "My mom is also a teacher."
+        "My dad is a doctor.",
+        "My father is a doctor."
       ]
     },
     {
@@ -1063,7 +1050,7 @@
       "question_id": 41,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "What do your parents do for work?",
+      "original_text": "What do your dad and mom do for work?",
       "standard_answers": [
         "你爸爸妈妈做什么工作？"
       ]
@@ -1073,7 +1060,7 @@
       "question_id": 42,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "My father is a lawyer.",
+      "original_text": "My dad is a lawyer.",
       "standard_answers": [
         "我爸爸是律师。"
       ]
@@ -1083,9 +1070,10 @@
       "question_id": 43,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "My mom is an English teacher.",
+      "original_text": "My older brother and younger sister are both college students.",
       "standard_answers": [
-        "我妈妈是英文老师。"
+        "我哥哥和妹妹都是大学生。",
+        "哥哥、妹妹都是大学生。"
       ]
     },
     {
@@ -1093,11 +1081,11 @@
       "question_id": 44,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "My older brother is a college student.",
+      "original_text": "My dad is a doctor.",
       "standard_answers": [
-        "我哥哥是大学生。"
+        "我爸爸是医生。"
       ]
     }
   ],
-  "aigc_visual_prompt": "A warm and friendly digital illustration of a diverse group of young adults, including an Asian teacher and Western students, discussing their families in a bright, modern classroom. On a whiteboard behind them are simple drawings of a family tree and the Chinese characters for '家' (family), '爸爸' (dad), and '妈妈' (mom). The atmosphere is cheerful and collaborative. --ar 16:9 --style raw --v 6.0"
+  "aigc_visual_prompt": "A warm and happy modern Chinese family with parents, an older brother, and two younger sisters are gathered in a cozy, brightly lit living room, chatting and laughing. The style is a gentle, heartwarming digital illustration, soft lighting, vibrant but not overwhelming colors, detailed character expressions. --ar 16:9 --style expressive --v 6.0"
 }
