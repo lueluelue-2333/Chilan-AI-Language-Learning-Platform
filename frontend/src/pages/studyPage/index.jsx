@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+// 🚀 确保路径指向你存放 apiClient 的地方
+import apiClient from '../../api/apiClient'; 
 import TeachingSection from './TeachingSection';
 import PracticeSection from './PracticeSection';
 import FinishCard from './FinishCard';
@@ -10,58 +11,68 @@ export default function StudyPage() {
     const { courseId = 1 } = useParams();
     const userId = localStorage.getItem('chilan_user_id') || 'test-user-id';
     
-    const [mode, setMode] = useState('loading');
+    const [mode, setMode] = useState('loading'); // loading, teaching, practice, review, completed, lesson_finished
     const [studyData, setStudyData] = useState(null);
 
+    // 🌟 核心逻辑：初始化学习流
     const initFlow = async () => {
         setMode('loading');
         try {
-            const res = await axios.get(`https://api.chilanlearning.com/study/init`, {
+            // 请求后端的 /study/init 接口
+            const res = await apiClient.get(`/study/init`, {
                 params: { course_id: courseId, user_id: userId }
             });
+            
             const { mode: responseMode, data } = res.data;
             setStudyData(data);
             
+            // 如果后端说这节课已经看过了，直接跳到练习
             if (responseMode === 'teaching' && data.skip_content) {
                 setMode('practice');
             } else {
                 setMode(responseMode);
             }
         } catch (e) { 
-            console.error(e);
+            console.error("加载学习流失败:", e);
             setMode('error'); 
         }
     };
 
     useEffect(() => { initFlow(); }, [courseId]);
 
-    // 🌟 修改：完成练习后，只推进度，不立刻进下一课
+    // 🌟 处理一课结束后的逻辑
     const handleLessonComplete = async () => {
         const lessonId = studyData?.lesson_content?.lesson_metadata?.lesson_id;
         
-        // 如果是从新课 (practice) 过来的，更新总体进度
         if (lessonId && mode === 'practice') {
-            await axios.post(`https://api.chilanlearning.com/study/complete_lesson`, {
-                user_id: userId,
-                course_id: courseId,
-                lesson_id: lessonId 
-            });
+            try {
+                await apiClient.post(`/study/complete_lesson`, {
+                    user_id: userId,
+                    course_id: courseId,
+                    lesson_id: lessonId 
+                });
+            } catch (e) {
+                console.error("更新进度失败:", e);
+            }
         }
-        
-        // 核心：切到胜利结算页！
         setMode('lesson_finished'); 
     };
 
-    if (mode === 'loading') return <div className="flex h-screen items-center justify-center"><Loader2 className="animate-spin text-blue-500" size={32} /></div>;
+    // --- 渲染逻辑 ---
+
+    if (mode === 'loading') return (
+        <div className="flex h-screen items-center justify-center">
+            <Loader2 className="animate-spin text-blue-500" size={32} />
+        </div>
+    );
     
-    // 🌟 全部结束：只有回主页按钮
     if (mode === 'completed') return <FinishCard isAllCompleted={true} />;
     
-    // 🌟 单课结束：出现“继续下一课”按钮，点击后触发 initFlow
     if (mode === 'lesson_finished') return <FinishCard isAllCompleted={false} onContinue={initFlow} />;
 
     return (
         <div className="min-h-screen bg-slate-50 py-8">
+            {/* 模式 1：教学讲解模式 */}
             {mode === 'teaching' && (
                 <TeachingSection 
                     data={studyData.lesson_content} 
@@ -70,12 +81,22 @@ export default function StudyPage() {
                     onStartPractice={() => setMode('practice')} 
                 />
             )}
+            
+            {/* 模式 2：练习或复习模式 */}
             {(mode === 'practice' || mode === 'review') && (
                 <PracticeSection 
                     questions={studyData.pending_items} 
                     isReview={mode === 'review'}
                     onAllDone={handleLessonComplete}
                 />
+            )}
+
+            {/* 错误处理 */}
+            {mode === 'error' && (
+                <div className="flex flex-col h-screen items-center justify-center gap-4">
+                    <p className="text-slate-500 font-bold">无法获取课程数据，请确认后端已同步 Lesson 101</p>
+                    <button onClick={initFlow} className="px-6 py-2 bg-blue-600 text-white rounded-xl font-bold">重试</button>
+                </div>
             )}
         </div>
     );

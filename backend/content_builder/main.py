@@ -52,6 +52,11 @@ def main():
             
         lesson_id = int(numbers[0])
         result = agent.parse_textbook(str(pdf_path), lesson_id=lesson_id)
+
+        if result is None:
+            print(f"\n🛑 [严重错误] {file_name}.pdf 处理失败！")
+            print("为了防止后续数据产生连锁反应，程序已自动终止。请排查报错原因后再重新运行。")
+            return
         
         if result:
             # 数据落盘

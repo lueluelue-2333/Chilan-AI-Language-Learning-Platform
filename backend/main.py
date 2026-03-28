@@ -10,10 +10,19 @@ from database.connection import get_connection
 
 app = FastAPI(title="Chilan LRS - Core Service")
 
-cors_origins_str = os.getenv("CORS_ORIGINS", "http://localhost:5173")
-origins = cors_origins_str.split(",")
+# 1. 从环境变量读取线上地址
+cors_origins_str = os.getenv("CORS_ORIGINS", "")
+# 2. 将字符串转为列表，并去掉多余空格
+origins = [o.strip() for o in cors_origins_str.split(",") if o.strip()]
 
-# --- ⚙️ 中间件配置 ---
+# 3. 强行加入本地开发地址（确保本地开发永远可用）
+local_origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
+origins.extend(local_origins)
+
+# 🌟 最终的 origins 列表会包含线上所有域名 + 本地 5173
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins, 

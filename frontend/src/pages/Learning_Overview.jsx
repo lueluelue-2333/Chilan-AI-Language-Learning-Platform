@@ -3,7 +3,8 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Brain, Calendar, Flame, GraduationCap, ChevronRight, Loader2, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+// 🚀 引入统一的 API 客户端
+import apiClient from '../api/apiClient'; 
 
 export default function Learning_Overview() {
     const { t } = useTranslation();
@@ -13,11 +14,19 @@ export default function Learning_Overview() {
     useEffect(() => {
         const fetchTasks = async () => {
             const userId = localStorage.getItem('chilan_user_id');
+            if (!userId) {
+                setLoading(false);
+                return;
+            }
             try {
-                const res = await axios.get(`https://api.chilanlearning.com/daily_tasks/${userId}`);
+                // 🚀 使用 apiClient 并简化路径，去掉硬编码域名
+                const res = await apiClient.get(`/daily_tasks/${userId}`);
                 setTasks(res.data);
-            } catch (err) { console.error(err); }
-            finally { setLoading(false); }
+            } catch (err) { 
+                console.error("加载每日任务失败:", err); 
+            } finally { 
+                setLoading(false); 
+            }
         };
         fetchTasks();
     }, []);
@@ -45,12 +54,18 @@ export default function Learning_Overview() {
                     <h2 className="text-xl font-black mb-8 flex items-center gap-3"><Calendar className="text-blue-600" size={20}/> 今日清单</h2>
                     {loading ? <Loader2 className="animate-spin mx-auto text-blue-500 my-10" /> : (
                         <div className="space-y-4">
-                            {tasks.map(task => (
-                                <div key={task.id} className="flex items-center justify-between p-5 bg-slate-50 rounded-2xl hover:bg-white hover:shadow-md transition-all cursor-pointer group border border-transparent hover:border-blue-100">
-                                    <span className="font-bold text-slate-700">{task.text}</span>
-                                    <ChevronRight size={18} className="text-slate-300 group-hover:text-blue-600 transition-colors" />
+                            {tasks.length > 0 ? (
+                                tasks.map(task => (
+                                    <div key={task.id} className="flex items-center justify-between p-5 bg-slate-50 rounded-2xl hover:bg-white hover:shadow-md transition-all cursor-pointer group border border-transparent hover:border-blue-100">
+                                        <span className="font-bold text-slate-700">{task.text}</span>
+                                        <ChevronRight size={18} className="text-slate-300 group-hover:text-blue-600 transition-colors" />
+                                    </div>
+                                ))
+                            ) : (
+                                <div className="py-10 text-center text-slate-400 font-bold">
+                                    今日任务已全部完成！☕️
                                 </div>
-                            ))}
+                            )}
                         </div>
                     )}
                 </div>

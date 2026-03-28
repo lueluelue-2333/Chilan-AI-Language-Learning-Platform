@@ -60,6 +60,6 @@ EVALUATE_PROMPT_TEMPLATE_LEARN_CHINESE_BY_ENGLISH = {
         - The second sentence should explain what the correct answer is.
         - Directly point out the specific Chinese grammar/vocabulary mistake in English.
 
-        # Output Format: JSON (level: int, is_correct: bool, explanation: string)
+        tring)# Output Format: JSON (level: int, is_correct: bool, explanation: s
     """
 }

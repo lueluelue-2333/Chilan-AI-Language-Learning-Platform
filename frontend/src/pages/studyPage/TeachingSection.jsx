@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import axios from 'axios';
+// 🚀 引入统一的 API 客户端
+import apiClient from '../../api/apiClient'; 
 import { Eye, EyeOff, Volume2, ArrowRight, Languages, BookOpen, Loader2 } from 'lucide-react';
 
 const fadeInUp = {
@@ -29,12 +30,15 @@ export default function TeachingSection({ data, courseId, userId, onStartPractic
     const { lesson_metadata, course_content, aigc_visual_prompt } = data;
     const { dialogues, vocabulary } = course_content;
 
+    // 🚀 核心修改：动态获取 API 基础地址用于音频播放
     const playAudio = (text) => {
         if (!text) return;
-        new Audio(`https://api.chilanlearning.com/study/tts?text=${encodeURIComponent(text)}`).play();
+        const API_BASE = import.meta.env.VITE_API_BASE_URL;
+        // 拼接 TTS 地址，确保本地调试走 localhost，线上走生产域名
+        new Audio(`${API_BASE}/study/tts?text=${encodeURIComponent(text)}`).play();
     };
 
-    // 3. 通用控制组件：接收 props 实现局部控制
+    // 3. 通用控制组件
     const ControlCapsule = ({ pinyin, setPinyin, trans, setTrans }) => (
         <div className="flex items-center gap-2 p-1 bg-slate-100 rounded-2xl border border-slate-200/50 shadow-inner">
             <button 
@@ -58,12 +62,13 @@ export default function TeachingSection({ data, courseId, userId, onStartPractic
         </div>
     );
 
-    // 打书签逻辑
+    // 🚀 核心修改：打书签逻辑改为使用 apiClient
     const handleStartPracticeClick = async () => {
         if (isSaving) return;
         setIsSaving(true);
         try {
-            await axios.post('https://api.chilanlearning.com/study/content_viewed', {
+            // 使用简化路径，不再硬编码域名
+            await apiClient.post('/study/content_viewed', {
                 user_id: userId,
                 course_id: courseId,
                 lesson_id: lesson_metadata.lesson_id
@@ -88,7 +93,7 @@ export default function TeachingSection({ data, courseId, userId, onStartPractic
                 {lesson_metadata.title}
             </h1>
 
-            {/* 视频区 */}
+            {/* 视频区 (Mock 展示) */}
             <motion.div variants={fadeInUp} initial="hidden" animate="show" className="w-full aspect-video bg-slate-900 rounded-[2.5rem] flex flex-col items-center justify-center mb-16 shadow-2xl relative overflow-hidden group">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-10"></div>
                 <div className="z-20 text-center">
@@ -102,7 +107,7 @@ export default function TeachingSection({ data, courseId, userId, onStartPractic
                 </p>
             </motion.div>
 
-            {/* 4. 课文对话区 (使用全新清爽蓝配色) */}
+            {/* 4. 课文对话区 */}
             <motion.section variants={fadeInUp} initial="hidden" animate="show" className="mb-24">
                 <div className="flex justify-between items-end mb-8">
                     <h2 className="text-2xl font-black text-slate-800">💬 课文对话</h2>

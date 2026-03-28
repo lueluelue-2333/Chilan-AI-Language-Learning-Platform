@@ -1,14 +1,73 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import axios from 'axios';
+// 🚀 引入统一的 API 客户端
+import apiClient from '../../api/apiClient'; 
 import { 
     Loader2, Send, CheckCircle2, XCircle, 
-    Sparkles, RefreshCcw, ArrowRight, AlertCircle 
+    Sparkles, RefreshCcw, ArrowRight, AlertCircle,
+    BookOpen
 } from 'lucide-react';
 
 const fadeInUp = {
     hidden: { opacity: 0, y: 15 },
     show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 20 } }
+};
+
+// 🌟 单词语境扩展卡片组件
+const WordContextCard = ({ word, pinyin, metadata }) => {
+    const examples = metadata?.context_examples || [];
+    const history = metadata?.history || [];
+
+    if (examples.length === 0 && history.length === 0) return null;
+
+    return (
+        <motion.div 
+            initial={{ opacity: 0, y: 10 }} 
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-4 mb-6 bg-slate-50/80 rounded-[2rem] border border-slate-200/50 p-7 text-left"
+        >
+            <div className="flex items-center gap-3 mb-5">
+                <div className="p-2 bg-blue-50 rounded-xl">
+                    <BookOpen className="text-blue-500" size={20} />
+                </div>
+                <h4 className="text-xl font-black text-slate-800 tracking-tight">知识点详情</h4>
+                <div className="h-px flex-1 bg-slate-200/60" />
+            </div>
+
+            <div className="space-y-4">
+                {examples.map((ex, idx) => (
+                    <div key={idx} className="bg-white/80 p-5 rounded-2xl border border-white shadow-sm">
+                        <p className="text-2xl font-black text-slate-800 mb-1 leading-tight">
+                            {ex.cn}
+                        </p>
+                        <p className="text-sm font-bold text-slate-400 mb-3 tracking-wide uppercase">
+                            {ex.py}
+                        </p>
+                        <div className="py-2 px-4 bg-blue-50/50 rounded-lg inline-block">
+                            <p className="text-base font-bold text-blue-600 italic leading-snug">
+                                {ex.en}
+                            </p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            {history.length > 0 && (
+                <div className="mt-6 pt-5 border-t border-slate-200/60">
+                    <p className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-3">
+                        Other Meanings / 更多义项
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                        {history.map((h, i) => (
+                            <span key={i} className="px-3 py-1.5 bg-slate-200/50 rounded-xl text-sm font-black text-slate-600">
+                                {h.definition}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            )}
+        </motion.div>
+    );
 };
 
 export default function PracticeSection({ questions, isReview, onAllDone }) {
@@ -22,7 +81,6 @@ export default function PracticeSection({ questions, isReview, onAllDone }) {
     const inputRef = useRef(null);
     const currentQuestion = questions[currentIndex];
 
-    // 辅助函数：根据 Level 获取样式配置
     const getFeedbackConfig = (level) => {
         if (level === 4) {
             return {
@@ -69,7 +127,6 @@ export default function PracticeSection({ questions, isReview, onAllDone }) {
         }
     }, [currentIndex, feedback, isEvaluating]);
 
-    // 键盘逻辑：Level 2, 3, 4 均视为“过关”，按 Enter 进入下一题
     useEffect(() => {
         const handleEnter = (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
@@ -96,7 +153,8 @@ export default function PracticeSection({ questions, isReview, onAllDone }) {
         if (isEvaluating) return;
         setIsEvaluating(true);
         try {
-            const res = await axios.post(`https://api.chilanlearning.com/study/evaluate`, {
+            // 🚀 使用 apiClient 并简化路径
+            const res = await apiClient.post(`/study/evaluate`, {
                 user_id: localStorage.getItem('chilan_user_id') || 'test-user-id',
                 lesson_id: currentQuestion.lesson_id || 101,
                 question_id: currentQuestion.question_id,
@@ -133,7 +191,6 @@ export default function PracticeSection({ questions, isReview, onAllDone }) {
     return (
         <div className="max-w-4xl mx-auto px-6 pt-20 pb-0">
             
-            {/* 顶部标题与进度 - 保持 font-black */}
             <motion.div variants={fadeInUp} initial="hidden" animate="show" className="flex items-center justify-center gap-5 mb-8">
                 <div className="flex items-center gap-3">
                     <Sparkles className="text-blue-500" size={28} />
@@ -146,7 +203,6 @@ export default function PracticeSection({ questions, isReview, onAllDone }) {
                 </div>
             </motion.div>
 
-            {/* 题目展示区 - 保持 font-black */}
             <motion.div variants={fadeInUp} initial="hidden" animate="show" className="text-center mb-8">
                 <span className="text-xl font-bold text-blue-500 uppercase tracking-[0.3em] block mb-1">
                     {currentQuestion.question_type === 'CN_TO_EN' ? 'Translate into English' : '请翻译成中文'}
@@ -156,7 +212,6 @@ export default function PracticeSection({ questions, isReview, onAllDone }) {
                 </p>
             </motion.div>
 
-            {/* 输入交互区 */}
             <motion.div variants={fadeInUp} initial="hidden" animate="show" className="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-xl shadow-slate-200/40 border border-slate-100">
                 
                 <div className={`
@@ -195,7 +250,6 @@ export default function PracticeSection({ questions, isReview, onAllDone }) {
                     ) : (
                         <motion.div key="feedback-area" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-5">
                             
-                            {/* 🌟 核心修改：根据 config 动态渲染颜色 */}
                             <div className={`p-6 rounded-[2rem] border-2 transition-colors duration-500 ${config.card}`}>
                                 <div className="flex gap-4">
                                     {config.icon}
@@ -210,6 +264,12 @@ export default function PracticeSection({ questions, isReview, onAllDone }) {
                                     </div>
                                 </div>
                             </div>
+
+                            <WordContextCard 
+                                word={currentQuestion.original_text}
+                                pinyin={currentQuestion.original_pinyin}
+                                metadata={currentQuestion.metadata}
+                            />
 
                             <div className="flex flex-col gap-3">
                                 {feedback.level === 1 ? (

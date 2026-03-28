@@ -3,50 +3,87 @@ import json
 import psycopg2
 import shutil
 from psycopg2.extras import Json
-from google import genai
 from pathlib import Path
 from dotenv import load_dotenv
+from abc import ABC, abstractmethod
+import sys
 
-# 🌟 引入你刚刚写的标准数据库连接池
-from connection import get_connection
+# 将父目录加入路径以确保能找到 connection
+CURRENT_DIR = Path(__file__).resolve().parent
+BACKEND_DIR = CURRENT_DIR.parent
+sys.path.append(str(BACKEND_DIR))
+
+# 🌟 引入数据库连接池
+try:
+    from database.connection import get_connection
+except ImportError:
+    from connection import get_connection
 
 # ==========================================
 # 1. 环境与配置初始化
 # ==========================================
-BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv(BASE_DIR / ".env")
-
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-if not GEMINI_API_KEY:
-    raise ValueError("❌ 未在 .env 中找到 GEMINI_API_KEY")
-
-client = genai.Client(api_key=GEMINI_API_KEY)
-EMBEDDING_MODEL = "gemini-embedding-001" 
-
-def get_embedding(text: str) -> list[float]:
-    """调用 Gemini 接口生成 3072 维向量"""
-    print(f"🧠 正在请求大模型生成向量: '{text[:15]}...'")
-    response = client.models.embed_content(
-        model=EMBEDDING_MODEL,
-        contents=text,
-    )
-    return response.embeddings[0].values
+load_dotenv(BACKEND_DIR / ".env")
 
 # ==========================================
-# 2. 核心入库逻辑
+# 2. Embedding 抽象基类与具体实现
 # ==========================================
-def sync_lesson_data(json_file_path: str) -> bool:
-    """处理单个 JSON 文件，成功返回 True，失败返回 False"""
+class BaseEmbeddingProvider(ABC):
+    @abstractmethod
+    def get_embedding(self, text: str) -> list[float]:
+        pass
+
+class GeminiEmbeddingProvider(BaseEmbeddingProvider):
+    def __init__(self, api_key: str, model_id: str):
+        from google import genai
+        self.client = genai.Client(api_key=api_key)
+        self.model_id = model_id
+
+    def get_embedding(self, text: str) -> list[float]:
+        print(f"🧠 [Gemini] 正在生成向量: '{text[:15]}...'")
+        response = self.client.models.embed_content(
+            model=self.model_id,
+            contents=text,
+        )
+        return response.embeddings[0].values
+
+class DoubaoEmbeddingProvider(BaseEmbeddingProvider):
+    def __init__(self, api_key: str, model_id: str):
+        from volcenginesdkarkruntime import Ark
+        self.client = Ark(api_key=api_key)
+        self.model_id = model_id
+
+    def get_embedding(self, text: str) -> list[float]:
+        print(f"🧠 [Doubao] 正在生成向量: '{text[:15]}...'")
+        response = self.client.embeddings.create(
+            model=self.model_id,
+            input=[text]
+        )
+        return response.data[0].embedding
+
+class EmbeddingFactory:
+    @staticmethod
+    def create_provider() -> BaseEmbeddingProvider:
+        provider_type = os.getenv("EMBED_ACTIVE_PROVIDER", "doubao").lower()
+        if provider_type == "gemini":
+            api_key = os.getenv("EMBED_GEMINI_API_KEY") or os.getenv("GEMINI_API_KEY")
+            model_id = os.getenv("EMBED_GEMINI_MODEL_ID", "gemini-embedding-001")
+            return GeminiEmbeddingProvider(api_key, model_id)
+        elif provider_type == "doubao":
+            api_key = os.getenv("EMBED_DOUBAO_API_KEY")
+            model_id = os.getenv("EMBED_DOUBAO_MODEL_ID")
+            return DoubaoEmbeddingProvider(api_key, model_id)
+        raise ValueError(f"❌ 不支持的 Provider: {provider_type}")
+
+# ==========================================
+# 3. 核心入库逻辑 (已适配新字段)
+# ==========================================
+def sync_lesson_data(json_file_path: str, provider: BaseEmbeddingProvider) -> bool:
     with open(json_file_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
     
     lesson_metadata = data.get("lesson_metadata", {})
     course_content = data.get("course_content", {})
     database_items = data.get("database_items", [])
-
-    if not lesson_metadata or not database_items:
-        print("❌ JSON 数据不完整，缺少 metadata 或 database_items！")
-        return False
 
     course_id = lesson_metadata.get("course_id")
     lesson_id = lesson_metadata.get("lesson_id")
@@ -58,43 +95,36 @@ def sync_lesson_data(json_file_path: str) -> bool:
     try:
         conn = get_connection()
         cur = conn.cursor()
-        print("✅ 成功连接到 PostgreSQL 数据库！")
 
-        # ---------------------------------------------------------
-        # 任务一：同步 `lessons` 表 (写入 JSONB 课件数据)
-        # ---------------------------------------------------------
-        print(f"📦 正在同步 Lesson {lesson_id} 基础课件数据...")
-        
+        # 1. 同步 lessons 表
+        print(f"📦 同步 Lesson {lesson_id} 基础数据...")
         cur.execute("SELECT 1 FROM lessons WHERE course_id = %s AND lesson_id = %s", (course_id, lesson_id))
+        
         if cur.fetchone():
             cur.execute("""
-                UPDATE lessons 
-                SET title = %s, structured_content = %s
+                UPDATE lessons SET title = %s, structured_content = %s
                 WHERE course_id = %s AND lesson_id = %s
             """, (title, Json(course_content), course_id, lesson_id))
-            print(f"   -> 🔄 更新了已存在的 Lesson {lesson_id} 数据。")
         else:
             cur.execute("""
                 INSERT INTO lessons (course_id, lesson_id, title, structured_content)
                 VALUES (%s, %s, %s, %s)
             """, (course_id, lesson_id, title, Json(course_content)))
-            print(f"   -> 🆕 插入了全新的 Lesson {lesson_id} 数据。")
 
-        # ---------------------------------------------------------
-        # 任务二：同步 `language_items` 表 (生成向量并写入题库)
-        # ---------------------------------------------------------
-        print("\n🎯 开始同步题库并生成 Embedding 向量...")
-        success_count = 0
-
+        # 2. 同步 language_items 表
+        print(f"🎯 正在处理 {len(database_items)} 道深度解析题目...")
         for item in database_items:
             q_id = item['question_id']
-            q_type = item['question_type']
-            q_text = item['original_text']
-            s_answers = item['standard_answers']
-            
-            # 生成向量
-            primary_embedding = get_embedding(s_answers[0])
-            embedding_str = str(primary_embedding)
+            # 🚀 提取新增字段
+            q_pinyin = item.get('original_pinyin', '')
+            # 🚀 将 context_examples 封装进元数据
+            q_metadata = {
+                "context_examples": item.get('context_examples', [])
+            }
+
+            # 生成向量 (取第一个答案作为基准)
+            embedding = provider.get_embedding(item['standard_answers'][0])
+            embedding_str = str(embedding)
 
             cur.execute("""
                 SELECT 1 FROM language_items 
@@ -104,60 +134,51 @@ def sync_lesson_data(json_file_path: str) -> bool:
             if cur.fetchone():
                 cur.execute("""
                     UPDATE language_items 
-                    SET question_type = %s, original_text = %s, standard_answers = %s, primary_embedding = %s
+                    SET question_type = %s, original_text = %s, original_pinyin = %s, 
+                        standard_answers = %s, primary_embedding = %s, metadata = %s
                     WHERE course_id = %s AND lesson_id = %s AND question_id = %s
-                """, (q_type, q_text, s_answers, embedding_str, course_id, lesson_id, q_id))
-                print(f"   -> 🔄 更新题目 {q_id}: {q_text}")
+                """, (item['question_type'], item['original_text'], q_pinyin, 
+                      item['standard_answers'], embedding_str, Json(q_metadata), 
+                      course_id, lesson_id, q_id))
             else:
                 cur.execute("""
                     INSERT INTO language_items 
-                    (course_id, lesson_id, question_id, question_type, original_text, standard_answers, primary_embedding)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s)
-                """, (course_id, lesson_id, q_id, q_type, q_text, s_answers, embedding_str))
-                print(f"   -> 🆕 插入题目 {q_id}: {q_text}")
+                    (course_id, lesson_id, question_id, question_type, original_text, 
+                     original_pinyin, standard_answers, primary_embedding, metadata)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                """, (course_id, lesson_id, q_id, item['question_type'], 
+                      item['original_text'], q_pinyin, item['standard_answers'], 
+                      embedding_str, Json(q_metadata)))
             
-            success_count += 1
-
         conn.commit()
-        print(f"\n🎉 大功告成！课件本体和 {success_count} 道向量题库全部落盘！")
+        print(f"✅ 入库成功！包含题目拼音与例句上下文。")
         return True
 
     except Exception as e:
-        print(f"\n❌ 数据库操作失败，已回滚: {e}")
+        print(f"❌ 入库失败: {e}")
         if conn: conn.rollback()
         return False
     finally:
         if cur: cur.close()
         if conn: conn.close()
 
+# ==========================================
+# 4. 执行入口
+# ==========================================
 if __name__ == "__main__":
-    current_dir = Path(__file__).resolve().parent
-    # 定位到 content_builder 下的 output_json 文件夹
-    output_dir = current_dir.parent / "content_builder" / "output_json"
+    embed_provider = EmbeddingFactory.create_provider()
     
-    # 🌟 新增：建立一个已同步归档文件夹，防重复 embedding
-    synced_dir = current_dir.parent / "content_builder" / "synced_json"
-    synced_dir.mkdir(parents=True, exist_ok=True)
+    # 路径绑定
+    content_builder_dir = CURRENT_DIR.parent / "content_builder"
+    output_dir = content_builder_dir / "output_json"
+    synced_dir = content_builder_dir / "synced_json"
+    synced_dir.mkdir(exist_ok=True)
     
-    if not output_dir.exists():
-        print(f"❌ 找不到数据文件夹: {output_dir}")
+    json_files = list(output_dir.glob("*.json"))
+    if not json_files:
+        print("📭 没有待处理的 JSON 文件。")
     else:
-        # 批量获取所有的 json 文件
-        json_files = list(output_dir.glob("*.json"))
-        
-        if not json_files:
-            print(f"📭 {output_dir.name} 文件夹为空，没有需要入库的数据。")
-        else:
-            print(f"📦 发现 {len(json_files)} 个 JSON 文件等待入库...")
-            
-            for target_json in json_files:
-                print(f"\n=====================================")
-                print(f"▶️ 开始处理: {target_json.name}")
-                
-                # 执行入库
-                is_success = sync_lesson_data(str(target_json))
-                
-                # 入库成功后，把 JSON 文件移走
-                if is_success:
-                    shutil.move(str(target_json), str(synced_dir / target_json.name))
-                    print(f"📁 {target_json.name} 已安全归档至 synced_json 文件夹。")
+        for target_json in json_files:
+            print(f"\n🚀 开始同步: {target_json.name}")
+            if sync_lesson_data(str(target_json), embed_provider):
+                shutil.move(str(target_json), str(synced_dir / target_json.name))

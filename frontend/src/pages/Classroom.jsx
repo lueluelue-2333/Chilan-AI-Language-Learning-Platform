@@ -6,13 +6,13 @@ import {
     CheckCircle2, Zap, Loader2, GraduationCap 
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// 🚀 引入统一的 API 客户端，不再直接使用原始 axios
+import apiClient from '../api/apiClient'; 
 
 // 通用底纹
 const SUBTLE_PATTERN = `data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg stroke='%23ffffff' stroke-width='1' opacity='0.05'%3E%3Cpath d='M30 0L0 30M60 30L30 60M30 0l30 30M0 30l30 30' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E`;
 
 export default function Classroom() {
-    // 🌟 核心修改 1：提取了 i18n 对象
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
     
@@ -32,9 +32,10 @@ export default function Classroom() {
     const fetchData = async () => {
         setIsLoading(true);
         try {
+            // 🚀 使用 apiClient 并移除硬编码域名
             const [statRes, myCourseRes] = await Promise.all([
-                axios.get(`https://api.chilanlearning.com/classroom/stats/${userId}`),
-                axios.get(`https://api.chilanlearning.com/my-courses/${userId}`)
+                apiClient.get(`/classroom/stats/${userId}`),
+                apiClient.get(`/my-courses/${userId}`)
             ]);
             setStats(statRes.data);
             setMyCourses(myCourseRes.data);
@@ -49,7 +50,8 @@ export default function Classroom() {
         setIsModalOpen(true);
         setIsCoursesLoading(true);
         try {
-            const res = await axios.get('https://api.chilanlearning.com/courses');
+            // 🚀 使用 apiClient
+            const res = await apiClient.get('/courses');
             setAllCourses(res.data);
         } catch (err) {
             console.error("加载课程库失败", err);
@@ -60,7 +62,8 @@ export default function Classroom() {
 
     const handleEnroll = async (courseId) => {
         try {
-            await axios.post(`https://api.chilanlearning.com/courses/enroll`, { 
+            // 🚀 使用 apiClient
+            await apiClient.post(`/courses/enroll`, { 
                 user_id: userId, 
                 course_id: courseId 
             });
@@ -82,7 +85,6 @@ export default function Classroom() {
         show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 120, damping: 20 } }
     };
 
-    // 优雅的 Loading 界面
     if (isLoading) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 text-slate-500">
@@ -95,14 +97,13 @@ export default function Classroom() {
     return (
         <div className="min-h-screen bg-slate-50 font-sans text-slate-900 pb-20 pt-24">
             
-            {/* 🌟 核心修复：加入 AnimatePresence 并设置 mode="wait" (先出后进) */}
             <AnimatePresence mode="wait">
                 <motion.div 
                     key={i18n.language}
                     variants={staggerContainer} 
                     initial="hidden" 
                     animate="show" 
-                    exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }} // 🌟 增加秒退出的过渡动画
+                    exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
                     className="max-w-6xl mx-auto px-8 py-12"
                 >
                     

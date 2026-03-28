@@ -38,6 +38,7 @@ class EvaluateRequest(BaseModel):
     question_id: int
     question_type: str
     original_text: str
+    original_pinyin: str = ""
     standard_answers: List[str]
     user_answer: str
 
@@ -54,28 +55,49 @@ class CompleteLessonRequest(BaseModel):
 # ==========================================
 # 接口 1: 初始化学习流
 # ==========================================
+# ==========================================
+# 接口 1: 初始化学习流 (完整版)
+# ==========================================
 @router.get("/study/init")
 async def init_study_flow(user_id: str, course_id: int = 1):
     conn = None
     try:
         conn = get_connection()
+        # 使用 RealDictCursor 确保查询结果直接映射为 Python 字典，方便 FastAPI 转 JSON
         cur = conn.cursor(cursor_factory=RealDictCursor)
 
-        # 1. 复习流查询
+        # ---------------------------------------------------------
+        # 1. 查询复习流 (Due Questions)
+        # 💡 这里加入了 original_pinyin 和 metadata，供复习时的单词卡片使用
+        # ---------------------------------------------------------
         cur.execute("""
-            SELECT q.item_id, q.question_id, q.question_type, q.original_text, q.standard_answers
+            SELECT 
+                q.item_id, 
+                q.question_id, 
+                q.question_type, 
+                q.original_text, 
+                q.original_pinyin, 
+                q.standard_answers, 
+                q.metadata
             FROM language_items q
             JOIN user_progress_of_language_items p ON q.item_id = p.item_id
             WHERE p.user_id::text = %s AND p.next_review <= CURRENT_TIMESTAMP
-            ORDER BY p.next_review ASC LIMIT 20;
+            ORDER BY p.next_review ASC 
+            LIMIT 20;
         """, (user_id,))
         
         due_questions = cur.fetchall()
 
+        # 如果有到期的复习题，优先进入复习模式
         if due_questions:
-            return {"mode": "review", "data": {"pending_items": due_questions}}
+            return {
+                "mode": "review", 
+                "data": {"pending_items": due_questions}
+            }
 
-        # 2. 查出进度和书签
+        # ---------------------------------------------------------
+        # 2. 查询用户当前课程进度
+        # ---------------------------------------------------------
         cur.execute("""
             SELECT last_completed_lesson_id, viewed_lesson_id 
             FROM user_progress_of_lessons 
@@ -84,7 +106,7 @@ async def init_study_flow(user_id: str, course_id: int = 1):
         
         progress = cur.fetchone()
         
-        # 🌟 核心修改：如果是新用户，进度从 0 开始算
+        # 处理新用户逻辑
         if progress:
             last_lesson = progress.get('last_completed_lesson_id') or 0
             viewed_lesson = progress.get('viewed_lesson_id') or 0
@@ -92,7 +114,10 @@ async def init_study_flow(user_id: str, course_id: int = 1):
             last_lesson = 0
             viewed_lesson = 0
             
-        # 🌟 核心修改：让数据库直接找排在后面的第一节课 (完美支持 102 跳到 201)
+        # ---------------------------------------------------------
+        # 3. 寻找下一节需要学习的课程
+        # 🌟 自动跳跃：支持 102 直接跳到 201 等非连续 ID
+        # ---------------------------------------------------------
         cur.execute("""
             SELECT lesson_id, title, structured_content 
             FROM lessons 
@@ -103,39 +128,63 @@ async def init_study_flow(user_id: str, course_id: int = 1):
         
         lesson_row = cur.fetchone()
 
+        # 如果没有下一课了，说明通关了
         if not lesson_row:
-            return {"mode": "completed", "message": "所有课程已完成！"}
+            return {"mode": "completed", "message": "恭喜！你已完成本课程的所有内容。"}
 
-        # 真实获取到的下一节课的 ID
-        next_lesson = lesson_row['lesson_id']
+        next_lesson_id = lesson_row['lesson_id']
 
-        # 查询新课题目
+        # ---------------------------------------------------------
+        # 4. 查询该新课的全部题目
+        # 💡 这里加入了 original_pinyin 和 metadata
+        # 💡 使用 ORDER BY question_id ASC 保证“中译英在前，英译中在后”
+        # ---------------------------------------------------------
         cur.execute("""
-            SELECT item_id, question_id, question_type, original_text, standard_answers, %s as lesson_id
-            FROM language_items WHERE course_id = %s AND lesson_id = %s
-        """, (next_lesson, course_id, next_lesson))
+            SELECT 
+                item_id, 
+                question_id, 
+                question_type, 
+                original_text, 
+                original_pinyin, 
+                standard_answers, 
+                metadata,
+                %s as lesson_id
+            FROM language_items 
+            WHERE course_id = %s AND lesson_id = %s
+            ORDER BY question_id ASC
+        """, (next_lesson_id, course_id, next_lesson_id))
+        
         new_questions = cur.fetchall()
 
-        # 判断这节课的书签是否已经被打过了
-        skip_content = (viewed_lesson == next_lesson)
+        # 判断用户是否已经看过该课的讲义（用于前端决定是先看视频还是直接练习）
+        skip_content = (viewed_lesson == next_lesson_id)
 
         return {
             "mode": "teaching",
             "data": {
                 "lesson_content": {
-                    "lesson_metadata": {"course_id": course_id, "lesson_id": next_lesson, "title": lesson_row['title']},
+                    "lesson_metadata": {
+                        "course_id": course_id, 
+                        "lesson_id": next_lesson_id, 
+                        "title": lesson_row['title']
+                    },
                     "course_content": lesson_row['structured_content'],
-                    "aigc_visual_prompt": "A cinematic scene in Paris..." 
+                    "aigc_visual_prompt": "A thematic visual for the current lesson..." 
                 },
                 "pending_items": new_questions,
                 "skip_content": skip_content  
             }
         }
+
     except Exception as e:
         print(f"❌ Init Flow Error: {e}")
-        raise HTTPException(status_code=500, detail="加载学习流失败")
+        # 记录详细错误日志
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail="加载学习流失败，请检查后端日志")
     finally:
-        if conn: conn.close()
+        if conn: 
+            conn.close()
         
 # ==========================================
 # 接口 2: 智能判卷与记忆更新

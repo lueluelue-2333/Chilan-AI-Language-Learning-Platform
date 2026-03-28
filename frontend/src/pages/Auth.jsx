@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import axios from 'axios';
+// 🚀 引入我们统一的 API 客户端
+import apiClient from '../api/apiClient'; 
 import { 
     Mail, Lock, ArrowLeft, Loader2, CheckCircle2, 
     ShieldCheck, AlertCircle, Eye, EyeOff, Hash, Check
@@ -42,34 +43,42 @@ export default function Auth() {
         setError('');
 
         try {
-            const API_BASE = "https://api.chilanlearning.com/auth";
+            // 🚀 定义统一的路径前缀
+            const AUTH_PATH = "/auth";
 
             if (step === 'forgot') {
-                await axios.post(`${API_BASE}/forgot-password`, { email });
+                await apiClient.post(`${AUTH_PATH}/forgot-password`, { email });
                 setStep('reset');
                 setPassword('');
                 setConfirmPassword('');
             } else if (step === 'reset') {
-                await axios.post(`${API_BASE}/reset-password`, { email, code, new_password: password });
+                // ✅ 已修复：使用 apiClient 和 AUTH_PATH
+                await apiClient.post(`${AUTH_PATH}/reset-password`, { 
+                    email, 
+                    code, 
+                    new_password: password 
+                });
                 setStep('success');
                 setTimeout(() => { setStep('form'); setMode('login'); }, 2000);
             } else if (mode === 'register') {
                 if (step === 'form') {
-                    await axios.post(`${API_BASE}/signup`, { email, password, lang: i18n.language });
+                    await apiClient.post(`${AUTH_PATH}/signup`, { email, password, lang: i18n.language });
                     setStep('verify');
                 } else {
-                    await axios.post(`${API_BASE}/verify`, { email, code });
+                    await apiClient.post(`${AUTH_PATH}/verify`, { email, code });
                     setStep('success');
                     setTimeout(() => { setMode('login'); setStep('form'); }, 2000);
                 }
             } else {
-                const res = await axios.post(`${API_BASE}/login`, { email, password });
+                // 登录逻辑
+                const res = await apiClient.post(`${AUTH_PATH}/login`, { email, password });
                 localStorage.setItem('chilan_token', res.data.access_token);
                 localStorage.setItem('chilan_user_id', res.data.user_id);
                 setStep('success');
                 setTimeout(() => navigate('/'), 2000); 
             }
         } catch (err) {
+            // 注意：axios 错误响应在 apiClient 中依然通过 err.response 访问
             setError(err.response?.data?.detail || "Operation failed");
         } finally {
             setIsLoading(false);
@@ -80,12 +89,19 @@ export default function Auth() {
         onSuccess: async (tokenResponse) => {
             setIsLoading(true);
             try {
-                const res = await axios.post('https://api.chilanlearning.com/auth/google', { access_token: tokenResponse.access_token });
+                // ✅ 使用 apiClient 处理 Google 登录
+                const res = await apiClient.post('/auth/google', { 
+                    access_token: tokenResponse.access_token 
+                });
                 localStorage.setItem('chilan_token', res.data.access_token);
                 localStorage.setItem('chilan_user_id', res.data.user_id);
                 setStep('success');
                 setTimeout(() => navigate('/'), 2000);
-            } catch (err) { setError("Google Auth Failed"); } finally { setIsLoading(false); }
+            } catch (err) { 
+                setError("Google Auth Failed"); 
+            } finally { 
+                setIsLoading(false); 
+            }
         }
     });
 
