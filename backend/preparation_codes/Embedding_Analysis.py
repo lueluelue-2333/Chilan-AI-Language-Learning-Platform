@@ -11,6 +11,14 @@ import google.generativeai as genai
 from zai import ZhipuAiClient
 import voyageai
 import datetime
+from pathlib import Path  
+from dotenv import load_dotenv
+
+current_file_path = Path(__file__).resolve()
+backend_dir = current_file_path.parent.parent
+env_path = backend_dir / ".env"
+
+load_dotenv(dotenv_path=env_path)
 
 # 导入测试用例
 try:
@@ -24,29 +32,33 @@ if sys.platform == "win32":
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
-# ================= 配置区 =================
-OPENAI_API_KEY = "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"
-GEMINI_API_KEY = "AIzaSyC52mIfJoYD8eoMS2DdY43BanE2jc2bp3w"
-ZHIPUAI_API_KEY = "8b6f34f2c0984d50b169c2e71dd4c51f.AIXzag6846gJqwfB"
-VOYAGE_API_KEY = "pa-Cn7qC8lQgj61S5kRBgXRY4Pd4WFJ0rS6B7xUA-PzKTK"
-DEEPSEEK_API_KEY = "sk-02cff5ac1c364489bccf386fd504b052"
+# ================= 🚀 配置区 (改为从 ENV 读取) =================
+# 读取 API Keys
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+ZHIPUAI_API_KEY = os.getenv("ZHIPUAI_API_KEY")
+VOYAGE_API_KEY = os.getenv("VOYAGE_API_KEY")
+DOUBAO_API_KEY = os.getenv("DOUBAO_API_KEY")
 
-# 定义评测模型矩阵
+# 🌟 定义评测模型矩阵 (ID 全部由 ENV 控制)
+# 如果 ENV 中没写，则使用你代码中原来的默认值作为兜底
 MODELS = {
-    "OA-Large": "text-embedding-3-large",
-    "Gemini": "gemini-embedding-001",
-    "ZP-3": "embedding-3",
-    "Voyage-4": "voyage-4-large",
-    "DeepSeek": "deepseek-embedding"  # 新增 DeepSeek 模型
+    "OA-Large": os.getenv("EMBED_OPENAI_MODEL_ID", "text-embedding-3-large"),
+    "Gemini": os.getenv("EMBED_GEMINI_MODEL_ID", "gemini-embedding-001"),
+    "ZP-3": os.getenv("EMBED_ZHIPU_MODEL_ID", "embedding-3"), # 建议在 env 增加此项
+    "Voyage-4": os.getenv("EMBED_VOYAGE_MODEL_ID", "voyage-4-large") # 建议在 env 增加此项
 }
 
-# 初始化所有客户端
+# --- 打印当前运行配置 (可选，方便调试) ---
+print(f"🛠️  模型矩阵加载完成:")
+for tag, m_id in MODELS.items():
+    print(f"   - {tag}: {m_id}")
+
+# ================= 初始化所有客户端 =================
 client_oa = OpenAI(api_key=OPENAI_API_KEY)
 genai.configure(api_key=GEMINI_API_KEY)
 client_zp = ZhipuAiClient(api_key=ZHIPUAI_API_KEY)
 client_vo = voyageai.Client(api_key=VOYAGE_API_KEY)
-# DeepSeek 专用客户端 (兼容 OpenAI 格式)
-client_ds = OpenAI(api_key=DEEPSEEK_API_KEY, base_url="https://api.deepseek.com")
 
 def get_embedding(text, model_tag):
     try:
@@ -62,16 +74,11 @@ def get_embedding(text, model_tag):
             # Voyage 4 指定 2048 维度
             resp = client_vo.embed([text], model=name, output_dimension=2048)
             return resp.embeddings[0]
-        elif "DeepSeek" in model_tag:
-            # 调用 DeepSeek 嵌入接口
-            return client_ds.embeddings.create(input=[text], model=name).data[0].embedding
     except Exception as e:
-        # print(f"获取 {model_tag} 失败: {e}") 
-        print(f"⚠️ 获取 {model_tag} 失败! 错误信息: {e}")
+        print(f"⚠️ 获取 {model_tag} ({MODELS[model_tag]}) 失败! 错误信息: {e}")
         return None
 
 def run_analysis():
-    # 循环跑：中译英(English_Evaluation) 和 英译中(Chinese_Evaluation)
     all_dfs = []
     modes = ["English_Evaluation", "Chinese_Evaluation"]
     
@@ -111,8 +118,7 @@ def plot_model_ranges(df, mode):
     plt.rcParams['font.sans-serif'] = ['SimHei', 'Arial Unicode MS']
     plt.rcParams['axes.unicode_minus'] = False
     
-    # 修改为 1行5列，适应 DeepSeek
-    fig, axes = plt.subplots(1, 5, figsize=(30, 8), sharey=True)
+    fig, axes = plt.subplots(1, 4, figsize=(30, 8), sharey=True)
 
     for i, tag in enumerate(MODELS.keys()):
         ax = axes[i]
@@ -137,12 +143,12 @@ def plot_model_ranges(df, mode):
             # 标注平均分
             ax.plot(grade-1, g_mean, marker='D', color='white', markeredgecolor='black', markersize=7)
 
-        ax.set_title(f"模型: {tag}", fontsize=15, fontweight='bold')
+        ax.set_title(f"模型: {tag}\n({MODELS[tag]})", fontsize=12, fontweight='bold')
         ax.set_xticks([0, 1, 2, 3])
         ax.set_xticklabels(['1分(错)', '2分', '3分', '4分'])
         ax.grid(axis='y', linestyle='--', alpha=0.3)
 
-    plt.suptitle(f"五路语义边界压力测试 (OpenAI/Gemini/智谱/Voyage/DeepSeek) - {mode}\n(Gap 越大代表模型区分度越好，推荐关注 1 分 Max 与 4 分 Min 的间距)", fontsize=22, y=1.05)
+    plt.suptitle(f"五路语义边界压力测试 - {mode}\n(通过 .env 动态配置模型版本)", fontsize=22, y=1.05)
     plt.tight_layout()
     plt.show()
 

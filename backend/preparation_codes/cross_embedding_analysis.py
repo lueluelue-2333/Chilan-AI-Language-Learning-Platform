@@ -11,9 +11,24 @@ import google.generativeai as genai
 from zai import ZhipuAiClient
 import voyageai
 import datetime
+# 🚀 引入路径处理和环境加载
+from pathlib import Path  
+from dotenv import load_dotenv
+
+# --- 🚀 路径解析逻辑 ---
+current_file_path = Path(__file__).resolve()
+backend_dir = current_file_path.parent.parent
+env_path = backend_dir / ".env"
+
+# 加载 .env
+load_dotenv(dotenv_path=env_path)
 
 # 导入您的海量版测试用例
-from test_cases import test_suites
+try:
+    from test_cases import test_suites
+except ImportError:
+    print("❌ 错误：请确保同目录下存在 test_cases.py 文件")
+    sys.exit(1)
 
 # ================= 模式选择 =================
 EVAL_MODE = "English_Evaluation" 
@@ -23,13 +38,21 @@ if sys.platform == "win32":
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
-# --- API 配置 (严格遵循您提供的最新 Key) ---
-OPENAI_API_KEY = "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"
-GEMINI_API_KEY = "AIzaSyC52mIfJoYD8eoMS2DdY43BanE2jc2bp3w"
-ZHIPUAI_API_KEY = "8b6f34f2c0984d50b169c2e71dd4c51f.AIXzag6846gJqwfB"
-VOYAGE_API_KEY = "pa-Cn7qC8lQgj61S5kRBgXRY4Pd4WFJ0rS6B7xUA-PzKTK"
+# --- 🚀 配置区 (完全从 ENV 读取) ---
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+ZHIPUAI_API_KEY = os.getenv("ZHIPUAI_API_KEY")
+VOYAGE_API_KEY = os.getenv("VOYAGE_API_KEY")
 
-# --- 逻辑门阈值设置 (建议根据后续 Excel 结果微调) ---
+# 🌟 动态获取模型 ID
+MODELS = {
+    "OA-Large": os.getenv("EMBED_OPENAI_MODEL_ID", "text-embedding-3-large"),
+    "Gemini": os.getenv("EMBED_GEMINI_MODEL_ID", "gemini-embedding-001"),
+    "ZP-3": os.getenv("EMBED_ZHIPU_MODEL_ID", "embedding-3"),
+    "Voyage-4": os.getenv("EMBED_VOYAGE_MODEL_ID", "voyage-4-large")
+}
+
+# --- 逻辑门阈值设置 ---
 # 只有高于此分的模型才认为该维度“通过”
 THRESHOLDS = {
     "OA-Large": 0.88,
@@ -38,14 +61,7 @@ THRESHOLDS = {
     "Voyage-4": 0.82
 }
 
-MODELS = {
-    "OA-Large": "text-embedding-3-large",
-    "Gemini": "gemini-embedding-001",
-    "ZP-3": "embedding-3",
-    "Voyage-4": "voyage-4-large"
-}
-
-# 初始化
+# --- 初始化所有客户端 ---
 client_oa = OpenAI(api_key=OPENAI_API_KEY)
 genai.configure(api_key=GEMINI_API_KEY)
 client_zp = ZhipuAiClient(api_key=ZHIPUAI_API_KEY)
@@ -62,8 +78,11 @@ def get_embedding(text, model_tag):
         elif "ZP" in model_tag:
             return client_zp.embeddings.create(model=name, input=[text]).data[0].embedding
         elif "Voyage" in model_tag:
+            # 保持 2048 维度配置
             return client_vo.embed([text], model=name, output_dimension=2048).embeddings[0]
-    except: return None
+    except Exception as e:
+        print(f"⚠️ 获取 {model_tag} ({MODELS.get(model_tag)}) 失败! 错误信息: {e}")
+        return None
 
 def apply_logic_gate(row):
     """
@@ -75,21 +94,31 @@ def apply_logic_gate(row):
     passed_count = 0
     
     for tag in MODELS.keys():
-        is_pass = row[tag] >= THRESHOLDS[tag]
-        gate_results[f"{tag}_Pass"] = is_pass
-        if is_pass: passed_count += 1
+        # 处理可能出现的 None 值
+        val = row.get(tag)
+        if val is not None:
+            is_pass = val >= THRESHOLDS[tag]
+            gate_results[f"{tag}_Pass"] = is_pass
+            if is_pass: passed_count += 1
+        else:
+            gate_results[f"{tag}_Pass"] = False
     
-    # 判定：全票通过才算真正通过
+    # 判定：全票通过才算真正通过 (4/4)
     row['Logic_Gate_Pass'] = "✅ PASS" if passed_count == 4 else "❌ FAIL"
     row['Confidence_Level'] = f"{passed_count}/4"
     
     # 综合共识分 (Consensus Score)
-    row['Consensus_Score'] = round(np.mean([row[t] for t in MODELS.keys()]), 4)
+    model_scores = [row[t] for t in MODELS.keys() if row[t] is not None]
+    row['Consensus_Score'] = round(np.mean(model_scores), 4) if model_scores else 0
     
     return row
 
 def run_logic_analysis():
-    print(f"🚀 正在执行四模型逻辑门检验: [{EVAL_MODE}]")
+    print(f"🛠️  模型矩阵加载完成 (4模型模式):")
+    for tag, m_id in MODELS.items():
+        print(f"   - {tag}: {m_id}")
+        
+    print(f"\n🚀 正在执行四模型逻辑门检验: [{EVAL_MODE}]")
     suite = test_suites[EVAL_MODE]
     data_list = []
     
@@ -102,7 +131,10 @@ def run_logic_analysis():
             for tag in MODELS:
                 t_vec = get_embedding(test_txt, tag)
                 if std_vecs[tag] and t_vec:
-                    row[tag] = round(float(cosine_similarity([std_vecs[tag]], [t_vec])[0][0]), 4)
+                    sim = cosine_similarity([std_vecs[tag]], [t_vec])[0][0]
+                    row[tag] = round(float(sim), 4)
+                else:
+                    row[tag] = None
             data_list.append(row)
 
     df = pd.DataFrame(data_list)
@@ -110,9 +142,10 @@ def run_logic_analysis():
     df = df.apply(apply_logic_gate, axis=1)
 
     # 导出 Excel
-    filename = f"LogicGate_Report_{EVAL_MODE}_{datetime.datetime.now().strftime('%H%M')}.xlsx"
+    timestamp = datetime.datetime.now().strftime('%m%d_%H%M')
+    filename = f"LogicGate_Report_{EVAL_MODE}_{timestamp}.xlsx"
     df.to_excel(filename, index=False)
-    print(f"✅ 逻辑门报告已生成: {filename}")
+    print(f"✅ 逻辑门报告已生成: {os.path.abspath(filename)}")
 
     # 打印逻辑门拦截统计
     print("\n--- 逻辑门拦截统计 (4/4 代表全模型通过) ---")
@@ -127,7 +160,10 @@ def plot_gate_results(df):
     plt.figure(figsize=(14, 7))
     
     # 绘制共识分与人工评分的对比散点图
-    sns.scatterplot(data=df, x='人工评分', y='Consensus_Score', hue='Logic_Gate_Pass', 
+    # 过滤掉无效数据
+    plot_df = df[df['Consensus_Score'] > 0]
+    
+    sns.scatterplot(data=plot_df, x='人工评分', y='Consensus_Score', hue='Logic_Gate_Pass', 
                     style='Logic_Gate_Pass', s=100, palette={'✅ PASS': 'g', '❌ FAIL': 'r'})
     
     plt.axhline(y=0.85, color='gray', linestyle='--', alpha=0.5, label="共识及格线")
