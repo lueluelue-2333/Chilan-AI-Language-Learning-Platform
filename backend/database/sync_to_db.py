@@ -84,6 +84,10 @@ def sync_lesson_data(json_file_path: str, provider: BaseEmbeddingProvider) -> bo
     lesson_metadata = data.get("lesson_metadata", {})
     course_content = data.get("course_content", {})
     database_items = data.get("database_items", [])
+    structured_lesson_payload = {
+        "lesson_metadata": lesson_metadata,
+        "course_content": course_content,
+    }
 
     course_id = lesson_metadata.get("course_id")
     lesson_id = lesson_metadata.get("lesson_id")
@@ -104,12 +108,12 @@ def sync_lesson_data(json_file_path: str, provider: BaseEmbeddingProvider) -> bo
             cur.execute("""
                 UPDATE lessons SET title = %s, structured_content = %s
                 WHERE course_id = %s AND lesson_id = %s
-            """, (title, Json(course_content), course_id, lesson_id))
+            """, (title, Json(structured_lesson_payload), course_id, lesson_id))
         else:
             cur.execute("""
                 INSERT INTO lessons (course_id, lesson_id, title, structured_content)
                 VALUES (%s, %s, %s, %s)
-            """, (course_id, lesson_id, title, Json(course_content)))
+            """, (course_id, lesson_id, title, Json(structured_lesson_payload)))
 
         # 2. 同步 language_items 表
         print(f"🎯 正在处理 {len(database_items)} 道深度解析题目...")

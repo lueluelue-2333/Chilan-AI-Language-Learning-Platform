@@ -14,7 +14,7 @@
             "words": [
               {
                 "cn": "高文中",
-                "py": "Gāo Wénzhōng",
+                "py": "gāo wénzhōng",
                 "highlight": false
               },
               {
@@ -40,7 +40,7 @@
               {
                 "cn": "的",
                 "py": "de",
-                "highlight": false
+                "highlight": true
               },
               {
                 "cn": "照片",
@@ -50,10 +50,10 @@
               {
                 "cn": "吗",
                 "py": "ma",
-                "highlight": true
+                "highlight": false
               },
               {
-                "cn": "?",
+                "cn": "？",
                 "py": "",
                 "highlight": false
               }
@@ -130,13 +130,18 @@
             "english": "Who is this girl?",
             "words": [
               {
-                "cn": "这个",
-                "py": "zhège",
+                "cn": "这",
+                "py": "zhè",
+                "highlight": true
+              },
+              {
+                "cn": "个",
+                "py": "ge",
                 "highlight": true
               },
               {
                 "cn": "女孩子",
-                "py": "nǚháizi",
+                "py": "nǚ háizi",
                 "highlight": true
               },
               {
@@ -150,7 +155,7 @@
                 "highlight": true
               },
               {
-                "cn": "?",
+                "cn": "？",
                 "py": "",
                 "highlight": false
               }
@@ -192,13 +197,18 @@
             "english": "Is this boy your younger brother?",
             "words": [
               {
-                "cn": "这个",
-                "py": "zhège",
+                "cn": "这",
+                "py": "zhè",
+                "highlight": true
+              },
+              {
+                "cn": "个",
+                "py": "ge",
                 "highlight": true
               },
               {
                 "cn": "男孩子",
-                "py": "nánháizi",
+                "py": "nán háizi",
                 "highlight": true
               },
               {
@@ -219,10 +229,10 @@
               {
                 "cn": "吗",
                 "py": "ma",
-                "highlight": true
+                "highlight": false
               },
               {
-                "cn": "?",
+                "cn": "？",
                 "py": "",
                 "highlight": false
               }
@@ -233,8 +243,13 @@
             "english": "No, he is my oldest brother's son.",
             "words": [
               {
-                "cn": "不是",
-                "py": "bú shì",
+                "cn": "不",
+                "py": "bú",
+                "highlight": true
+              },
+              {
+                "cn": "是",
+                "py": "shì",
                 "highlight": true
               },
               {
@@ -255,11 +270,11 @@
               {
                 "cn": "我",
                 "py": "wǒ",
-                "highlight": false
+                "highlight": true
               },
               {
                 "cn": "大哥",
-                "py": "dàgē",
+                "py": "dà gē",
                 "highlight": true
               },
               {
@@ -269,7 +284,7 @@
               },
               {
                 "cn": "儿子",
-                "py": "érzi",
+                "py": "ér zi",
                 "highlight": true
               },
               {
@@ -286,11 +301,11 @@
               {
                 "cn": "你",
                 "py": "nǐ",
-                "highlight": false
+                "highlight": true
               },
               {
                 "cn": "大哥",
-                "py": "dàgē",
+                "py": "dà gē",
                 "highlight": true
               },
               {
@@ -306,10 +321,10 @@
               {
                 "cn": "吗",
                 "py": "ma",
-                "highlight": true
+                "highlight": false
               },
               {
-                "cn": "?",
+                "cn": "？",
                 "py": "",
                 "highlight": false
               }
@@ -326,7 +341,7 @@
               },
               {
                 "cn": "没有",
-                "py": "méiyǒu",
+                "py": "méi yǒu",
                 "highlight": true
               },
               {
@@ -461,8 +476,8 @@
         "part_of_speech": "pr",
         "definition": "she, her",
         "example_sentence": {
-          "cn": "",
-          "py": "",
+          "cn": "她是我姐姐。",
+          "py": "Tā shì wǒ jiějie.",
           "en": ""
         }
       },
@@ -472,7 +487,7 @@
         "part_of_speech": "n",
         "definition": "older sister",
         "example_sentence": {
-          "cn": "谁有姐姐?",
+          "cn": "谁有姐姐？",
           "py": "Shéi yǒu jiějie?",
           "en": "Who has older sisters?"
         }
@@ -483,8 +498,8 @@
         "part_of_speech": "adj",
         "definition": "male",
         "example_sentence": {
-          "cn": "",
-          "py": "",
+          "cn": "这个男孩子是你弟弟吗？",
+          "py": "Zhè ge nán háizi shì nǐ dìdi ma?",
           "en": ""
         }
       },
@@ -494,7 +509,7 @@
         "part_of_speech": "n",
         "definition": "younger brother",
         "example_sentence": {
-          "cn": "王先生有弟弟吗?",
+          "cn": "王先生有弟弟吗？",
           "py": "Wáng xiānsheng yǒu dìdi ma?",
           "en": "Does Mr. Wang have a younger brother?"
         }
@@ -505,8 +520,8 @@
         "part_of_speech": "pr",
         "definition": "he, him",
         "example_sentence": {
-          "cn": "",
-          "py": "",
+          "cn": "他没有女儿。",
+          "py": "Tā méiyǒu nǚ'ér.",
           "en": ""
         }
       },
@@ -538,9 +553,9 @@
         "part_of_speech": "v",
         "definition": "to have, to exist [See Grammar 4 and Grammar 5.]",
         "example_sentence": {
-          "cn": "谁有姐姐?",
-          "py": "Shéi yǒu jiějie?",
-          "en": "Who has older sisters?"
+          "cn": "高文中有姐姐。",
+          "py": "Gāo Wénzhōng yǒu jiějie.",
+          "en": "Gao Wenzhong has an older sister."
         }
       },
       {
@@ -782,8 +797,8 @@
       ],
       "context_examples": [
         {
-          "cn": "",
-          "py": "",
+          "cn": "她是我姐姐。",
+          "py": "Tā shì wǒ jiějie.",
           "en": ""
         }
       ]
@@ -800,7 +815,7 @@
       ],
       "context_examples": [
         {
-          "cn": "谁有姐姐?",
+          "cn": "谁有姐姐？",
           "py": "Shéi yǒu jiějie?",
           "en": "Who has older sisters?"
         }
@@ -818,8 +833,8 @@
       ],
       "context_examples": [
         {
-          "cn": "",
-          "py": "",
+          "cn": "这个男孩子是你弟弟吗？",
+          "py": "Zhè ge nán háizi shì nǐ dìdi ma?",
           "en": ""
         }
       ]
@@ -836,7 +851,7 @@
       ],
       "context_examples": [
         {
-          "cn": "王先生有弟弟吗?",
+          "cn": "王先生有弟弟吗？",
           "py": "Wáng xiānsheng yǒu dìdi ma?",
           "en": "Does Mr. Wang have a younger brother?"
         }
@@ -854,8 +869,8 @@
       ],
       "context_examples": [
         {
-          "cn": "",
-          "py": "",
+          "cn": "他没有女儿。",
+          "py": "Tā méiyǒu nǚ'ér.",
           "en": ""
         }
       ]
@@ -904,13 +919,13 @@
       "original_text": "有",
       "original_pinyin": "yǒu",
       "standard_answers": [
-        "to have, to exist"
+        "to have, to exist [See Grammar 4 and Grammar 5.]"
       ],
       "context_examples": [
         {
-          "cn": "谁有姐姐?",
-          "py": "Shéi yǒu jiějie?",
-          "en": "Who has older sisters?"
+          "cn": "高文中有姐姐。",
+          "py": "Gāo Wénzhōng yǒu jiějie.",
+          "en": "Gao Wenzhong has an older sister."
         }
       ]
     },
@@ -991,10 +1006,10 @@
       "question_id": 23,
       "course_id": 1,
       "question_type": "CN_TO_EN",
-      "original_text": "高文中,那是你的照片吗?",
-      "original_pinyin": "Gāo Wénzhōng nà shì nǐ de zhàopiàn ma",
+      "original_text": "那是你的照片吗？",
+      "original_pinyin": "nà shì nǐ de zhàopiàn ma",
       "standard_answers": [
-        "Gao Wenzhong, is that your picture?"
+        "Is that your picture?"
       ]
     },
     {
@@ -1002,8 +1017,8 @@
       "question_id": 24,
       "course_id": 1,
       "question_type": "CN_TO_EN",
-      "original_text": "这个女孩子是谁?",
-      "original_pinyin": "zhège nǚháizi shì shéi",
+      "original_text": "这个女孩子是谁？",
+      "original_pinyin": "zhè ge nǚ háizi shì shéi",
       "standard_answers": [
         "Who is this girl?"
       ]
@@ -1013,10 +1028,10 @@
       "question_id": 25,
       "course_id": 1,
       "question_type": "CN_TO_EN",
-      "original_text": "不是,他是我大哥的儿子。",
-      "original_pinyin": "bú shì tā shì wǒ dàgē de érzi",
+      "original_text": "这个男孩子是你弟弟吗？",
+      "original_pinyin": "zhè ge nán háizi shì nǐ dìdi ma",
       "standard_answers": [
-        "No, he is my oldest brother's son."
+        "Is this boy your younger brother?"
       ]
     },
     {
@@ -1024,26 +1039,15 @@
       "question_id": 26,
       "course_id": 1,
       "question_type": "CN_TO_EN",
-      "original_text": "你大哥有女儿吗?",
-      "original_pinyin": "nǐ dàgē yǒu nǚ'ér ma",
+      "original_text": "他没有女儿。",
+      "original_pinyin": "tā méi yǒu nǚ'ér",
       "standard_answers": [
-        "Does your oldest brother have a daughter?"
+        "He doesn't have a daughter."
       ]
     },
     {
       "lesson_id": 201,
       "question_id": 27,
-      "course_id": 1,
-      "question_type": "CN_TO_EN",
-      "original_text": "高文中有姐姐。",
-      "original_pinyin": "Gāo Wénzhōng yǒu jiějie.",
-      "standard_answers": [
-        "Gao Wenzhong has an older sister."
-      ]
-    },
-    {
-      "lesson_id": 201,
-      "question_id": 28,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "that",
@@ -1061,7 +1065,7 @@
     },
     {
       "lesson_id": 201,
-      "question_id": 29,
+      "question_id": 28,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "De (a possessive or descriptive particle)",
@@ -1079,7 +1083,7 @@
     },
     {
       "lesson_id": 201,
-      "question_id": 30,
+      "question_id": 29,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "picture, photo",
@@ -1097,7 +1101,7 @@
     },
     {
       "lesson_id": 201,
-      "question_id": 31,
+      "question_id": 30,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "this",
@@ -1115,7 +1119,7 @@
     },
     {
       "lesson_id": 201,
-      "question_id": 32,
+      "question_id": 31,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "father, dad",
@@ -1133,7 +1137,7 @@
     },
     {
       "lesson_id": 201,
-      "question_id": 33,
+      "question_id": 32,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "mother, mom",
@@ -1151,7 +1155,7 @@
     },
     {
       "lesson_id": 201,
-      "question_id": 34,
+      "question_id": 33,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "Gè/ge (measure word for many common everyday objects) [See Grammar 2.]",
@@ -1169,7 +1173,7 @@
     },
     {
       "lesson_id": 201,
-      "question_id": 35,
+      "question_id": 34,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "female",
@@ -1187,11 +1191,11 @@
     },
     {
       "lesson_id": 201,
-      "question_id": 36,
+      "question_id": 35,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "child",
-      "original_pinyin": "",
+      "original_pinyin": null,
       "standard_answers": [
         "孩子"
       ],
@@ -1205,11 +1209,11 @@
     },
     {
       "lesson_id": 201,
-      "question_id": 37,
+      "question_id": 36,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "who, whom",
-      "original_pinyin": "",
+      "original_pinyin": null,
       "standard_answers": [
         "谁"
       ],
@@ -1223,35 +1227,35 @@
     },
     {
       "lesson_id": 201,
-      "question_id": 38,
+      "question_id": 37,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "she, her",
-      "original_pinyin": "",
+      "original_pinyin": null,
       "standard_answers": [
         "她"
       ],
       "context_examples": [
         {
-          "cn": "",
-          "py": "",
+          "cn": "她是我姐姐。",
+          "py": "Tā shì wǒ jiějie.",
           "en": ""
         }
       ]
     },
     {
       "lesson_id": 201,
-      "question_id": 39,
+      "question_id": 38,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "older sister",
-      "original_pinyin": "",
+      "original_pinyin": null,
       "standard_answers": [
         "姐姐"
       ],
       "context_examples": [
         {
-          "cn": "谁有姐姐?",
+          "cn": "谁有姐姐？",
           "py": "Shéi yǒu jiějie?",
           "en": "Who has older sisters?"
         }
@@ -1259,7 +1263,7 @@
     },
     {
       "lesson_id": 201,
-      "question_id": 40,
+      "question_id": 39,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "male",
@@ -1269,15 +1273,15 @@
       ],
       "context_examples": [
         {
-          "cn": "",
-          "py": "",
+          "cn": "这个男孩子是你弟弟吗？",
+          "py": "Zhè ge nán háizi shì nǐ dìdi ma?",
           "en": ""
         }
       ]
     },
     {
       "lesson_id": 201,
-      "question_id": 41,
+      "question_id": 40,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "younger brother",
@@ -1287,7 +1291,7 @@
       ],
       "context_examples": [
         {
-          "cn": "王先生有弟弟吗?",
+          "cn": "王先生有弟弟吗？",
           "py": "Wáng xiānsheng yǒu dìdi ma?",
           "en": "Does Mr. Wang have a younger brother?"
         }
@@ -1295,7 +1299,7 @@
     },
     {
       "lesson_id": 201,
-      "question_id": 42,
+      "question_id": 41,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "he, him",
@@ -1305,15 +1309,15 @@
       ],
       "context_examples": [
         {
-          "cn": "",
-          "py": "",
+          "cn": "他没有女儿。",
+          "py": "Tā méiyǒu nǚ'ér.",
           "en": ""
         }
       ]
     },
     {
       "lesson_id": 201,
-      "question_id": 43,
+      "question_id": 42,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "eldest/oldest brother",
@@ -1331,7 +1335,7 @@
     },
     {
       "lesson_id": 201,
-      "question_id": 44,
+      "question_id": 43,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "son",
@@ -1349,25 +1353,25 @@
     },
     {
       "lesson_id": 201,
-      "question_id": 45,
+      "question_id": 44,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "to have, to exist",
+      "original_text": "to have, to exist [See Grammar 4 and Grammar 5.]",
       "original_pinyin": null,
       "standard_answers": [
         "有"
       ],
       "context_examples": [
         {
-          "cn": "谁有姐姐?",
-          "py": "Shéi yǒu jiějie?",
-          "en": "Who has older sisters?"
+          "cn": "高文中有姐姐。",
+          "py": "Gāo Wénzhōng yǒu jiějie.",
+          "en": "Gao Wenzhong has an older sister."
         }
       ]
     },
     {
       "lesson_id": 201,
-      "question_id": 46,
+      "question_id": 45,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "daughter",
@@ -1385,7 +1389,7 @@
     },
     {
       "lesson_id": 201,
-      "question_id": 47,
+      "question_id": 46,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "not",
@@ -1403,11 +1407,11 @@
     },
     {
       "lesson_id": 201,
-      "question_id": 48,
+      "question_id": 47,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "Gāo Wénzhōng Gao Wenzhong (a personal name)",
-      "original_pinyin": "",
+      "original_pinyin": null,
       "standard_answers": [
         "高文中"
       ],
@@ -1421,11 +1425,11 @@
     },
     {
       "lesson_id": 201,
-      "question_id": 49,
+      "question_id": 48,
       "course_id": 1,
       "question_type": "EN_TO_CN",
       "original_text": "Gāo Gao (a family name); tall, high",
-      "original_pinyin": "",
+      "original_pinyin": null,
       "standard_answers": [
         "高"
       ],
@@ -1439,12 +1443,24 @@
     },
     {
       "lesson_id": 201,
+      "question_id": 49,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "This is my dad, this is my mom.",
+      "original_pinyin": null,
+      "standard_answers": [
+        "这是我爸爸,这是我妈妈。"
+      ]
+    },
+    {
+      "lesson_id": 201,
       "question_id": 50,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "Yes. This is my dad, this is my mom.",
+      "original_text": "She is my older sister.",
+      "original_pinyin": null,
       "standard_answers": [
-        "是。这是我爸爸,这是我妈妈。"
+        "她是我姐姐。"
       ]
     },
     {
@@ -1452,9 +1468,10 @@
       "question_id": 51,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "Is this boy your younger brother?",
+      "original_text": "No, he is my oldest brother's son.",
+      "original_pinyin": null,
       "standard_answers": [
-        "这个男孩子是你弟弟吗?"
+        "不是,他是我大哥的儿子。"
       ]
     },
     {
@@ -1462,114 +1479,115 @@
       "question_id": 52,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "He doesn't have a daughter.",
+      "original_text": "Do you have an older brother?",
+      "original_pinyin": null,
       "standard_answers": [
-        "他没有女儿。"
+        "你有哥哥吗?"
       ]
     }
   ],
   "video_global_config": {
-    "visual_style": "3D Pixar style, vibrant colors, soft lighting, educational animation for young adults.",
+    "visual_style": "Warm and friendly 3D animation style, reminiscent of Pixar films, with soft lighting and detailed textures. The setting is a cozy, modern apartment.",
     "character_definitions": [
       {
         "name": "王朋",
-        "appearance_description_en": "A friendly-looking Chinese male college student in his early 20s, with short black hair, wearing a casual blue hoodie and glasses. Expressive and curious. Use 'Wang Peng' for consistency."
+        "appearance_description_en": "A friendly Chinese male in his early 20s, with short, slightly messy black hair, wearing a modern casual outfit like a green hoodie and jeans. He has expressive, curious eyes and a warm smile. Character name: Wang Peng."
       },
       {
         "name": "高文中",
-        "appearance_description_en": "A slightly more reserved Chinese male college student in his early 20s, with neat black hair, wearing a green sweater. Kind and patient. Use 'Gao Wenzhong' for consistency."
+        "appearance_description_en": "A calm and gentle Chinese male in his early 20s, with neat black hair and glasses. He wears a comfortable blue sweater over a collared shirt. He appears proud and happy when talking about his family. Character name: Gao Wenzhong."
       }
     ]
   },
   "video_scenes": [
     {
       "scene_id": 1,
-      "scene_description_cn": "在大学宿舍里，王朋好奇地指着高文中手中的一张家庭照片提问。",
-      "video_api_prompt_en": "3D Pixar style. In a cozy, sunlit dorm room, Gao Wenzhong (kind, green sweater) is holding a framed family photo. His friend Wang Peng (curious, blue hoodie, glasses) leans in and points at the photo, asking a question. Medium shot, cinematic, warm and inviting lighting.",
+      "scene_description_cn": "在舒适的客厅里，高文中拿着一张家庭照片，王朋好奇地指着照片提问。",
+      "video_api_prompt_en": "3D Pixar style. Two young Chinese men, Wang Peng and Gao Wenzhong, are in a cozy, sunlit living room. Gao Wenzhong is holding a framed family photograph. Wang Peng leans in, pointing at the photo with a curious expression. The camera is at eye level, medium shot, capturing both characters' interactions. Soft, warm afternoon light streams through a window.",
       "camera_movement": "Static",
       "voice_over": {
         "role": "王朋",
-        "content": "高文中, 那是你的照片吗?",
-        "pinyin": "Gāo Wénzhōng, nà shì nǐ de zhàopiàn ma?"
+        "content": "高文中, 那是你的照片吗？",
+        "pinyin": "gāo wénzhōng, nà shì nǐ de zhàopiàn ma?"
       },
       "screen_overlay": {
-        "main_text": "那 (nà) ... 照片 (zhàopiàn) ... 吗 (ma)?",
-        "sub_text": "that ... photo ... ?"
+        "main_text": "那 是 你的 照片 吗？",
+        "sub_text": "nà shì nǐ de zhàopiàn ma? (Is that your picture?)"
       }
     },
     {
       "scene_id": 2,
-      "scene_description_cn": "镜头特写照片，高文中依次指出他的爸爸和妈妈。",
-      "video_api_prompt_en": "3D Pixar style. Extreme close-up on the vibrant family photo held by Gao Wenzhong. A gentle, animated glowing circle appears first around the father (a middle-aged man with glasses), then moves to the mother (a smiling middle-aged woman). The background is softly blurred. Dynamic and educational feel.",
+      "scene_description_cn": "镜头推近到照片，高文中自豪地指着照片中的父母介绍。",
+      "video_api_prompt_en": "Extreme close-up on the family photo held by Gao Wenzhong. The photo is in a classic style, showing a happy family. Gao Wenzhong's finger enters the frame, first pointing to the father, then moving to point at the mother. The focus is sharp on the photo, with the background softly blurred. 3D Pixar style.",
       "camera_movement": "Zoom in",
       "voice_over": {
         "role": "高文中",
         "content": "是。这是我爸爸, 这是我妈妈。",
-        "pinyin": "Shì. Zhè shì wǒ bàba, zhè shì wǒ māmā."
+        "pinyin": "shì. zhè shì wǒ bàba, zhè shì wǒ māmā."
       },
       "screen_overlay": {
-        "main_text": "这 (zhè) 是我 爸爸 (bàba), 这 (zhè) 是我 妈妈 (māmā)",
-        "sub_text": "This is my dad, This is my mom"
+        "main_text": "这 是 我 爸爸, 这 是 我 妈妈。",
+        "sub_text": "zhè shì wǒ bàba, zhè shì wǒ māmā. (This is my dad, this is my mom.)"
       }
     },
     {
       "scene_id": 3,
-      "scene_description_cn": "王朋指着照片中的女孩，好奇地问她是谁。",
-      "video_api_prompt_en": "3D Pixar style. The shot returns to Wang Peng and Gao Wenzhong looking at the photo. Wang Peng points specifically to the teenage girl in the photo. The camera follows his finger, pushing in for a close-up on the girl's smiling face in the photograph. A stylized question mark icon animates beside her head.",
-      "camera_movement": "Slow Zoom",
+      "scene_description_cn": "王朋指着照片中的一个女孩，好奇地询问她的身份。",
+      "video_api_prompt_en": "The camera angle shifts to an over-the-shoulder shot from Wang Peng's perspective, looking at the photo. His finger points towards a teenage girl in the picture. The focus racks from his finger to the girl's face in the photo. We can see Gao Wenzhong in the peripheral vision, ready to answer. 3D Pixar style.",
+      "camera_movement": "Static",
       "voice_over": {
         "role": "王朋",
-        "content": "这个女孩子是谁?",
-        "pinyin": "Zhège nǚháizi shì shéi?"
+        "content": "这个女孩子是谁？",
+        "pinyin": "zhè ge nǚ háizi shì shéi?"
       },
       "screen_overlay": {
-        "main_text": "这个女孩子 (zhège nǚháizi) 是 谁 (shéi)?",
-        "sub_text": "Who is this girl?"
+        "main_text": "这个 女孩子 是 谁？",
+        "sub_text": "zhè ge nǚ háizi shì shéi? (Who is this girl?)"
       }
     },
     {
       "scene_id": 4,
-      "scene_description_cn": "高文中微笑着揭晓答案，照片中女孩的身份被标明。",
-      "video_api_prompt_en": "3D Pixar style. Close-up on the photo, focused on the teenage girl. The animated question mark icon smoothly transforms into the Chinese characters '姐姐' (jiějie) with a soft glow. Gao Wenzhong's smiling face is visible in the blurred background, looking proud.",
-      "camera_movement": "Static",
+      "scene_description_cn": "高文中微笑着回答，确认女孩是他的姐姐。",
+      "video_api_prompt_en": "Medium close-up on Gao Wenzhong's face. He has a warm, proud smile as he looks at the photo in his hands. The camera then pans down slightly to the photo, where a subtle, animated glow briefly highlights the sister's face. 3D Pixar style, warm lighting.",
+      "camera_movement": "Pan",
       "voice_over": {
         "role": "高文中",
         "content": "她是我姐姐。",
-        "pinyin": "Tā shì wǒ jiějie."
+        "pinyin": "tā shì wǒ jiějie."
       },
       "screen_overlay": {
-        "main_text": "她 (tā) 是我 姐姐 (jiějie)",
-        "sub_text": "She is my older sister"
+        "main_text": "她 是 我 姐姐。",
+        "sub_text": "tā shì wǒ jiějie. (She is my older sister.)"
       }
     },
     {
       "scene_id": 5,
-      "scene_description_cn": "王朋的注意力转移到照片中的小男孩身上，继续提问。",
-      "video_api_prompt_en": "3D Pixar style. The camera focus racks from the sister to a young boy in the family photo. Wang Peng's finger enters the frame, pointing at the boy. The lighting remains bright and clear, highlighting the boy's cheerful expression.",
-      "camera_movement": "Focus Rack",
+      "scene_description_cn": "王朋的目光转向照片中的一个小男孩，猜测他是不是高文中的弟弟。",
+      "video_api_prompt_en": "The camera focuses again on the photo, this time zooming in on a young boy standing next to the father. The shot then cuts back to a medium shot of Wang Peng looking at Gao Wenzhong with an inquisitive expression, asking his question. 3D Pixar style.",
+      "camera_movement": "Zoom in",
       "voice_over": {
         "role": "王朋",
-        "content": "这个男孩子是你弟弟吗?",
-        "pinyin": "Zhège nánháizi shì nǐ dìdi ma?"
+        "content": "这个男孩子是你弟弟吗？",
+        "pinyin": "zhè ge nán háizi shì nǐ dìdi ma?"
       },
       "screen_overlay": {
-        "main_text": "这个男孩子 (zhège nánháizi) 是你 弟弟 (dìdi) 吗?",
-        "sub_text": "Is this boy your younger brother?"
+        "main_text": "这个 男孩子 是 你 弟弟 吗？",
+        "sub_text": "zhè ge nán háizi shì nǐ dìdi ma? (Is this boy your younger brother?)"
       }
     },
     {
       "scene_id": 6,
-      "scene_description_cn": "高文中笑着摇头，并用一个简单的动画家谱图解释男孩的身份。",
-      "video_api_prompt_en": "3D Pixar style. The shot pulls back from the photo to show Gao Wenzhong shaking his head with a friendly smile. A simple, clean animated family tree graphic overlays on the screen, showing a line connecting '大哥' (oldest brother) to '儿子' (son), clarifying the relationship. The animation is quick and easy to understand.",
-      "camera_movement": "Pull back",
+      "scene_description_cn": "高文中笑着摇头，解释说那是他大哥的儿子。画面中出现一个简单的动画家谱图来帮助理解关系。",
+      "video_api_prompt_en": "Gao Wenzhong gently shakes his head with a friendly smile. As he speaks, a simple, animated family tree graphic materializes beside him in the air. The graphic highlights the 'oldest brother' (大哥) and then draws a line down to the 'son' (儿子), visually clarifying the relationship. 3D Pixar style, clean motion graphics.",
+      "camera_movement": "Static",
       "voice_over": {
         "role": "高文中",
-        "content": "不是, 他是我大哥的儿子。",
-        "pinyin": "Bú shì, tā shì wǒ dàgē de érzi."
+        "content": "不 是, 他是我大哥的儿子。",
+        "pinyin": "bú shì, tā shì wǒ dà gē de ér zi."
       },
       "screen_overlay": {
-        "main_text": "不是 (bú shì), 他是 大哥 (dàgē) 的 儿子 (érzi)",
-        "sub_text": "No, he is my oldest brother's son"
+        "main_text": "他 是 我 大哥 的 儿子。",
+        "sub_text": "tā shì wǒ dà gē de ér zi. (He is my oldest brother's son.)"
       }
     }
   ]

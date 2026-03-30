@@ -41,6 +41,12 @@ def main():
         print(f"📭 raw_materials 为空，没有需要处理的 PDF。")
         return
 
+    def extract_lesson_id(pdf_path: Path):
+        numbers = re.findall(r'\d+', pdf_path.stem)
+        return int(numbers[0]) if numbers else float("inf")
+
+    pdf_files = sorted(pdf_files, key=extract_lesson_id)
+
     print(f"📦 发现 {len(pdf_files)} 个新教材准备处理！\n" + "="*45)
 
     for pdf_path in pdf_files:

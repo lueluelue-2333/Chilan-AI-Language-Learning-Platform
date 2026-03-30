@@ -133,6 +133,22 @@ async def init_study_flow(user_id: str, course_id: int = 1):
             return {"mode": "completed", "message": "恭喜！你已完成本课程的所有内容。"}
 
         next_lesson_id = lesson_row['lesson_id']
+        stored_lesson_payload = lesson_row.get('structured_content') or {}
+        if isinstance(stored_lesson_payload, dict) and "course_content" in stored_lesson_payload:
+            lesson_metadata = stored_lesson_payload.get("lesson_metadata", {}) or {}
+            course_content = stored_lesson_payload.get("course_content", {}) or {}
+        else:
+            # 兼容旧数据：旧版本 lessons.structured_content 里只存了 course_content
+            lesson_metadata = {}
+            course_content = stored_lesson_payload if isinstance(stored_lesson_payload, dict) else {}
+
+        lesson_metadata = {
+            "course_id": course_id,
+            "lesson_id": next_lesson_id,
+            "title": lesson_metadata.get("title") or lesson_row['title'],
+            "content_type": lesson_metadata.get("content_type", "dialogue"),
+            **{k: v for k, v in lesson_metadata.items() if k not in {"course_id", "lesson_id", "title", "content_type"}},
+        }
 
         # ---------------------------------------------------------
         # 4. 查询该新课的全部题目
@@ -163,12 +179,8 @@ async def init_study_flow(user_id: str, course_id: int = 1):
             "mode": "teaching",
             "data": {
                 "lesson_content": {
-                    "lesson_metadata": {
-                        "course_id": course_id, 
-                        "lesson_id": next_lesson_id, 
-                        "title": lesson_row['title']
-                    },
-                    "course_content": lesson_row['structured_content'],
+                    "lesson_metadata": lesson_metadata,
+                    "course_content": course_content,
                     "aigc_visual_prompt": "A thematic visual for the current lesson..." 
                 },
                 "pending_items": new_questions,

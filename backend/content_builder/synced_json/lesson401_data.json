@@ -101,7 +101,7 @@
               {
                 "cn": "呢",
                 "py": "ne",
-                "highlight": false
+                "highlight": true
               },
               {
                 "cn": "？",
@@ -201,18 +201,8 @@
                 "highlight": false
               },
               {
-                "cn": "对",
-                "py": "duì",
-                "highlight": true
-              },
-              {
-                "cn": "不",
-                "py": "bu",
-                "highlight": true
-              },
-              {
-                "cn": "对",
-                "py": "duì",
+                "cn": "对不对",
+                "py": "duì bu duì",
                 "highlight": true
               },
               {
@@ -270,21 +260,21 @@
               {
                 "cn": "你",
                 "py": "nǐ",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "喜欢",
-                "py": "xǐhuan",
+                "py": "xǐ huān",
                 "highlight": true
               },
               {
                 "cn": "不",
-                "py": "bu",
-                "highlight": true
+                "py": "bù",
+                "highlight": false
               },
               {
                 "cn": "喜欢",
-                "py": "xǐhuan",
+                "py": "xǐ huān",
                 "highlight": true
               },
               {
@@ -294,7 +284,7 @@
               },
               {
                 "cn": "电影",
-                "py": "diànyǐng",
+                "py": "diàn yǐng",
                 "highlight": true
               },
               {
@@ -310,7 +300,7 @@
             "words": [
               {
                 "cn": "喜欢",
-                "py": "xǐhuan",
+                "py": "xǐ huān",
                 "highlight": true
               },
               {
@@ -321,16 +311,16 @@
               {
                 "cn": "我",
                 "py": "wǒ",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "周末",
-                "py": "zhōumò",
+                "py": "zhōu mò",
                 "highlight": true
               },
               {
                 "cn": "常常",
-                "py": "chángcháng",
+                "py": "cháng cháng",
                 "highlight": true
               },
               {
@@ -340,7 +330,7 @@
               },
               {
                 "cn": "电影",
-                "py": "diànyǐng",
+                "py": "diàn yǐng",
                 "highlight": true
               },
               {
@@ -361,17 +351,17 @@
               },
               {
                 "cn": "我们",
-                "py": "wǒmen",
-                "highlight": true
+                "py": "wǒ men",
+                "highlight": false
               },
               {
                 "cn": "今天",
-                "py": "jīntiān",
+                "py": "jīn tiān",
                 "highlight": true
               },
               {
                 "cn": "晚上",
-                "py": "wǎnshang",
+                "py": "wǎn shang",
                 "highlight": true
               },
               {
@@ -387,16 +377,16 @@
               {
                 "cn": "一个",
                 "py": "yí ge",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "外国",
-                "py": "wàiguó",
+                "py": "wài guó",
                 "highlight": true
               },
               {
                 "cn": "电影",
-                "py": "diànyǐng",
+                "py": "diàn yǐng",
                 "highlight": true
               },
               {
@@ -406,7 +396,7 @@
               },
               {
                 "cn": "怎么样",
-                "py": "zěnmeyàng",
+                "py": "zěn me yàng",
                 "highlight": true
               },
               {
@@ -417,7 +407,7 @@
               {
                 "cn": "我",
                 "py": "wǒ",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "请客",
@@ -437,13 +427,13 @@
             "words": [
               {
                 "cn": "为什么",
-                "py": "wèishénme",
+                "py": "wèi shén me",
                 "highlight": true
               },
               {
                 "cn": "你",
                 "py": "nǐ",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "请客",
@@ -463,18 +453,18 @@
             "words": [
               {
                 "cn": "因为",
-                "py": "yīnwèi",
+                "py": "yīn wèi",
                 "highlight": true
               },
               {
                 "cn": "昨天",
-                "py": "zuótiān",
+                "py": "zuó tiān",
                 "highlight": true
               },
               {
                 "cn": "你",
                 "py": "nǐ",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "请",
@@ -484,7 +474,7 @@
               {
                 "cn": "我",
                 "py": "wǒ",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "吃饭",
@@ -498,18 +488,18 @@
               },
               {
                 "cn": "所以",
-                "py": "suǒyǐ",
+                "py": "suǒ yǐ",
                 "highlight": true
               },
               {
                 "cn": "今天",
-                "py": "jīntiān",
+                "py": "jīn tiān",
                 "highlight": true
               },
               {
                 "cn": "我",
                 "py": "wǒ",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "请",
@@ -519,7 +509,7 @@
               {
                 "cn": "你",
                 "py": "nǐ",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "看",
@@ -528,7 +518,7 @@
               },
               {
                 "cn": "电影",
-                "py": "diànyǐng",
+                "py": "diàn yǐng",
                 "highlight": true
               },
               {
@@ -545,17 +535,17 @@
               {
                 "cn": "那",
                 "py": "nà",
-                "highlight": false
+                "highlight": true
               },
               {
                 "cn": "你",
                 "py": "nǐ",
-                "highlight": false
+                "highlight": true
               },
               {
                 "cn": "也",
                 "py": "yě",
-                "highlight": false
+                "highlight": true
               },
               {
                 "cn": "请",
@@ -563,8 +553,13 @@
                 "highlight": true
               },
               {
-                "cn": "王朋",
-                "py": "wáng péng",
+                "cn": "王",
+                "py": "wáng",
+                "highlight": true
+              },
+              {
+                "cn": "朋",
+                "py": "péng",
                 "highlight": false
               },
               {
@@ -573,8 +568,13 @@
                 "highlight": false
               },
               {
-                "cn": "李友",
-                "py": "lǐ yǒu",
+                "cn": "李",
+                "py": "lǐ",
+                "highlight": true
+              },
+              {
+                "cn": "友",
+                "py": "yǒu",
                 "highlight": false
               },
               {
@@ -585,12 +585,12 @@
               {
                 "cn": "好",
                 "py": "hǎo",
-                "highlight": false
+                "highlight": true
               },
               {
                 "cn": "吗",
                 "py": "ma",
-                "highlight": false
+                "highlight": true
               },
               {
                 "cn": "？",
@@ -611,7 +611,7 @@
               {
                 "cn": "好",
                 "py": "hǎo",
-                "highlight": false
+                "highlight": true
               },
               {
                 "cn": "。",
@@ -685,9 +685,9 @@
         "part_of_speech": "n",
         "definition": "television",
         "example_sentence": {
-          "cn": "她今天晚上看不看电视？",
-          "py": "Tā jīntiān wǎnshang kàn bu kàn diànshì?",
-          "en": "Is she going to watch TV tonight?"
+          "cn": "我常常打球、跳舞、看电视",
+          "py": "Wǒ chángcháng dǎ qiú, tiào wǔ, kàn diànshì",
+          "en": "I often play ball, dance, and watch TV"
         }
       },
       {
@@ -751,9 +751,9 @@
         "part_of_speech": "vo",
         "definition": "to dance",
         "example_sentence": {
-          "cn": "你喜欢不喜欢跳舞?",
-          "py": "Nǐ xǐhuan bu xǐhuan tiào wǔ?",
-          "en": "Do you like dancing?"
+          "cn": "我常常打球、跳舞、看电视。",
+          "py": "Wǒ chángcháng dǎ qiú, tiào wǔ, kàn diànshì.",
+          "en": "I often play ball, dance, and watch TV."
         }
       },
       {
@@ -785,7 +785,7 @@
         "definition": "to listen",
         "example_sentence": {
           "cn": "王朋周末/常常听音乐。",
-          "py": "Wáng Péng zhōumò/chángcháng tīng yīnyuè",
+          "py": "Wáng Péng zhōumò/chángcháng tīng yīnyuè.",
           "en": "Wang Peng often listens to music on weekends."
         }
       },
@@ -850,9 +850,9 @@
         "part_of_speech": "n",
         "definition": "movie",
         "example_sentence": {
-          "cn": "你喜欢不喜欢看电影？",
-          "py": "Nǐ xǐhuan bu xǐhuan kàn diànyǐng?",
-          "en": ""
+          "cn": "我们明天去看电影。",
+          "py": "Wǒmen míngtiān qù kàn diànyǐng.",
+          "en": "We are going to see a movie tomorrow."
         }
       },
       {
@@ -872,9 +872,9 @@
         "part_of_speech": "adv",
         "definition": "often",
         "example_sentence": {
-          "cn": "我周末常常看电影。",
-          "py": "Wǒ zhōumò chángcháng kàn diànyǐng.",
-          "en": ""
+          "cn": "你常常看电影吗?",
+          "py": "Nǐ chángcháng kàn diànyǐng ma?",
+          "en": "Do you often go to the movies?"
         }
       },
       {
@@ -883,7 +883,7 @@
         "part_of_speech": "conj",
         "definition": "in that case, then",
         "example_sentence": {
-          "cn": "那明天呢？",
+          "cn": "那明天呢?",
           "py": "Nà míngtiān ne?",
           "en": "Then how about tomorrow?"
         }
@@ -894,9 +894,9 @@
         "part_of_speech": "v",
         "definition": "to go",
         "example_sentence": {
-          "cn": "我们明天去看电影。",
-          "py": "Wǒmen míngtiān qù kàn diànyǐng.",
-          "en": "We are going to see a movie tomorrow."
+          "cn": "周末我去跳舞,你去不去?",
+          "py": "Zhōumò wǒ qù tiào wǔ, nǐ qù bu qù?",
+          "en": "I'll go dancing this weekend. Are you going?"
         }
       },
       {
@@ -1048,9 +1048,9 @@
       ],
       "context_examples": [
         {
-          "cn": "她今天晚上看不看电视？",
-          "py": "Tā jīntiān wǎnshang kàn bu kàn diànshì?",
-          "en": "Is she going to watch TV tonight?"
+          "cn": "我常常打球、跳舞、看电视",
+          "py": "Wǒ chángcháng dǎ qiú, tiào wǔ, kàn diànshì",
+          "en": "I often play ball, dance, and watch TV"
         }
       ]
     },
@@ -1156,9 +1156,9 @@
       ],
       "context_examples": [
         {
-          "cn": "你喜欢不喜欢跳舞?",
-          "py": "Nǐ xǐhuan bu xǐhuan tiào wǔ?",
-          "en": "Do you like dancing?"
+          "cn": "我常常打球、跳舞、看电视。",
+          "py": "Wǒ chángcháng dǎ qiú, tiào wǔ, kàn diànshì.",
+          "en": "I often play ball, dance, and watch TV."
         }
       ]
     },
@@ -1211,7 +1211,7 @@
       "context_examples": [
         {
           "cn": "王朋周末/常常听音乐。",
-          "py": "Wáng Péng zhōumò/chángcháng tīng yīnyuè",
+          "py": "Wáng Péng zhōumò/chángcháng tīng yīnyuè.",
           "en": "Wang Peng often listens to music on weekends."
         }
       ]
@@ -1246,9 +1246,9 @@
       ],
       "context_examples": [
         {
-          "cn": "我喜欢看书。",
-          "py": "Wǒ xǐhuān kàn shū.",
-          "en": "I like to read books."
+          "cn": "",
+          "py": "",
+          "en": ""
         }
       ]
     },
@@ -1264,9 +1264,9 @@
       ],
       "context_examples": [
         {
-          "cn": "你说得对。",
-          "py": "Nǐ shuō de duì.",
-          "en": "What you said is correct."
+          "cn": "",
+          "py": "",
+          "en": ""
         }
       ]
     },
@@ -1282,9 +1282,9 @@
       ],
       "context_examples": [
         {
-          "cn": "有的人喜欢茶。",
-          "py": "Yǒude rén xǐhuān chá.",
-          "en": "Some people like tea."
+          "cn": "",
+          "py": "",
+          "en": ""
         }
       ]
     },
@@ -1300,9 +1300,9 @@
       ],
       "context_examples": [
         {
-          "cn": "你什么时候回家？",
-          "py": "Nǐ shénme shíhou huí jiā?",
-          "en": "When are you coming home?"
+          "cn": "",
+          "py": "",
+          "en": ""
         }
       ]
     },
@@ -1318,9 +1318,9 @@
       ],
       "context_examples": [
         {
-          "cn": "你喜欢不喜欢看电影？",
-          "py": "Nǐ xǐhuan bu xǐhuan kàn diànyǐng?",
-          "en": ""
+          "cn": "我们明天去看电影。",
+          "py": "Wǒmen míngtiān qù kàn diànyǐng.",
+          "en": "We are going to see a movie tomorrow."
         }
       ]
     },
@@ -1354,9 +1354,9 @@
       ],
       "context_examples": [
         {
-          "cn": "我周末常常看电影。",
-          "py": "Wǒ zhōumò chángcháng kàn diànyǐng.",
-          "en": ""
+          "cn": "你常常看电影吗?",
+          "py": "Nǐ chángcháng kàn diànyǐng ma?",
+          "en": "Do you often go to the movies?"
         }
       ]
     },
@@ -1372,7 +1372,7 @@
       ],
       "context_examples": [
         {
-          "cn": "那明天呢？",
+          "cn": "那明天呢?",
           "py": "Nà míngtiān ne?",
           "en": "Then how about tomorrow?"
         }
@@ -1390,9 +1390,9 @@
       ],
       "context_examples": [
         {
-          "cn": "我们明天去看电影。",
-          "py": "Wǒmen míngtiān qù kàn diànyǐng.",
-          "en": "We are going to see a movie tomorrow."
+          "cn": "周末我去跳舞,你去不去?",
+          "py": "Zhōumò wǒ qù tiào wǔ, nǐ qù bu qù?",
+          "en": "I'll go dancing this weekend. Are you going?"
         }
       ]
     },
@@ -1473,10 +1473,10 @@
       "question_id": 30,
       "course_id": 1,
       "question_type": "CN_TO_EN",
-      "original_text": "我喜欢唱歌、跳舞,还喜欢听音乐。",
-      "original_pinyin": "wǒ xǐhuan chàng gē tiào wǔ hái xǐhuan tīng yīnyuè",
+      "original_text": "你周末喜欢做什么？",
+      "original_pinyin": "Nǐ zhōumò xǐhuan zuò shénme?",
       "standard_answers": [
-        "I like to sing, dance, and also like to listen to music."
+        "What do you like to do on weekends?"
       ]
     },
     {
@@ -1485,7 +1485,7 @@
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "你喜欢不喜欢看电影？",
-      "original_pinyin": "nǐ xǐhuan bu xǐhuan kàn diànyǐng",
+      "original_pinyin": "nǐ xǐ huān bù xǐ huān kàn diàn yǐng",
       "standard_answers": [
         "Do you like to watch movies or not?"
       ]
@@ -1495,10 +1495,10 @@
       "question_id": 32,
       "course_id": 1,
       "question_type": "CN_TO_EN",
-      "original_text": "那我们今天晚上去看一个外国电影,怎么样？我请客。",
-      "original_pinyin": "nà wǒmen jīntiān wǎnshang qù kàn yí ge wàiguó diànyǐng zěnmeyàng wǒ qǐng kè",
+      "original_text": "为什么你请客？",
+      "original_pinyin": "wèi shén me nǐ qǐng kè",
       "standard_answers": [
-        "In that case, let's go see a foreign movie tonight, how about it? My treat."
+        "Why is it your treat?"
       ]
     },
     {
@@ -1506,10 +1506,10 @@
       "question_id": 33,
       "course_id": 1,
       "question_type": "CN_TO_EN",
-      "original_text": "你为什么不去打球？",
-      "original_pinyin": "Nǐ wèishénme bú qù dǎ qiú?",
+      "original_text": "因为昨天你请我吃饭,所以今天我请你看电影。",
+      "original_pinyin": "yīn wèi zuó tiān nǐ qǐng wǒ chī fàn suǒ yǐ jīn tiān wǒ qǐng nǐ kàn diàn yǐng",
       "standard_answers": [
-        "Why aren't you going to play ball?"
+        "Because you treated me to dinner yesterday, so today I'm treating you to a movie."
       ]
     },
     {
@@ -1614,9 +1614,9 @@
       ],
       "context_examples": [
         {
-          "cn": "她今天晚上看不看电视？",
-          "py": "Tā jīntiān wǎnshang kàn bu kàn diànshì?",
-          "en": "Is she going to watch TV tonight?"
+          "cn": "我常常打球、跳舞、看电视",
+          "py": "Wǒ chángcháng dǎ qiú, tiào wǔ, kàn diànshì",
+          "en": "I often play ball, dance, and watch TV"
         }
       ]
     },
@@ -1722,9 +1722,9 @@
       ],
       "context_examples": [
         {
-          "cn": "你喜欢不喜欢跳舞?",
-          "py": "Nǐ xǐhuan bu xǐhuan tiào wǔ?",
-          "en": "Do you like dancing?"
+          "cn": "我常常打球、跳舞、看电视。",
+          "py": "Wǒ chángcháng dǎ qiú, tiào wǔ, kàn diànshì.",
+          "en": "I often play ball, dance, and watch TV."
         }
       ]
     },
@@ -1777,7 +1777,7 @@
       "context_examples": [
         {
           "cn": "王朋周末/常常听音乐。",
-          "py": "Wáng Péng zhōumò/chángcháng tīng yīnyuè",
+          "py": "Wáng Péng zhōumò/chángcháng tīng yīnyuè.",
           "en": "Wang Peng often listens to music on weekends."
         }
       ]
@@ -1812,9 +1812,9 @@
       ],
       "context_examples": [
         {
-          "cn": "我喜欢看书。",
-          "py": "Wǒ xǐhuān kàn shū.",
-          "en": "I like to read books."
+          "cn": "",
+          "py": "",
+          "en": ""
         }
       ]
     },
@@ -1830,9 +1830,9 @@
       ],
       "context_examples": [
         {
-          "cn": "你说得对。",
-          "py": "Nǐ shuō de duì.",
-          "en": "What you said is correct."
+          "cn": "",
+          "py": "",
+          "en": ""
         }
       ]
     },
@@ -1848,9 +1848,9 @@
       ],
       "context_examples": [
         {
-          "cn": "有的人喜欢茶。",
-          "py": "Yǒude rén xǐhuān chá.",
-          "en": "Some people like tea."
+          "cn": "",
+          "py": "",
+          "en": ""
         }
       ]
     },
@@ -1866,9 +1866,9 @@
       ],
       "context_examples": [
         {
-          "cn": "你什么时候回家？",
-          "py": "Nǐ shénme shíhou huí jiā?",
-          "en": "When are you coming home?"
+          "cn": "",
+          "py": "",
+          "en": ""
         }
       ]
     },
@@ -1884,9 +1884,9 @@
       ],
       "context_examples": [
         {
-          "cn": "你喜欢不喜欢看电影？",
-          "py": "Nǐ xǐhuan bu xǐhuan kàn diànyǐng?",
-          "en": ""
+          "cn": "我们明天去看电影。",
+          "py": "Wǒmen míngtiān qù kàn diànyǐng.",
+          "en": "We are going to see a movie tomorrow."
         }
       ]
     },
@@ -1920,9 +1920,9 @@
       ],
       "context_examples": [
         {
-          "cn": "我周末常常看电影。",
-          "py": "Wǒ zhōumò chángcháng kàn diànyǐng.",
-          "en": ""
+          "cn": "你常常看电影吗?",
+          "py": "Nǐ chángcháng kàn diànyǐng ma?",
+          "en": "Do you often go to the movies?"
         }
       ]
     },
@@ -1938,7 +1938,7 @@
       ],
       "context_examples": [
         {
-          "cn": "那明天呢？",
+          "cn": "那明天呢?",
           "py": "Nà míngtiān ne?",
           "en": "Then how about tomorrow?"
         }
@@ -1956,9 +1956,9 @@
       ],
       "context_examples": [
         {
-          "cn": "我们明天去看电影。",
-          "py": "Wǒmen míngtiān qù kàn diànyǐng.",
-          "en": "We are going to see a movie tomorrow."
+          "cn": "周末我去跳舞,你去不去?",
+          "py": "Zhōumò wǒ qù tiào wǔ, nǐ qù bu qù?",
+          "en": "I'll go dancing this weekend. Are you going?"
         }
       ]
     },
@@ -2039,10 +2039,10 @@
       "question_id": 63,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "Because you treated me to dinner yesterday, so today I'm treating you to a movie.",
+      "original_text": "I like to sing, dance, and also like to listen to music.",
       "original_pinyin": null,
       "standard_answers": [
-        "因为昨天你请我吃饭,所以今天我请你看电影。"
+        "我喜欢唱歌、跳舞,还喜欢听音乐。"
       ]
     },
     {
@@ -2061,103 +2061,92 @@
       "question_id": 65,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "Whose movies do you like to watch?",
+      "original_text": "Let's go see a movie tomorrow night, OK?",
       "original_pinyin": null,
       "standard_answers": [
-        "你喜欢看谁的电影？"
-      ]
-    },
-    {
-      "lesson_id": 401,
-      "question_id": 66,
-      "course_id": 1,
-      "question_type": "EN_TO_CN",
-      "original_text": "Then could you also invite Wang Peng and Li You, okay?",
-      "original_pinyin": null,
-      "standard_answers": [
-        "那你也请王朋、李友,好吗？"
+        "我们明天晚上去看电影，好吗？"
       ]
     }
   ],
   "video_global_config": {
-    "visual_style": "A vibrant and warm 3D Pixar animation style, with soft lighting and expressive characters. The setting is a modern, clean university campus coffee shop.",
+    "visual_style": "Vibrant and clean 3D Pixar animation style, cinematic lighting, warm color palette, high-detail character models and environments.",
     "character_definitions": [
       {
-        "name": "高文中",
-        "appearance_description_en": "Gao Wenzhong is a 20-year-old Chinese male university student. He has short, neat black hair, friendly brown eyes, and wears stylish glasses. He is dressed in a casual light blue hoodie and jeans. He has an enthusiastic and curious expression."
+        "name": "Gao Wenzhong",
+        "appearance_description_en": "A friendly Chinese young man in his early 20s, with short, neat black hair, wearing stylish black-rimmed glasses. Dressed in a casual light blue polo shirt and khaki pants. Expressive and warm facial features."
       },
       {
-        "name": "白英爱",
-        "appearance_description_en": "Bai Ying'ai is a 19-year-old Chinese female university student. She has long, straight black hair tied in a high ponytail. She has bright, expressive dark eyes and a warm smile. She wears a comfortable pink sweater over a white collared shirt and a plaid skirt."
+        "name": "Bai Ying'ai",
+        "appearance_description_en": "A cheerful Chinese young woman in her early 20s, with a chic shoulder-length bob haircut, dark brown hair. Dressed in a fashionable yellow sweater and jeans. Bright, curious eyes and an engaging smile."
       }
     ]
   },
   "video_scenes": [
     {
       "scene_id": 1,
-      "scene_description_cn": "开场镜头。高文中和白英爱坐在一家阳光明媚的校园咖啡馆里。高文中身体前倾，好奇地问白英爱周末的爱好。",
-      "video_api_prompt_en": "3D Pixar style, cinematic shot. Gao Wenzhong, a friendly Chinese male student with glasses and a blue hoodie, and Bai Ying'ai, a cheerful Chinese female student with a ponytail and a pink sweater, are sitting at a wooden table in a sunlit, cozy university coffee shop. Gao Wenzhong leans forward with a curious smile, asking a question. The camera is at eye level, medium shot, with a soft focus on the background. Warm, natural lighting.",
-      "camera_movement": "Slow zoom in",
+      "scene_description_cn": "开场，高文中和白英爱在一个明亮的咖啡馆里聊天。高文中友好地询问白英爱的周末爱好。",
+      "video_api_prompt_en": "3D Pixar style. Medium shot of Gao Wenzhong and Bai Ying'ai sitting opposite each other at a small wooden table in a bright, modern coffee shop with large windows. Sunlight streams in, creating a warm and inviting atmosphere. Gao Wenzhong leans forward slightly, smiling as he asks a question. Bai Ying'ai listens attentively. Cinematic, soft focus on the background.",
+      "camera_movement": "Static",
       "voice_over": {
         "role": "高文中",
         "content": "白英爱, 你周末喜欢做什么？",
         "pinyin": "Bái Yīng'ài, nǐ zhōumò xǐhuan zuò shénme?"
       },
       "screen_overlay": {
-        "main_text": "周末 (zhōumò) 喜欢 (xǐhuan) 做什么 (zuò shénme)?",
-        "sub_text": "What do you like to do on weekends?"
+        "main_text": "周末 (zhōumò) 喜欢 (xǐhuan) 做什么 (zuò shénme)？",
+        "sub_text": "weekend / to like / to do what?"
       }
     },
     {
       "scene_id": 2,
-      "scene_description_cn": "白英爱回答时，画面快速切换到她爱好的蒙太奇：她在一个户外篮球场上打球，然后又在舒适的客厅里看电视。",
-      "video_api_prompt_en": "3D Pixar style. A dynamic split-screen montage. On the left, Bai Ying'ai is energetically playing basketball on a sunny outdoor court, mid-dribble. On the right, she is comfortably sitting on a sofa in a cozy living room, laughing while watching TV. The scene then transitions back to her in the coffee shop, smiling as she finishes her sentence. Bright, energetic lighting for the activities, warm and soft for the living room.",
-      "camera_movement": "Quick cuts",
+      "scene_description_cn": "白英爱回答时，画面快速切换，生动地展示她打球和看电视的场景。",
+      "video_api_prompt_en": "3D Pixar style. A dynamic split-screen effect. On the left, Bai Ying'ai is on a sunny outdoor basketball court, mid-dribble with a determined and happy expression. On the right, she is relaxing on a cozy sofa in a living room, laughing while watching TV. The scene then cuts back to her in the coffee shop, smiling at Gao Wenzhong.",
+      "camera_movement": "Cut",
       "voice_over": {
         "role": "白英爱",
         "content": "我喜欢打球、看电视。你呢？",
         "pinyin": "Wǒ xǐhuan dǎ qiú, kàn diànshì. Nǐ ne?"
       },
       "screen_overlay": {
-        "main_text": "打球 (dǎ qiú), 看电视 (kàn diànshì)",
-        "sub_text": "Play ball, Watch TV"
+        "main_text": "打球 (dǎ qiú) / 看电视 (kàn diànshì)",
+        "sub_text": "to play ball / to watch TV"
       }
     },
     {
       "scene_id": 3,
-      "scene_description_cn": "轮到高文中描述他的爱好。画面呈现他唱歌、跳舞和听音乐的蒙太奇，展现他充满活力和艺术气息的一面。",
-      "video_api_prompt_en": "3D Pixar style. A quick-cut montage of Gao Wenzhong's hobbies. First, a close-up of him singing enthusiastically into a microphone in a colorful KTV room with neon lights. Second, a wide shot of him dancing energetically in a bright dance studio with mirrors. Third, a peaceful shot of him sitting by a window, wearing headphones with his eyes closed, blissfully listening to music. The lighting changes to match each activity: vibrant for KTV, bright for dancing, and soft for listening.",
-      "camera_movement": "Quick cuts",
+      "scene_description_cn": "高文中介绍自己的爱好，画面通过蒙太奇展示他唱歌、跳舞和听音乐的快乐瞬间。",
+      "video_api_prompt_en": "3D Pixar style. A quick montage sequence. First, Gao Wenzhong is in a colorful KTV room, singing passionately into a microphone. Second, he is in a dance studio with friends, executing a cool hip-hop move. Third, he is sitting on a park bench with headphones on, eyes closed, blissfully enjoying music. Each clip is energetic and joyful.",
+      "camera_movement": "Montage / Quick Cuts",
       "voice_over": {
         "role": "高文中",
         "content": "我喜欢唱歌、跳舞, 还喜欢听音乐。",
         "pinyin": "Wǒ xǐhuan chàng gē, tiào wǔ, hái xǐhuan tīng yīnyuè."
       },
       "screen_overlay": {
-        "main_text": "唱歌 (chàng gē), 跳舞 (tiào wǔ), 听音乐 (tīng yīnyuè)",
-        "sub_text": "Sing, Dance, Listen to music"
+        "main_text": "唱歌 (chàng gē) / 跳舞 (tiào wǔ) / 听音乐 (tīng yīnyuè)",
+        "sub_text": "to sing / to dance / to listen to music"
       }
     },
     {
       "scene_id": 4,
-      "scene_description_cn": "高文中确认白英爱也喜欢看书，并提出了看电影的邀请。他的表情充满期待。",
-      "video_api_prompt_en": "3D Pixar style, cinematic medium close-up. Back in the coffee shop, Gao Wenzhong looks at Bai Ying'ai with a hopeful and inviting expression. The background is softly blurred. As he says 'foreign movie', a stylized, imaginary movie poster for a romantic foreign film briefly appears as a translucent overlay next to his head. He makes a gesture of invitation. Soft, warm lighting from the coffee shop window.",
-      "camera_movement": "Static",
+      "scene_description_cn": "高文中向白英爱发出看电影的邀请，表情充满期待。",
+      "video_api_prompt_en": "3D Pixar style. Back in the coffee shop. Close-up shot on Gao Wenzhong's face, he has a hopeful and inviting expression. He makes a small gesture with his hands as if offering something. The background is softly blurred, focusing all attention on his earnest invitation. Warm, cinematic lighting.",
+      "camera_movement": "Slow Zoom In",
       "voice_over": {
         "role": "高文中",
         "content": "那我们今天晚上去看一个外国电影, 怎么样？我请客。",
         "pinyin": "Nà wǒmen jīntiān wǎnshang qù kàn yí ge wàiguó diànyǐng, zěnmeyàng? Wǒ qǐng kè."
       },
       "screen_overlay": {
-        "main_text": "看电影 (kàn diànyǐng), 我请客 (wǒ qǐng kè)",
-        "sub_text": "Watch a movie, My treat"
+        "main_text": "看电影 (kàn diànyǐng) / 我请客 (wǒ qǐng kè)",
+        "sub_text": "to watch a movie / my treat"
       }
     },
     {
       "scene_id": 5,
-      "scene_description_cn": "高文中解释他请客的原因。画面中出现一个柔和的闪回气泡，显示昨天白英爱请他吃饭的温馨场景。",
-      "video_api_prompt_en": "3D Pixar style. A soft-edged thought bubble appears above Gao Wenzhong. Inside the bubble, a brief flashback scene shows Bai Ying'ai and Gao Wenzhong laughing and eating at a vibrant Chinese restaurant yesterday. The main scene remains in the coffee shop, with Gao Wenzhong explaining with a sincere expression. The flashback has a slightly warmer, dream-like filter.",
-      "camera_movement": "Pan",
+      "scene_description_cn": "高文中解释请客的原因，画面中出现一个回忆气泡，显示昨天白英爱请他吃饭的场景。",
+      "video_api_prompt_en": "3D Pixar style. Medium shot of Gao Wenzhong explaining. A stylized, slightly transparent thought bubble appears above his head, showing a brief, warm-toned scene of Bai Ying'ai and Gao Wenzhong happily eating at a bustling Chinese restaurant the previous night. The main scene in the coffee shop remains in focus.",
+      "camera_movement": "Static",
       "voice_over": {
         "role": "高文中",
         "content": "因为昨天你请我吃饭, 所以今天我请你看电影。",
@@ -2170,17 +2159,17 @@
     },
     {
       "scene_id": 6,
-      "scene_description_cn": "白英爱听后笑着建议也邀请王朋和李友。高文中略显犹豫，但最终还是答应了。画面定格在他们友好的互动上。",
-      "video_api_prompt_en": "3D Pixar style, two-shot. Bai Ying'ai smiles warmly and suggests inviting more friends. Gao Wenzhong's expression shows a brief, comical moment of hesitation, his smile faltering slightly, before he nods in agreement. The final shot captures their friendly dynamic in the cozy coffee shop. Soft, natural light.",
-      "camera_movement": "Static",
+      "scene_description_cn": "白英爱笑着提议也邀请王朋和李友，高文中的表情瞬间凝固，显得有些滑稽。",
+      "video_api_prompt_en": "3D Pixar style. Two-shot. Bai Ying'ai has a sweet, innocent smile. The camera quickly pans to Gao Wenzhong, whose smile freezes into a comical, slightly panicked expression. A classic anime-style sweat drop appears on his forehead. The moment is lighthearted and humorous.",
+      "camera_movement": "Pan Right / Crash Zoom",
       "voice_over": {
         "role": "白英爱",
         "content": "那你也请王朋、李友, 好吗？",
         "pinyin": "Nà nǐ yě qǐng Wáng Péng, Lǐ Yǒu, hǎo ma?"
       },
       "screen_overlay": {
-        "main_text": "请 (qǐng)",
-        "sub_text": "to invite; to treat"
+        "main_text": "也请 (yě qǐng)... 好吗 (hǎo ma)?",
+        "sub_text": "also invite... okay?"
       }
     }
   ]

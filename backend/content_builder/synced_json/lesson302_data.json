@@ -2,7 +2,7 @@
   "lesson_metadata": {
     "course_id": 1,
     "lesson_id": 302,
-    "title": "晚餐邀请"
+    "title": "邀请吃晚饭"
   },
   "course_content": {
     "dialogues": [
@@ -46,7 +46,7 @@
           },
           {
             "role": "白英爱",
-            "english": "Five forty-five.",
+            "english": "It's a quarter to six.",
             "words": [
               {
                 "cn": "五",
@@ -82,7 +82,7 @@
               {
                 "cn": "我",
                 "py": "wǒ",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "六",
@@ -107,7 +107,7 @@
               {
                 "cn": "有",
                 "py": "yǒu",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "事儿",
@@ -123,12 +123,12 @@
           },
           {
             "role": "白英爱",
-            "english": "You are busy today. Are you busy tomorrow?",
+            "english": "Are you busy today? Will you be busy tomorrow?",
             "words": [
               {
                 "cn": "你",
                 "py": "nǐ",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "今天",
@@ -138,7 +138,7 @@
               {
                 "cn": "很",
                 "py": "hěn",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "忙",
@@ -163,7 +163,7 @@
               {
                 "cn": "不",
                 "py": "bù",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "忙",
@@ -179,12 +179,12 @@
           },
           {
             "role": "王朋",
-            "english": "I'm busy today, but not busy tomorrow. What's up?",
+            "english": "I'm busy today, but I won't be busy tomorrow.",
             "words": [
               {
                 "cn": "我",
                 "py": "wǒ",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "今天",
@@ -194,7 +194,7 @@
               {
                 "cn": "很",
                 "py": "hěn",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "忙",
@@ -219,7 +219,7 @@
               {
                 "cn": "不",
                 "py": "bù",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "忙",
@@ -230,7 +230,13 @@
                 "cn": "。",
                 "py": "",
                 "highlight": false
-              },
+              }
+            ]
+          },
+          {
+            "role": "王朋",
+            "english": "What's up?",
+            "words": [
               {
                 "cn": "有",
                 "py": "yǒu",
@@ -255,7 +261,7 @@
           },
           {
             "role": "白英爱",
-            "english": "I'd like to invite you to dinner tomorrow. How about it?",
+            "english": "I'd like to treat you to dinner tomorrow. How about it?",
             "words": [
               {
                 "cn": "明天",
@@ -265,7 +271,7 @@
               {
                 "cn": "我",
                 "py": "wǒ",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "请",
@@ -275,7 +281,7 @@
               {
                 "cn": "你",
                 "py": "nǐ",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "吃",
@@ -306,12 +312,12 @@
           },
           {
             "role": "王朋",
-            "english": "Why are you inviting me to dinner?",
+            "english": "Why are you treating me to dinner?",
             "words": [
               {
                 "cn": "你",
                 "py": "nǐ",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "为什么",
@@ -326,16 +332,11 @@
               {
                 "cn": "我",
                 "py": "wǒ",
-                "highlight": true
+                "highlight": false
               },
               {
-                "cn": "吃",
-                "py": "chī",
-                "highlight": true
-              },
-              {
-                "cn": "饭",
-                "py": "fàn",
+                "cn": "吃饭",
+                "py": "chīfàn",
                 "highlight": true
               },
               {
@@ -444,7 +445,7 @@
               {
                 "cn": "还",
                 "py": "hái",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "请",
@@ -454,7 +455,7 @@
               {
                 "cn": "我",
                 "py": "wǒ",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "的",
@@ -480,7 +481,7 @@
           },
           {
             "role": "王朋",
-            "english": "That's great. I know Li You. She is also my friend. What time tomorrow?",
+            "english": "That's great. I know Li You. She's my friend, too. What time tomorrow?",
             "words": [
               {
                 "cn": "那",
@@ -490,7 +491,7 @@
               {
                 "cn": "太",
                 "py": "tài",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "好",
@@ -519,7 +520,7 @@
               },
               {
                 "cn": "李友",
-                "py": "lǐ yǒu",
+                "py": "Lǐ Yǒu",
                 "highlight": false
               },
               {
@@ -535,7 +536,7 @@
               {
                 "cn": "也",
                 "py": "yě",
-                "highlight": true
+                "highlight": false
               },
               {
                 "cn": "是",
@@ -568,8 +569,13 @@
                 "highlight": true
               },
               {
-                "cn": "几点",
-                "py": "jǐ diǎn",
+                "cn": "几",
+                "py": "jǐ",
+                "highlight": false
+              },
+              {
+                "cn": "点",
+                "py": "diǎn",
                 "highlight": true
               },
               {
@@ -601,12 +607,12 @@
               {
                 "cn": "点",
                 "py": "diǎn",
-                "highlight": false
+                "highlight": true
               },
               {
                 "cn": "半",
                 "py": "bàn",
-                "highlight": false
+                "highlight": true
               },
               {
                 "cn": "。",
@@ -642,12 +648,12 @@
               {
                 "cn": "点",
                 "py": "diǎn",
-                "highlight": false
+                "highlight": true
               },
               {
                 "cn": "半",
                 "py": "bàn",
-                "highlight": false
+                "highlight": true
               },
               {
                 "cn": "见",
@@ -737,8 +743,8 @@
         "part_of_speech": "t",
         "definition": "tomorrow",
         "example_sentence": {
-          "cn": "",
-          "py": "",
+          "cn": "明天我请你吃晚饭，怎么样？",
+          "py": "Míngtiān wǒ qǐng nǐ chī wǎnfàn, zěnmeyàng?",
           "en": ""
         }
       },
@@ -748,8 +754,8 @@
         "part_of_speech": "n",
         "definition": "dinner, supper",
         "example_sentence": {
-          "cn": "",
-          "py": "",
+          "cn": "明天我请你吃晚饭，怎么样？",
+          "py": "Míngtiān wǒ qǐng nǐ chī wǎnfàn, zěnmeyàng?",
           "en": ""
         }
       },
@@ -792,7 +798,7 @@
         "part_of_speech": "adv",
         "definition": "also, too, as well [See Grammar 8.]",
         "example_sentence": {
-          "cn": "白英爱请高文中和王朋,还请李友。",
+          "cn": "白英爱请高文中和王朋，还请李友。",
           "py": "Bái Yīng'ài qǐng Gāo Wénzhōng hé Wáng Péng, hái qǐng Lǐ Yǒu.",
           "en": "Bai Ying'ai is inviting Gao Wenzhong and Wang Peng, and Li You, too."
         }
@@ -953,8 +959,8 @@
       ],
       "context_examples": [
         {
-          "cn": "",
-          "py": "",
+          "cn": "明天我请你吃晚饭，怎么样？",
+          "py": "Míngtiān wǒ qǐng nǐ chī wǎnfàn, zěnmeyàng?",
           "en": ""
         }
       ]
@@ -972,8 +978,8 @@
       ],
       "context_examples": [
         {
-          "cn": "",
-          "py": "",
+          "cn": "明天我请你吃晚饭，怎么样？",
+          "py": "Míngtiān wǒ qǐng nǐ chī wǎnfàn, zěnmeyàng?",
           "en": ""
         }
       ]
@@ -992,7 +998,7 @@
         {
           "cn": "你为什么请我吃饭？",
           "py": "Nǐ wèishénme qǐng wǒ chī fàn?",
-          "en": ""
+          "en": "Why are you inviting me to dinner?"
         }
       ]
     },
@@ -1008,9 +1014,9 @@
       ],
       "context_examples": [
         {
-          "cn": "",
-          "py": "",
-          "en": ""
+          "cn": "我为你买了一本书。",
+          "py": "Wǒ wèi nǐ mǎile yī běn shū.",
+          "en": "I bought a book for you."
         }
       ]
     },
@@ -1026,9 +1032,9 @@
       ],
       "context_examples": [
         {
-          "cn": "",
-          "py": "",
-          "en": ""
+          "cn": "因为明天有考试，所以他今天很忙。",
+          "py": "Yīnwèi míngtiān yǒu kǎoshì, suǒyǐ tā jīntiān hěn máng.",
+          "en": "Because there's a test tomorrow, he is very busy today."
         }
       ]
     },
@@ -1044,7 +1050,7 @@
       ],
       "context_examples": [
         {
-          "cn": "白英爱请高文中和王朋,还请李友。",
+          "cn": "白英爱请高文中和王朋，还请李友。",
           "py": "Bái Yīng'ài qǐng Gāo Wénzhōng hé Wáng Péng, hái qǐng Lǐ Yǒu.",
           "en": "Bai Ying'ai is inviting Gao Wenzhong and Wang Peng, and Li You, too."
         }
@@ -1109,10 +1115,10 @@
       "question_id": 16,
       "course_id": 1,
       "question_type": "CN_TO_EN",
-      "original_text": "你今天很忙,明天忙不忙?",
-      "original_pinyin": "nǐ jīntiān hěn máng míngtiān máng bù máng",
+      "original_text": "现在几点?",
+      "original_pinyin": "xiànzài jǐ diǎn",
       "standard_answers": [
-        "You are busy today. Are you busy tomorrow?"
+        "What time is it now?"
       ]
     },
     {
@@ -1120,10 +1126,10 @@
       "question_id": 17,
       "course_id": 1,
       "question_type": "CN_TO_EN",
-      "original_text": "明天我请你吃晚饭,怎么样?",
-      "original_pinyin": "míngtiān wǒ qǐng nǐ chī wǎnfàn zěnmeyàng",
+      "original_text": "你今天很忙,明天忙不忙?",
+      "original_pinyin": "nǐ jīntiān hěn máng míngtiān máng bù máng",
       "standard_answers": [
-        "I'd like to invite you to dinner tomorrow. How about it?"
+        "Are you busy today? Will you be busy tomorrow?"
       ]
     },
     {
@@ -1132,9 +1138,9 @@
       "course_id": 1,
       "question_type": "CN_TO_EN",
       "original_text": "你为什么请我吃饭?",
-      "original_pinyin": "nǐ wèishénme qǐng wǒ chī fàn",
+      "original_pinyin": "nǐ wèishénme qǐng wǒ chīfàn",
       "standard_answers": [
-        "Why are you inviting me to dinner?"
+        "Why are you treating me to dinner?"
       ]
     },
     {
@@ -1142,10 +1148,10 @@
       "question_id": 19,
       "course_id": 1,
       "question_type": "CN_TO_EN",
-      "original_text": "因为明天是高文中的生日。",
-      "original_pinyin": "yīnwèi míngtiān shì Gāo Wénzhōng de shēngrì",
+      "original_text": "还请我的同学李友。",
+      "original_pinyin": "hái qǐng wǒ de tóngxué Lǐ Yǒu",
       "standard_answers": [
-        "Because tomorrow is Gao Wenzhong's birthday."
+        "I'm also inviting my classmate Li You."
       ]
     },
     {
@@ -1192,9 +1198,7 @@
       "original_text": "matter, affair, event",
       "original_pinyin": null,
       "standard_answers": [
-        "事(儿)",
-        "事儿",
-        "事"
+        "事(儿)"
       ],
       "context_examples": [
         {
@@ -1270,8 +1274,8 @@
       ],
       "context_examples": [
         {
-          "cn": "",
-          "py": "",
+          "cn": "明天我请你吃晚饭，怎么样？",
+          "py": "Míngtiān wǒ qǐng nǐ chī wǎnfàn, zěnmeyàng?",
           "en": ""
         }
       ]
@@ -1288,8 +1292,8 @@
       ],
       "context_examples": [
         {
-          "cn": "",
-          "py": "",
+          "cn": "明天我请你吃晚饭，怎么样？",
+          "py": "Míngtiān wǒ qǐng nǐ chī wǎnfàn, zěnmeyàng?",
           "en": ""
         }
       ]
@@ -1308,7 +1312,7 @@
         {
           "cn": "你为什么请我吃饭？",
           "py": "Nǐ wèishénme qǐng wǒ chī fàn?",
-          "en": ""
+          "en": "Why are you inviting me to dinner?"
         }
       ]
     },
@@ -1324,9 +1328,9 @@
       ],
       "context_examples": [
         {
-          "cn": "",
-          "py": "",
-          "en": ""
+          "cn": "我为你买了一本书。",
+          "py": "Wǒ wèi nǐ mǎile yī běn shū.",
+          "en": "I bought a book for you."
         }
       ]
     },
@@ -1342,9 +1346,9 @@
       ],
       "context_examples": [
         {
-          "cn": "",
-          "py": "",
-          "en": ""
+          "cn": "因为明天有考试，所以他今天很忙。",
+          "py": "Yīnwèi míngtiān yǒu kǎoshì, suǒyǐ tā jīntiān hěn máng.",
+          "en": "Because there's a test tomorrow, he is very busy today."
         }
       ]
     },
@@ -1360,7 +1364,7 @@
       ],
       "context_examples": [
         {
-          "cn": "白英爱请高文中和王朋,还请李友。",
+          "cn": "白英爱请高文中和王朋，还请李友。",
           "py": "Bái Yīng'ài qǐng Gāo Wénzhōng hé Wáng Péng, hái qǐng Lǐ Yǒu.",
           "en": "Bai Ying'ai is inviting Gao Wenzhong and Wang Peng, and Li You, too."
         }
@@ -1436,10 +1440,10 @@
       "question_id": 36,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "I'm busy today, but not busy tomorrow. What's up?",
+      "original_text": "I'd like to treat you to dinner tomorrow. How about it?",
       "original_pinyin": null,
       "standard_answers": [
-        "我今天很忙,可是明天不忙。有事儿吗?"
+        "明天我请你吃晚饭,怎么样?"
       ]
     },
     {
@@ -1447,10 +1451,10 @@
       "question_id": 37,
       "course_id": 1,
       "question_type": "EN_TO_CN",
-      "original_text": "That's great. I know Li You. She is also my friend. What time tomorrow?",
+      "original_text": "Because tomorrow is Gao Wenzhong's birthday.",
       "original_pinyin": null,
       "standard_answers": [
-        "那太好了,我认识李友,她也是我的朋友。明天几点?"
+        "因为明天是高文中的生日。"
       ]
     },
     {
@@ -1466,24 +1470,24 @@
     }
   ],
   "video_global_config": {
-    "visual_style": "3D Pixar animation style, cinematic lighting, vibrant colors, expressive characters, suitable for educational content.",
+    "visual_style": "3D Pixar style, cinematic, vibrant colors, soft lighting, detailed textures.",
     "character_definitions": [
       {
         "name": "王朋",
-        "appearance_description_en": "A friendly and slightly studious young Chinese man in his early 20s, with short black hair, wearing stylish black-rimmed glasses and a casual blue hoodie over a white t-shirt."
+        "appearance_description_en": "A friendly young Chinese man in his early 20s, with short, neat black hair, warm brown eyes, and a casual style. He wears a light blue hoodie and jeans. He has a gentle and approachable demeanor. Consistent character design across all scenes."
       },
       {
         "name": "白英爱",
-        "appearance_description_en": "A cheerful and outgoing young Chinese woman in her early 20s, with long, dark brown hair tied in a loose ponytail, wearing a cozy cream-colored knit sweater and simple earrings."
+        "appearance_description_en": "A cheerful young Chinese woman in her early 20s, with shoulder-length dark brown hair styled in soft waves. She has bright, expressive eyes and wears a stylish yellow sweater over a white collared shirt. She appears energetic and friendly. Consistent character design across all scenes."
       }
     ]
   },
   "video_scenes": [
     {
       "scene_id": 1,
-      "scene_description_cn": "开场镜头：王朋在大学图书馆里，他看了一眼手表，显得有些着急。他转向正在旁边看书的白英爱，准备问时间。",
-      "video_api_prompt_en": "A medium shot of Wang Peng, a young Chinese man with glasses and a blue hoodie, looking anxiously at his watch in a bright, modern university library. He turns to Bai Ying'ai, a cheerful young Chinese woman with a ponytail and a cream sweater, who is focused on a book. The background is filled with tall bookshelves and soft sunlight. 3D Pixar animation style, cinematic, shallow depth of field.",
-      "camera_movement": "Pan Right",
+      "scene_description_cn": "王朋在大学图书馆里，看起来有点着急，他看了一眼手腕（没有手表），然后转身问正在看书的白英爱现在几点了。背景是高大的书架和柔和的灯光。",
+      "video_api_prompt_en": "3D Pixar style. A young Chinese man (Wang Peng) and a young Chinese woman (Bai Ying'ai) are at a large wooden table in a cozy university library. Bookshelves filled with books are visible in the soft, warm background lighting. Wang Peng looks slightly anxious, glances at his empty wrist, then turns to Bai Ying'ai who is reading. Medium shot, cinematic, soft focus on the background.",
+      "camera_movement": "Static",
       "voice_over": {
         "role": "王朋",
         "content": "白英爱, 现在几点?",
@@ -1496,77 +1500,62 @@
     },
     {
       "scene_id": 2,
-      "scene_description_cn": "白英爱看了看手机屏幕，告诉王朋时间。王朋听后，指着自己的日程本，表情显得很忙碌。",
-      "video_api_prompt_en": "Close-up on Bai Ying'ai's face as she looks down at her phone (off-screen) and then up to speak. The shot then cuts to Wang Peng, who sighs and points to a busy planner on the table, his expression showing he's in a hurry. The library setting is softly blurred in the background. Warm, focused lighting. 3D Pixar animation style.",
-      "camera_movement": "Static",
+      "scene_description_cn": "白英爱微笑着看了一下手机，然后告诉王朋时间。画面切换到一个风格化的时钟动画，指针清晰地指示出“五点三刻”和“六点一刻”，并高亮“刻”字。",
+      "video_api_prompt_en": "3D Pixar style. Close-up on Bai Ying'ai's smiling face as she checks her smartphone. The scene transitions to a clean, stylized animated clock face. The hands move to 5:45, with the text '五点三刻' appearing. Then they move to 6:15, with '六点一刻' appearing. The character '刻' is highlighted. Bright, educational animation style.",
+      "camera_movement": "Cut to animation",
       "voice_over": {
         "role": "白英爱",
-        "content": "五点三刻。",
-        "pinyin": "wǔ diǎn sān kè."
+        "content": "五点三刻。我六点一刻有事儿。",
+        "pinyin": "Wǔ diǎn sān kè. Wǒ liù diǎn yī kè yǒu shìr."
       },
       "screen_overlay": {
-        "main_text": "五点三刻",
-        "sub_text": "wǔ diǎn sān kè (a quarter to six / 5:45)"
+        "main_text": "刻 (kè) / 事儿 (shìr)",
+        "sub_text": "quarter (of an hour) / matter, affair"
       }
     },
     {
       "scene_id": 3,
-      "scene_description_cn": "白英爱关心地询问王朋明天的安排。王朋回答说明天不忙后，白英爱微笑着发出了晚餐邀请。",
-      "video_api_prompt_en": "A two-shot of the characters. Bai Ying'ai has a curious and friendly expression. Wang Peng shakes his head, looking relieved. Bai Ying'ai's face lights up, and she makes a gentle, inviting gesture with her hands. The atmosphere is warm and friendly. 3D Pixar animation style.",
-      "camera_movement": "Slow Zoom In",
+      "scene_description_cn": "场景切换到第二天，王朋和白英爱在阳光明媚的校园小路上边走边聊。白英爱停下脚步，面带期待地看着王朋，做出一个“请”的手势，邀请他吃晚饭。",
+      "video_api_prompt_en": "3D Pixar style. The next day, Wang Peng and Bai Ying'ai are strolling leisurely on a beautiful, sunlit university campus path. Bai Ying'ai stops, turns to Wang Peng with an expectant smile, and makes a welcoming 'please' gesture with her hands, inviting him. Medium shot, warm afternoon sunlight creating a gentle glow, cinematic.",
+      "camera_movement": "Zoom in slowly",
       "voice_over": {
         "role": "白英爱",
         "content": "明天我请你吃晚饭, 怎么样?",
-        "pinyin": "míngtiān wǒ qǐng nǐ chī wǎnfàn, zěnmeyàng?"
+        "pinyin": "Míngtiān wǒ qǐng nǐ chī wǎnfàn, zěnmeyàng?"
       },
       "screen_overlay": {
-        "main_text": "请你吃晚饭",
-        "sub_text": "qǐng nǐ chī wǎnfàn (invite you to dinner)"
+        "main_text": "明天请你吃晚饭",
+        "sub_text": "míngtiān qǐng nǐ chī wǎnfàn (I'll treat you to dinner tomorrow)"
       }
     },
     {
       "scene_id": 4,
-      "scene_description_cn": "王朋好奇地问为什么。白英爱开心地解释说，因为明天是高文中的生日。一个生日蛋糕的卡通图标出现在她头顶。",
-      "video_api_prompt_en": "Wang Peng raises an eyebrow, looking curious. Bai Ying'ai smiles brightly and explains. A cute, stylized thought bubble appears above her head, showing a cartoon birthday cake with lit candles and confetti. The lighting becomes slightly more playful. 3D Pixar animation style.",
-      "camera_movement": "Static",
+      "scene_description_cn": "王朋露出好奇的表情。白英爱笑着解释，旁边出现一个想象气泡，里面是他们的朋友高文中戴着生日帽，面前放着一个生日蛋糕的快乐画面。",
+      "video_api_prompt_en": "3D Pixar style. Close-up on Wang Peng's curious face. The camera then pans to Bai Ying'ai, who is smiling as she explains. A whimsical thought bubble appears next to her head, showing another young man (Gao Wenzhong) with glasses, wearing a party hat and smiling in front of a birthday cake with lit candles. Soft, celebratory lighting inside the bubble.",
+      "camera_movement": "Pan",
       "voice_over": {
-        "role": "白英爱",
-        "content": "因为明天是高文中的生日。",
-        "pinyin": "yīnwèi míngtiān shì Gāo Wénzhōng de shēngrì."
+        "role": "王朋",
+        "content": "你为什么请我吃饭? 因为明天是高文中的生日。",
+        "pinyin": "Nǐ wèishénme qǐng wǒ chīfàn? Yīnwèi míngtiān shì Gāo Wénzhōng de shēngrì."
       },
       "screen_overlay": {
-        "main_text": "因为...是...的生日",
-        "sub_text": "yīnwèi... shì... de shēngrì (Because... is...'s birthday)"
+        "main_text": "为什么 (wèishénme)... 因为 (yīnwèi)...",
+        "sub_text": "Why... Because..."
       }
     },
     {
       "scene_id": 5,
-      "scene_description_cn": "王朋得知李友也会参加后非常开心。两人最终确认了晚餐时间，画面中出现日历和时钟的动画图标。",
-      "video_api_prompt_en": "Wang Peng's face shows pleasant surprise, and he gives a thumbs-up. The scene transitions to a split screen: on the left, Wang Peng and Bai Ying'ai are smiling; on the right, a clean graphic animation shows a calendar page flipping to 'Tomorrow' with a clock icon showing '7:30 PM'. 3D Pixar animation style.",
+      "scene_description_cn": "王朋听后很高兴。场景快速切换到第二天晚上，王朋和白英爱来到一家热闹的中餐厅，他们的朋友李友和高文中已经在座位上向他们招手。餐厅里挂着生日快乐的装饰。",
+      "video_api_prompt_en": "3D Pixar style. Wang Peng looks delighted. Quick transition to the next evening. Wang Peng and Bai Ying'ai enter a vibrant, warmly lit Chinese restaurant decorated with 'Happy Birthday' banners. They spot their friends, Gao Wenzhong and Li You (a friendly young woman with a ponytail), already at a round table, waving happily at them. The atmosphere is cheerful and festive. Wide shot.",
       "camera_movement": "Static",
       "voice_over": {
-        "role": "白英爱",
-        "content": "明天晚上七点半。",
-        "pinyin": "míngtiān wǎnshang qī diǎn bàn."
-      },
-      "screen_overlay": {
-        "main_text": "明天晚上七点半",
-        "sub_text": "míngtiān wǎnshang qī diǎn bàn (7:30 tomorrow evening)"
-      }
-    },
-    {
-      "scene_id": 6,
-      "scene_description_cn": "结尾镜头：王朋和白英爱愉快地挥手告别，约定明天见。夕阳的光从图书馆的窗户照进来，营造出温暖的氛围。",
-      "video_api_prompt_en": "Wide shot of Wang Peng packing his backpack and waving goodbye to Bai Ying'ai, who waves back with a warm smile. The setting sun outside the large library window casts a beautiful golden hour glow on the scene, creating long shadows. The atmosphere is cheerful and full of anticipation. 3D Pixar animation style, cinematic.",
-      "camera_movement": "Slow Pull Back",
-      "voice_over": {
         "role": "王朋",
-        "content": "好, 明天七点半见。",
-        "pinyin": "hǎo, míngtiān qī diǎn bàn jiàn."
+        "content": "那太好了。明天几点? 明天晚上七点半。好, 明天七点半见。",
+        "pinyin": "Nà tài hǎo le. Míngtiān jǐ diǎn? Míngtiān wǎnshang qī diǎn bàn. Hǎo, míngtiān qī diǎn bàn jiàn."
       },
       "screen_overlay": {
-        "main_text": "明天见",
-        "sub_text": "míngtiān jiàn (See you tomorrow)"
+        "main_text": "明天七点半见",
+        "sub_text": "míngtiān qī diǎn bàn jiàn (See you tomorrow at 7:30)"
       }
     }
   ]

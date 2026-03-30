@@ -14,6 +14,33 @@ const formatLessonId = (id) => {
     return numId < 100 ? id : `${Math.floor(numId / 100)}.${numId % 100}`;
 };
 
+const InlineAnnotatedText = ({ words = [], showPinyin, pinyinClassName = '', textClassName = '' }) => {
+    if (!showPinyin) {
+        return (
+            <div className={`leading-[1.95] ${textClassName}`}>
+                {words.map((w, idx) => (
+                    <span key={idx} className={w.highlight ? 'text-blue-600 font-black' : ''}>
+                        {w.cn}
+                    </span>
+                ))}
+            </div>
+        );
+    }
+
+    return (
+        <div className="flex flex-wrap items-end gap-x-2 gap-y-4 leading-relaxed">
+            {words.map((w, idx) => (
+                <ruby key={idx} className="flex flex-col items-center">
+                    <rt className={pinyinClassName}>{w.py}</rt>
+                    <span className={`${textClassName} ${w.highlight ? 'text-blue-600 font-black' : ''}`}>
+                        {w.cn}
+                    </span>
+                </ruby>
+            ))}
+        </div>
+    );
+};
+
 export default function TeachingSection({ data, courseId, userId, onStartPractice }) {
     // 1. 状态拆分：课文专用
     const [diagPinyin, setDiagPinyin] = useState(true);
@@ -29,6 +56,13 @@ export default function TeachingSection({ data, courseId, userId, onStartPractic
     if (!data) return null;
     const { lesson_metadata, course_content, aigc_visual_prompt } = data;
     const { dialogues, vocabulary } = course_content;
+    const contentType = lesson_metadata?.content_type || 'dialogue';
+    const isReadingMode = ['diary', 'article', 'passage'].includes(contentType);
+    const isMixedMode = contentType === 'mixed';
+    const lessonHeading = isReadingMode
+        ? (contentType === 'diary' ? '🗒️ 日记原文' : '📖 课文阅读')
+        : (isMixedMode ? '🎭 课文内容' : '💬 课文对话');
+    const lineItems = dialogues?.flatMap(t => t.lines || []) || [];
 
     // 🚀 核心修改：动态获取 API 基础地址用于音频播放
     const playAudio = (text) => {
@@ -110,61 +144,129 @@ export default function TeachingSection({ data, courseId, userId, onStartPractic
             {/* 4. 课文对话区 */}
             <motion.section variants={fadeInUp} initial="hidden" animate="show" className="mb-24">
                 <div className="flex justify-between items-end mb-8">
-                    <h2 className="text-2xl font-black text-slate-800">💬 课文对话</h2>
+                    <div>
+                        <h2 className="text-2xl font-black text-slate-800">{lessonHeading}</h2>
+                        <p className="mt-1 text-xs font-black uppercase tracking-[0.24em] text-slate-400">
+                            {contentType}
+                        </p>
+                    </div>
                     <ControlCapsule 
                         pinyin={diagPinyin} setPinyin={setDiagPinyin} 
                         trans={diagTrans} setTrans={setDiagTrans} 
                     />
                 </div>
 
-                <div className="space-y-10 bg-white p-10 md:p-14 rounded-[3rem] shadow-sm border border-slate-100">
-                    {dialogues?.flatMap(t => t.lines || []).map((line, idx) => {
-                        const isLeft = idx % 2 === 0;
-                        return (
-                            <div key={idx} className={`flex flex-col ${isLeft ? 'items-start' : 'items-end'}`}>
-                                <span className="text-2xl font-black text-slate-300 mb-2 px-4 uppercase tracking-widest">{line.role}</span>
-                                
-                                <div className={`px-7 py-5 rounded-[2.2rem] max-w-[85%] group relative transition-all hover:shadow-lg ${
-                                    isLeft 
-                                        ? 'bg-slate-50 border border-slate-100 rounded-tl-none text-slate-800' 
-                                        : 'bg-blue-50 border border-blue-100 rounded-tr-none text-slate-800'
-                                }`}>
-                                    <div className="flex items-end flex-wrap gap-x-2 gap-y-4">
-                                        {line.words?.map((w, wIdx) => (
-                                            <ruby key={wIdx} className="flex flex-col items-center">
-                                                <rt className={`text-xl font-mono mb-1 transition-all duration-500 ${
-                                                    diagPinyin ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'
-                                                } ${isLeft ? 'text-slate-400' : 'text-blue-400'}`}>{w.py}</rt>
-                                                
-                                                <span className={`text-3xl ${
-                                                    w.highlight 
-                                                        ? 'text-blue-600 font-black' 
-                                                        : 'font-medium'
-                                                }`}>{w.cn}</span>
-                                            </ruby>
-                                        ))}
-                                        
-                                        <button onClick={() => playAudio(line.words.map(w=>w.cn).join(''))} 
-                                            className={`p-2 ml-2 transition-colors ${
-                                                isLeft ? 'text-slate-400 hover:text-blue-500' : 'text-blue-400 hover:text-blue-600'
-                                            }`}>
-                                            <Volume2 size={20} />
-                                        </button>
-                                    </div>
-                                    
-                                    {diagTrans && line.english && (
-                                        <p className={`text-xl mt-5 pt-4 border-t ${
-                                            isLeft 
-                                                ? 'text-slate-500 border-slate-200/60' 
-                                                : 'text-blue-700/70 border-blue-200/60'
-                                        }`}>
-                                            {line.english}
+                <div className={`bg-white rounded-[3rem] shadow-sm border border-slate-100 ${
+                    isReadingMode ? 'p-8 md:p-12' : 'p-10 md:p-14'
+                }`}>
+                    {isReadingMode ? (
+                        <div className="mx-auto max-w-3xl rounded-[2.5rem] border border-stone-200/80 bg-gradient-to-b from-stone-50 to-white px-8 py-10 md:px-14 md:py-14 shadow-[0_24px_60px_rgba(15,23,42,0.06)]">
+                            <div className="mb-10 border-b border-stone-200/80 pb-6">
+                                <div className="flex items-center justify-between gap-4">
+                                    <div>
+                                        <p className="text-[10px] font-black uppercase tracking-[0.36em] text-stone-400">
+                                            {contentType === 'diary' ? 'Diary Entry' : 'Reading Passage'}
                                         </p>
-                                    )}
+                                        <h3 className="mt-3 text-3xl md:text-4xl font-black tracking-tight text-stone-800">
+                                            {lesson_metadata.title}
+                                        </h3>
+                                    </div>
+                                    <div className="hidden md:flex items-center gap-2 rounded-full border border-stone-200 bg-white/80 px-4 py-2 text-[10px] font-black uppercase tracking-[0.28em] text-stone-400">
+                                        {contentType}
+                                    </div>
                                 </div>
                             </div>
-                        );
-                    })}
+
+                            <div className="space-y-8">
+                                {lineItems.map((line, idx) => {
+                                    const cnText = (line.words || []).map(w => w.cn).join('');
+                                    const isShortMetaLine = idx === 0 && cnText.length <= 12;
+
+                                    return (
+                                        <article
+                                            key={idx}
+                                            className={`group ${isShortMetaLine ? 'text-center' : ''}`}
+                                        >
+                                            <div className={`flex gap-3 ${isShortMetaLine ? 'justify-center items-center' : 'items-start'}`}>
+                                                <InlineAnnotatedText
+                                                    words={line.words || []}
+                                                    showPinyin={diagPinyin}
+                                                    pinyinClassName={`text-sm md:text-base font-mono mb-1 text-stone-400 ${
+                                                        isShortMetaLine ? 'text-center' : ''
+                                                    }`}
+                                                    textClassName={`text-stone-800 ${
+                                                        isShortMetaLine
+                                                            ? 'text-4xl md:text-5xl font-black tracking-[0.12em]'
+                                                            : 'text-3xl md:text-[2.15rem] font-medium'
+                                                    }`}
+                                                />
+
+                                                <button
+                                                    onClick={() => playAudio(cnText)}
+                                                    className={`shrink-0 p-2 text-stone-300 hover:text-blue-600 transition-colors ${
+                                                        isShortMetaLine ? 'mt-1' : 'mt-2'
+                                                    }`}
+                                                >
+                                                    <Volume2 size={20} />
+                                                </button>
+                                            </div>
+
+                                            {diagTrans && line.english && (
+                                                <p className={`mt-3 text-lg md:text-xl leading-relaxed text-stone-500 ${
+                                                    isShortMetaLine ? 'text-center' : ''
+                                                }`}>
+                                                    {line.english}
+                                                </p>
+                                            )}
+                                        </article>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="space-y-10">
+                            {lineItems.map((line, idx) => {
+                                const isLeft = idx % 2 === 0;
+                                return (
+                                    <div key={idx} className={`flex flex-col ${isLeft ? 'items-start' : 'items-end'}`}>
+                                        <span className="text-2xl font-black text-slate-300 mb-2 px-4 uppercase tracking-widest">{line.role}</span>
+                                        
+                                        <div className={`px-7 py-5 rounded-[2.2rem] max-w-[85%] group relative transition-all hover:shadow-lg ${
+                                            isLeft 
+                                                ? 'bg-slate-50 border border-slate-100 rounded-tl-none text-slate-800' 
+                                                : 'bg-blue-50 border border-blue-100 rounded-tr-none text-slate-800'
+                                        }`}>
+                                            <div className="flex items-end flex-wrap gap-x-2 gap-y-4">
+                                                <InlineAnnotatedText
+                                                    words={line.words || []}
+                                                    showPinyin={diagPinyin}
+                                                    pinyinClassName={`text-xl font-mono mb-1 ${isLeft ? 'text-slate-400' : 'text-blue-400'}`}
+                                                    textClassName="text-3xl font-medium"
+                                                />
+
+                                                <button onClick={() => playAudio((line.words || []).map(w => w.cn).join(''))} 
+                                                    className={`p-2 ml-2 transition-colors ${
+                                                        isLeft ? 'text-slate-400 hover:text-blue-500' : 'text-blue-400 hover:text-blue-600'
+                                                    }`}>
+                                                    <Volume2 size={20} />
+                                                </button>
+                                            </div>
+                                            
+                                            {diagTrans && line.english && (
+                                                <p className={`text-xl mt-5 pt-4 border-t ${
+                                                    isLeft 
+                                                        ? 'text-slate-500 border-slate-200/60' 
+                                                        : 'text-blue-700/70 border-blue-200/60'
+                                                }`}>
+                                                    {line.english}
+                                                </p>
+                                            )}
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    )}
                 </div>
             </motion.section>
 
