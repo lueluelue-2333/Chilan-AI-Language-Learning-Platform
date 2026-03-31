@@ -106,7 +106,9 @@ CREATE TABLE public.language_items (
     question_id integer NOT NULL,
     question_type character varying(20) NOT NULL,
     original_text text NOT NULL,
+    original_pinyin text DEFAULT ''::text,
     standard_answers text[] NOT NULL,
+    metadata jsonb DEFAULT '{}'::jsonb,
     primary_embedding public.vector(3072) NOT NULL,
     course_id integer NOT NULL,
     lesson_id integer NOT NULL,
@@ -285,6 +287,11 @@ CREATE TABLE public.review_logs (
     review_time timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
     stability double precision,
     difficulty double precision,
+    input_mode character varying(16) DEFAULT 'text'::character varying NOT NULL,
+    asr_text text,
+    asr_confidence double precision,
+    vector_score double precision,
+    audio_duration_ms integer,
     item_id integer
 );
 
