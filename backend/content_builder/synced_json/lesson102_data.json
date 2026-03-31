@@ -1,0 +1,1017 @@
+{
+  "lesson_metadata": {
+    "course_id": 1,
+    "lesson_id": 102,
+    "title": "你是哪国人？",
+    "content_type": "dialogue"
+  },
+  "course_content": {
+    "dialogues": [
+      {
+        "lines": [
+          {
+            "role": "李友",
+            "english": "Mr. Wang, are you a teacher?",
+            "words": [
+              {
+                "cn": "王",
+                "py": "Wáng",
+                "highlight": false
+              },
+              {
+                "cn": "先生",
+                "py": "xiānsheng",
+                "highlight": true
+              },
+              {
+                "cn": ",",
+                "py": "",
+                "highlight": false
+              },
+              {
+                "cn": "你",
+                "py": "nǐ",
+                "highlight": true
+              },
+              {
+                "cn": "是",
+                "py": "shì",
+                "highlight": true
+              },
+              {
+                "cn": "老师",
+                "py": "lǎoshī",
+                "highlight": true
+              },
+              {
+                "cn": "吗",
+                "py": "ma",
+                "highlight": true
+              },
+              {
+                "cn": "？",
+                "py": "",
+                "highlight": false
+              }
+            ]
+          },
+          {
+            "role": "王先生",
+            "english": "I am not a teacher, I am a student. Li You, what about you?",
+            "words": [
+              {
+                "cn": "我",
+                "py": "wǒ",
+                "highlight": true
+              },
+              {
+                "cn": "不",
+                "py": "bú",
+                "highlight": true
+              },
+              {
+                "cn": "是",
+                "py": "shì",
+                "highlight": true
+              },
+              {
+                "cn": "老师",
+                "py": "lǎoshī",
+                "highlight": true
+              },
+              {
+                "cn": ",",
+                "py": "",
+                "highlight": false
+              },
+              {
+                "cn": "我",
+                "py": "wǒ",
+                "highlight": true
+              },
+              {
+                "cn": "是",
+                "py": "shì",
+                "highlight": true
+              },
+              {
+                "cn": "学生",
+                "py": "xuésheng",
+                "highlight": true
+              },
+              {
+                "cn": "。",
+                "py": "",
+                "highlight": false
+              },
+              {
+                "cn": "李",
+                "py": "Lǐ",
+                "highlight": false
+              },
+              {
+                "cn": "友",
+                "py": "Yǒu",
+                "highlight": false
+              },
+              {
+                "cn": ",",
+                "py": "",
+                "highlight": false
+              },
+              {
+                "cn": "你",
+                "py": "nǐ",
+                "highlight": true
+              },
+              {
+                "cn": "呢",
+                "py": "ne",
+                "highlight": true
+              },
+              {
+                "cn": "？",
+                "py": "",
+                "highlight": false
+              }
+            ]
+          },
+          {
+            "role": "李友",
+            "english": "I am a student, too. Are you Chinese?",
+            "words": [
+              {
+                "cn": "我",
+                "py": "wǒ",
+                "highlight": true
+              },
+              {
+                "cn": "也",
+                "py": "yě",
+                "highlight": true
+              },
+              {
+                "cn": "是",
+                "py": "shì",
+                "highlight": true
+              },
+              {
+                "cn": "学生",
+                "py": "xuésheng",
+                "highlight": true
+              },
+              {
+                "cn": "。",
+                "py": "",
+                "highlight": false
+              },
+              {
+                "cn": "你",
+                "py": "nǐ",
+                "highlight": true
+              },
+              {
+                "cn": "是",
+                "py": "shì",
+                "highlight": true
+              },
+              {
+                "cn": "中国",
+                "py": "Zhōngguó",
+                "highlight": true
+              },
+              {
+                "cn": "人",
+                "py": "rén",
+                "highlight": true
+              },
+              {
+                "cn": "吗",
+                "py": "ma",
+                "highlight": true
+              },
+              {
+                "cn": "？",
+                "py": "",
+                "highlight": false
+              }
+            ]
+          },
+          {
+            "role": "王先生",
+            "english": "Yes, I am from Beijing. Are you American?",
+            "words": [
+              {
+                "cn": "是",
+                "py": "shì",
+                "highlight": true
+              },
+              {
+                "cn": ",",
+                "py": "",
+                "highlight": false
+              },
+              {
+                "cn": "我",
+                "py": "wǒ",
+                "highlight": true
+              },
+              {
+                "cn": "是",
+                "py": "shì",
+                "highlight": true
+              },
+              {
+                "cn": "北京",
+                "py": "běi jīng",
+                "highlight": true
+              },
+              {
+                "cn": "人",
+                "py": "rén",
+                "highlight": true
+              },
+              {
+                "cn": "。",
+                "py": "",
+                "highlight": false
+              },
+              {
+                "cn": "你",
+                "py": "nǐ",
+                "highlight": true
+              },
+              {
+                "cn": "是",
+                "py": "shì",
+                "highlight": true
+              },
+              {
+                "cn": "美国",
+                "py": "měi guó",
+                "highlight": true
+              },
+              {
+                "cn": "人",
+                "py": "rén",
+                "highlight": true
+              },
+              {
+                "cn": "吗",
+                "py": "ma",
+                "highlight": true
+              },
+              {
+                "cn": "？",
+                "py": "",
+                "highlight": false
+              }
+            ]
+          },
+          {
+            "role": "李友",
+            "english": "Yes, I am from New York.",
+            "words": [
+              {
+                "cn": "是",
+                "py": "shì",
+                "highlight": true
+              },
+              {
+                "cn": ",",
+                "py": "",
+                "highlight": false
+              },
+              {
+                "cn": "我",
+                "py": "wǒ",
+                "highlight": true
+              },
+              {
+                "cn": "是",
+                "py": "shì",
+                "highlight": true
+              },
+              {
+                "cn": "纽约",
+                "py": "niǔ yuē",
+                "highlight": true
+              },
+              {
+                "cn": "人",
+                "py": "rén",
+                "highlight": true
+              },
+              {
+                "cn": "。",
+                "py": "",
+                "highlight": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "vocabulary": [
+      {
+        "word": "是",
+        "pinyin": "shì",
+        "part_of_speech": "v",
+        "definition": "to be [See Grammar 5.]",
+        "example_sentence": {
+          "cn": "李友是学生。",
+          "py": "Lǐ Yōu shì xuésheng.",
+          "en": "Li You is a student."
+        }
+      },
+      {
+        "word": "老师",
+        "pinyin": "lǎoshī",
+        "part_of_speech": "n",
+        "definition": "teacher",
+        "example_sentence": {
+          "cn": "你是老师吗?",
+          "py": "Nǐ shì lǎoshī ma?",
+          "en": "Are you a teacher?"
+        }
+      },
+      {
+        "word": "吗",
+        "pinyin": "ma",
+        "part_of_speech": "qp",
+        "definition": "(question particle) [See Grammar 6.]",
+        "example_sentence": {
+          "cn": "王先生,你是老师吗？",
+          "py": "Wáng xiānsheng nǐ shì lǎoshī ma",
+          "en": "Mr. Wang, are you a teacher?"
+        }
+      },
+      {
+        "word": "不",
+        "pinyin": "bù",
+        "part_of_speech": "adv",
+        "definition": "not, no [See Grammar 7.]",
+        "example_sentence": {
+          "cn": "我不是老师。",
+          "py": "Wǒ bú shì lǎoshī.",
+          "en": "I am not a teacher."
+        }
+      },
+      {
+        "word": "学生",
+        "pinyin": "xuésheng",
+        "part_of_speech": "n",
+        "definition": "student",
+        "example_sentence": {
+          "cn": "我是学生。",
+          "py": "wǒ shì xuésheng.",
+          "en": "I am a student."
+        }
+      },
+      {
+        "word": "也",
+        "pinyin": "yě",
+        "part_of_speech": "adv",
+        "definition": "too, also [See Grammar 8.]",
+        "example_sentence": {
+          "cn": "我也是学生。",
+          "py": "Wǒ yě shì xuésheng.",
+          "en": "I'm a student, too."
+        }
+      },
+      {
+        "word": "人",
+        "pinyin": "rén",
+        "part_of_speech": "n",
+        "definition": "people, person",
+        "example_sentence": {
+          "cn": "我也是学生。你是中国人吗？",
+          "py": "wǒ yě shì xuésheng nǐ shì Zhōngguó rén ma",
+          "en": "I am a student, too. Are you Chinese?"
+        }
+      },
+      {
+        "word": "中国",
+        "pinyin": "Zhōngguó",
+        "part_of_speech": "pn",
+        "definition": "China",
+        "example_sentence": {
+          "cn": "我也是学生。你是中国人吗？",
+          "py": "wǒ yě shì xuésheng nǐ shì Zhōngguó rén ma",
+          "en": "I am a student, too. Are you Chinese?"
+        }
+      },
+      {
+        "word": "北京",
+        "pinyin": "Běijīng",
+        "part_of_speech": "pn",
+        "definition": "Beijing",
+        "example_sentence": {
+          "cn": "是,我是北京人。你是美国人吗？",
+          "py": "shì wǒ shì běi jīng rén nǐ shì měi guó rén ma",
+          "en": "Yes, I am from Beijing. Are you American?"
+        }
+      },
+      {
+        "word": "美国",
+        "pinyin": "Měiguó",
+        "part_of_speech": "pn",
+        "definition": "America",
+        "example_sentence": {
+          "cn": "你是美国人吗?",
+          "py": "Nǐ shì Měiguó rén ma?",
+          "en": "Are you American?"
+        }
+      },
+      {
+        "word": "纽约",
+        "pinyin": "Niŭyuē",
+        "part_of_speech": "pn",
+        "definition": "New York",
+        "example_sentence": {
+          "cn": "你不是纽约人, 我也不是纽约人。",
+          "py": "Nǐ bú shì Niǔyuē rén, wǒ yě bú shì Niǔyuē rén.",
+          "en": "You are not from New York. I am not from New York, either."
+        }
+      }
+    ]
+  },
+  "database_items": [
+    {
+      "lesson_id": 102,
+      "question_id": 1,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "是",
+      "original_pinyin": "shì",
+      "standard_answers": [
+        "to be"
+      ],
+      "context_examples": [
+        {
+          "cn": "李友是学生。",
+          "py": "Lǐ Yōu shì xuésheng.",
+          "en": "Li You is a student."
+        }
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 2,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "老师",
+      "original_pinyin": "lǎoshī",
+      "standard_answers": [
+        "teacher"
+      ],
+      "context_examples": [
+        {
+          "cn": "你是老师吗?",
+          "py": "Nǐ shì lǎoshī ma?",
+          "en": "Are you a teacher?"
+        }
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 3,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "吗",
+      "original_pinyin": "ma",
+      "standard_answers": [
+        "(question particle)"
+      ],
+      "context_examples": [
+        {
+          "cn": "王先生,你是老师吗？",
+          "py": "Wáng xiānsheng nǐ shì lǎoshī ma",
+          "en": "Mr. Wang, are you a teacher?"
+        }
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 4,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "不",
+      "original_pinyin": "bù",
+      "standard_answers": [
+        "not",
+        "no"
+      ],
+      "context_examples": [
+        {
+          "cn": "我不是老师。",
+          "py": "Wǒ bú shì lǎoshī.",
+          "en": "I am not a teacher."
+        }
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 5,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "学生",
+      "original_pinyin": "xuésheng",
+      "standard_answers": [
+        "student"
+      ],
+      "context_examples": [
+        {
+          "cn": "我是学生。",
+          "py": "wǒ shì xuésheng.",
+          "en": "I am a student."
+        }
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 6,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "也",
+      "original_pinyin": "yě",
+      "standard_answers": [
+        "too, also"
+      ],
+      "context_examples": [
+        {
+          "cn": "我也是学生。",
+          "py": "Wǒ yě shì xuésheng.",
+          "en": "I'm a student, too."
+        }
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 7,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "人",
+      "original_pinyin": "rén",
+      "standard_answers": [
+        "people, person"
+      ],
+      "context_examples": [
+        {
+          "cn": "我也是学生。你是中国人吗？",
+          "py": "wǒ yě shì xuésheng nǐ shì Zhōngguó rén ma",
+          "en": "I am a student, too. Are you Chinese?"
+        }
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 8,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "中国",
+      "original_pinyin": "Zhōngguó",
+      "standard_answers": [
+        "China"
+      ],
+      "context_examples": [
+        {
+          "cn": "我也是学生。你是中国人吗？",
+          "py": "wǒ yě shì xuésheng nǐ shì Zhōngguó rén ma",
+          "en": "I am a student, too. Are you Chinese?"
+        }
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 9,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "北京",
+      "original_pinyin": "Běijīng",
+      "standard_answers": [
+        "Beijing"
+      ],
+      "context_examples": [
+        {
+          "cn": "是,我是北京人。你是美国人吗？",
+          "py": "shì wǒ shì běi jīng rén nǐ shì měi guó rén ma",
+          "en": "Yes, I am from Beijing. Are you American?"
+        }
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 10,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "美国",
+      "original_pinyin": "Měiguó",
+      "standard_answers": [
+        "America"
+      ],
+      "context_examples": [
+        {
+          "cn": "你是美国人吗?",
+          "py": "Nǐ shì Měiguó rén ma?",
+          "en": "Are you American?"
+        }
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 11,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "纽约",
+      "original_pinyin": "Niŭyuē",
+      "standard_answers": [
+        "New York"
+      ],
+      "context_examples": [
+        {
+          "cn": "你不是纽约人, 我也不是纽约人。",
+          "py": "Nǐ bú shì Niǔyuē rén, wǒ yě bú shì Niǔyuē rén.",
+          "en": "You are not from New York. I am not from New York, either."
+        }
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 12,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "你是老师吗？",
+      "original_pinyin": "nǐ shì lǎoshī ma",
+      "standard_answers": [
+        "Are you a teacher?"
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 13,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "我不是老师,我是学生。",
+      "original_pinyin": "wǒ bú shì lǎoshī wǒ shì xuésheng",
+      "standard_answers": [
+        "I am not a teacher, I am a student."
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 14,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "我也是学生。",
+      "original_pinyin": "wǒ yě shì xuésheng",
+      "standard_answers": [
+        "I am a student, too.",
+        "I am also a student."
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 15,
+      "course_id": 1,
+      "question_type": "CN_TO_EN",
+      "original_text": "我是北京人。",
+      "original_pinyin": "wǒ shì běi jīng rén",
+      "standard_answers": [
+        "I am from Beijing."
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 16,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "to be",
+      "original_pinyin": null,
+      "standard_answers": [
+        "是"
+      ],
+      "context_examples": [
+        {
+          "cn": "李友是学生。",
+          "py": "Lǐ Yōu shì xuésheng.",
+          "en": "Li You is a student."
+        }
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 17,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "teacher",
+      "original_pinyin": null,
+      "standard_answers": [
+        "老师"
+      ],
+      "context_examples": [
+        {
+          "cn": "你是老师吗?",
+          "py": "Nǐ shì lǎoshī ma?",
+          "en": "Are you a teacher?"
+        }
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 18,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "Ma (question particle)",
+      "original_pinyin": null,
+      "standard_answers": [
+        "吗"
+      ],
+      "context_examples": [
+        {
+          "cn": "王先生,你是老师吗？",
+          "py": "Wáng xiānsheng nǐ shì lǎoshī ma",
+          "en": "Mr. Wang, are you a teacher?"
+        }
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 19,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "not, no",
+      "original_pinyin": null,
+      "standard_answers": [
+        "不"
+      ],
+      "context_examples": [
+        {
+          "cn": "我不是老师。",
+          "py": "Wǒ bú shì lǎoshī.",
+          "en": "I am not a teacher."
+        }
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 20,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "student",
+      "original_pinyin": null,
+      "standard_answers": [
+        "学生"
+      ],
+      "context_examples": [
+        {
+          "cn": "我是学生。",
+          "py": "wǒ shì xuésheng.",
+          "en": "I am a student."
+        }
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 21,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "too, also",
+      "original_pinyin": null,
+      "standard_answers": [
+        "也"
+      ],
+      "context_examples": [
+        {
+          "cn": "我也是学生。",
+          "py": "Wǒ yě shì xuésheng.",
+          "en": "I'm a student, too."
+        }
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 22,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "people, person",
+      "original_pinyin": null,
+      "standard_answers": [
+        "人"
+      ],
+      "context_examples": [
+        {
+          "cn": "我也是学生。你是中国人吗？",
+          "py": "wǒ yě shì xuésheng nǐ shì Zhōngguó rén ma",
+          "en": "I am a student, too. Are you Chinese?"
+        }
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 23,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "China",
+      "original_pinyin": null,
+      "standard_answers": [
+        "中国"
+      ],
+      "context_examples": [
+        {
+          "cn": "我也是学生。你是中国人吗？",
+          "py": "wǒ yě shì xuésheng nǐ shì Zhōngguó rén ma",
+          "en": "I am a student, too. Are you Chinese?"
+        }
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 24,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "Beijing",
+      "original_pinyin": null,
+      "standard_answers": [
+        "北京"
+      ],
+      "context_examples": [
+        {
+          "cn": "是,我是北京人。你是美国人吗？",
+          "py": "shì wǒ shì běi jīng rén nǐ shì měi guó rén ma",
+          "en": "Yes, I am from Beijing. Are you American?"
+        }
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 25,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "America",
+      "original_pinyin": null,
+      "standard_answers": [
+        "美国"
+      ],
+      "context_examples": [
+        {
+          "cn": "你是美国人吗?",
+          "py": "Nǐ shì Měiguó rén ma?",
+          "en": "Are you American?"
+        }
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 26,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "New York",
+      "original_pinyin": null,
+      "standard_answers": [
+        "纽约"
+      ],
+      "context_examples": [
+        {
+          "cn": "你不是纽约人, 我也不是纽约人。",
+          "py": "Nǐ bú shì Niǔyuē rén, wǒ yě bú shì Niǔyuē rén.",
+          "en": "You are not from New York. I am not from New York, either."
+        }
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 27,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "Are you Chinese?",
+      "original_pinyin": null,
+      "standard_answers": [
+        "你是中国人吗？"
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 28,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "Are you American?",
+      "original_pinyin": null,
+      "standard_answers": [
+        "你是美国人吗？"
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 29,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "Yes, I am from New York.",
+      "original_pinyin": null,
+      "standard_answers": [
+        "是,我是纽约人。"
+      ]
+    },
+    {
+      "lesson_id": 102,
+      "question_id": 30,
+      "course_id": 1,
+      "question_type": "EN_TO_CN",
+      "original_text": "I am a student. What about you?",
+      "original_pinyin": null,
+      "standard_answers": [
+        "我是学生。你呢？"
+      ]
+    }
+  ],
+  "video_global_config": {
+    "visual_style": "Vibrant 3D Pixar animation style, cinematic lighting, warm and friendly atmosphere.",
+    "character_definitions": [
+      {
+        "name": "李友",
+        "appearance_description_en": "A female university student in her early 20s, American, with shoulder-length wavy brown hair, bright green eyes, and a curious, friendly expression. She wears a light blue university hoodie and jeans."
+      },
+      {
+        "name": "王先生",
+        "appearance_description_en": "A male university student in his early 20s, Chinese, with short, neat black hair, wearing stylish black-rimmed glasses. He has a warm, gentle smile and wears a grey sweater over a white collared shirt."
+      }
+    ]
+  },
+  "video_scenes": [
+    {
+      "scene_id": 1,
+      "scene_description_cn": "在阳光明媚的大学校园里，李友看到王先生，友好地走上前去询问他是不是老师。",
+      "video_api_prompt_en": "A medium shot in vibrant 3D Pixar style. Li You, a friendly American student with wavy brown hair, approaches Wang Xiansheng, a gentle Chinese student with glasses, on a beautiful, sun-drenched university campus with modern architecture and green lawns in the background. She has an inquisitive expression. Cinematic, warm lighting.",
+      "camera_movement": "Static",
+      "voice_over": {
+        "role": "李友",
+        "content": "王先生, 你是老师吗？",
+        "pinyin": "Wáng xiānsheng, nǐ shì lǎoshī ma?"
+      },
+      "screen_overlay": {
+        "main_text": "老师 (lǎoshī) 吗 (ma)?",
+        "sub_text": "teacher?"
+      }
+    },
+    {
+      "scene_id": 2,
+      "scene_description_cn": "王先生微笑着摇摇头，然后指着自己，澄清自己是学生，并反问李友。",
+      "video_api_prompt_en": "Close-up shot on Wang Xiansheng's face, 3D Pixar style. He smiles warmly and shakes his head gently, then points to his chest with his thumb. The background is softly blurred (bokeh effect). The lighting highlights his friendly expression. He looks directly at Li You.",
+      "camera_movement": "Slow zoom in",
+      "voice_over": {
+        "role": "王先生",
+        "content": "我不是老师, 我是学生。李友, 你呢？",
+        "pinyin": "Wǒ bú shì lǎoshī, wǒ shì xuésheng. Lǐ Yǒu, nǐ ne?"
+      },
+      "screen_overlay": {
+        "main_text": "不 (bú) 是 / 学生 (xuésheng)",
+        "sub_text": "not / student"
+      }
+    },
+    {
+      "scene_id": 3,
+      "scene_description_cn": "李友听后也开心地笑了，她也表明自己是学生，并好奇地问王先生是不是中国人。",
+      "video_api_prompt_en": "Medium two-shot, 3D Pixar style. Li You smiles brightly, looking relieved and happy. She gestures to herself similarly. Both characters are standing together, conveying a new friendship. The campus background is visible again. Bright, cheerful afternoon light.",
+      "camera_movement": "Static",
+      "voice_over": {
+        "role": "李友",
+        "content": "我也是学生。你是中国人吗？",
+        "pinyin": "Wǒ yě shì xuésheng. Nǐ shì Zhōngguó rén ma?"
+      },
+      "screen_overlay": {
+        "main_text": "也 (yě) / 中国人 (Zhōngguó rén)?",
+        "sub_text": "also / Chinese person?"
+      }
+    },
+    {
+      "scene_id": 4,
+      "scene_description_cn": "王先生自豪地点点头。他身后浮现出北京天坛的动画背景，然后他问李友是不是美国人。",
+      "video_api_prompt_en": "Medium close-up on Wang Xiansheng, 3D Pixar style. He nods with a proud, friendly smile. As he speaks, a beautiful, stylized 2D animated background of the Temple of Heaven in Beijing fades in and then out behind him. He then gestures towards Li You inquisitively.",
+      "camera_movement": "Pan right slightly",
+      "voice_over": {
+        "role": "王先生",
+        "content": "是, 我是北京人。你是美国人吗？",
+        "pinyin": "Shì, wǒ shì Běijīng rén. Nǐ shì Měiguó rén ma?"
+      },
+      "screen_overlay": {
+        "main_text": "北京人 (Běijīng rén) / 美国人 (Měiguó rén)?",
+        "sub_text": "person from Beijing / American?"
+      }
+    },
+    {
+      "scene_id": 5,
+      "scene_description_cn": "李友也肯定地回答。她身后浮现出纽约自由女神像的动画背景，画面定格在两人友好的笑容上。",
+      "video_api_prompt_en": "Medium close-up on Li You, 3D Pixar style. She nods enthusiastically. As she speaks, a vibrant, stylized 2D animated background of the Statue of Liberty and the New York City skyline fades in and then out behind her. The scene ends with both of them smiling at each other.",
+      "camera_movement": "Static",
+      "voice_over": {
+        "role": "李友",
+        "content": "是, 我是纽约人。",
+        "pinyin": "Shì, wǒ shì Niǔyuē rén."
+      },
+      "screen_overlay": {
+        "main_text": "是 (shì) / 纽约人 (Niǔyuē rén)",
+        "sub_text": "Yes / person from New York"
+      }
+    }
+  ]
+}

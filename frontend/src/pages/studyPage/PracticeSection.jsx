@@ -5,7 +5,7 @@ import apiClient from '../../api/apiClient';
 import { 
     Loader2, Send, CheckCircle2, XCircle, 
     Sparkles, RefreshCcw, ArrowRight, AlertCircle,
-    BookOpen
+    BookOpen, Volume2, Eye, EyeOff
 } from 'lucide-react';
 
 const fadeInUp = {
@@ -14,6 +14,14 @@ const fadeInUp = {
 };
 
 // 🌟 单词语境扩展卡片组件
+const formatPinyinDisplay = (value = '') => {
+    return value
+        .split(/\s+/)
+        .filter(Boolean)
+        .map((token) => token.toLowerCase())
+        .join(' ');
+};
+
 const WordContextCard = ({ word, pinyin, metadata, knowledgeData }) => {
     const examples = metadata?.context_examples || [];
     const fallbackKnowledge = metadata?.knowledge || {};
@@ -25,6 +33,7 @@ const WordContextCard = ({ word, pinyin, metadata, knowledgeData }) => {
     const displayPartOfSpeech = currentSense?.part_of_speech || '';
     const primaryExample = currentSense?.example_sentence;
     const combinedExamples = [];
+    const [expandedExamples, setExpandedExamples] = useState({});
 
     if (primaryExample?.cn || primaryExample?.py || primaryExample?.en) {
         combinedExamples.push(primaryExample);
@@ -43,6 +52,16 @@ const WordContextCard = ({ word, pinyin, metadata, knowledgeData }) => {
         !displayDefinition &&
         !displayWord
     ) return null;
+
+    const playAudio = (text) => {
+        if (!text) return;
+        const API_BASE = import.meta.env.VITE_API_BASE_URL;
+        new Audio(`${API_BASE}/study/tts?text=${encodeURIComponent(text)}`).play();
+    };
+
+    const toggleExample = (key) => {
+        setExpandedExamples((prev) => ({ ...prev, [key]: !prev[key] }));
+    };
 
     return (
         <motion.div 
@@ -67,17 +86,25 @@ const WordContextCard = ({ word, pinyin, metadata, knowledgeData }) => {
                     </div>
                     <div className="flex flex-wrap items-start gap-4 justify-between">
                         <div className="min-w-[180px]">
-                            <div className="flex items-end gap-3">
+                            <div className="flex items-start gap-4">
                                 <p className="text-5xl font-black text-slate-900 leading-none">{displayWord}</p>
-                                {displayPinyin && (
-                                    <p className="text-lg font-black text-orange-500">{displayPinyin}</p>
-                                )}
+                                <button
+                                    onClick={() => playAudio(displayWord)}
+                                    className="mt-1 p-2.5 bg-slate-50 text-slate-400 hover:bg-blue-600 hover:text-white rounded-2xl transition-all shadow-sm"
+                                >
+                                    <Volume2 size={18} />
+                                </button>
+                                <div className="pt-2">
+                                    {displayPinyin && (
+                                        <p className="text-lg font-black text-orange-500">{formatPinyinDisplay(displayPinyin)}</p>
+                                    )}
+                                    {displayPartOfSpeech && (
+                                        <span className="inline-block mt-3 px-3 py-1 rounded-full bg-slate-100 text-xs font-black uppercase tracking-[0.2em] text-slate-500">
+                                            {displayPartOfSpeech}
+                                        </span>
+                                    )}
+                                </div>
                             </div>
-                            {displayPartOfSpeech && (
-                                <span className="inline-block mt-3 px-3 py-1 rounded-full bg-slate-100 text-xs font-black uppercase tracking-[0.2em] text-slate-500">
-                                    {displayPartOfSpeech}
-                                </span>
-                            )}
                         </div>
                         {displayDefinition && (
                             <div className="flex-1 min-w-[220px]">
@@ -93,17 +120,49 @@ const WordContextCard = ({ word, pinyin, metadata, knowledgeData }) => {
             <div className="space-y-4">
                 {combinedExamples.map((ex, idx) => (
                     <div key={idx} className="bg-white/80 p-5 rounded-2xl border border-white shadow-sm">
-                        <p className="text-2xl font-black text-slate-800 mb-1 leading-tight">
-                            {ex.cn}
-                        </p>
-                        <p className="text-sm font-bold text-slate-400 mb-3 tracking-wide uppercase">
-                            {ex.py}
-                        </p>
-                        <div className="py-2 px-4 bg-blue-50/50 rounded-lg inline-block">
-                            <p className="text-base font-bold text-blue-600 italic leading-snug">
-                                {ex.en}
+                        <div className="flex items-start justify-between gap-4">
+                            <p className="text-2xl font-black text-slate-800 leading-tight flex-1">
+                                {ex.cn}
                             </p>
+                            <div className="flex items-center gap-2 shrink-0">
+                                <button
+                                    onClick={() => playAudio(ex.cn)}
+                                    className="p-2 text-slate-300 hover:text-blue-600 transition-colors"
+                                >
+                                    <Volume2 size={18} />
+                                </button>
+                                <button
+                                    onClick={() => toggleExample(`current-${idx}`)}
+                                    className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors text-xs font-black uppercase tracking-[0.18em]"
+                                >
+                                    {expandedExamples[`current-${idx}`] ? <EyeOff size={14} /> : <Eye size={14} />}
+                                    {expandedExamples[`current-${idx}`] ? 'Hide' : 'Show'}
+                                </button>
+                            </div>
                         </div>
+                        <AnimatePresence initial={false}>
+                            {expandedExamples[`current-${idx}`] && (
+                                <motion.div
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: 'auto' }}
+                                    exit={{ opacity: 0, height: 0 }}
+                                    className="overflow-hidden"
+                                >
+                                    {ex.py && (
+                                        <p className="mt-3 text-sm font-bold text-slate-400 tracking-wide">
+                                            {formatPinyinDisplay(ex.py)}
+                                        </p>
+                                    )}
+                                    {ex.en && (
+                                        <div className="mt-3 py-2 px-4 bg-blue-50/50 rounded-lg inline-block">
+                                            <p className="text-base font-bold text-blue-600 italic leading-snug">
+                                                {ex.en}
+                                            </p>
+                                        </div>
+                                    )}
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </div>
                 ))}
             </div>
@@ -130,17 +189,45 @@ const WordContextCard = ({ word, pinyin, metadata, knowledgeData }) => {
                                     )}
                                 </div>
                                 <p className="text-base font-black text-slate-800 leading-snug">{h.definition}</p>
-                                {(h.example?.cn || h.example?.en) && (
-                                    <div className="mt-3 space-y-1.5">
-                                        {h.example?.cn && (
-                                            <p className="text-sm font-bold text-slate-700">{h.example.cn}</p>
-                                        )}
-                                        {h.example?.py && (
-                                            <p className="text-xs font-bold text-slate-400 uppercase tracking-wide">{h.example.py}</p>
-                                        )}
-                                        {h.example?.en && (
-                                            <p className="text-sm font-semibold italic text-blue-600">{h.example.en}</p>
-                                        )}
+                                {h.example?.cn && (
+                                    <div className="mt-3">
+                                        <div className="flex items-start justify-between gap-4">
+                                            <p className="text-sm font-bold text-slate-700 flex-1">{h.example.cn}</p>
+                                            <div className="flex items-center gap-2 shrink-0">
+                                                <button
+                                                    onClick={() => playAudio(h.example.cn)}
+                                                    className="p-1.5 text-slate-300 hover:text-blue-600 transition-colors"
+                                                >
+                                                    <Volume2 size={16} />
+                                                </button>
+                                                <button
+                                                    onClick={() => toggleExample(`history-${i}`)}
+                                                    className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors text-[10px] font-black uppercase tracking-[0.16em]"
+                                                >
+                                                    {expandedExamples[`history-${i}`] ? <EyeOff size={12} /> : <Eye size={12} />}
+                                                    {expandedExamples[`history-${i}`] ? 'Hide' : 'Show'}
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <AnimatePresence initial={false}>
+                                            {expandedExamples[`history-${i}`] && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, height: 0 }}
+                                                    animate={{ opacity: 1, height: 'auto' }}
+                                                    exit={{ opacity: 0, height: 0 }}
+                                                    className="overflow-hidden mt-2 space-y-1.5"
+                                                >
+                                                    {h.example?.py && (
+                                                        <p className="text-xs font-bold text-slate-400 tracking-wide">
+                                                            {formatPinyinDisplay(h.example.py)}
+                                                        </p>
+                                                    )}
+                                                    {h.example?.en && (
+                                                        <p className="text-sm font-semibold italic text-blue-600">{h.example.en}</p>
+                                                    )}
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
                                     </div>
                                 )}
                             </div>
@@ -162,7 +249,14 @@ export default function PracticeSection({ questions, isReview, onAllDone, userId
     const [knowledgeDetails, setKnowledgeDetails] = useState(null);
     
     const inputRef = useRef(null);
+    const lastAutoPlayedKeyRef = useRef('');
     const currentQuestion = questions[currentIndex];
+
+    const playAudio = (text) => {
+        if (!text) return;
+        const API_BASE = import.meta.env.VITE_API_BASE_URL;
+        new Audio(`${API_BASE}/study/tts?text=${encodeURIComponent(text)}`).play();
+    };
 
     useEffect(() => {
         const safeIndex = Number.isInteger(initialIndex)
@@ -174,6 +268,21 @@ export default function PracticeSection({ questions, isReview, onAllDone, userId
         setFeedback(null);
         setKnowledgeDetails(null);
     }, [initialIndex, questions]);
+
+    useEffect(() => {
+        if (!currentQuestion) return;
+        if (currentQuestion.question_type !== 'CN_TO_EN') return;
+
+        const questionKey = `${currentQuestion.item_id || currentQuestion.question_id || currentIndex}:${currentQuestion.original_text || ''}`;
+        if (lastAutoPlayedKeyRef.current === questionKey) return;
+
+        lastAutoPlayedKeyRef.current = questionKey;
+        const timer = setTimeout(() => {
+            playAudio(currentQuestion.original_text);
+        }, 250);
+
+        return () => clearTimeout(timer);
+    }, [currentQuestion, currentIndex]);
 
     useEffect(() => {
         if (!questions?.length || !userId || !courseId || !lessonId || isReview) return;

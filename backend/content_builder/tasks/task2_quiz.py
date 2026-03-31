@@ -11,7 +11,7 @@ class Task2QuizGenerator:
         self.memory_file = memory_dir / "global_vocab_memory.json"
         # 🚀 这里的 global_vocab 现在的结构是字典: { "单词": [ {词义1...}, {词义2...} ] }
         self.global_vocab = self._load_memory()
-        self.example_batch_size = max(1, int(os.getenv("CB_TASK2_EXAMPLE_BATCH_SIZE", "5")))
+        self.example_batch_size = max(1, int(os.getenv("CB_TASK2_EXAMPLE_BATCH_SIZE", "3")))
         self.word_quiz_batch_size = max(1, int(os.getenv("CB_TASK2_WORD_QUIZ_BATCH_SIZE", "4")))
 
     def _load_memory(self) -> dict:
@@ -233,6 +233,7 @@ class Task2QuizGenerator:
         【提取要求】
         1. 仅定位 PDF 中的“生词表/Vocabulary”板块。
         2. 仅提取字段：单词(word)、拼音(pinyin)、词性(part_of_speech)、英文定义(definition)。
+        3. 单词请提取全部，拼音格式为标准汉语拼音(即辅音大写、元音小写、并直接在元音上标注声调)，词性请使用英文全称(Noun, Adjective, Verb, etc.)，定义提取对应的英文。
         3. 如果当前 PDF 页面没有任何生词表，请直接返回 {"vocabulary": []}。
         4. 严禁自行添加任何 PDF 中不存在的单词（哪怕你觉得这一课应该学这些词）。
         
