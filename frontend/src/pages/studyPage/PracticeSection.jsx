@@ -25,7 +25,8 @@ const DEFAULT_SPEECH_CONFIG = {
     review_threshold: 0.78,
     min_asr_confidence: 0.6,
     max_attempts: 3,
-    max_duration_sec: 15
+    max_duration_sec: 15,
+    allow_paraphrase: true
 };
 
 const RECORDER_MIME_TYPES = [

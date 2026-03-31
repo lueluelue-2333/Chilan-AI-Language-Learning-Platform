@@ -279,11 +279,14 @@ async def evaluate_answer(req: EvaluateRequest):
         if not normalized_answers:
             raise HTTPException(status_code=400, detail="standard_answers is empty.")
 
-        effective_answer = (req.user_answer or "").strip()
         if input_mode == "speech":
-            effective_answer = (req.asr_text or effective_answer).strip()
-        if not effective_answer:
-            raise HTTPException(status_code=400, detail="Answer text is empty.")
+            effective_answer = (req.asr_text or "").strip()
+            if not effective_answer:
+                raise HTTPException(status_code=400, detail="asr_text is required when input_mode is 'speech'.")
+        else:
+            effective_answer = (req.user_answer or "").strip()
+            if not effective_answer:
+                raise HTTPException(status_code=400, detail="user_answer is empty.")
 
         audio_meta = req.audio_meta or {}
         asr_text_for_log = effective_answer if input_mode == "speech" else None

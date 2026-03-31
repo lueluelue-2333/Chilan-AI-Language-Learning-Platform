@@ -1,4 +1,5 @@
 import io
+import math
 import os
 import wave
 from typing import Optional, Dict, Any
@@ -9,6 +10,53 @@ class ASRService:
         self.provider = os.getenv("ASR_ACTIVE_PROVIDER", "openai").lower()
         self.max_audio_bytes = int(os.getenv("ASR_MAX_AUDIO_BYTES", str(10 * 1024 * 1024)))
         self.openai_model = os.getenv("ASR_OPENAI_MODEL", "whisper-1")
+
+    @staticmethod
+    def _to_optional_float(value: Any) -> Optional[float]:
+        try:
+            if value is None or value == "":
+                return None
+            return float(value)
+        except (TypeError, ValueError):
+            return None
+
+    @staticmethod
+    def _clamp_01(value: float) -> float:
+        return max(0.0, min(1.0, value))
+
+    @staticmethod
+    def _read_attr(obj: Any, key: str) -> Any:
+        if isinstance(obj, dict):
+            return obj.get(key)
+        return getattr(obj, key, None)
+
+    def _extract_confidence(self, response: Any) -> Optional[float]:
+        direct = self._to_optional_float(self._read_attr(response, "confidence"))
+        if direct is not None:
+            return self._clamp_01(direct)
+
+        segments = self._read_attr(response, "segments") or []
+        if not isinstance(segments, list):
+            return None
+
+        segment_conf = []
+        segment_avg_logprob = []
+        for seg in segments:
+            c = self._to_optional_float(self._read_attr(seg, "confidence"))
+            if c is not None:
+                segment_conf.append(self._clamp_01(c))
+                continue
+
+            lp = self._to_optional_float(self._read_attr(seg, "avg_logprob"))
+            if lp is not None:
+                # avg_logprob is in log space, typically <= 0. Convert to 0..1 probability.
+                segment_avg_logprob.append(self._clamp_01(math.exp(max(-8.0, min(0.0, lp)))))
+
+        if segment_conf:
+            return self._clamp_01(sum(segment_conf) / len(segment_conf))
+        if segment_avg_logprob:
+            return self._clamp_01(sum(segment_avg_logprob) / len(segment_avg_logprob))
+        return None
 
     def _estimate_duration_ms(
         self,
@@ -52,6 +100,7 @@ class ASRService:
         kwargs = {
             "model": self.openai_model,
             "file": file_obj,
+            "response_format": "verbose_json",
         }
         if language:
             kwargs["language"] = language
@@ -62,10 +111,11 @@ class ASRService:
         transcript = (getattr(response, "text", None) or "").strip()
         if not transcript:
             raise ValueError("ASR transcript is empty. Please retry recording.")
+        confidence = self._extract_confidence(response)
 
         return {
             "transcript": transcript,
-            "confidence": None,
+            "confidence": confidence,
             "provider": "openai",
             "model": self.openai_model,
         }

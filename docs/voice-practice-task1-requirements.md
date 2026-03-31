@@ -59,7 +59,8 @@
     "review_threshold": 0.78,
     "min_asr_confidence": 0.60,
     "max_attempts": 3,
-    "max_duration_sec": 15
+    "max_duration_sec": 15,
+    "allow_paraphrase": true
   }
 }
 ```

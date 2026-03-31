@@ -17,6 +17,14 @@ class Task2QuizGenerator:
         target_default = min(self.speech_quiz_max, 4)
         self.speech_quiz_target = int(os.getenv("CB_TASK2_SPEECH_QUIZ_TARGET", str(target_default)))
         self.speech_quiz_target = max(self.speech_quiz_min, min(self.speech_quiz_target, self.speech_quiz_max))
+        self.speech_allow_paraphrase = self._env_bool("VOICE_ALLOW_PARAPHRASE", True)
+
+    @staticmethod
+    def _env_bool(name: str, default: bool) -> bool:
+        raw = os.getenv(name)
+        if raw is None:
+            return default
+        return raw.strip().lower() in {"1", "true", "yes", "y", "on"}
 
     def _load_memory(self) -> dict:
         if self.memory_file.exists():
@@ -351,6 +359,7 @@ class Task2QuizGenerator:
             "min_asr_confidence": float(os.getenv("VOICE_MIN_ASR_CONFIDENCE", "0.60")),
             "max_attempts": int(os.getenv("VOICE_MAX_ATTEMPTS", "3")),
             "max_duration_sec": int(os.getenv("VOICE_MAX_DURATION_SEC", "15")),
+            "allow_paraphrase": self.speech_allow_paraphrase,
         }
 
     def _select_speech_materials(self, combined_practice: list, max_items: int) -> list:
