@@ -1,0 +1,96 @@
+import io
+import os
+import wave
+from typing import Optional, Dict, Any
+
+
+class ASRService:
+    def __init__(self):
+        self.provider = os.getenv("ASR_ACTIVE_PROVIDER", "openai").lower()
+        self.max_audio_bytes = int(os.getenv("ASR_MAX_AUDIO_BYTES", str(10 * 1024 * 1024)))
+        self.openai_model = os.getenv("ASR_OPENAI_MODEL", "whisper-1")
+
+    def _estimate_duration_ms(
+        self,
+        audio_bytes: bytes,
+        filename: str = "",
+        content_type: str = "",
+    ) -> Optional[int]:
+        lower_name = (filename or "").lower()
+        lower_type = (content_type or "").lower()
+        is_wav = lower_name.endswith(".wav") or "wav" in lower_type or "wave" in lower_type
+        if not is_wav:
+            return None
+
+        try:
+            with wave.open(io.BytesIO(audio_bytes), "rb") as wav_file:
+                frame_rate = wav_file.getframerate()
+                frame_count = wav_file.getnframes()
+                if frame_rate <= 0:
+                    return None
+                return int(frame_count / frame_rate * 1000)
+        except Exception:
+            return None
+
+    def _transcribe_with_openai(
+        self,
+        audio_bytes: bytes,
+        filename: str,
+        language: Optional[str],
+        prompt: Optional[str],
+    ) -> Dict[str, Any]:
+        api_key = os.getenv("ASR_OPENAI_API_KEY") or os.getenv("OPENAI_API_KEY")
+        if not api_key:
+            raise RuntimeError("OpenAI ASR key is missing. Set ASR_OPENAI_API_KEY or OPENAI_API_KEY.")
+
+        from openai import OpenAI
+
+        client = OpenAI(api_key=api_key)
+        file_obj = io.BytesIO(audio_bytes)
+        file_obj.name = filename or "speech.webm"
+
+        kwargs = {
+            "model": self.openai_model,
+            "file": file_obj,
+        }
+        if language:
+            kwargs["language"] = language
+        if prompt:
+            kwargs["prompt"] = prompt
+
+        response = client.audio.transcriptions.create(**kwargs)
+        transcript = (getattr(response, "text", None) or "").strip()
+        if not transcript:
+            raise ValueError("ASR transcript is empty. Please retry recording.")
+
+        return {
+            "transcript": transcript,
+            "confidence": None,
+            "provider": "openai",
+            "model": self.openai_model,
+        }
+
+    def transcribe(
+        self,
+        audio_bytes: bytes,
+        filename: str = "",
+        content_type: str = "",
+        language: Optional[str] = None,
+        prompt: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        if not audio_bytes:
+            raise ValueError("Audio payload is empty.")
+        if len(audio_bytes) > self.max_audio_bytes:
+            raise ValueError(f"Audio file is too large (>{self.max_audio_bytes} bytes).")
+
+        if self.provider != "openai":
+            raise RuntimeError(f"Unsupported ASR provider: {self.provider}")
+
+        result = self._transcribe_with_openai(
+            audio_bytes=audio_bytes,
+            filename=filename,
+            language=language,
+            prompt=prompt,
+        )
+        result["duration_ms"] = self._estimate_duration_ms(audio_bytes, filename, content_type)
+        return result
