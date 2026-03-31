@@ -1,4 +1,4 @@
-import os, re, random, httpx, jwt, smtplib
+import os, re, random, httpx, jwt, smtplib, traceback
 from email.mime.text import MIMEText
 from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel, EmailStr
@@ -68,14 +68,18 @@ def _send_email_via_smtp(to_email: str, subject: str, html_content: str):
         raise HTTPException(status_code=500, detail="SMTP mail config missing")
 
     try:
+        print(f"📨 [SMTP] Sending auth email to={to_email} host={host} port={port} from={os.getenv('MAIL_FROM')}")
         smtp_cls = smtplib.SMTP_SSL if use_ssl else smtplib.SMTP
         with smtp_cls(host, port) as server:
             if use_tls and not use_ssl:
                 server.starttls()
             server.login(username, password)
             server.send_message(msg)
-    except Exception:
-        raise HTTPException(status_code=500, detail="Mail failed")
+        print(f"✅ [SMTP] Mail sent successfully to={to_email}")
+    except Exception as e:
+        print(f"❌ [SMTP] Mail send failed to={to_email}: {repr(e)}")
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Mail failed (SMTP): {type(e).__name__}")
 
 def _send_email_via_resend(to_email: str, subject: str, html_content: str):
     api_key = os.getenv("RESEND_API_KEY")
@@ -95,6 +99,10 @@ def _send_email_via_resend(to_email: str, subject: str, html_content: str):
         payload["audience"] = audience
 
     try:
+        print(
+            f"📨 [Resend] Sending auth email to={to_email} from={from_email} "
+            f"provider=resend audience={audience or 'none'}"
+        )
         response = httpx.post(
             "https://api.resend.com/emails",
             headers={
@@ -105,8 +113,20 @@ def _send_email_via_resend(to_email: str, subject: str, html_content: str):
             timeout=20.0,
         )
         response.raise_for_status()
-    except Exception:
-        raise HTTPException(status_code=500, detail="Mail failed")
+        print(f"✅ [Resend] Mail sent successfully to={to_email} response={response.text}")
+    except httpx.HTTPStatusError as e:
+        response_text = e.response.text if e.response is not None else ""
+        status_code = e.response.status_code if e.response is not None else "unknown"
+        print(
+            f"❌ [Resend] HTTP error sending to={to_email} status={status_code} "
+            f"body={response_text}"
+        )
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Mail failed (Resend HTTP {status_code})")
+    except Exception as e:
+        print(f"❌ [Resend] Send failed to={to_email}: {repr(e)}")
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Mail failed (Resend): {type(e).__name__}")
 
 # --- 统一的高颜值邮件模板系统 ---
 def send_auth_email(to_email: str, code: str, email_type: str = "signup", lang: str = "zh"):
@@ -137,6 +157,10 @@ def send_auth_email(to_email: str, code: str, email_type: str = "signup", lang: 
     </html>
     """
     provider = _get_mail_provider()
+    print(
+        f"🔐 [AuthMail] provider={provider} email_type={email_type} "
+        f"lang={lang} to={to_email}"
+    )
     if provider == "resend":
         _send_email_via_resend(to_email, t['subject'], content)
     else:

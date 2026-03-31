@@ -78,8 +78,22 @@ export default function Auth() {
                 setTimeout(() => navigate('/'), 2000); 
             }
         } catch (err) {
-            // 注意：axios 错误响应在 apiClient 中依然通过 err.response 访问
-            setError(err.response?.data?.detail || "Operation failed");
+            const status = err.response?.status;
+            const detail = err.response?.data?.detail;
+            const message = err.message;
+            console.error("Auth request failed:", {
+                step,
+                mode,
+                status,
+                detail,
+                message,
+                response: err.response?.data,
+            });
+            setError(
+                detail
+                    ? `${detail}${status ? ` (HTTP ${status})` : ''}`
+                    : `Operation failed${status ? ` (HTTP ${status})` : ''}`
+            );
         } finally {
             setIsLoading(false);
         }
@@ -98,7 +112,17 @@ export default function Auth() {
                 setStep('success');
                 setTimeout(() => navigate('/'), 2000);
             } catch (err) { 
-                setError("Google Auth Failed"); 
+                console.error("Google auth failed:", {
+                    status: err.response?.status,
+                    detail: err.response?.data?.detail,
+                    message: err.message,
+                    response: err.response?.data,
+                });
+                setError(
+                    err.response?.data?.detail
+                        ? `${err.response.data.detail}${err.response?.status ? ` (HTTP ${err.response.status})` : ''}`
+                        : "Google Auth Failed"
+                ); 
             } finally { 
                 setIsLoading(false); 
             }
