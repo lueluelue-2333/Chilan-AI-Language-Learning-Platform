@@ -15,12 +15,21 @@ cors_origins_str = os.getenv("CORS_ORIGINS", "")
 # 2. 将字符串转为列表，并去掉多余空格
 origins = [o.strip() for o in cors_origins_str.split(",") if o.strip()]
 
+# 线上常用域名兜底，避免部署环境漏配 CORS_ORIGINS 时注册/登录直接被浏览器拦截
+production_origins = [
+    "https://www.chilanlearning.com",
+    "https://chilanlearning.com",
+]
+
 # 3. 强行加入本地开发地址（确保本地开发永远可用）
 local_origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
 ]
-origins.extend(local_origins)
+
+for origin in production_origins + local_origins:
+    if origin not in origins:
+        origins.append(origin)
 
 # 🌟 最终的 origins 列表会包含线上所有域名 + 本地 5173
 app.add_middleware(
