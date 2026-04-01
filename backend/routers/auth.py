@@ -78,19 +78,40 @@ def build_device_info(user_agent: str) -> str:
     ua = (user_agent or "").lower()
     if not ua:
         return "Unknown device"
+    platform = "Unknown device"
+    browser = "Unknown browser"
+
     if "iphone" in ua:
-        return "iPhone"
-    if "ipad" in ua:
-        return "iPad"
-    if "android" in ua:
-        return "Android device"
-    if "windows" in ua:
-        return "Windows device"
-    if "mac os x" in ua or "macintosh" in ua:
-        return "Mac device"
-    if "linux" in ua:
-        return "Linux device"
-    return "Browser device"
+        platform = "iPhone"
+    elif "ipad" in ua:
+        platform = "iPad"
+    elif "android" in ua:
+        platform = "Android"
+    elif "windows" in ua:
+        platform = "Windows"
+    elif "mac os x" in ua or "macintosh" in ua:
+        platform = "macOS"
+    elif "linux" in ua:
+        platform = "Linux"
+
+    if "edg/" in ua:
+        browser = "Edge"
+    elif "opr/" in ua or "opera" in ua:
+        browser = "Opera"
+    elif "chrome/" in ua and "edg/" not in ua:
+        browser = "Chrome"
+    elif "firefox/" in ua:
+        browser = "Firefox"
+    elif "safari/" in ua and "chrome/" not in ua and "chromium/" not in ua:
+        browser = "Safari"
+
+    if platform == "Unknown device" and browser == "Unknown browser":
+        return "Browser device"
+    if browser == "Unknown browser":
+        return platform
+    if platform == "Unknown device":
+        return browser
+    return f"{platform} · {browser}"
 
 def record_login_event(db, user_id: str, provider: str, request: Request):
     cur = db.cursor()
