@@ -61,7 +61,15 @@ def resolve_login_provider(password_hash: str) -> str:
 def extract_client_ip(request: Request) -> str:
     forwarded_for = request.headers.get("x-forwarded-for")
     if forwarded_for:
-        return forwarded_for.split(",")[0].strip()
+        first_ip = forwarded_for.split(",")[0].strip()
+        if first_ip:
+            return first_ip
+    true_client_ip = request.headers.get("true-client-ip")
+    if true_client_ip:
+        return true_client_ip.strip()
+    cf_connecting_ip = request.headers.get("cf-connecting-ip")
+    if cf_connecting_ip:
+        return cf_connecting_ip.strip()
     if request.client and request.client.host:
         return request.client.host
     return ""
