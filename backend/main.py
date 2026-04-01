@@ -64,15 +64,22 @@ class EnrollReq(BaseModel):
 @app.get("/courses")
 async def list_all_courses(db=Depends(get_db)):
     cur = db.cursor()
-    cur.execute("SELECT course_id, name, category, cover_color FROM courses")
-    return [{"id": r[0], "name": r[1], "category": r[2], "color": r[3]} for r in cur.fetchall()]
+    cur.execute("SELECT course_id, name, category, target_language, source_language FROM courses")
+    return [{
+        "id": r[0],
+        "name": r[1],
+        "category": r[2],
+        "target_language": r[3],
+        "source_language": r[4],
+    } for r in cur.fetchall()]
 
 @app.get("/my-courses/{user_id}")
 async def get_my_courses(user_id: str, db=Depends(get_db)):
     cur = db.cursor()
     # 🌟 关联查询用户课程及 FSRS 掌握进度
     query = """
-        SELECT c.course_id, c.name, c.category, c.cover_color, 
+        SELECT c.course_id, c.name, c.category,
+               c.target_language, c.source_language,
                COUNT(p.question_id) FILTER (WHERE p.is_mastered = TRUE) as mastered_count
         FROM courses c
         JOIN user_courses uc ON c.course_id = uc.course_id
@@ -82,7 +89,14 @@ async def get_my_courses(user_id: str, db=Depends(get_db)):
         GROUP BY c.course_id;
     """
     cur.execute(query, (user_id, user_id))
-    return [{"id": r[0], "name": r[1], "category": r[2], "color": r[3], "mastered": r[4]} for r in cur.fetchall()]
+    return [{
+        "id": r[0],
+        "name": r[1],
+        "category": r[2],
+        "target_language": r[3],
+        "source_language": r[4],
+        "mastered": r[5],
+    } for r in cur.fetchall()]
 
 @app.post("/courses/enroll")
 async def enroll_course(req: EnrollReq, db=Depends(get_db)):

@@ -2,8 +2,8 @@
   "你": [
     {
       "definition": "you",
-      "pinyin": "nǐ",
-      "part_of_speech": "pr",
+      "pinyin": "Nǐ",
+      "part_of_speech": "Pronoun",
       "example": {
         "cn": "请问, 你贵姓?",
         "py": "Qǐng wèn, nǐ guì xìng?",
@@ -15,8 +15,8 @@
   "好": [
     {
       "definition": "fine, good, nice, OK, it's settled",
-      "pinyin": "hǎo",
-      "part_of_speech": "adj",
+      "pinyin": "Hǎo",
+      "part_of_speech": "Adjective",
       "example": {
         "cn": "你好！",
         "py": "nǐ hǎo",
@@ -28,8 +28,8 @@
   "请": [
     {
       "definition": "please (polite form of request), to treat or to invite (somebody)",
-      "pinyin": "qǐng",
-      "part_of_speech": "v",
+      "pinyin": "Qǐng",
+      "part_of_speech": "Verb",
       "example": {
         "cn": "请问, 你贵姓?",
         "py": "Qǐng wèn, nǐ guì xìng?",
@@ -41,10 +41,10 @@
   "问": [
     {
       "definition": "to ask (a question)",
-      "pinyin": "wèn",
-      "part_of_speech": "v",
+      "pinyin": "Wèn",
+      "part_of_speech": "Verb",
       "example": {
-        "cn": "请问,你贵姓？",
+        "cn": "请问，你贵姓？",
         "py": "qǐngwèn nǐ guìxìng",
         "en": "Excuse me, what is your surname?"
       },
@@ -54,12 +54,12 @@
   "贵": [
     {
       "definition": "honorable, expensive",
-      "pinyin": "guì",
-      "part_of_speech": "adj",
+      "pinyin": "Guì",
+      "part_of_speech": "Adjective",
       "example": {
-        "cn": "你贵姓?",
-        "py": "Nǐ guì xìng?",
-        "en": "What is your family name? (Lit. Your honorable family name is...?)"
+        "cn": "请问，你贵姓？",
+        "py": "qǐngwèn nǐ guìxìng",
+        "en": "Excuse me, what is your surname?"
       },
       "lesson_id": 101
     }
@@ -67,8 +67,8 @@
   "姓": [
     {
       "definition": "(one's) family name is . . . ; family name [See Grammar 1.]",
-      "pinyin": "xìng",
-      "part_of_speech": "v/n",
+      "pinyin": "Xìng",
+      "part_of_speech": "Verb/Noun",
       "example": {
         "cn": "我姓李。",
         "py": "Wǒ xìng Lǐ.",
@@ -80,12 +80,12 @@
   "我": [
     {
       "definition": "I, me",
-      "pinyin": "wǒ",
-      "part_of_speech": "pr",
+      "pinyin": "Wǒ",
+      "part_of_speech": "Pronoun",
       "example": {
-        "cn": "我姓李。你呢？",
-        "py": "wǒ xìng lǐ nǐ ne",
-        "en": "My surname is Li. And you?"
+        "cn": "我叫王朋。",
+        "py": "Wǒ jiào Wáng Péng.",
+        "en": "My name is Wang Peng."
       },
       "lesson_id": 101
     }
@@ -93,8 +93,8 @@
   "呢": [
     {
       "definition": "(question particle) [See Grammar 2.]",
-      "pinyin": "ne",
-      "part_of_speech": "qp",
+      "pinyin": "Ne",
+      "part_of_speech": "Question Particle",
       "example": {
         "cn": "我姓李。你呢？",
         "py": "wǒ xìng lǐ nǐ ne",
@@ -106,12 +106,12 @@
   "小姐": [
     {
       "definition": "Miss, young lady",
-      "pinyin": "xiǎojiě",
-      "part_of_speech": "n",
+      "pinyin": "Xiǎojiě",
+      "part_of_speech": "Noun",
       "example": {
-        "cn": "我姓王。李小姐,你叫什么名字？",
-        "py": "wǒ xìng wáng lǐ xiǎojiě nǐ jiào shénme míngzi",
-        "en": "My surname is Wang. Miss Li, what is your name?"
+        "cn": "李小姐, 你叫什么名字?",
+        "py": "Lǐ xiǎojiě, nǐ jiào shénme míngzi?",
+        "en": "Miss Li, what is your name?"
       },
       "lesson_id": 101
     }
@@ -119,10 +119,10 @@
   "叫": [
     {
       "definition": "to be called, to call [See Grammar 3.]",
-      "pinyin": "jiào",
-      "part_of_speech": "v",
+      "pinyin": "Jiào",
+      "part_of_speech": "Verb",
       "example": {
-        "cn": "我姓王。李小姐,你叫什么名字？",
+        "cn": "我姓王。李小姐，你叫什么名字？",
         "py": "wǒ xìng wáng lǐ xiǎojiě nǐ jiào shénme míngzi",
         "en": "My surname is Wang. Miss Li, what is your name?"
       },
@@ -132,8 +132,8 @@
   "什么": [
     {
       "definition": "what",
-      "pinyin": "shénme",
-      "part_of_speech": "qpr",
+      "pinyin": "Shénme",
+      "part_of_speech": "Question Pronoun",
       "example": {
         "cn": "你叫什么名字？",
         "py": "Nǐ jiào shénme míngzi?",
@@ -145,8 +145,8 @@
   "名字": [
     {
       "definition": "name",
-      "pinyin": "míngzi",
-      "part_of_speech": "n",
+      "pinyin": "Míngzi",
+      "part_of_speech": "Noun",
       "example": {
         "cn": "你叫什么名字？",
         "py": "Nǐ jiào shénme míngzi?",
@@ -158,10 +158,10 @@
   "先生": [
     {
       "definition": "Mr., husband, teacher",
-      "pinyin": "xiānsheng",
-      "part_of_speech": "n",
+      "pinyin": "Xiānsheng",
+      "part_of_speech": "Noun",
       "example": {
-        "cn": "我叫李友。王先生,你叫什么名字？",
+        "cn": "我叫李友。王先生，你叫什么名字？",
         "py": "wǒ jiào lǐ yǒu wáng xiānsheng nǐ jiào shénme míngzi",
         "en": "My name is Li You. Mr. Wang, what is your name?"
       },
@@ -172,11 +172,11 @@
     {
       "definition": "(a personal name)",
       "pinyin": "Lǐ Yǒu",
-      "part_of_speech": "pn",
+      "part_of_speech": "Proper Noun",
       "example": {
-        "cn": "我叫李友。王先生,你叫什么名字？",
-        "py": "wǒ jiào lǐ yǒu wáng xiānsheng nǐ jiào shénme míngzi",
-        "en": "My name is Li You. Mr. Wang, what is your name?"
+        "cn": "我叫李友。",
+        "py": "Wǒ jiào Lǐ Yǒu.",
+        "en": "My name is Li You."
       },
       "lesson_id": 101
     }
@@ -184,8 +184,8 @@
   "李": [
     {
       "definition": "(a family name); plum",
-      "pinyin": "lǐ",
-      "part_of_speech": "pn/n",
+      "pinyin": "Lǐ",
+      "part_of_speech": "Proper Noun/Noun",
       "example": {
         "cn": "我姓李。",
         "py": "Wǒ xìng Lǐ.",
@@ -198,11 +198,11 @@
     {
       "definition": "(a personal name)",
       "pinyin": "Wáng Péng",
-      "part_of_speech": "pn",
+      "part_of_speech": "Proper Noun",
       "example": {
-        "cn": "我叫王朋。",
-        "py": "Wǒ jiào Wáng Péng.",
-        "en": "My name is Wang Peng."
+        "cn": "我叫王朋, 你呢?",
+        "py": "Wǒ jiào Wáng Péng, nǐ ne?",
+        "en": "My name is Wang Peng. How about you?"
       },
       "lesson_id": 101
     }
@@ -210,8 +210,8 @@
   "王": [
     {
       "definition": "(a family name); king",
-      "pinyin": "wáng",
-      "part_of_speech": "pn/n",
+      "pinyin": "Wáng",
+      "part_of_speech": "Proper Noun/Noun",
       "example": {
         "cn": "我姓王。",
         "py": "Wǒ xìng Wáng.",
@@ -222,9 +222,9 @@
   ],
   "是": [
     {
-      "definition": "to be [See Grammar 5.]",
+      "definition": "to be",
       "pinyin": "shì",
-      "part_of_speech": "v",
+      "part_of_speech": "Verb",
       "example": {
         "cn": "李友是学生。",
         "py": "Lǐ Yōu shì xuésheng.",
@@ -237,23 +237,23 @@
     {
       "definition": "teacher",
       "pinyin": "lǎoshī",
-      "part_of_speech": "n",
+      "part_of_speech": "Noun",
       "example": {
-        "cn": "你是老师吗?",
-        "py": "Nǐ shì lǎoshī ma?",
-        "en": "Are you a teacher?"
+        "cn": "我是老师。",
+        "py": "Wǒ shì lǎoshī.",
+        "en": "I am a teacher."
       },
       "lesson_id": 102
     }
   ],
   "吗": [
     {
-      "definition": "(question particle) [See Grammar 6.]",
+      "definition": "(question particle)",
       "pinyin": "ma",
-      "part_of_speech": "qp",
+      "part_of_speech": "Question Particle",
       "example": {
         "cn": "王先生,你是老师吗？",
-        "py": "Wáng xiānsheng nǐ shì lǎoshī ma",
+        "py": "wáng xiānsheng nǐ shì lǎoshī ma",
         "en": "Mr. Wang, are you a teacher?"
       },
       "lesson_id": 102
@@ -261,9 +261,9 @@
   ],
   "不": [
     {
-      "definition": "not, no [See Grammar 7.]",
+      "definition": "not, no",
       "pinyin": "bù",
-      "part_of_speech": "adv",
+      "part_of_speech": "Adverb",
       "example": {
         "cn": "我不是老师。",
         "py": "Wǒ bú shì lǎoshī.",
@@ -276,20 +276,20 @@
     {
       "definition": "student",
       "pinyin": "xuésheng",
-      "part_of_speech": "n",
+      "part_of_speech": "Noun",
       "example": {
-        "cn": "我是学生。",
-        "py": "wǒ shì xuésheng.",
-        "en": "I am a student."
+        "cn": "李友是学生。",
+        "py": "Lǐ Yōu shì xuésheng.",
+        "en": "Li You is a student."
       },
       "lesson_id": 102
     }
   ],
   "也": [
     {
-      "definition": "too, also [See Grammar 8.]",
+      "definition": "too, also",
       "pinyin": "yě",
-      "part_of_speech": "adv",
+      "part_of_speech": "Adverb",
       "example": {
         "cn": "我也是学生。",
         "py": "Wǒ yě shì xuésheng.",
@@ -302,11 +302,11 @@
     {
       "definition": "people, person",
       "pinyin": "rén",
-      "part_of_speech": "n",
+      "part_of_speech": "Noun",
       "example": {
         "cn": "我也是学生。你是中国人吗？",
-        "py": "wǒ yě shì xuésheng nǐ shì Zhōngguó rén ma",
-        "en": "I am a student, too. Are you Chinese?"
+        "py": "wǒ yě shì xué sheng nǐ shì zhōng guó rén ma",
+        "en": "I'm a student, too. Are you Chinese?"
       },
       "lesson_id": 102
     }
@@ -315,11 +315,11 @@
     {
       "definition": "China",
       "pinyin": "Zhōngguó",
-      "part_of_speech": "pn",
+      "part_of_speech": "Proper Noun",
       "example": {
         "cn": "我也是学生。你是中国人吗？",
-        "py": "wǒ yě shì xuésheng nǐ shì Zhōngguó rén ma",
-        "en": "I am a student, too. Are you Chinese?"
+        "py": "wǒ yě shì xué sheng nǐ shì zhōng guó rén ma",
+        "en": "I'm a student, too. Are you Chinese?"
       },
       "lesson_id": 102
     }
@@ -328,11 +328,11 @@
     {
       "definition": "Beijing",
       "pinyin": "Běijīng",
-      "part_of_speech": "pn",
+      "part_of_speech": "Proper Noun",
       "example": {
-        "cn": "是,我是北京人。你是美国人吗？",
-        "py": "shì wǒ shì běi jīng rén nǐ shì měi guó rén ma",
-        "en": "Yes, I am from Beijing. Are you American?"
+        "cn": "我不是北京人。",
+        "py": "Wǒ bú shì Běijīng rén.",
+        "en": "I am not from Beijing."
       },
       "lesson_id": 102
     }
@@ -341,7 +341,7 @@
     {
       "definition": "America",
       "pinyin": "Měiguó",
-      "part_of_speech": "pn",
+      "part_of_speech": "Proper Noun",
       "example": {
         "cn": "你是美国人吗?",
         "py": "Nǐ shì Měiguó rén ma?",
@@ -353,534 +353,14 @@
   "纽约": [
     {
       "definition": "New York",
-      "pinyin": "Niŭyuē",
-      "part_of_speech": "pn",
+      "pinyin": "Niǔyuē",
+      "part_of_speech": "Proper Noun",
       "example": {
-        "cn": "你不是纽约人, 我也不是纽约人。",
-        "py": "Nǐ bú shì Niǔyuē rén, wǒ yě bú shì Niǔyuē rén.",
-        "en": "You are not from New York. I am not from New York, either."
+        "cn": "是，我是纽约人。",
+        "py": "shì wǒ shì niǔ yuē rén",
+        "en": "Yes, I'm from New York."
       },
       "lesson_id": 102
-    }
-  ],
-  "那": [
-    {
-      "definition": "that",
-      "pinyin": "nà",
-      "part_of_speech": "pr",
-      "example": {
-        "cn": "那个女孩子是李友。",
-        "py": "Nà ge nǚ háizi shì Lǐ Yǒu.",
-        "en": "That girl is Li You."
-      },
-      "lesson_id": 201
-    }
-  ],
-  "的": [
-    {
-      "definition": "(a possessive or descriptive particle) [See Grammar 1.]",
-      "pinyin": "de",
-      "part_of_speech": "p",
-      "example": {
-        "cn": "",
-        "py": "",
-        "en": ""
-      },
-      "lesson_id": 201
-    }
-  ],
-  "照片": [
-    {
-      "definition": "picture, photo",
-      "pinyin": "zhàopiàn",
-      "part_of_speech": "n",
-      "example": {
-        "cn": "",
-        "py": "",
-        "en": ""
-      },
-      "lesson_id": 201
-    }
-  ],
-  "这": [
-    {
-      "definition": "this",
-      "pinyin": "zhè",
-      "part_of_speech": "pr",
-      "example": {
-        "cn": "这是谁?",
-        "py": "Zhè shì shéi?",
-        "en": "Who is this?"
-      },
-      "lesson_id": 201
-    }
-  ],
-  "爸爸": [
-    {
-      "definition": "father, dad",
-      "pinyin": "bàba",
-      "part_of_speech": "n",
-      "example": {
-        "cn": "",
-        "py": "",
-        "en": ""
-      },
-      "lesson_id": 201
-    }
-  ],
-  "妈妈": [
-    {
-      "definition": "mother, mom",
-      "pinyin": "māma",
-      "part_of_speech": "n",
-      "example": {
-        "cn": "是。这是我爸爸，这是我妈妈。",
-        "py": "Shì. Zhè shì wǒ bàba, zhè shì wǒ māma.",
-        "en": "Yes. This is my dad, this is my mom."
-      },
-      "lesson_id": 201
-    }
-  ],
-  "个": [
-    {
-      "definition": "(measure word for many common everyday objects) [See Grammar 2.]",
-      "pinyin": "gè/ge",
-      "part_of_speech": "m",
-      "example": {
-        "cn": "",
-        "py": "",
-        "en": ""
-      },
-      "lesson_id": 201
-    }
-  ],
-  "女": [
-    {
-      "definition": "female",
-      "pinyin": "nǚ",
-      "part_of_speech": "adj",
-      "example": {
-        "cn": "",
-        "py": "",
-        "en": ""
-      },
-      "lesson_id": 201
-    }
-  ],
-  "孩子": [
-    {
-      "definition": "child",
-      "pinyin": "háizi",
-      "part_of_speech": "n",
-      "example": {
-        "cn": "",
-        "py": "",
-        "en": ""
-      },
-      "lesson_id": 201
-    }
-  ],
-  "谁": [
-    {
-      "definition": "who, whom [See Grammar 3.]",
-      "pinyin": "shéi",
-      "part_of_speech": "qpr",
-      "example": {
-        "cn": "这个女孩子是谁？",
-        "py": "Zhè ge nǚ háizi shì shéi?",
-        "en": "Who is this girl?"
-      },
-      "lesson_id": 201
-    }
-  ],
-  "她": [
-    {
-      "definition": "she, her",
-      "pinyin": "tā",
-      "part_of_speech": "pr",
-      "example": {
-        "cn": "",
-        "py": "",
-        "en": ""
-      },
-      "lesson_id": 201
-    }
-  ],
-  "姐姐": [
-    {
-      "definition": "older sister",
-      "pinyin": "jiějie",
-      "part_of_speech": "n",
-      "example": {
-        "cn": "高文中有姐姐。",
-        "py": "Gāo Wénzhōng yǒu jiějie.",
-        "en": "Gao Wenzhong has an older sister."
-      },
-      "lesson_id": 201
-    }
-  ],
-  "男": [
-    {
-      "definition": "male",
-      "pinyin": "nán",
-      "part_of_speech": "adj",
-      "example": {
-        "cn": "那个男学生",
-        "py": "nà ge nán xuésheng",
-        "en": "that male student"
-      },
-      "lesson_id": 201
-    }
-  ],
-  "弟弟": [
-    {
-      "definition": "younger brother",
-      "pinyin": "dìdi",
-      "part_of_speech": "n",
-      "example": {
-        "cn": "王先生有弟弟吗?",
-        "py": "Wáng xiānsheng yǒu dìdi ma?",
-        "en": "Does Mr. Wang have a younger brother?"
-      },
-      "lesson_id": 201
-    }
-  ],
-  "他": [
-    {
-      "definition": "he, him",
-      "pinyin": "tā",
-      "part_of_speech": "pr",
-      "example": {
-        "cn": "",
-        "py": "",
-        "en": ""
-      },
-      "lesson_id": 201
-    }
-  ],
-  "大哥": [
-    {
-      "definition": "eldest/oldest brother",
-      "pinyin": "dàgē",
-      "part_of_speech": "n",
-      "example": {
-        "cn": "",
-        "py": "",
-        "en": ""
-      },
-      "lesson_id": 201
-    }
-  ],
-  "儿子": [
-    {
-      "definition": "son",
-      "pinyin": "érzi",
-      "part_of_speech": "n",
-      "example": {
-        "cn": "",
-        "py": "",
-        "en": ""
-      },
-      "lesson_id": 201
-    }
-  ],
-  "有": [
-    {
-      "definition": "to have, to exist [See Grammar 4 and Grammar 5.]",
-      "pinyin": "yǒu",
-      "part_of_speech": "v",
-      "example": {
-        "cn": "",
-        "py": "",
-        "en": ""
-      },
-      "lesson_id": 201
-    }
-  ],
-  "女儿": [
-    {
-      "definition": "daughter",
-      "pinyin": "nǚ'ér",
-      "part_of_speech": "n",
-      "example": {
-        "cn": "",
-        "py": "",
-        "en": ""
-      },
-      "lesson_id": 201
-    }
-  ],
-  "没": [
-    {
-      "definition": "not",
-      "pinyin": "méi",
-      "part_of_speech": "adv",
-      "example": {
-        "cn": "",
-        "py": "",
-        "en": ""
-      },
-      "lesson_id": 201
-    }
-  ],
-  "高文中": [
-    {
-      "definition": "(a personal name)",
-      "pinyin": "Gāo Wénzhōng",
-      "part_of_speech": "pn",
-      "example": {
-        "cn": "",
-        "py": "",
-        "en": ""
-      },
-      "lesson_id": 201
-    }
-  ],
-  "高": [
-    {
-      "definition": "(a family name); tall, high",
-      "pinyin": "gāo",
-      "part_of_speech": "pn/adj",
-      "example": {
-        "cn": "",
-        "py": "",
-        "en": ""
-      },
-      "lesson_id": 201
-    }
-  ],
-  "家": [
-    {
-      "definition": "family, home",
-      "pinyin": "jiā",
-      "part_of_speech": "n",
-      "example": {
-        "cn": "我家有五口人。",
-        "py": "Wǒ jiā yǒu wǔ kǒu rén.",
-        "en": "There are five people in my family."
-      },
-      "lesson_id": 202
-    }
-  ],
-  "几": [
-    {
-      "definition": "how many, some, a few",
-      "pinyin": "jǐ",
-      "part_of_speech": "nu",
-      "example": {
-        "cn": "白英爱,你家有几口人?",
-        "py": "Bái Yīng'ài nǐ jiā yǒu jǐ kǒu rén",
-        "en": "Bai Ying'ai, how many people are in your family?"
-      },
-      "lesson_id": 202
-    }
-  ],
-  "口": [
-    {
-      "definition": "(measure word for number of family members)",
-      "pinyin": "kǒu",
-      "part_of_speech": "m",
-      "example": {
-        "cn": "我家有五口人。",
-        "py": "Wǒ jiā yǒu wǔ kǒu rén.",
-        "en": "There are five people in my family."
-      },
-      "lesson_id": 202
-    }
-  ],
-  "哥哥": [
-    {
-      "definition": "older brother",
-      "pinyin": "gēge",
-      "part_of_speech": "n",
-      "example": {
-        "cn": "我家有六口人,我爸爸、我妈妈、一个哥哥、两个妹妹和我。李友,你家有几口人?",
-        "py": "wǒ jiā yǒu liù kǒu rén wǒ bàba wǒ māma yí ge gēge liǎng ge mèimei hé wǒ Lǐ Yǒu nǐ jiā yǒu jǐ kǒu rén",
-        "en": "There are six people in my family: my dad, my mom, an older brother, two younger sisters, and me. Li You, how many people are in your family?"
-      },
-      "lesson_id": 202
-    }
-  ],
-  "两": [
-    {
-      "definition": "two, a couple of [See Grammar 6.]",
-      "pinyin": "liǎng",
-      "part_of_speech": "nu",
-      "example": {
-        "cn": "小高家有两个大学生。",
-        "py": "Xiǎo Gāo jiā yǒu liǎng ge dàxuéshēng.",
-        "en": "There are two college students in Little Gao's family."
-      },
-      "lesson_id": 202
-    }
-  ],
-  "妹妹": [
-    {
-      "definition": "younger sister",
-      "pinyin": "mèimei",
-      "part_of_speech": "n",
-      "example": {
-        "cn": "王朋和白英爱都有妹妹。",
-        "py": "Wáng Péng hé Bái Yīng'ài dōu yǒu mèimei.",
-        "en": "Both Wang Peng and Bai Ying'ai have younger sisters."
-      },
-      "lesson_id": 202
-    }
-  ],
-  "和": [
-    {
-      "definition": "and",
-      "pinyin": "hé",
-      "part_of_speech": "conj",
-      "example": {
-        "cn": "王朋、李友和高文中都是学生。",
-        "py": "Wáng Péng, Lǐ Yǒu hé Gāo Wénzhōng dōu shì xuésheng.",
-        "en": "Wang Peng, Li You, and Gao Wenzhong are all students."
-      },
-      "lesson_id": 202
-    }
-  ],
-  "大姐": [
-    {
-      "definition": "eldest/oldest sister",
-      "pinyin": "dàjiě",
-      "part_of_speech": "n",
-      "example": {
-        "cn": "我家有五口人:爸爸、妈妈、大姐、二姐和我。你爸爸妈妈做什么工作?",
-        "py": "wǒ jiā yǒu wǔ kǒu rén bàba māma dàjiě èrjiě hé wǒ nǐ bàba māma zuò shénme gōngzuò",
-        "en": "There are five people in my family: dad, mom, oldest sister, second oldest sister, and me. What do your dad and mom do for work?"
-      },
-      "lesson_id": 202
-    }
-  ],
-  "二姐": [
-    {
-      "definition": "second oldest sister",
-      "pinyin": "èrjiě",
-      "part_of_speech": "n",
-      "example": {
-        "cn": "我家有五口人:爸爸、妈妈、大姐、二姐和我。你爸爸妈妈做什么工作?",
-        "py": "wǒ jiā yǒu wǔ kǒu rén bàba māma dàjiě èrjiě hé wǒ nǐ bàba māma zuò shénme gōngzuò",
-        "en": "There are five people in my family: dad, mom, oldest sister, second oldest sister, and me. What do your dad and mom do for work?"
-      },
-      "lesson_id": 202
-    }
-  ],
-  "做": [
-    {
-      "definition": "to do",
-      "pinyin": "zuò",
-      "part_of_speech": "v",
-      "example": {
-        "cn": "他/她做什么工作? 你呢?",
-        "py": "Tā zuò shénme gōngzuò? Nǐ ne?",
-        "en": "What does he/she do? How about you?"
-      },
-      "lesson_id": 202
-    }
-  ],
-  "工作": [
-    {
-      "definition": "job; to work",
-      "pinyin": "gōngzuò",
-      "part_of_speech": "n/v",
-      "example": {
-        "cn": "我家有五口人:爸爸、妈妈、大姐、二姐和我。你爸爸妈妈做什么工作?",
-        "py": "wǒ jiā yǒu wǔ kǒu rén bàba māma dàjiě èrjiě hé wǒ nǐ bàba māma zuò shénme gōngzuò",
-        "en": "There are five people in my family: dad, mom, oldest sister, second oldest sister, and me. What do your dad and mom do for work?"
-      },
-      "lesson_id": 202
-    }
-  ],
-  "律师": [
-    {
-      "definition": "lawyer",
-      "pinyin": "lǜshī",
-      "part_of_speech": "n",
-      "example": {
-        "cn": "我爸爸是律师,妈妈是英文老师,哥哥、妹妹都是大学生。",
-        "py": "wǒ bàba shì lǜshī māma shì Yīngwén lǎoshī gēge mèimei dōu shì dàxuéshēng",
-        "en": "My dad is a lawyer, and my mom is an English teacher. My older brother and younger sisters are all college students."
-      },
-      "lesson_id": 202
-    }
-  ],
-  "英文": [
-    {
-      "definition": "the English language",
-      "pinyin": "Yīngwén",
-      "part_of_speech": "n",
-      "example": {
-        "cn": "我爸爸是律师,妈妈是英文老师,哥哥、妹妹都是大学生。",
-        "py": "wǒ bàba shì lǜshī māma shì Yīngwén lǎoshī gēge mèimei dōu shì dàxuéshēng",
-        "en": "My dad is a lawyer, and my mom is an English teacher. My older brother and younger sisters are all college students."
-      },
-      "lesson_id": 202
-    }
-  ],
-  "都": [
-    {
-      "definition": "both, all [See Grammar 7.]",
-      "pinyin": "dōu",
-      "part_of_speech": "adv",
-      "example": {
-        "cn": "王朋、李友和高文中都是学生。",
-        "py": "Wáng Péng, Lǐ Yǒu hé Gāo Wénzhōng dōu shì xuésheng.",
-        "en": "Wang Peng, Li You, and Gao Wenzhong are all students."
-      },
-      "lesson_id": 202
-    }
-  ],
-  "大学生": [
-    {
-      "definition": "college student",
-      "pinyin": "dàxuéshēng",
-      "part_of_speech": "n",
-      "example": {
-        "cn": "小高家有两个大学生。",
-        "py": "Xiǎo Gāo jiā yǒu liǎng ge dàxuéshēng.",
-        "en": "There are two college students in Little Gao's family."
-      },
-      "lesson_id": 202
-    }
-  ],
-  "大学": [
-    {
-      "definition": "university, college",
-      "pinyin": "dàxué",
-      "part_of_speech": "n",
-      "example": {
-        "cn": "我爸爸是律师,妈妈是英文老师,哥哥、妹妹都是大学生。",
-        "py": "wǒ bàba shì lǜshī māma shì Yīngwén lǎoshī gēge mèimei dōu shì dàxuéshēng",
-        "en": "My dad is a lawyer, and my mom is an English teacher. My older brother and younger sisters are all college students."
-      },
-      "lesson_id": 202
-    }
-  ],
-  "医生": [
-    {
-      "definition": "doctor, physician",
-      "pinyin": "yīshēng",
-      "part_of_speech": "n",
-      "example": {
-        "cn": "我妈妈也是老师,我爸爸是医生。",
-        "py": "wǒ māma yě shì lǎoshī wǒ bàba shì yīshēng",
-        "en": "My mom is also a teacher, and my dad is a doctor."
-      },
-      "lesson_id": 202
-    }
-  ],
-  "白英爱": [
-    {
-      "definition": "(a personal name)",
-      "pinyin": "Bái Yīng'ài",
-      "part_of_speech": "pn",
-      "example": {
-        "cn": "白英爱,你家有几口人?",
-        "py": "Bái Yīng'ài nǐ jiā yǒu jǐ kǒu rén",
-        "en": "Bai Ying'ai, how many people are in your family?"
-      },
-      "lesson_id": 202
     }
   ]
 }

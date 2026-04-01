@@ -7,6 +7,7 @@ class Task1Extractor:
         self.llm = llm_provider
         self.pinyin_batch_size = max(1, int(os.getenv("CB_TASK1_PINYIN_BATCH_SIZE", "3")))
         self.pinyin_batch_char_limit = max(200, int(os.getenv("CB_TASK1_PINYIN_BATCH_CHAR_LIMIT", "600")))
+        self.translation_repair_batch_size = max(1, int(os.getenv("CB_TASK1_TRANSLATION_REPAIR_BATCH_SIZE", "6")))
 
     def _build_extract_prompt(self, lesson_id: int, course_id: int) -> str:
         # 🚀 第一步：文本提取 + 强力去噪
@@ -23,6 +24,8 @@ class Task1Extractor:
            - "passage": 一般叙述性课文/段落
            - "mixed": 对话与叙述混合
         3. dialogues: 按照原文顺序提取。只需提取：role (角色), chinese (中文原文), english (英文翻译)。
+           - 如果教材页面上给出了对应英文翻译，english 必须提取该翻译。
+           - 如果教材页面上没有英文翻译，必须根据中文原句自动生成自然、简洁、适合教学展示的英文翻译，english 不要留空。
         4. 如果是对话类课文，按说话轮次提取，role 使用教材中的角色名。
         5. 如果是日记/文章/段落类课文，按自然句顺序切分提取；role 不要编造人物名，可统一填写为 "日记"、"课文" 或 "旁白" 中最合适的一项，并在整课内保持一致。
 
@@ -46,6 +49,37 @@ class Task1Extractor:
                 ]
             }}
         }}
+        """
+
+    def _build_translation_repair_prompt(self, dialogue_batch: list) -> str:
+        payload = json.dumps([
+            {
+                "role": item.get("role", ""),
+                "chinese": item.get("chinese", ""),
+                "english": item.get("english", "")
+            }
+            for item in dialogue_batch
+        ], ensure_ascii=False)
+
+        return f"""
+        你是一名教材内容修复专家。下面这些课文句子在第一次提取后 english 为空或疑似漏提。
+        请你重新检查这些句子的英文翻译，并按原顺序返回结果。
+        素材：{payload}
+
+        【规则】
+        1. 如果 PDF 页面中有现成英文翻译，优先提取原文英文。
+        2. 如果 PDF 页面中没有英文翻译，则必须根据中文原句自动补写自然、简洁、适合教学展示的英文翻译。
+        3. 不要改动 role 和 chinese。
+        4. english 应尽量补全，不要留空。
+
+        【输出结构】
+        [
+          {{
+            "role": "角色",
+            "chinese": "中文原句",
+            "english": "补全后的英文翻译"
+          }}
+        ]
         """
 
     def _build_pinyin_prompt(self, dialogues_to_process: list) -> str:
@@ -111,6 +145,38 @@ class Task1Extractor:
         pinyin_prompt = self._build_pinyin_prompt(batch)
         return self.llm.generate_structured_json(pinyin_prompt, file_path=None)
 
+    def _repair_missing_english(self, raw_dialogues: list, file_path: str = None, file_obj=None) -> list:
+        if not raw_dialogues:
+            return raw_dialogues
+
+        missing_indices = [
+            idx for idx, item in enumerate(raw_dialogues)
+            if isinstance(item, dict) and not (item.get("english") or "").strip()
+        ]
+        if not missing_indices:
+            return raw_dialogues
+
+        print(f"     🩹 检测到 {len(missing_indices)} 句缺少英文翻译，正在启动英译补全...")
+
+        for start in range(0, len(missing_indices), self.translation_repair_batch_size):
+            index_batch = missing_indices[start:start + self.translation_repair_batch_size]
+            dialogue_batch = [raw_dialogues[idx] for idx in index_batch]
+            repair_result = self.llm.generate_structured_json(
+                self._build_translation_repair_prompt(dialogue_batch),
+                file_path=file_path,
+                file_obj=file_obj
+            )
+
+            if isinstance(repair_result, list) and len(repair_result) == len(dialogue_batch):
+                for local_idx, repaired_item in enumerate(repair_result):
+                    repaired_english = ""
+                    if isinstance(repaired_item, dict):
+                        repaired_english = (repaired_item.get("english") or "").strip()
+                    if repaired_english:
+                        raw_dialogues[index_batch[local_idx]]["english"] = repaired_english
+
+        return raw_dialogues
+
     def _annotate_batch_with_retry(self, batch: list, batch_label: str) -> list:
         try:
             batch_result = self._generate_pinyin_batch(batch)
@@ -165,8 +231,11 @@ class Task1Extractor:
         
         if not raw_result: return None
 
-        print(f"  ▶️ [Task 1.2] 正在标注拼音并识别重点词汇...")
         raw_dialogues = raw_result.get("course_content", {}).get("dialogues", [])
+        raw_dialogues = self._repair_missing_english(raw_dialogues, file_path=file_path, file_obj=file_obj)
+        raw_result["course_content"]["dialogues"] = raw_dialogues
+
+        print(f"  ▶️ [Task 1.2] 正在标注拼音并识别重点词汇...")
         pinyin_result = self._annotate_pinyin_in_batches(raw_dialogues)
 
         # 🚀 【结构封装】：匹配前端 .flatMap(t => t.lines)

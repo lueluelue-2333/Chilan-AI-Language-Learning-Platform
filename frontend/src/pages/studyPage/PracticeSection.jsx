@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 // 🚀 引入统一的 API 客户端
 import apiClient from '../../api/apiClient'; 
 import { 
@@ -59,6 +60,7 @@ const RubySentence = ({ cn = '', py = '' }) => {
 };
 
 const WordContextCard = ({ word, pinyin, metadata, knowledgeData }) => {
+    const { t } = useTranslation();
     const examples = metadata?.context_examples || [];
     const fallbackKnowledge = metadata?.knowledge || {};
     const currentSense = knowledgeData?.current_sense || fallbackKnowledge;
@@ -109,7 +111,7 @@ const WordContextCard = ({ word, pinyin, metadata, knowledgeData }) => {
                 <div className="p-2 bg-blue-50 rounded-xl">
                     <BookOpen className="text-blue-500" size={20} />
                 </div>
-                <h4 className="text-xl font-black text-slate-800 tracking-tight">知识点详情</h4>
+                <h4 className="text-xl font-black text-slate-800 tracking-tight">{t('knowledge_title')}</h4>
                 <div className="h-px flex-1 bg-slate-200/60" />
             </div>
 
@@ -117,7 +119,7 @@ const WordContextCard = ({ word, pinyin, metadata, knowledgeData }) => {
                 <div className="mb-5 bg-white/90 p-5 rounded-[1.75rem] border border-white shadow-sm">
                     <div className="mb-3">
                         <span className="inline-flex items-center px-3 py-1 rounded-full bg-blue-50 text-[11px] font-black uppercase tracking-[0.25em] text-blue-500">
-                            Current Sense / 当前义项
+                            {t('knowledge_current_sense')}
                         </span>
                     </div>
                     <div className="flex flex-wrap items-start gap-4 justify-between">
@@ -178,7 +180,7 @@ const WordContextCard = ({ word, pinyin, metadata, knowledgeData }) => {
                                     className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors text-xs font-black uppercase tracking-[0.18em]"
                                 >
                                     {expandedExamples[`current-${idx}`] ? <EyeOff size={14} /> : <Eye size={14} />}
-                                    {expandedExamples[`current-${idx}`] ? 'Hide' : 'Show'}
+                                    {expandedExamples[`current-${idx}`] ? t('knowledge_hide') : t('knowledge_show')}
                                 </button>
                             </div>
                         </div>
@@ -207,7 +209,7 @@ const WordContextCard = ({ word, pinyin, metadata, knowledgeData }) => {
             {history.length > 0 && (
                 <div className="mt-6 pt-5 border-t border-slate-200/60">
                     <p className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-4">
-                        Other Meanings / 更多义项
+                        {t('knowledge_other_senses')}
                     </p>
                     <div className="space-y-3">
                         {history.map((h, i) => (
@@ -248,7 +250,7 @@ const WordContextCard = ({ word, pinyin, metadata, knowledgeData }) => {
                                                     className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors text-[10px] font-black uppercase tracking-[0.16em]"
                                                 >
                                                     {expandedExamples[`history-${i}`] ? <EyeOff size={12} /> : <Eye size={12} />}
-                                                    {expandedExamples[`history-${i}`] ? 'Hide' : 'Show'}
+                                                    {expandedExamples[`history-${i}`] ? t('knowledge_hide') : t('knowledge_show')}
                                                 </button>
                                             </div>
                                         </div>
@@ -278,6 +280,7 @@ const WordContextCard = ({ word, pinyin, metadata, knowledgeData }) => {
 };
 
 export default function PracticeSection({ questions, isReview, onAllDone, userId, courseId, lessonId, initialIndex = 0 }) {
+    const { t } = useTranslation();
     const [currentIndex, setCurrentIndex] = useState(0);
     const [userAnswer, setUserAnswer] = useState('');
     const [lastSubmittedAnswer, setLastSubmittedAnswer] = useState('');
@@ -346,7 +349,7 @@ export default function PracticeSection({ questions, isReview, onAllDone, userId
                 titleColor: 'text-green-800',
                 msgColor: 'text-green-700/90',
                 icon: <CheckCircle2 className="text-green-500 shrink-0" size={32} />,
-                title: '优秀！'
+                title: t('practice_feedback_excellent')
             };
         }
         if (level === 2 || level === 3) {
@@ -355,7 +358,7 @@ export default function PracticeSection({ questions, isReview, onAllDone, userId
                 titleColor: 'text-amber-800',
                 msgColor: 'text-amber-700',
                 icon: <AlertCircle className="text-amber-500 shrink-0" size={32} />,
-                title: '不错，但还有提升空间！'
+                title: t('practice_feedback_good')
             };
         }
         return {
@@ -363,7 +366,7 @@ export default function PracticeSection({ questions, isReview, onAllDone, userId
             titleColor: 'text-red-800',
             msgColor: 'text-red-700',
             icon: <XCircle className="text-red-500 shrink-0" size={32} />,
-            title: '需要继续努力！'
+            title: t('practice_feedback_retry')
         };
     };
 
@@ -445,7 +448,7 @@ export default function PracticeSection({ questions, isReview, onAllDone, userId
             setFeedback(res.data.data);
             setLastSubmittedAnswer(userAnswer);
         } catch (e) {
-            setFeedback({ level: 1, isCorrect: false, message: "判题服务连接失败，请重试。" });
+            setFeedback({ level: 1, isCorrect: false, message: t('practice_eval_failed') });
         } finally {
             setIsEvaluating(false);
         }
@@ -475,7 +478,7 @@ export default function PracticeSection({ questions, isReview, onAllDone, userId
                 <div className="flex items-center gap-3">
                     <Sparkles className="text-blue-500" size={28} />
                     <h1 className="text-5xl font-black text-slate-900 tracking-tight">
-                        {isReview ? "智能巩固复习" : "随堂强化练习"}
+                        {isReview ? t('practice_title_review') : t('practice_title_lesson')}
                     </h1>
                 </div>
                 <div className="px-5 py-1.5 bg-slate-200/50 rounded-full text-xl font-black text-slate-500 tracking-tighter">
@@ -485,7 +488,7 @@ export default function PracticeSection({ questions, isReview, onAllDone, userId
 
             <motion.div variants={fadeInUp} initial="hidden" animate="show" className="text-center mb-8">
                 <span className="text-xl font-bold text-blue-500 uppercase tracking-[0.3em] block mb-1">
-                    {currentQuestion.question_type === 'CN_TO_EN' ? 'Translate into English' : '请翻译成中文'}
+                    {currentQuestion.question_type === 'CN_TO_EN' ? t('practice_prompt_cn_to_en') : t('practice_prompt_en_to_cn')}
                 </span>
                 <p className="text-4xl md:text-5xl font-black text-slate-900 leading-tight px-4">
                     “{currentQuestion.original_text}”
@@ -507,7 +510,7 @@ export default function PracticeSection({ questions, isReview, onAllDone, userId
                         onChange={(e) => setUserAnswer(e.target.value)}
                         onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
-                        placeholder={isFocused ? "" : "在这里输入你的答案..."}
+                        placeholder={isFocused ? "" : t('practice_input_placeholder')}
                         disabled={isEvaluating || (feedback && feedback.level >= 2)}
                         className="w-full h-auto max-h-full bg-transparent text-center focus:outline-none resize-none leading-relaxed text-slate-800 placeholder:text-slate-400 text-3xl font-bold"
                         rows={1}
@@ -525,7 +528,7 @@ export default function PracticeSection({ questions, isReview, onAllDone, userId
                             className="w-full py-5 bg-slate-900 text-white rounded-[1.2rem] font-black text-xl hover:bg-blue-600 disabled:bg-slate-200 transition-all flex items-center justify-center gap-3 shadow-lg"
                         >
                             {isEvaluating ? <Loader2 className="animate-spin" /> : <Send size={22} />}
-                            {isEvaluating ? 'AI 导师正在阅卷...' : '提交答案'}
+                            {isEvaluating ? t('practice_evaluating') : t('practice_submit')}
                         </motion.button>
                     ) : (
                         <motion.div key="feedback-area" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-5">
@@ -554,11 +557,11 @@ export default function PracticeSection({ questions, isReview, onAllDone, userId
                                             className="w-full py-5 bg-slate-900 text-white rounded-[1.2rem] font-black text-xl hover:bg-slate-800 transition-all flex items-center justify-center gap-3 shadow-lg disabled:bg-slate-200 disabled:text-slate-400"
                                         >
                                             {isEvaluating ? <Loader2 className="animate-spin" /> : <RefreshCcw size={22} />}
-                                            重新提交
+                                            {t('practice_retry')}
                                             <span className="ml-2 font-normal text-xs uppercase tracking-widest opacity-60">Enter</span>
                                         </button>
                                         <button onClick={handleNext} className="w-full py-5 bg-blue-600 text-white rounded-[1.2rem] font-black text-xl hover:bg-blue-700 transition-all flex items-center justify-center gap-3 shadow-lg">
-                                            跳过此题，继续前进
+                                            {t('practice_skip')}
                                             <ArrowRight size={22} />
                                         </button>
                                     </>
@@ -567,7 +570,7 @@ export default function PracticeSection({ questions, isReview, onAllDone, userId
                                         onClick={handleNext} 
                                         className="w-full py-5 bg-blue-600 text-white rounded-[1.2rem] font-black text-xl hover:bg-blue-700 transition-all flex items-center justify-center shadow-lg shadow-blue-100"
                                     >
-                                        {currentIndex === questions.length - 1 ? '完成所有练习' : '进入下一题'} 
+                                        {currentIndex === questions.length - 1 ? t('practice_finish') : t('practice_next')} 
                                         <span className="ml-3 text-blue-200 font-normal text-xs uppercase tracking-widest">Enter</span>
                                     </button>
                                 )}

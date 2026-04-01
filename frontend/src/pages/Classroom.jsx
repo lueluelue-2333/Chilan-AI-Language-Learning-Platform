@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { 
-    Layers, ChevronRight, X, Plus, 
+    Layers, ChevronRight,
     CheckCircle2, Zap, Loader2, GraduationCap 
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +11,215 @@ import apiClient from '../api/apiClient';
 
 // 通用底纹
 const SUBTLE_PATTERN = `data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg stroke='%23ffffff' stroke-width='1' opacity='0.05'%3E%3Cpath d='M30 0L0 30M60 30L30 60M30 0l30 30M0 30l30 30' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E`;
+
+function FlagChina({ className = '' }) {
+    return (
+        <svg viewBox="0 0 64 48" className={className} aria-hidden="true">
+            <rect width="64" height="48" rx="6" fill="#DE2910" />
+            <g fill="#FFDE00">
+                <path d="M14 8l1.9 5.7h6L17 17.1l1.9 5.7L14 19.4l-4.9 3.4 1.9-5.7-4.9-3.4h6z" />
+                <path d="M24.5 7.5l.8 2.5H28l-2.2 1.5.8 2.5-2.1-1.5-2.2 1.5.8-2.5L21 10h2.7z" />
+                <path d="M28 13.5l.8 2.5h2.7L29.3 17.5l.8 2.5-2.1-1.5-2.2 1.5.8-2.5L24.5 16h2.7z" />
+                <path d="M28 21l.8 2.5h2.7L29.3 25l.8 2.5-2.1-1.5-2.2 1.5.8-2.5-2.1-1.5h2.7z" />
+                <path d="M24 27l.8 2.5h2.7L25.3 31l.8 2.5-2.1-1.5-2.2 1.5.8-2.5-2.1-1.5h2.7z" />
+            </g>
+        </svg>
+    );
+}
+
+function FlagUK({ className = '' }) {
+    return (
+        <svg viewBox="0 0 64 48" className={className} aria-hidden="true">
+            <rect width="64" height="48" rx="6" fill="#012169" />
+            <path d="M0 0l64 48M64 0L0 48" stroke="#FFF" strokeWidth="10" />
+            <path d="M0 0l64 48M64 0L0 48" stroke="#C8102E" strokeWidth="4" />
+            <path d="M32 0v48M0 24h64" stroke="#FFF" strokeWidth="16" />
+            <path d="M32 0v48M0 24h64" stroke="#C8102E" strokeWidth="8" />
+        </svg>
+    );
+}
+
+function FlagJapan({ className = '' }) {
+    return (
+        <svg viewBox="0 0 64 48" className={className} aria-hidden="true">
+            <rect width="64" height="48" rx="6" fill="#FFFFFF" stroke="#E5E7EB" />
+            <circle cx="32" cy="24" r="11" fill="#BC002D" />
+        </svg>
+    );
+}
+
+function FlagFrance({ className = '' }) {
+    return (
+        <svg viewBox="0 0 64 48" className={className} aria-hidden="true">
+            <rect width="64" height="48" rx="6" fill="#FFFFFF" />
+            <rect width="21.34" height="48" rx="6" fill="#0055A4" />
+            <rect x="42.66" width="21.34" height="48" rx="6" fill="#EF4135" />
+        </svg>
+    );
+}
+
+const LANGUAGE_LABEL_MAP = {
+    zh: {
+        chinese: '中文',
+        english: '英语',
+        japanese: '日语',
+        french: '法语',
+    },
+    en: {
+        chinese: 'Chinese',
+        english: 'English',
+        japanese: 'Japanese',
+        french: 'French',
+    },
+    jp: {
+        chinese: '中国語',
+        english: '英語',
+        japanese: '日本語',
+        french: 'フランス語',
+    },
+    fr: {
+        chinese: 'Chinois',
+        english: 'Anglais',
+        japanese: 'Japonais',
+        french: 'Français',
+    },
+    de: {
+        chinese: 'Chinesisch',
+        english: 'Englisch',
+        japanese: 'Japanisch',
+        french: 'Französisch',
+    },
+};
+
+const FLAG_COMPONENT_MAP = {
+    chinese: FlagChina,
+    english: FlagUK,
+    japanese: FlagJapan,
+    french: FlagFrance,
+};
+
+const LANGUAGE_STYLE_MAP = {
+    chinese: {
+        bg: 'from-red-500 via-red-600 to-yellow-500',
+        shadow: 'shadow-red-200/60',
+        ring: 'ring-red-200/60',
+    },
+    english: {
+        bg: 'from-blue-700 via-blue-800 to-red-500',
+        shadow: 'shadow-blue-200/60',
+        ring: 'ring-blue-200/60',
+    },
+    japanese: {
+        bg: 'from-white via-rose-50 to-red-300',
+        shadow: 'shadow-rose-200/60',
+        ring: 'ring-rose-200/60',
+    },
+    french: {
+        bg: 'from-blue-700 via-white to-red-500',
+        shadow: 'shadow-slate-200/60',
+        ring: 'ring-slate-200/60',
+    },
+};
+
+const parseCourseLanguagePair = (courseName = '') => {
+    const match = courseName.match(/learn\s+(.+?)\s+in\s+(.+)/i);
+    if (!match) {
+        return { learning: 'chinese', native: 'english' };
+    }
+
+    const normalize = (value) => {
+        const lower = value.trim().toLowerCase();
+        if (lower.includes('chinese')) return 'chinese';
+        if (lower.includes('english')) return 'english';
+        if (lower.includes('japanese')) return 'japanese';
+        if (lower.includes('french')) return 'french';
+        if (lower.includes('korean')) return 'korean';
+        if (lower.includes('spanish')) return 'spanish';
+        if (lower.includes('german')) return 'german';
+        return lower;
+    };
+
+    return {
+        learning: normalize(match[1]),
+        native: normalize(match[2]),
+    };
+};
+
+const normalizeLanguage = (value = '') => {
+    const lower = String(value).trim().toLowerCase();
+    if (lower.includes('chinese') || lower.includes('中文')) return 'chinese';
+    if (lower.includes('english') || lower.includes('英语')) return 'english';
+    if (lower.includes('japanese') || lower.includes('日语')) return 'japanese';
+    if (lower.includes('french') || lower.includes('法语')) return 'french';
+    if (lower.includes('korean') || lower.includes('韩语')) return 'korean';
+    if (lower.includes('spanish') || lower.includes('西班牙语')) return 'spanish';
+    if (lower.includes('german') || lower.includes('德语')) return 'german';
+    return lower;
+};
+
+const getCourseLanguagePair = (course = {}) => {
+    const target = normalizeLanguage(course.target_language);
+    const source = normalizeLanguage(course.source_language);
+    if (target && source) {
+        return { learning: target, native: source };
+    }
+    return parseCourseLanguagePair(course.name || '');
+};
+
+const getCourseVisual = (course = {}) => {
+    const { learning, native } = getCourseLanguagePair(course);
+    const style = LANGUAGE_STYLE_MAP[learning] || LANGUAGE_STYLE_MAP.chinese;
+    return {
+        learning,
+        native,
+        LearningFlag: FLAG_COMPONENT_MAP[learning] || FlagChina,
+        NativeFlag: FLAG_COMPONENT_MAP[native] || FlagUK,
+        gradientClass: style.bg,
+        shadowClass: style.shadow,
+        ringClass: style.ring,
+    };
+};
+
+function formatLanguageLabel(language, locale = 'zh') {
+    if (!language) return '';
+    return LANGUAGE_LABEL_MAP[locale]?.[language] || LANGUAGE_LABEL_MAP.en?.[language] || (language.charAt(0).toUpperCase() + language.slice(1));
+}
+
+function LanguagePill({ course, compact = false }) {
+    const { i18n } = useTranslation();
+    const visual = getCourseVisual(course);
+    const LearningFlag = visual.LearningFlag;
+    const NativeFlag = visual.NativeFlag;
+    const learningLabel = formatLanguageLabel(visual.learning, i18n.language);
+    const nativeLabel = formatLanguageLabel(visual.native, i18n.language);
+    const pillPadding = compact ? 'px-3 py-2' : 'px-4 py-2.5';
+    const flagSize = compact ? 'w-5 h-5' : 'w-6 h-6';
+    const textSize = compact ? 'text-xs' : 'text-sm';
+
+    return (
+        <div className={`inline-flex items-center ${compact ? 'gap-1.5' : 'gap-2.5'} flex-wrap`}>
+            <div className={`inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/85 shadow-sm ${pillPadding}`}>
+                <div className={`${flagSize} rounded-full overflow-hidden ring-1 ${visual.ringClass} shadow-sm`}>
+                    <LearningFlag className="w-full h-full" />
+                </div>
+                <span className={`${textSize} font-black text-slate-700`}>
+                    {learningLabel}
+                </span>
+            </div>
+            <span className={`${compact ? 'text-base' : 'text-lg'} text-slate-300 font-black leading-none`}>
+                →
+            </span>
+            <div className={`inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/85 shadow-sm ${pillPadding}`}>
+                <div className={`${flagSize} rounded-full overflow-hidden ring-1 ring-slate-200 shadow-sm`}>
+                    <NativeFlag className="w-full h-full" />
+                </div>
+                <span className={`${textSize} font-black text-slate-700`}>
+                    {nativeLabel}
+                </span>
+            </div>
+        </div>
+    );
+}
 
 export default function Classroom() {
     const { t, i18n } = useTranslation();
@@ -21,7 +230,8 @@ export default function Classroom() {
     const [allCourses, setAllCourses] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isCoursesLoading, setIsCoursesLoading] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [learningFilter, setLearningFilter] = useState('all');
+    const [nativeFilter, setNativeFilter] = useState('all');
 
     const userId = localStorage.getItem('chilan_user_id');
 
@@ -46,11 +256,9 @@ export default function Classroom() {
         }
     };
 
-    const handleOpenModal = async () => {
-        setIsModalOpen(true);
+    const fetchAllCourses = async () => {
         setIsCoursesLoading(true);
         try {
-            // 🚀 使用 apiClient
             const res = await apiClient.get('/courses');
             setAllCourses(res.data);
         } catch (err) {
@@ -60,6 +268,38 @@ export default function Classroom() {
         }
     };
 
+    useEffect(() => {
+        fetchAllCourses();
+    }, []);
+
+    const languageOptions = React.useMemo(() => {
+        const learning = new Set();
+        const native = new Set();
+        allCourses.forEach((course) => {
+            const pair = getCourseLanguagePair(course);
+            learning.add(pair.learning);
+            native.add(pair.native);
+        });
+        return {
+            learning: ['all', ...Array.from(learning)],
+            native: ['all', ...Array.from(native)],
+        };
+    }, [allCourses]);
+
+    const filteredCourses = React.useMemo(() => {
+        return allCourses.filter((course) => {
+            const pair = getCourseLanguagePair(course);
+            const learningMatch = learningFilter === 'all' || pair.learning === learningFilter;
+            const nativeMatch = nativeFilter === 'all' || pair.native === nativeFilter;
+            return learningMatch && nativeMatch;
+        });
+    }, [allCourses, learningFilter, nativeFilter]);
+
+    const enrolledCourseIds = React.useMemo(
+        () => new Set(myCourses.map((course) => course.id)),
+        [myCourses]
+    );
+
     const handleEnroll = async (courseId) => {
         try {
             // 🚀 使用 apiClient
@@ -67,7 +307,6 @@ export default function Classroom() {
                 user_id: userId, 
                 course_id: courseId 
             });
-            setIsModalOpen(false);
             fetchData();
         } catch (err) {
             alert("订阅失败");
@@ -95,7 +334,12 @@ export default function Classroom() {
     }
 
     return (
-        <div className="min-h-screen bg-slate-50 font-sans text-slate-900 pb-20 pt-24">
+        <div className="min-h-screen bg-slate-50 font-sans text-slate-900 pb-20 pt-24 relative overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute -top-16 -left-12 w-72 h-72 rounded-full bg-gradient-to-br from-red-100 via-amber-50 to-transparent blur-3xl opacity-70" />
+                <div className="absolute top-1/3 right-0 w-80 h-80 rounded-full bg-gradient-to-br from-blue-100 via-sky-50 to-transparent blur-3xl opacity-60" />
+                <div className="absolute bottom-0 left-1/3 w-96 h-72 rounded-full bg-gradient-to-tr from-rose-100 via-orange-50 to-transparent blur-3xl opacity-60" />
+            </div>
             
             <AnimatePresence mode="wait">
                 <motion.div 
@@ -104,7 +348,7 @@ export default function Classroom() {
                     initial="hidden" 
                     animate="show" 
                     exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
-                    className="max-w-6xl mx-auto px-8 py-12"
+                    className="max-w-6xl mx-auto px-8 py-12 relative z-10"
                 >
                     
                     {/* 1. 顶部统计 */}
@@ -129,97 +373,130 @@ export default function Classroom() {
                             <h2 className="text-2xl font-black flex items-center gap-3">
                                 <GraduationCap className="text-blue-600" size={28} /> {t('classroom_my_courses')}
                             </h2>
-                            <button 
-                                onClick={handleOpenModal}
-                                className="w-12 h-12 bg-white shadow-lg text-blue-600 rounded-2xl flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all active:scale-95"
-                            >
-                                <Plus size={24} />
-                            </button>
                         </motion.div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {myCourses.map((course) => (
+                            {myCourses.map((course) => {
+                                const visual = getCourseVisual(course);
+                                return (
                                 <motion.div 
                                     key={course.id}
                                     variants={fadeInUp}
                                     whileHover={{ y: -8, scale: 1.01 }}
                                     onClick={() => navigate(`/study/${course.id}`)}
-                                    className={`relative h-64 rounded-[2.5rem] ${course.color} p-8 text-white shadow-2xl shadow-slate-300/40 cursor-pointer overflow-hidden group border-2 border-white/10`}
-                                    style={{ 
-                                        backgroundImage: `url("${SUBTLE_PATTERN}")`,
-                                        backgroundSize: '60px 60px'
-                                    }}
+                                    className={`relative h-64 rounded-[2.5rem] p-8 text-slate-900 shadow-2xl cursor-pointer overflow-hidden group border border-white/70 bg-gradient-to-br from-white via-white to-slate-50/95 ${visual.shadowClass}`}
                                 >
+                                    <div
+                                        className="absolute inset-0 opacity-[0.06]"
+                                        style={{ backgroundImage: `url("${SUBTLE_PATTERN}")`, backgroundSize: '60px 60px' }}
+                                    />
+                                    <div className={`absolute inset-0 opacity-[0.10] bg-gradient-to-br ${visual.gradientClass}`} />
+                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.55),transparent_38%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.42),transparent_34%)]" />
                                     <div className="relative h-full flex flex-col justify-between z-10">
                                         <div>
                                             <h3 className="text-3xl font-black mb-1 tracking-tight">{course.name}</h3>
+                                            <div className="mt-5">
+                                                <LanguagePill course={course} />
+                                            </div>
                                             <div className="flex items-center gap-3 mt-6">
-                                                <div className="flex-1 h-1.5 bg-white/30 rounded-full overflow-hidden">
-                                                    <div className="h-full bg-white w-1/6 rounded-full"></div>
+                                                <div className="flex-1 h-1.5 bg-slate-200 rounded-full overflow-hidden">
+                                                    <div className={`h-full w-1/6 rounded-full bg-gradient-to-r ${visual.gradientClass}`}></div>
                                                 </div>
-                                                <p className="text-xs font-bold opacity-90">{t('classroom_mastered')}: {course.mastered}</p>
+                                                <p className="text-xs font-bold text-slate-500">{t('classroom_mastered')}: {course.mastered}</p>
                                             </div>
                                         </div>
                                         <div className="flex items-center justify-between">
-                                            <span className="text-sm font-bold opacity-90 uppercase tracking-widest flex items-center gap-2">
+                                            <span className="text-sm font-bold text-slate-700 uppercase tracking-widest flex items-center gap-2">
                                                 {t('classroom_start')} <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform"/>
                                             </span>
                                         </div>
                                     </div>
                                 </motion.div>
-                            ))}
+                                );
+                            })}
                         </div>
                     </section>
-                </motion.div>
-            </AnimatePresence>
 
-            {/* 3. 选课 Modal */}
-            <AnimatePresence>
-                {isModalOpen && (
-                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
-                        <motion.div 
-                            initial={{ opacity: 0 }} 
-                            animate={{ opacity: 1 }} 
-                            exit={{ opacity: 0 }} 
-                            onClick={() => setIsModalOpen(false)} 
-                            className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" 
-                        />
-                        <motion.div 
-                            initial={{ scale: 0.9, opacity: 0, y: 20 }} 
-                            animate={{ scale: 1, opacity: 1, y: 0 }} 
-                            exit={{ scale: 0.9, opacity: 0, y: 20 }} 
-                            transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                            className="relative w-full max-w-xl bg-white rounded-[3rem] shadow-2xl p-10 max-h-[85vh] flex flex-col"
-                        >
-                            <h2 className="text-3xl font-black mb-8">{t('classroom_add_course')}</h2>
-                            <div className="space-y-4 overflow-y-auto pr-2 custom-scrollbar">
-                                {isCoursesLoading ? (
-                                    <div className="flex flex-col items-center py-20 text-slate-400 gap-4"><Loader2 className="animate-spin" size={32} /></div>
-                                ) : (
-                                    allCourses.map(course => (
-                                        <motion.div 
-                                            key={course.id} 
-                                            initial={{ opacity: 0, x: -10 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            className="p-3 border border-slate-100 rounded-[2rem] flex items-center justify-between hover:bg-slate-50 group transition-colors"
-                                        >
-                                            <div className="flex items-center gap-4">
-                                                <div className={`w-16 h-16 rounded-2xl ${course.color} shadow-sm shadow-black/10`} />
-                                                <div>
-                                                    <p className="font-black text-lg text-slate-800">{course.name}</p>
-                                                    <p className="text-xs font-bold text-slate-400 uppercase">{course.id}</p>
-                                                </div>
-                                            </div>
-                                            <button onClick={() => handleEnroll(course.id)} className="mr-2 px-6 py-2 bg-slate-900 text-white text-sm font-bold rounded-xl hover:bg-blue-600 active:scale-95 transition-all">
-                                                {t('btn_add')}
-                                            </button>
-                                        </motion.div>
-                                    ))
-                                )}
+                    <section className="mt-20">
+                        <motion.div variants={fadeInUp} className="flex flex-col md:flex-row gap-4 md:items-center md:justify-between mb-8 px-2">
+                            <h2 className="text-2xl font-black flex items-center gap-3">
+                                <Layers className="text-blue-600" size={28} /> {t('classroom_all_courses')}
+                            </h2>
+                            <div className="flex flex-wrap gap-3">
+                                <FilterSelect
+                                    label={t('classroom_filter_learning')}
+                                    value={learningFilter}
+                                    options={languageOptions.learning}
+                                    onChange={setLearningFilter}
+                                />
+                                <FilterSelect
+                                    label={t('classroom_filter_native')}
+                                    value={nativeFilter}
+                                    options={languageOptions.native}
+                                    onChange={setNativeFilter}
+                                />
                             </div>
                         </motion.div>
-                    </div>
-                )}
+
+                        {isCoursesLoading ? (
+                            <div className="flex flex-col items-center py-20 text-slate-400 gap-4">
+                                <Loader2 className="animate-spin" size={32} />
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                {filteredCourses.map((course) => {
+                                    const visual = getCourseVisual(course);
+                                    const isEnrolled = enrolledCourseIds.has(course.id);
+                                    return (
+                                        <motion.div
+                                            key={course.id}
+                                            variants={fadeInUp}
+                                            className={`relative h-64 rounded-[2.5rem] p-8 text-slate-900 shadow-2xl overflow-hidden border border-white/70 bg-gradient-to-br from-white via-white to-slate-50/95 ${visual.shadowClass}`}
+                                        >
+                                            <div
+                                                className="absolute inset-0 opacity-[0.05]"
+                                                style={{ backgroundImage: `url("${SUBTLE_PATTERN}")`, backgroundSize: '60px 60px' }}
+                                            />
+                                            <div className={`absolute inset-0 opacity-[0.10] bg-gradient-to-br ${visual.gradientClass}`} />
+                                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.55),transparent_38%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.42),transparent_34%)]" />
+                                            <div className="relative h-full flex flex-col justify-between z-10">
+                                                <div>
+                                                    <h3 className="text-3xl font-black mb-1 tracking-tight">{course.name}</h3>
+                                                    <div className="mt-5">
+                                                        <LanguagePill course={course} />
+                                                    </div>
+                                                </div>
+                                                <div className="flex items-center justify-between">
+                                                    <span className="text-sm font-bold text-slate-700 uppercase tracking-widest flex items-center gap-2">
+                                                        {isEnrolled ? t('classroom_in_learning') : t('classroom_join_course')}
+                                                        <ChevronRight size={16} />
+                                                    </span>
+                                                    <button
+                                                        onClick={() => !isEnrolled && handleEnroll(course.id)}
+                                                        disabled={isEnrolled}
+                                                        className={`shrink-0 px-5 py-2.5 rounded-2xl text-sm font-black transition-all ${
+                                                            isEnrolled
+                                                                ? 'bg-emerald-50 text-emerald-600 cursor-default'
+                                                                : 'bg-slate-900 text-white hover:bg-blue-600 active:scale-95'
+                                                        }`}
+                                                    >
+                                                        {isEnrolled ? t('classroom_added') : t('btn_add')}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                    );
+                                })}
+                            </div>
+                        )}
+
+                        {!isCoursesLoading && filteredCourses.length === 0 && (
+                            <div className="py-16 text-center text-slate-400 font-semibold">
+                                {t('classroom_no_courses')}
+                            </div>
+                        )}
+                    </section>
+                </motion.div>
             </AnimatePresence>
         </div>
     );
@@ -233,6 +510,28 @@ function StatItem({ icon, label, value, color }) {
                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-tight">{label}</p>
                 <p className="text-2xl font-black text-slate-900 leading-tight">{value}</p>
             </div>
+        </div>
+    );
+}
+
+function FilterSelect({ label, value, options, onChange }) {
+    const { t, i18n } = useTranslation();
+    return (
+        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/90 px-2 py-2 shadow-sm">
+            <span className="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-black tracking-[0.18em] text-slate-500 whitespace-nowrap">
+                {label}
+            </span>
+            <select
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                className="min-w-[112px] appearance-none rounded-full bg-slate-50 px-4 py-2 text-sm font-black text-slate-700 outline-none ring-1 ring-slate-200 transition focus:ring-blue-300"
+            >
+                {options.map((option) => (
+                    <option key={option} value={option}>
+                        {option === 'all' ? t('classroom_filter_all') : formatLanguageLabel(option, i18n.language)}
+                    </option>
+                ))}
+            </select>
         </div>
     );
 }
