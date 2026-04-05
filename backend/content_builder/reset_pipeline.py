@@ -96,7 +96,7 @@ def _purge_cos_objects(object_keys):
 
     storage = TencentCOSStorage.from_env(optional=True)
     if not storage:
-        print("⚠️ 未配置 TENCENT_COS_* 环境变量，跳过 COS 清理。")
+        print("⚠️ 未配置 STORAGE_COS_* 环境变量，跳过 COS 清理。")
         return
 
     deleted = 0

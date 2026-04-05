@@ -28,7 +28,7 @@ from config.env import get_env
 router = APIRouter(tags=["Study Flow"])
 
 # --- ⚙️ 初始化全局单例 ---
-API_KEY = get_env("LLM_GEMINI_API_KEY", "GEMINI_API_KEY")
+API_KEY = get_env("LLM_GEMINI_API_KEY")
 engine = LLMEngine(api_key=API_KEY)
 llm_tools = LanguageTools(engine=engine)
 scheduler = FSRSScheduler()
@@ -751,8 +751,9 @@ async def get_knowledge_details(item_id: int):
 # ==========================================
 @router.get("/study/tts")
 async def generate_tts(text: str):
-    voice = "zh-CN-XiaoxiaoNeural"
-    communicate = edge_tts.Communicate(text, voice) 
+    voice = get_env("TTS_EDGE_VOICE", default="zh-CN-XiaoxiaoNeural")
+    rate = get_env("TTS_EDGE_RATE", default="-12%")
+    communicate = edge_tts.Communicate(text, voice, rate=rate) 
     async def audio_stream():
         async for chunk in communicate.stream():
             if chunk["type"] == "audio": yield chunk["data"]

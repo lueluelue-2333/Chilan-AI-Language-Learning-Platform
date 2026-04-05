@@ -14,11 +14,11 @@ from config.env import get_env
 app = FastAPI(title="Chilan LRS - Core Service")
 
 # 1. 从环境变量读取线上地址
-cors_origins_str = get_env("APP_CORS_ORIGINS", "WEB_CORS_ORIGINS", "CORS_ORIGINS", default="")
+cors_origins_str = get_env("APP_CORS_ORIGINS", default="")
 # 2. 将字符串转为列表，并去掉多余空格
 origins = [o.strip() for o in cors_origins_str.split(",") if o.strip()]
 
-# 线上常用域名兜底，避免部署环境漏配 CORS_ORIGINS 时注册/登录直接被浏览器拦截
+# 线上常用域名兜底，避免部署环境漏配 APP_CORS_ORIGINS 时注册/登录直接被浏览器拦截
 production_origins = [
     "https://www.chilanlearning.com",
     "https://chilanlearning.com",

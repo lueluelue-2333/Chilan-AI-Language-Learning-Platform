@@ -29,22 +29,18 @@ CACHE_PATH = PREPARATION_DIR / "test_case_embedding_cache.json"
 load_dotenv(dotenv_path=ENV_PATH)
 
 MODELS = {
-    "OA-Large": os.getenv("EMBED_OPENAI_MODEL_ID", "text-embedding-3-large"),
-    "Gemini": os.getenv("EMBED_GEMINI_MODEL_ID", "gemini-embedding-001"),
-    "ZP-3": os.getenv("EMBED_ZHIPU_MODEL_ID", "embedding-3"),
-    "Voyage-4": os.getenv("EMBED_VOYAGE_MODEL_ID", "voyage-4-large"),
-    "Ali": os.getenv("EMBED_ALI_MODEL_ID", "text-embedding-v4"),
+    "OA-Large": os.getenv("LLM_EMBED_OPENAI_MODEL_ID", "text-embedding-3-large"),
+    "Gemini": os.getenv("LLM_EMBED_GEMINI_MODEL_ID", "gemini-embedding-001"),
+    "ZP-3": os.getenv("LLM_EMBED_ZHIPU_MODEL_ID", "embedding-3"),
+    "Voyage-4": os.getenv("LLM_EMBED_VOYAGE_MODEL_ID", "voyage-4-large"),
+    "Ali": os.getenv("LLM_EMBED_ALI_MODEL_ID", "text-embedding-v4"),
 }
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-ZHIPUAI_API_KEY = os.getenv("ZHIPUAI_API_KEY")
-VOYAGE_API_KEY = os.getenv("VOYAGE_API_KEY")
-ALI_API_KEY = (
-    os.getenv("Ali_API_KEY")
-    or os.getenv("ALI_API_KEY")
-    or os.getenv("DASHSCOPE_API_KEY")
-)
+OPENAI_API_KEY = os.getenv("LLM_OPENAI_API_KEY")
+GEMINI_API_KEY = os.getenv("LLM_GEMINI_API_KEY")
+ZHIPUAI_API_KEY = os.getenv("LLM_ZHIPU_API_KEY")
+VOYAGE_API_KEY = os.getenv("LLM_VOYAGE_API_KEY")
+ALI_API_KEY = os.getenv("LLM_ALI_API_KEY")
 
 
 def ensure_utf8_stdout():

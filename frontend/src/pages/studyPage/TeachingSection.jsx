@@ -80,7 +80,7 @@ export default function TeachingSection({ data, courseId, userId, onStartPractic
 
     const audioRef = useRef(null);
     const lessonAudioRef = useRef(null);
-    const API_BASE = import.meta.env.VITE_APP_API_BASE_URL || import.meta.env.VITE_API_BASE_URL || '';
+    const API_BASE = import.meta.env.VITE_APP_API_BASE_URL || '';
     const lesson_metadata = data?.lesson_metadata || {};
     const course_content = data?.course_content || {};
     const aigc_visual_prompt = data?.aigc_visual_prompt || '';

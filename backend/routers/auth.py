@@ -255,16 +255,16 @@ def _get_mail_provider() -> str:
 def _send_email_via_smtp(to_email: str, subject: str, html_content: str):
     msg = MIMEText(html_content, 'html', 'utf-8')
     msg['Subject'] = subject
-    msg['From'] = get_env("MAIL_FROM", "MAIL_SMTP_FROM", default="")
+    msg['From'] = get_env("MAIL_SMTP_FROM", default="")
     msg['To'] = to_email
 
-    host = get_env("MAIL_SMTP_SERVER", "MAIL_SERVER")
-    port = get_env_int("MAIL_SMTP_PORT", "MAIL_PORT", default=587)
-    username = get_env("MAIL_SMTP_USERNAME", "MAIL_USERNAME")
-    password = get_env("MAIL_SMTP_PASSWORD", "MAIL_PASSWORD")
-    mail_from = get_env("MAIL_FROM", "MAIL_SMTP_FROM")
-    use_ssl = get_env_bool("MAIL_SMTP_USE_SSL", "MAIL_USE_SSL", default=False)
-    use_tls = get_env_bool("MAIL_SMTP_USE_TLS", "MAIL_USE_TLS", default=True)
+    host = get_env("MAIL_SMTP_SERVER")
+    port = get_env_int("MAIL_SMTP_PORT", default=587)
+    username = get_env("MAIL_SMTP_USERNAME")
+    password = get_env("MAIL_SMTP_PASSWORD")
+    mail_from = get_env("MAIL_SMTP_FROM")
+    use_ssl = get_env_bool("MAIL_SMTP_USE_SSL", default=False)
+    use_tls = get_env_bool("MAIL_SMTP_USE_TLS", default=True)
 
     if not host or not username or not password or not mail_from:
         raise HTTPException(status_code=500, detail="SMTP mail config missing")
@@ -284,9 +284,9 @@ def _send_email_via_smtp(to_email: str, subject: str, html_content: str):
         raise HTTPException(status_code=500, detail=f"Mail failed (SMTP): {type(e).__name__}")
 
 def _send_email_via_resend(to_email: str, subject: str, html_content: str):
-    api_key = get_env("MAIL_RESEND_API_KEY", "RESEND_API_KEY")
-    from_email = get_env("MAIL_RESEND_FROM", "RESEND_FROM", "MAIL_FROM", "MAIL_SMTP_FROM")
-    audience = get_env("MAIL_RESEND_AUDIENCE", "RESEND_AUDIENCE")
+    api_key = get_env("MAIL_RESEND_API_KEY")
+    from_email = get_env("MAIL_RESEND_FROM")
+    audience = get_env("MAIL_RESEND_AUDIENCE")
 
     if not api_key or not from_email:
         raise HTTPException(status_code=500, detail="Resend mail config missing")
@@ -457,7 +457,7 @@ async def apple_auth(req: AppleAuthReq, request: Request, db=Depends(get_db)):
             req.token,
             jwks_client.get_signing_key_from_jwt(req.token).key,
             algorithms=["RS256"],
-            audience=get_env("AUTH_APPLE_CLIENT_ID", "APPLE_CLIENT_ID"),
+        audience=get_env("AUTH_APPLE_CLIENT_ID"),
             issuer="https://appleid.apple.com"
         )
         email = idinfo.get('email') or f"{idinfo['sub']}@apple.chilan"

@@ -9,12 +9,10 @@ from config.env import get_env, get_env_int
 # 新密码统一使用 pbkdf2_sha256，避免 Render / Python 3.14 环境下
 # passlib+bcrypt 的兼容问题。旧用户如果库里存的是 bcrypt 哈希，仍做兼容验证。
 
-SECRET_KEY = get_env("SECURITY_JWT_SECRET", "AUTH_JWT_SECRET", "JWT_SECRET", default="fallback_secret")
-ALGORITHM = get_env("SECURITY_JWT_ALGORITHM", "AUTH_JWT_ALGORITHM", "ALGORITHM", default="HS256")
+SECRET_KEY = get_env("SECURITY_JWT_SECRET", default="fallback_secret")
+ALGORITHM = get_env("SECURITY_JWT_ALGORITHM", default="HS256")
 ACCESS_TOKEN_EXPIRE_MINUTES = get_env_int(
     "SECURITY_ACCESS_TOKEN_EXPIRE_MINUTES",
-    "AUTH_ACCESS_TOKEN_EXPIRE_MINUTES",
-    "ACCESS_TOKEN_EXPIRE_MINUTES",
     default=1440,
 )
 

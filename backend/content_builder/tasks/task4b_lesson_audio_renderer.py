@@ -17,7 +17,7 @@ BACKEND_DIR = Path(__file__).resolve().parents[2]
 if str(BACKEND_DIR) not in sys.path:
     sys.path.append(str(BACKEND_DIR))
 
-from config.env import get_env, get_env_int
+from config.env import get_env, get_env_float, get_env_int
 from services.storage.tencent_cos_storage import TencentCOSStorage
 
 
@@ -47,7 +47,7 @@ class Task4BLessonAudioRenderer:
         voice_type: int | None = None,
         codec: str = "mp3",
         sample_rate: int = 16000,
-        speed: float = 0.0,
+        speed: float | None = None,
         volume: float = 0.0,
         model_type: int = 1,
         primary_language: int = 1,
@@ -56,18 +56,18 @@ class Task4BLessonAudioRenderer:
         poll_interval_seconds: int = 3,
         request_timeout_seconds: int = 60,
     ):
-        self.secret_id = (secret_id or get_env("TTS_TENCENT_SECRET_ID", "TENCENT_SECRET_ID", default="") or "").strip()
-        self.secret_key = (secret_key or get_env("TTS_TENCENT_SECRET_KEY", "TENCENT_SECRET_KEY", default="") or "").strip()
-        self.voice_type = voice_type or get_env_int("TTS_TENCENT_DEFAULT_VOICE_TYPE", "TENCENT_TTS_VOICE_TYPE", default=301001)
+        self.secret_id = (secret_id or get_env("TTS_TENCENT_SECRET_ID", default="") or "").strip()
+        self.secret_key = (secret_key or get_env("TTS_TENCENT_SECRET_KEY", default="") or "").strip()
+        self.voice_type = voice_type or get_env_int("TTS_TENCENT_DEFAULT_VOICE_TYPE", default=301001)
         self.role_voice_map = self._load_role_voice_map()
         self.codec = codec
         self.sample_rate = sample_rate
-        self.speed = speed
+        self.speed = speed if speed is not None else get_env_float("TTS_TENCENT_SPEED", default=-0.2)
         self.volume = volume
         self.model_type = model_type
         self.primary_language = primary_language
         self.project_id = project_id
-        self.sentence_gap_ms = get_env_int("TTS_TENCENT_SENTENCE_GAP_MS", "TENCENT_TTS_SENTENCE_GAP_MS", default=sentence_gap_ms)
+        self.sentence_gap_ms = get_env_int("TTS_TENCENT_SENTENCE_GAP_MS", default=sentence_gap_ms)
         self.poll_interval_seconds = poll_interval_seconds
         self.request_timeout_seconds = request_timeout_seconds
         self.cos_storage = TencentCOSStorage.from_env(optional=True)
@@ -77,7 +77,7 @@ class Task4BLessonAudioRenderer:
             raise ValueError("TTS_TENCENT_SECRET_ID / TTS_TENCENT_SECRET_KEY 未配置，无法调用腾讯云 TTS。")
 
     def _load_role_voice_map(self) -> dict[str, int]:
-        env_mapping = (get_env("TTS_TENCENT_ROLE_VOICE_MAP_JSON", "TENCENT_TTS_ROLE_VOICE_MAP_JSON", default="") or "").strip()
+        env_mapping = (get_env("TTS_TENCENT_ROLE_VOICE_MAP_JSON", default="") or "").strip()
         role_map = dict(self.DEFAULT_ROLE_VOICE_MAP)
         if not env_mapping:
             return role_map

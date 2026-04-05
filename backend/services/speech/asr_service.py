@@ -22,7 +22,7 @@ class ASRService:
     )
 
     def __init__(self):
-        self.provider = get_env("ASR_PROVIDER", "ASR_ACTIVE_PROVIDER", default="openai").lower()
+        self.provider = get_env("ASR_PROVIDER", default="openai").lower()
         self.max_audio_bytes = get_env_int("ASR_MAX_AUDIO_BYTES", default=10 * 1024 * 1024)
         self.openai_model = get_env("ASR_OPENAI_MODEL", default="whisper-1")
 
@@ -123,9 +123,9 @@ class ASRService:
         language: Optional[str],
         prompt: Optional[str],
     ) -> Dict[str, Any]:
-        api_key = get_env("ASR_OPENAI_API_KEY", "LLM_OPENAI_API_KEY", "OPENAI_API_KEY")
+        api_key = get_env("ASR_OPENAI_API_KEY", "LLM_OPENAI_API_KEY")
         if not api_key:
-            raise RuntimeError("OpenAI ASR key is missing. Set ASR_OPENAI_API_KEY or OPENAI_API_KEY.")
+            raise RuntimeError("OpenAI ASR key is missing. Set ASR_OPENAI_API_KEY or LLM_OPENAI_API_KEY.")
 
         from openai import OpenAI
 

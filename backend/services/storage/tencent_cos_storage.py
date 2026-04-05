@@ -35,26 +35,25 @@ class TencentCOSStorage:
 
     @classmethod
     def from_env(cls, optional: bool = False):
-        secret_id = get_env("STORAGE_COS_SECRET_ID", "TENCENT_COS_SECRET_ID", default="")
-        secret_key = get_env("STORAGE_COS_SECRET_KEY", "TENCENT_COS_SECRET_KEY", default="")
-        region = get_env("STORAGE_COS_REGION", "TENCENT_COS_REGION", default="")
-        bucket = get_env("STORAGE_COS_BUCKET", "TENCENT_COS_BUCKET", default="")
+        secret_id = get_env("STORAGE_COS_SECRET_ID", default="")
+        secret_key = get_env("STORAGE_COS_SECRET_KEY", default="")
+        region = get_env("STORAGE_COS_REGION", default="")
+        bucket = get_env("STORAGE_COS_BUCKET", default="")
 
         if not all([secret_id, secret_key, region, bucket]):
             if optional:
                 return None
-            raise ValueError("TENCENT_COS_* 环境变量未完整配置。")
+            raise ValueError("STORAGE_COS_* 环境变量未完整配置。")
 
         return cls(
             secret_id=secret_id,
             secret_key=secret_key,
             region=region,
             bucket=bucket,
-            public_base_url=get_env("STORAGE_COS_PUBLIC_BASE_URL", "TENCENT_COS_PUBLIC_BASE_URL", default=""),
-            use_signed_url=get_env_bool("STORAGE_COS_USE_SIGNED_URL", "TENCENT_COS_USE_SIGNED_URL", default=True),
+            public_base_url=get_env("STORAGE_COS_PUBLIC_BASE_URL", default=""),
+            use_signed_url=get_env_bool("STORAGE_COS_USE_SIGNED_URL", default=True),
             signed_url_expires_seconds=get_env_int(
                 "STORAGE_COS_SIGNED_URL_EXPIRES_SECONDS",
-                "TENCENT_COS_SIGNED_URL_EXPIRES_SECONDS",
                 default=3600,
             ),
         )

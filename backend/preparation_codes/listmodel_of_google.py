@@ -8,12 +8,12 @@ from dotenv import load_dotenv
 base_dir = Path(__file__).resolve().parent.parent
 load_dotenv(dotenv_path=base_dir / ".env")
 
-api_key = os.getenv("GEMINI_API_KEY")
+api_key = os.getenv("LLM_GEMINI_API_KEY")
 print(f"--- 调试信息 ---")
 print(f"API Key 加载成功: {api_key is not None}")
 
 if not api_key:
-    print("❌ 错误：请检查 .env 是否在 backend 目录下，且包含 GEMINI_API_KEY")
+    print("❌ 错误：请检查 .env 是否在 backend 目录下，且包含 LLM_GEMINI_API_KEY")
 else:
     # 2. 使用新版客户端
     client = genai.Client(api_key=api_key)

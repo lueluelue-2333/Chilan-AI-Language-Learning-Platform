@@ -26,7 +26,7 @@ class Task4ADramatizationRenderer:
         poll_interval_seconds: int = 3,
         request_timeout_seconds: int = 60,
     ):
-        self.api_key = (api_key or get_env("MEDIA_LUMA_API_KEY", "LUMA_API_KEY", "LUMAAI_API_KEY", default="")).strip()
+        self.api_key = (api_key or get_env("MEDIA_LUMA_API_KEY", default="")).strip()
         self.model = model
         self.resolution = resolution
         self.duration = duration
@@ -36,7 +36,7 @@ class Task4ADramatizationRenderer:
 
     def _headers(self) -> dict[str, str]:
         if not self.api_key:
-            raise ValueError("LUMA_API_KEY 未配置，无法调用 Luma API。")
+            raise ValueError("MEDIA_LUMA_API_KEY 未配置，无法调用 Luma API。")
         return {
             "accept": "application/json",
             "authorization": f"Bearer {self.api_key}",
