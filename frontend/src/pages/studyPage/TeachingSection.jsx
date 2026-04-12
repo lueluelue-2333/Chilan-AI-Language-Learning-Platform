@@ -1,8 +1,7 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import apiClient from '../../api/apiClient';
-import { claimGlobalAudio, releaseGlobalAudio, stopGlobalAudio } from '../../utils/audioPlayback';
 import {
     ArrowRight,
     BookOpen,
@@ -15,6 +14,7 @@ import {
     VolumeX,
     Volume2
 } from 'lucide-react';
+import useTeachingAudio, { buildLessonAudioUrl } from './teaching/hooks/useTeachingAudio';
 
 const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -61,13 +61,6 @@ const InlineAnnotatedText = ({ words = [], showPinyin, pinyinClassName = '', tex
 const normalizeLineRef = (value) => {
     const num = Number(value);
     return Number.isFinite(num) ? num : null;
-};
-
-const buildLessonAudioUrl = (lessonAudioAssets, apiBase) => {
-    const relativeUrl = lessonAudioAssets?.full_audio?.audio_url || '';
-    if (!relativeUrl) return '';
-    if (relativeUrl.startsWith('http://') || relativeUrl.startsWith('https://')) return relativeUrl;
-    return `${apiBase}${relativeUrl}`;
 };
 
 const LESSON_AUDIO_RATES = [0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3];
@@ -173,20 +166,6 @@ export default function TeachingSection({ data, courseId, userId, onStartPractic
     const [vocabPinyin, setVocabPinyin] = useState(true);
     const [vocabTrans, setVocabTrans] = useState(true);
     const [isSaving, setIsSaving] = useState(false);
-    const [playingKey, setPlayingKey] = useState(null);
-    const [lessonAudioDuration, setLessonAudioDuration] = useState(0);
-    const [lessonAudioCurrentTime, setLessonAudioCurrentTime] = useState(0);
-    const [isLessonAudioPlaying, setIsLessonAudioPlaying] = useState(false);
-    const [lessonAudioVolume, setLessonAudioVolume] = useState(1);
-    const [lessonAudioRate, setLessonAudioRate] = useState(1);
-    const [showLessonVolumeControl, setShowLessonVolumeControl] = useState(false);
-    const [showFloatingLessonAudio, setShowFloatingLessonAudio] = useState(false);
-    const [isFloatingLessonAudioOpen, setIsFloatingLessonAudioOpen] = useState(true);
-
-    const audioRef = useRef(null);
-    const lessonAudioRef = useRef(null);
-    const lessonVolumeControlRef = useRef(null);
-    const lessonAudioSectionRef = useRef(null);
     const API_BASE = import.meta.env.VITE_APP_API_BASE_URL || '';
     const lesson_metadata = data?.lesson_metadata || {};
     const course_content = data?.course_content || {};
@@ -202,283 +181,34 @@ export default function TeachingSection({ data, courseId, userId, onStartPractic
         : (isMixedMode ? `🎭 ${t('teaching_content')}` : `💬 ${t('teaching_dialogue')}`);
     const lineItems = dialogues?.flatMap((section) => section.lines || []) || [];
     const lessonFullAudioUrl = buildLessonAudioUrl(lesson_audio_assets, API_BASE);
-
-    const audioAssetMap = useMemo(() => {
-        const map = new Map();
-        (lesson_audio_assets?.items || []).forEach((item) => {
-            const lineRef = normalizeLineRef(item?.line_ref);
-            if (lineRef) map.set(lineRef, item);
-        });
-        return map;
-    }, [lesson_audio_assets]);
-
-    const activeLessonLineRef = useMemo(() => {
-        if (!isLessonAudioPlaying) return null;
-        const currentTime = Number(lessonAudioCurrentTime || 0);
-        const matchedItem = (lesson_audio_assets?.items || []).find((item) => {
-            const lineRef = normalizeLineRef(item?.line_ref);
-            const start = Number(item?.start_time_seconds);
-            const end = Number(item?.end_time_seconds);
-            return lineRef && Number.isFinite(start) && Number.isFinite(end) && currentTime >= start && currentTime < end;
-        });
-        return normalizeLineRef(matchedItem?.line_ref);
-    }, [isLessonAudioPlaying, lessonAudioCurrentTime, lesson_audio_assets]);
-
-    useEffect(() => {
-        return () => {
-            if (audioRef.current) {
-                audioRef.current.pause();
-                audioRef.current = null;
-            }
-            if (lessonAudioRef.current) {
-                lessonAudioRef.current.pause();
-                lessonAudioRef.current = null;
-            }
-            stopGlobalAudio();
-        };
-    }, []);
-
-    useEffect(() => {
-        const handleOutsideClick = (event) => {
-            if (!lessonVolumeControlRef.current?.contains(event.target)) {
-                setShowLessonVolumeControl(false);
-            }
-        };
-
-        if (showLessonVolumeControl) {
-            document.addEventListener('mousedown', handleOutsideClick);
-        }
-
-        return () => {
-            document.removeEventListener('mousedown', handleOutsideClick);
-        };
-    }, [showLessonVolumeControl]);
-
-    useEffect(() => {
-        setLessonAudioCurrentTime(0);
-        setLessonAudioDuration(0);
-        setIsLessonAudioPlaying(false);
-        setShowFloatingLessonAudio(false);
-        setIsFloatingLessonAudioOpen(true);
-        if (lessonAudioRef.current) {
-            lessonAudioRef.current.pause();
-            lessonAudioRef.current = null;
-        }
-    }, [lessonFullAudioUrl]);
-
-    useEffect(() => {
-        if (lessonAudioRef.current) {
-            lessonAudioRef.current.volume = lessonAudioVolume;
-        }
-    }, [lessonAudioVolume]);
-
-    useEffect(() => {
-        if (lessonAudioRef.current) {
-            lessonAudioRef.current.playbackRate = lessonAudioRate;
-        }
-    }, [lessonAudioRate]);
-
-    useEffect(() => {
-        if (!lessonFullAudioUrl) {
-            setShowFloatingLessonAudio(false);
-            return;
-        }
-
-        const updateFloatingPlayerVisibility = () => {
-            const section = lessonAudioSectionRef.current;
-            if (!section) {
-                setShowFloatingLessonAudio(false);
-                return;
-            }
-
-            const rect = section.getBoundingClientRect();
-            const shouldFloat = rect.bottom < 96;
-            setShowFloatingLessonAudio(shouldFloat);
-        };
-
-        updateFloatingPlayerVisibility();
-        window.addEventListener('scroll', updateFloatingPlayerVisibility, { passive: true });
-        window.addEventListener('resize', updateFloatingPlayerVisibility);
-
-        return () => {
-            window.removeEventListener('scroll', updateFloatingPlayerVisibility);
-            window.removeEventListener('resize', updateFloatingPlayerVisibility);
-        };
-    }, [lessonFullAudioUrl]);
+    const {
+        playingKey,
+        lessonAudioDuration,
+        lessonAudioCurrentTime,
+        isLessonAudioPlaying,
+        lessonAudioVolume,
+        lessonAudioRate,
+        showLessonVolumeControl,
+        showFloatingLessonAudio,
+        isFloatingLessonAudioOpen,
+        lessonVolumeControlRef,
+        lessonAudioSectionRef,
+        activeLessonLineRef,
+        setShowLessonVolumeControl,
+        setIsFloatingLessonAudioOpen,
+        playTtsFallback,
+        playDialogueAudio,
+        handleLessonAudioToggle,
+        handleLessonAudioSeek,
+        handleLessonAudioVolumeChange,
+        handleLessonAudioRateChange,
+    } = useTeachingAudio({
+        lessonAudioAssets: lesson_audio_assets,
+        lessonFullAudioUrl,
+        apiBase: API_BASE,
+    });
 
     if (!data) return null;
-
-    const buildAbsoluteAudioUrl = (url) => {
-        if (!url) return '';
-        if (url.startsWith('http://') || url.startsWith('https://')) return url;
-        return `${API_BASE}${url}`;
-    };
-
-    const stopCurrentAudio = () => {
-        if (audioRef.current) {
-            audioRef.current.pause();
-            audioRef.current.currentTime = 0;
-            releaseGlobalAudio(audioRef.current);
-            audioRef.current = null;
-        }
-        setPlayingKey(null);
-    };
-
-    const stopLessonAudio = () => {
-        if (lessonAudioRef.current) {
-            lessonAudioRef.current.pause();
-            lessonAudioRef.current.currentTime = 0;
-            releaseGlobalAudio(lessonAudioRef.current);
-        }
-        setIsLessonAudioPlaying(false);
-        setLessonAudioCurrentTime(0);
-    };
-
-    const playFromUrl = async (url, key) => {
-        if (!url) return;
-
-        if (playingKey === key) {
-            stopCurrentAudio();
-            return;
-        }
-
-        stopCurrentAudio();
-        stopLessonAudio();
-
-        const audio = new Audio(url);
-        claimGlobalAudio(audio);
-        audioRef.current = audio;
-        setPlayingKey(key);
-
-        audio.onpause = () => {
-            if (audioRef.current === audio) {
-                audioRef.current = null;
-            }
-            releaseGlobalAudio(audio);
-            setPlayingKey(null);
-        };
-        audio.onended = () => {
-            if (audioRef.current === audio) {
-                audioRef.current = null;
-            }
-            releaseGlobalAudio(audio);
-            setPlayingKey(null);
-        };
-
-        audio.onerror = () => {
-            if (audioRef.current === audio) {
-                audioRef.current = null;
-            }
-            releaseGlobalAudio(audio);
-            setPlayingKey(null);
-        };
-
-        try {
-            await audio.play();
-        } catch (error) {
-            console.error('播放音频失败:', error);
-            if (audioRef.current === audio) {
-                audioRef.current = null;
-            }
-            releaseGlobalAudio(audio);
-            setPlayingKey(null);
-        }
-    };
-
-    const playTtsFallback = (text, key) => {
-        if (!text) return;
-        const url = `${API_BASE}/study/tts?text=${encodeURIComponent(text)}`;
-        playFromUrl(url, key);
-    };
-
-    const playDialogueAudio = ({ lineRef, text }) => {
-        const item = audioAssetMap.get(normalizeLineRef(lineRef));
-        const readyUrl = buildAbsoluteAudioUrl(item?.audio_url);
-        const playbackKey = `line-${lineRef}`;
-
-        if (readyUrl) {
-            playFromUrl(readyUrl, playbackKey);
-            return;
-        }
-
-        playTtsFallback(text, playbackKey);
-    };
-
-    const handleLessonAudioToggle = async () => {
-        if (!lessonFullAudioUrl) return;
-
-        if (!lessonAudioRef.current) {
-            const audio = new Audio(lessonFullAudioUrl);
-            audio.volume = lessonAudioVolume;
-            audio.playbackRate = lessonAudioRate;
-            if ('preservesPitch' in audio) audio.preservesPitch = true;
-            if ('mozPreservesPitch' in audio) audio.mozPreservesPitch = true;
-            if ('webkitPreservesPitch' in audio) audio.webkitPreservesPitch = true;
-            lessonAudioRef.current = audio;
-
-            audio.onloadedmetadata = () => {
-                setLessonAudioDuration(Number.isFinite(audio.duration) ? audio.duration : 0);
-            };
-            audio.ontimeupdate = () => {
-                setLessonAudioCurrentTime(audio.currentTime || 0);
-            };
-            audio.onpause = () => {
-                setIsLessonAudioPlaying(false);
-                releaseGlobalAudio(audio);
-            };
-            audio.onended = () => {
-                setIsLessonAudioPlaying(false);
-                setLessonAudioCurrentTime(0);
-                releaseGlobalAudio(audio);
-                if (lessonAudioRef.current) {
-                    lessonAudioRef.current.currentTime = 0;
-                }
-            };
-            audio.onerror = () => {
-                setIsLessonAudioPlaying(false);
-                releaseGlobalAudio(audio);
-            };
-        }
-
-        const audio = lessonAudioRef.current;
-        if (!audio) return;
-
-        if (isLessonAudioPlaying) {
-            audio.pause();
-            setIsLessonAudioPlaying(false);
-            return;
-        }
-
-        stopCurrentAudio();
-        claimGlobalAudio(audio, { resetPrevious: true });
-
-        try {
-            await audio.play();
-            setIsLessonAudioPlaying(true);
-        } catch (error) {
-            console.error('播放整课音频失败:', error);
-            setIsLessonAudioPlaying(false);
-            releaseGlobalAudio(audio);
-        }
-    };
-
-    const handleLessonAudioSeek = (event) => {
-        const nextTime = Number(event.target.value || 0);
-        setLessonAudioCurrentTime(nextTime);
-        if (lessonAudioRef.current) {
-            lessonAudioRef.current.currentTime = nextTime;
-        }
-    };
-
-    const handleLessonAudioVolumeChange = (event) => {
-        const nextVolume = Number(event.target.value || 0);
-        setLessonAudioVolume(nextVolume);
-    };
-
-    const handleLessonAudioRateChange = (event) => {
-        const nextRate = Number(event.target.value || 1);
-        setLessonAudioRate(nextRate);
-    };
 
     const handleStartPracticeClick = async () => {
         if (isSaving) return;

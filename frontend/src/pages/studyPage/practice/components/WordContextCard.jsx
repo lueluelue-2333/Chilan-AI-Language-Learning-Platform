@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { BookOpen, Volume2 } from 'lucide-react';
-import { claimGlobalAudio, releaseGlobalAudio } from '../../../utils/audioPlayback';
+import { claimGlobalAudio, releaseGlobalAudio } from '../../../../utils/audioPlayback';
 
 const formatPinyinDisplay = (value = '') => {
     return value
