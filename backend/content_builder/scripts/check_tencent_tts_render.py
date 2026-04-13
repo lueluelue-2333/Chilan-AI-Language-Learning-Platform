@@ -10,7 +10,7 @@ def parse_args():
 
 
 def main():
-    current_dir = Path(__file__).resolve().parent
+    current_dir = Path(__file__).resolve().parent.parent / "artifacts"
     args = parse_args()
     lesson_id = args.lesson_id
 

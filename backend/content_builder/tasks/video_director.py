@@ -1,6 +1,6 @@
 from llm_providers import BaseLLMProvider
-from tasks.task3a_dramatization import Task3DramatizationGenerator
-from tasks.task3b_explanation import Task3ExplanationGenerator
+from tasks._dramatization_writer import Task3DramatizationGenerator
+from tasks._explanation_writer import Task3ExplanationGenerator
 
 
 class Task3LessonVideoPlanner:

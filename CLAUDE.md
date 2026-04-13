@@ -23,9 +23,12 @@ pip install -r requirements.txt   # or: pipenv install
 # Run development server (auto-reload on port 8000)
 python main.py
 
-# Run content builder pipeline (place PDFs in content_builder/raw_materials/ first)
-python content_builder/main.py
-python content_builder/main.py --render-explanation-video   # also render videos
+# Run content builder pipeline (place PDFs in content_builder/artifacts/raw_materials/ first)
+python content_builder/generate.py                          # Stage 1: generate lesson JSON + audio
+python content_builder/render_narration.py                  # Stage 2: narration TTS (all JSONs)
+python content_builder/render_narration.py artifacts/output_json/lesson101_data.json  # single file
+python content_builder/render_narration.py --render-video   # Stage 2: narration + explanation video
+python content_builder/render_narration.py --render-video --lang fr  # French learner version
 ```
 
 ### Frontend (React + Vite)
@@ -63,7 +66,8 @@ React SPA (port 5173) → FastAPI (port 8000) → PostgreSQL (Neon Cloud)
 - **services/study/scheduler.py** — FSRS (Free Spaced Repetition Scheduler) for review interval calculation
 - **services/llm/** — LLM engine (Gemini 2.0 Flash default), embedding providers (Gemini, Doubao, Voyage), evaluation prompts
 - **services/speech/asr_service.py** — Whisper-based speech recognition with noise filtering
-- **services/storage/tencent_cos_storage.py** — Media file storage with signed URLs
+- **services/storage/r2_storage.py** — Cloudflare R2 media storage with presigned URLs
+- **services/storage/media_storage.py** — Factory: `get_media_storage()` returns R2Storage instance
 - **database/connection.py** — PostgreSQL connection (Neon Cloud)
 - **database/sync_to_db.py** — Syncs lesson JSON → database, creates embeddings
 - **config/env.py** — Environment variable helpers (`get_env()`, `get_env_int()`, etc.)
@@ -86,14 +90,17 @@ React SPA (port 5173) → FastAPI (port 8000) → PostgreSQL (Neon Cloud)
 3. Call LLM with answer + context → parse judgment + explanation → return to frontend
 
 ### Content Builder Pipeline
-`raw_materials/*.pdf` → LLM text extraction → structured lesson JSON → `sync_to_db.py` embeds vocabulary → Tencent COS stores audio/video → Remotion renders explanation videos
+Two-stage pipeline with a JSON checkpoint between stages:
+- **Stage 1** (`generate.py`): `artifacts/raw_materials/*.pdf` → LLM extraction → lesson JSON + dialogue audio (local only) → `artifacts/output_json/`
+- **Stage 2** (`render_narration.py`): lesson JSON → narration TTS → optional Remotion+ffmpeg video render → all saved locally; supports `--lang` for multilingual
+- **Stage 3 / Publish** (`sync_to_db.py`): upload all local audio+video to Cloudflare R2 → write object_keys back → sync to PostgreSQL; moves JSON to `artifacts/synced_json/`
 
 ### FSRS Scheduler
 Tracks `stability`, `difficulty`, and `next_review` per user per question. After 5+ consecutive correct answers, marks item as mastered. State stored in `user_progress_of_language_items` table.
 
 ## Environment Configuration
 
-- **Backend**: `backend/.env` — DB URL, LLM API keys (Gemini, Claude, Doubao, Voyage, DeepSeek, Ali, Zhipu), Whisper ASR, TTS (Tencent/Edge), Tencent COS, email (Resend/SMTP), Google OAuth, JWT secret
+- **Backend**: `backend/.env` — DB URL, LLM API keys (Gemini, Claude, Doubao, Voyage, DeepSeek, Ali, Zhipu), Whisper ASR, TTS (Tencent/Edge), Cloudflare R2 (`STORAGE_R2_*`), email (Resend/SMTP), Google OAuth, JWT secret
 - **Frontend dev**: `frontend/.env.development` — sets `VITE_API_BASE_URL=http://localhost:8000`
 - **Frontend prod**: `frontend/.env.production` — production API URL
 

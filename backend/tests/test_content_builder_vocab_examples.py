@@ -12,7 +12,7 @@ for path in (BACKEND_DIR, CONTENT_BUILDER_DIR):
         sys.path.append(path_str)
 
 from content_builder.content_agent import _normalize_dialogues
-from content_builder.tasks.task2_quiz import Task2QuizGenerator
+from content_builder.tasks.quiz_generator import Task2QuizGenerator
 
 
 class DummyLLMProvider:

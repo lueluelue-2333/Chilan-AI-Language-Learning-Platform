@@ -182,8 +182,8 @@ def main():
     parser.add_argument(
         "target",
         nargs="?",
-        default=str(Path(__file__).resolve().parents[1] / "content_builder" / "synced_json"),
-        help="Lesson JSON file or directory. Defaults to backend/content_builder/synced_json.",
+        default=str(Path(__file__).resolve().parents[1] / "content_builder" / "artifacts" / "synced_json"),
+        help="Lesson JSON file or directory. Defaults to backend/content_builder/artifacts/synced_json.",
     )
     parser.add_argument(
         "--apply",

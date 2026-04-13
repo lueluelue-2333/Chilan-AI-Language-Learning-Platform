@@ -29,15 +29,8 @@ backend/preparation_codes/test_case_embedding_cache.json
 textbook/*.pdf
 textbook/*.zip
 
-# content_builder 运行产物
-backend/content_builder/archive_pdfs/
-backend/content_builder/raw_materials/
-backend/content_builder/output_json/
-backend/content_builder/synced_json/
-backend/content_builder/output_audio/
-backend/content_builder/output_video/
-backend/content_builder/test_tts_output/
-backend/content_builder/global_vocab_memory.json
+# content_builder 运行产物（统一在 artifacts/ 下）
+backend/content_builder/artifacts/
 
 # Remotion 自动生成文件
 frontend/remotion/generated/

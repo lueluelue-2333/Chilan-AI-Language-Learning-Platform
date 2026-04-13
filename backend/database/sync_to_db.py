@@ -21,6 +21,11 @@ try:
 except ImportError:
     from connection import get_connection
 
+try:
+    from services.storage.media_storage import get_media_storage
+except ImportError:
+    get_media_storage = None
+
 # ==========================================
 # 1. 环境与配置初始化
 # ==========================================
@@ -92,7 +97,76 @@ def ensure_vocabulary_knowledge_table(cur):
     """)
 
 # ==========================================
-# 3. 核心入库逻辑 (已适配新字段)
+# 3. R2 上传（入库前统一执行）
+# ==========================================
+def upload_assets_to_r2(data: dict) -> dict:
+    """
+    上传 data 中所有本地音频/视频文件到 R2，并将 object_key 和 audio_url/media_url 写回 data。
+    如果 R2 未配置或文件不存在，静默跳过。
+    返回更新后的 data（原地修改，同时也返回以便链式调用）。
+    """
+    if get_media_storage is None:
+        return data
+
+    r2 = get_media_storage(optional=True)
+    if not r2:
+        print("ℹ️ R2 未配置，跳过资源上传（仅本地可用）。")
+        return data
+
+    uploaded = 0
+    failed = 0
+
+    def _upload(local_path: str, object_key: str, content_type: str, label: str) -> str:
+        """上传单个文件，返回上传成功后的 object_key（失败返回原 object_key）。"""
+        nonlocal uploaded, failed
+        p = Path(local_path)
+        if not p.exists():
+            print(f"  ⚠️ 文件不存在，跳过: {p.name}")
+            return object_key
+        try:
+            result = r2.upload_file(str(p), object_key, content_type=content_type)
+            print(f"  ☁️ 已上传 [{label}]: {object_key}")
+            uploaded += 1
+            return result.get("object_key", object_key)
+        except Exception as e:
+            print(f"  ⚠️ R2 上传失败 [{label}]: {e}")
+            failed += 1
+            return object_key
+
+    # ── 1. 课文逐句音频 ──────────────────────────────────────────────────
+    lesson_audio = data.get("lesson_audio_assets", {})
+    if isinstance(lesson_audio, dict):
+        for item in lesson_audio.get("items", []):
+            if not isinstance(item, dict):
+                continue
+            local = (item.get("local_audio_file") or "").strip()
+            key   = (item.get("object_key") or "").strip()
+            if local and key:
+                item["object_key"] = _upload(local, key, "audio/mpeg", f"line {item.get('line_ref', '?')}")
+
+        # ── 2. 整课合并音频 ──────────────────────────────────────────────
+        full = lesson_audio.get("full_audio", {})
+        if isinstance(full, dict):
+            local = (full.get("local_audio_file") or "").strip()
+            key   = (full.get("object_key") or "").strip()
+            if local and key:
+                full["object_key"] = _upload(local, key, "audio/mpeg", "full_audio")
+
+    # ── 3. 讲解视频 ──────────────────────────────────────────────────────
+    video_urls = data.get("explanation_video_urls", {})
+    if isinstance(video_urls, dict):
+        local = (video_urls.get("local_path") or "").strip()
+        key   = (video_urls.get("object_key") or "").strip()
+        if local and key:
+            video_urls["object_key"] = _upload(local, key, "video/mp4", "explanation_video")
+            video_urls["media_url"]  = ""   # 由 study router 在请求时生成签名 URL
+
+    print(f"  📊 R2 上传完成：成功 {uploaded} 个，失败 {failed} 个。")
+    return data
+
+
+# ==========================================
+# 4. 核心入库逻辑
 # ==========================================
 def sync_lesson_data(json_file_path: str, provider: BaseEmbeddingProvider) -> bool:
     with open(json_file_path, 'r', encoding='utf-8') as f:
@@ -282,22 +356,34 @@ def sync_lesson_data(json_file_path: str, provider: BaseEmbeddingProvider) -> bo
         if conn: conn.close()
 
 # ==========================================
-# 4. 执行入口
+# 5. 执行入口
 # ==========================================
 if __name__ == "__main__":
     embed_provider = EmbeddingFactory.create_provider()
-    
+
     # 路径绑定
     content_builder_dir = CURRENT_DIR.parent / "content_builder"
-    output_dir = content_builder_dir / "output_json"
-    synced_dir = content_builder_dir / "synced_json"
+    artifacts_dir = content_builder_dir / "artifacts"
+    output_dir = artifacts_dir / "output_json"
+    synced_dir = artifacts_dir / "synced_json"
     synced_dir.mkdir(exist_ok=True)
-    
+
     json_files = list(output_dir.glob("*_data.json"))
     if not json_files:
         print("📭 没有待处理的 JSON 文件。")
     else:
         for target_json in json_files:
-            print(f"\n🚀 开始同步: {target_json.name}")
+            print(f"\n🚀 开始处理: {target_json.name}")
+
+            with open(target_json, encoding="utf-8") as _f:
+                lesson_data = json.load(_f)
+
+            print("☁️ 上传本地资产到 R2...")
+            lesson_data = upload_assets_to_r2(lesson_data)
+
+            # 写回更新后的 object_key（供入库使用）
+            with open(target_json, "w", encoding="utf-8") as _f:
+                json.dump(lesson_data, _f, ensure_ascii=False, indent=2)
+
             if sync_lesson_data(str(target_json), embed_provider):
                 shutil.move(str(target_json), str(synced_dir / target_json.name))

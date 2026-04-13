@@ -18,7 +18,6 @@ if str(BACKEND_DIR) not in sys.path:
     sys.path.append(str(BACKEND_DIR))
 
 from config.env import get_env, get_env_float, get_env_int
-from services.storage.tencent_cos_storage import TencentCOSStorage
 
 
 class Task4BLessonAudioRenderer:
@@ -70,7 +69,6 @@ class Task4BLessonAudioRenderer:
         self.sentence_gap_ms = get_env_int("TTS_TENCENT_SENTENCE_GAP_MS", default=sentence_gap_ms)
         self.poll_interval_seconds = poll_interval_seconds
         self.request_timeout_seconds = request_timeout_seconds
-        self.cos_storage = TencentCOSStorage.from_env(optional=True)
 
     def _require_credentials(self):
         if not self.secret_id or not self.secret_key:
@@ -428,7 +426,7 @@ class Task4BLessonAudioRenderer:
         items = self._extract_sentence_items(lesson_data, include_speakers=include_speakers)
         rendered_items = []
         sentence_audio_files: list[Path] = []
-        storage_backend = "cos" if self.cos_storage else "local"
+        storage_backend = "local"
         timeline_cursor_seconds = 0.0
 
         for item in items:
@@ -457,21 +455,8 @@ class Task4BLessonAudioRenderer:
             start_time_seconds = round(timeline_cursor_seconds, 3)
             end_time_seconds = round(start_time_seconds + sentence_duration_seconds, 3)
             lesson_folder = output_dir.name
-            audio_url = f"{public_base_url.rstrip('/')}/{lesson_folder}/{filename}"
-            object_key = ""
-
-            if self.cos_storage:
-                try:
-                    upload_result = self.cos_storage.upload_file(
-                        local_path=audio_file,
-                        object_key=f"audio/{lesson_folder}/sentences/{filename}",
-                        content_type="audio/mpeg",
-                    )
-                    object_key = upload_result.get("object_key", "")
-                    audio_url = upload_result.get("public_url", audio_url)
-                except Exception as upload_error:
-                    print(f"  ⚠️ [Tencent COS] line {line_ref} 上传失败，暂时保留本地 URL: {upload_error}")
-                    storage_backend = "local"
+            object_key = f"zh/audio/{lesson_folder}/sentences/{filename}"
+            audio_url = ""
 
             rendered_items.append({
                 "line_ref": line_ref,
@@ -514,24 +499,12 @@ class Task4BLessonAudioRenderer:
             full_audio_duration_seconds = self._probe_audio_duration_seconds(full_audio_file) or timeline_cursor_seconds
             full_audio_payload = {
                 "status": "ready",
-                "audio_url": f"{public_base_url.rstrip('/')}/{lesson_folder}/{full_audio_filename}",
-                "object_key": "",
+                "audio_url": "",
+                "object_key": f"zh/audio/{lesson_folder}/full/{full_audio_filename}",
                 "local_audio_file": str(full_audio_file),
                 "codec": self.codec,
                 "duration_seconds": round(full_audio_duration_seconds, 3),
             }
-            if self.cos_storage:
-                try:
-                    upload_result = self.cos_storage.upload_file(
-                        local_path=full_audio_file,
-                        object_key=f"audio/{lesson_folder}/full/{full_audio_filename}",
-                        content_type="audio/mpeg",
-                    )
-                    full_audio_payload["audio_url"] = upload_result.get("public_url", full_audio_payload["audio_url"])
-                    full_audio_payload["object_key"] = upload_result.get("object_key", "")
-                except Exception as upload_error:
-                    print(f"  ⚠️ [Tencent COS] 整课音频上传失败，暂时保留本地 URL: {upload_error}")
-                    storage_backend = "local"
 
         return {
             "lesson_audio_assets": {

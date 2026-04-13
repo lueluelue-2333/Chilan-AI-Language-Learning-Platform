@@ -8,8 +8,8 @@ const currentFilePath = fileURLToPath(import.meta.url);
 const frontendDir = path.resolve(path.dirname(currentFilePath), '..');
 const projectRoot = path.resolve(frontendDir, '..');
 const lessonId = process.argv[2] || '101';
-const outputJsonPath = path.join(projectRoot, 'backend', 'content_builder', 'output_json', `lesson${lessonId}_data.json`);
-const syncedJsonPath = path.join(projectRoot, 'backend', 'content_builder', 'synced_json', `lesson${lessonId}_data.json`);
+const outputJsonPath = path.join(projectRoot, 'backend', 'content_builder', 'artifacts', 'output_json', `lesson${lessonId}_data.json`);
+const syncedJsonPath = path.join(projectRoot, 'backend', 'content_builder', 'artifacts', 'synced_json', `lesson${lessonId}_data.json`);
 const sourceJsonPath = fs.existsSync(outputJsonPath) ? outputJsonPath : syncedJsonPath;
 
 if (!fs.existsSync(sourceJsonPath)) {
@@ -29,7 +29,7 @@ const generatedModulePath = path.join(frontendDir, 'remotion', 'generated', 'exp
 const moduleSource = `const explanationRenderPlan = ${JSON.stringify(renderPlan, null, 2)};\n\nexport default explanationRenderPlan;\n`;
 fs.writeFileSync(generatedModulePath, moduleSource, 'utf-8');
 
-const outputDir = path.join(projectRoot, 'backend', 'content_builder', 'output_video');
+const outputDir = path.join(projectRoot, 'backend', 'content_builder', 'artifacts', 'output_video');
 fs.mkdirSync(outputDir, { recursive: true });
 const outputFile = path.join(outputDir, `lesson${lessonId}_explanation.mp4`);
 
