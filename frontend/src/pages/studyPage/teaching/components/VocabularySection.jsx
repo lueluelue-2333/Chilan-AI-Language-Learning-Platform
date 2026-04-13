@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BookOpen, Eye, EyeOff, Languages, Volume2 } from 'lucide-react';
+import { Eye, EyeOff, Languages, Volume2, BookOpen } from 'lucide-react';
+import AnnotatedSentence from '../../components/AnnotatedSentence';
 
 function ControlCapsule({ pinyin, setPinyin, trans, setTrans, t }) {
     return (
@@ -85,13 +86,17 @@ export default function VocabularySection({
                                     <span className="text-[10px] font-black text-slate-300">{t('teaching_example')}</span>
                                 </div>
                                 <div className="flex-1">
-                                    <p className={`mb-1 text-sm font-mono text-slate-400 transition-all duration-500 ${vocabPinyin ? 'opacity-100' : 'opacity-0'}`}>
-                                        {vocab.example_sentence.py}
-                                    </p>
                                     <div className="mb-2 flex items-center gap-3">
-                                        <p className="text-xl font-bold tracking-wide text-slate-800">
-                                            {vocab.example_sentence.cn}
-                                        </p>
+                                        <AnnotatedSentence
+                                            tokens={vocab.example_sentence.tokens}
+                                            cn={vocab.example_sentence.cn}
+                                            py={vocab.example_sentence.py}
+                                            showPinyin={vocabPinyin}
+                                            wrapperClassName="flex flex-wrap items-end gap-x-2 gap-y-3"
+                                            tokenClassName="inline-flex flex-col items-center justify-end"
+                                            pinyinClassName="mb-1 min-h-[1.1rem] text-sm font-mono font-bold text-slate-400 normal-case leading-none"
+                                            textClassName="text-xl font-bold text-slate-800 leading-none"
+                                        />
                                         <button
                                             onClick={() => playTtsFallback(vocab.example_sentence.cn, `example-${idx}`)}
                                             className="p-1.5 text-slate-300 transition-colors hover:text-blue-600"

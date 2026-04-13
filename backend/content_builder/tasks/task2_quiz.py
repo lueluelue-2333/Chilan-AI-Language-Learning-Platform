@@ -109,6 +109,7 @@ class Task2QuizGenerator:
             cn = (item.get("cn") or "").strip()
             en = (item.get("en") or "").strip()
             py = (item.get("py") or "").strip()
+            tokens = self._normalize_example(item).get("tokens", [])
 
             if not cn and not en:
                 continue
@@ -118,18 +119,170 @@ class Task2QuizGenerator:
                 continue
 
             seen.add(dedupe_key)
-            deduped.append({"cn": cn, "py": py, "en": en})
+            deduped.append({"cn": cn, "py": py, "en": en, "tokens": tokens})
 
         return deduped
 
     def _normalize_example(self, example: dict | None) -> dict:
         if not isinstance(example, dict):
-            return {"cn": "", "py": "", "en": ""}
+            return {"cn": "", "py": "", "en": "", "tokens": []}
+        normalized_tokens = []
+        for token in example.get("tokens", []) or []:
+            if not isinstance(token, dict):
+                continue
+            normalized_tokens.append({
+                "cn": (token.get("cn") or "").strip(),
+                "py": (token.get("py") or "").strip(),
+            })
         return {
             "cn": (example.get("cn") or "").strip(),
             "py": (example.get("py") or "").strip(),
-            "en": (example.get("en") or "").strip()
+            "en": (example.get("en") or "").strip(),
+            "tokens": normalized_tokens,
         }
+
+    def _slice_matching_tokens(self, target_cn: str, words: list) -> list:
+        normalized_target = (target_cn or "").strip()
+        normalized_words = [
+            {
+                "cn": (token.get("cn") or "").strip(),
+                "py": (token.get("py") or "").strip(),
+            }
+            for token in words or []
+            if isinstance(token, dict) and (token.get("cn") or "").strip()
+        ]
+        if not normalized_target or not normalized_words:
+            return []
+
+        for start in range(len(normalized_words)):
+            buffer = ""
+            matched = []
+            for token in normalized_words[start:]:
+                buffer += token["cn"]
+                matched.append(token)
+                if buffer == normalized_target:
+                    return matched
+                if not normalized_target.startswith(buffer):
+                    break
+        return []
+
+    def _tokens_to_sentence_pinyin(self, tokens: list) -> str:
+        pieces = []
+        punctuation_map = {
+            "，": ",",
+            "。": ".",
+            "？": "?",
+            "！": "!",
+            "：": ":",
+            "；": ";",
+            "、": ",",
+            "（": "(",
+            "）": ")",
+            "“": "\"",
+            "”": "\"",
+            "‘": "'",
+            "’": "'",
+        }
+
+        for token in tokens or []:
+            if not isinstance(token, dict):
+                continue
+            py = (token.get("py") or "").strip()
+            cn = (token.get("cn") or "").strip()
+            if py:
+                if pieces and not pieces[-1].endswith((" ", "(", "\"", "'")):
+                    pieces.append(" ")
+                pieces.append(py)
+            elif cn:
+                pieces.append(punctuation_map.get(cn, cn))
+
+        rendered = "".join(pieces).strip()
+        if not rendered:
+            return ""
+        return rendered[0].upper() + rendered[1:]
+
+    def _find_dialogue_pinyin(self, sentence_cn: str, source_dialogues: list) -> str:
+        target_cn = (sentence_cn or "").strip()
+        if not target_cn:
+            return ""
+
+        for dialogue_block in source_dialogues or []:
+            if not isinstance(dialogue_block, dict):
+                continue
+
+            if "chinese" in dialogue_block:
+                cn = (dialogue_block.get("chinese") or "").strip()
+                words = dialogue_block.get("words", []) or dialogue_block.get("tokens", [])
+                matched_tokens = self._slice_matching_tokens(target_cn, words)
+                if matched_tokens:
+                    return self._tokens_to_sentence_pinyin(matched_tokens)
+                if cn == target_cn:
+                    return (dialogue_block.get("pinyin") or "").strip()
+                continue
+
+            for line in dialogue_block.get("lines", []):
+                if not isinstance(line, dict):
+                    continue
+                words = line.get("words", [])
+                cn = "".join(
+                    token.get("cn", "")
+                    for token in words
+                    if isinstance(token, dict)
+                ).strip()
+                matched_tokens = self._slice_matching_tokens(target_cn, words)
+                if matched_tokens:
+                    return self._tokens_to_sentence_pinyin(matched_tokens)
+
+        return ""
+
+    def _find_dialogue_tokens(self, sentence_cn: str, source_dialogues: list) -> list:
+        target_cn = (sentence_cn or "").strip()
+        if not target_cn:
+            return []
+
+        for dialogue_block in source_dialogues or []:
+            if not isinstance(dialogue_block, dict):
+                continue
+
+            if "chinese" in dialogue_block:
+                words = dialogue_block.get("words", []) or dialogue_block.get("tokens", [])
+                matched_tokens = self._slice_matching_tokens(target_cn, words)
+                if matched_tokens:
+                    return matched_tokens
+
+            for line in dialogue_block.get("lines", []):
+                if not isinstance(line, dict):
+                    continue
+                words = line.get("words", [])
+                cn = "".join(
+                    token.get("cn", "")
+                    for token in words
+                    if isinstance(token, dict)
+                ).strip()
+                matched_tokens = self._slice_matching_tokens(target_cn, words)
+                if matched_tokens:
+                    return matched_tokens
+
+        return []
+
+    def _ensure_example_pinyin(self, example: dict | None, source_dialogues: list) -> dict:
+        normalized = self._normalize_example(example)
+        if normalized["py"] or not normalized["cn"]:
+            if not normalized["tokens"] and normalized["cn"]:
+                normalized["tokens"] = self._find_dialogue_tokens(normalized["cn"], source_dialogues)
+            return normalized
+
+        normalized["tokens"] = normalized["tokens"] or self._find_dialogue_tokens(normalized["cn"], source_dialogues)
+        recovered_pinyin = self._find_dialogue_pinyin(normalized["cn"], source_dialogues)
+        if recovered_pinyin:
+            normalized["py"] = recovered_pinyin
+        return normalized
+
+    def _ensure_example_alignment(self, example: dict | None, source_dialogues: list) -> dict:
+        normalized = self._ensure_example_pinyin(example, source_dialogues)
+        if not normalized["tokens"] and normalized["cn"]:
+            normalized["tokens"] = self._find_dialogue_tokens(normalized["cn"], source_dialogues)
+        return normalized
 
     def _clean_definition_text(self, definition: str) -> str:
         text = (definition or "").strip()
@@ -302,9 +455,23 @@ class Task2QuizGenerator:
             # Flat format: {"role": ..., "chinese": ..., "english": ...}
             if "chinese" in dialogue_block:
                 cn = (dialogue_block.get("chinese") or "").strip()
+                py = (dialogue_block.get("pinyin") or "").strip()
                 en = (dialogue_block.get("english") or "").strip()
+                words = dialogue_block.get("words", []) or dialogue_block.get("tokens", [])
                 if cn and en:
-                    fallback_items.append({"cn": cn, "py": "", "en": en})
+                    fallback_items.append({
+                        "cn": cn,
+                        "py": py,
+                        "en": en,
+                        "tokens": [
+                            {
+                                "cn": (token.get("cn") or "").strip(),
+                                "py": (token.get("py") or "").strip(),
+                            }
+                            for token in words
+                            if isinstance(token, dict) and (token.get("cn") or "").strip()
+                        ],
+                    })
                 continue
 
             # Legacy format: {"lines": [{"words": [...], "english": ...}]}
@@ -324,7 +491,19 @@ class Task2QuizGenerator:
                     if isinstance(token, dict) and token.get("py")
                 ).strip()
                 if cn and en:
-                    fallback_items.append({"cn": cn, "py": py, "en": en})
+                    fallback_items.append({
+                        "cn": cn,
+                        "py": py,
+                        "en": en,
+                        "tokens": [
+                            {
+                                "cn": (token.get("cn") or "").strip(),
+                                "py": (token.get("py") or "").strip(),
+                            }
+                            for token in words
+                            if isinstance(token, dict) and (token.get("cn") or "").strip()
+                        ],
+                    })
 
         return self._dedupe_sentence_materials(fallback_items)
 
@@ -402,7 +581,7 @@ class Task2QuizGenerator:
 
         for idx, vocab in enumerate(vocab_batch):
             raw_example = example_batch[idx] if idx < len(example_batch) else {}
-            normalized_example = self._normalize_example(raw_example)
+            normalized_example = self._ensure_example_alignment(raw_example, source_dialogues)
 
             if self._is_blank_example(normalized_example):
                 normalized_example = self._pick_dialogue_fallback_example(vocab, source_dialogues)
@@ -411,7 +590,10 @@ class Task2QuizGenerator:
             elif not self._example_matches_current_sense(vocab, normalized_example):
                 normalized_example = self._pick_dialogue_fallback_example(vocab, source_dialogues)
 
-            merged.append({**vocab, "example_sentence": normalized_example})
+            merged.append({
+                **vocab,
+                "example_sentence": self._ensure_example_alignment(normalized_example, source_dialogues)
+            })
 
         return merged
 

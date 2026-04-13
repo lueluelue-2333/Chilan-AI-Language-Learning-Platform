@@ -145,9 +145,9 @@ def main():
         help="在生成 lesson JSON 后，顺带渲染该课的教学讲解视频。",
     )
     parser.add_argument(
-        "--skip-sync",
+        "--sync",
         action="store_true",
-        help="跳过自动入库步骤（默认完成后自动同步到数据库）。",
+        help="生成内容后自动同步到数据库（默认只生成 JSON，不入库）。",
     )
     args = parser.parse_args()
 
@@ -161,7 +161,7 @@ def main():
         "CB_RENDER_EXPLANATION_VIDEO",
         default=False,
     )
-    should_sync = not args.skip_sync
+    should_sync = args.sync
     
     # 2. 引擎初始化
     try:

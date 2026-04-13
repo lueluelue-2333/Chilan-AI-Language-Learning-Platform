@@ -3,50 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { BookOpen, Volume2 } from 'lucide-react';
 import { claimGlobalAudio, releaseGlobalAudio } from '../../../../utils/audioPlayback';
+import AnnotatedSentence from '../../components/AnnotatedSentence';
 
-const formatPinyinDisplay = (value = '') => {
-    return value
+const formatPinyinDisplay = (value = '') =>
+    value
         .split(/\s+/)
         .filter(Boolean)
         .map((token) => token.toLowerCase())
         .join(' ');
-};
-
-const isChineseChar = (char = '') => /[\u3400-\u9fff]/.test(char);
-
-const buildRubyTokens = (cn = '', py = '') => {
-    const chars = Array.from(cn || '');
-    const pinyinTokens = formatPinyinDisplay(py).split(/\s+/).filter(Boolean);
-    let pinyinIndex = 0;
-
-    return chars.map((char) => {
-        if (isChineseChar(char)) {
-            const token = pinyinTokens[pinyinIndex] || '';
-            pinyinIndex += 1;
-            return { cn: char, py: token };
-        }
-        return { cn: char, py: '' };
-    });
-};
-
-const RubySentence = ({ cn = '', py = '' }) => {
-    const rubyTokens = buildRubyTokens(cn, py);
-
-    return (
-        <div className="flex flex-wrap items-end gap-x-1 gap-y-3">
-            {rubyTokens.map((token, idx) => (
-                <ruby key={`${token.cn}-${idx}`} className="inline-flex flex-col items-center">
-                    <rt className="mb-1 text-xs font-bold text-slate-400 normal-case">
-                        {token.py}
-                    </rt>
-                    <span className="text-2xl font-black text-slate-800 leading-tight">
-                        {token.cn}
-                    </span>
-                </ruby>
-            ))}
-        </div>
-    );
-};
 
 export default function WordContextCard({ word, pinyin, metadata, knowledgeData }) {
     const { t } = useTranslation();
@@ -159,7 +123,16 @@ export default function WordContextCard({ word, pinyin, metadata, knowledgeData 
                             <div className="flex items-start justify-between gap-4">
                                 <div className="flex-1">
                                     {pinyinOn && ex.py ? (
-                                        <RubySentence cn={ex.cn} py={ex.py} />
+                                        <AnnotatedSentence
+                                            tokens={ex.tokens}
+                                            cn={ex.cn}
+                                            py={ex.py}
+                                            showPinyin
+                                            wrapperClassName="flex flex-wrap items-end gap-x-1 gap-y-3"
+                                            tokenClassName="inline-flex flex-col items-center justify-end"
+                                            pinyinClassName="mb-1 min-h-[0.9rem] text-xs font-bold text-slate-400 normal-case leading-none"
+                                            textClassName="text-2xl font-black text-slate-800 leading-none"
+                                        />
                                     ) : (
                                         <p className="text-2xl font-black text-slate-800 leading-tight">
                                             {ex.cn}
@@ -235,7 +208,16 @@ export default function WordContextCard({ word, pinyin, metadata, knowledgeData 
                                         <div className="flex items-start justify-between gap-4">
                                             <div className="flex-1">
                                                 {showPinyin[`history-${i}`] && h.example?.py ? (
-                                                    <RubySentence cn={h.example.cn} py={h.example.py} />
+                                                    <AnnotatedSentence
+                                                        tokens={h.example.tokens}
+                                                        cn={h.example.cn}
+                                                        py={h.example.py}
+                                                        showPinyin
+                                                        wrapperClassName="flex flex-wrap items-end gap-x-1 gap-y-2"
+                                                        tokenClassName="inline-flex flex-col items-center justify-end"
+                                                        pinyinClassName="mb-1 min-h-[0.75rem] text-[10px] font-bold text-slate-400 normal-case leading-none"
+                                                        textClassName="text-sm font-bold text-slate-700 leading-none"
+                                                    />
                                                 ) : (
                                                     <p className="text-sm font-bold text-slate-700">{h.example.cn}</p>
                                                 )}

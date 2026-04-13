@@ -20,7 +20,7 @@ def _normalize_dialogues(dialogues: list) -> list:
     Handles the legacy format where each item is:
       {"lines": [{"role": ..., "english": ..., "words": [{"cn": ..., "py": ...}]}]}
     and converts it to:
-      [{"role": ..., "chinese": "...", "english": "..."}]
+      [{"role": ..., "chinese": "...", "pinyin": "...", "english": "..."}]
     """
     if not isinstance(dialogues, list):
         return []
@@ -37,14 +37,27 @@ def _normalize_dialogues(dialogues: list) -> list:
                     w.get("cn", "") for w in line.get("words", [])
                     if isinstance(w, dict)
                 )
+                pinyin = " ".join(
+                    w.get("py", "").strip()
+                    for w in line.get("words", [])
+                    if isinstance(w, dict) and (w.get("py") or "").strip()
+                ).strip()
                 result.append({
                     "role": line.get("role", ""),
                     "chinese": chinese,
+                    "pinyin": pinyin,
                     "english": line.get("english", ""),
+                    "words": line.get("words", []),
                 })
         elif "chinese" in item:
-            # Current format — pass through as-is
-            result.append(item)
+            # Current format — preserve any existing pinyin if available.
+            result.append({
+                "role": item.get("role", ""),
+                "chinese": item.get("chinese", ""),
+                "pinyin": item.get("pinyin", ""),
+                "english": item.get("english", ""),
+                "words": item.get("words", []) or item.get("tokens", []),
+            })
     return result
 
 class ContentCreatorAgent:
