@@ -4,7 +4,15 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-from tasks.task4b_lesson_audio_renderer import Task4BLessonAudioRenderer
+import sys
+
+CURRENT_DIR = Path(__file__).resolve().parent
+CONTENT_BUILDER_DIR = CURRENT_DIR.parent
+ARTIFACTS_DIR = CONTENT_BUILDER_DIR / "artifacts"
+if str(CONTENT_BUILDER_DIR) not in sys.path:
+    sys.path.insert(0, str(CONTENT_BUILDER_DIR))
+
+from tasks.dialogue_audio import Task4BLessonAudioRenderer
 
 
 def parse_args():
@@ -17,14 +25,15 @@ def parse_args():
 
 
 def main():
-    current_dir = Path(__file__).resolve().parent
-    backend_dir = current_dir.parent
+    current_dir = CURRENT_DIR
+    content_builder_dir = CONTENT_BUILDER_DIR
+    backend_dir = content_builder_dir.parent
     load_dotenv(dotenv_path=backend_dir / ".env")
 
     args = parse_args()
     lesson_id = args.lesson_id
 
-    source_file = current_dir / "output_json" / f"lesson{lesson_id}_data.json"
+    source_file = ARTIFACTS_DIR / "output_json" / f"lesson{lesson_id}_data.json"
     if not source_file.exists():
         raise FileNotFoundError(f"未找到 lesson 数据文件: {source_file}")
 
@@ -32,7 +41,7 @@ def main():
         lesson_data = json.load(f)
 
     renderer = Task4BLessonAudioRenderer(voice_type=args.voice_type)
-    output_audio_dir = current_dir / "output_audio" / f"lesson{lesson_id}"
+    output_audio_dir = ARTIFACTS_DIR / "output_audio" / f"lesson{lesson_id}"
 
     result = renderer.render_sentence_audio_assets(
         lesson_data=lesson_data,
@@ -41,7 +50,7 @@ def main():
         enable_subtitle=args.enable_subtitle,
     )
 
-    output_file = current_dir / "output_json" / f"lesson{lesson_id}_tencent_tts.json"
+    output_file = ARTIFACTS_DIR / "output_json" / f"lesson{lesson_id}_tencent_tts.json"
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False, indent=2)
 

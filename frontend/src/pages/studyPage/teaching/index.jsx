@@ -47,17 +47,17 @@ function ExplanationVideoPlayer({ videoUrls, title, apiBase, t }) {
     const bilibiliUrl = (videoUrls?.bilibili_url || '').trim();
     const youtubeUrl  = (videoUrls?.youtube_url  || '').trim();
 
-    const cosRaw = (videoUrls?.cos_url || '').trim();
-    const cosUrl = cosRaw
-        ? (cosRaw.startsWith('http') ? cosRaw : `${apiBase}/media/video/${cosRaw}`)
+    const mediaRaw = (videoUrls?.media_url || '').trim();
+    const mediaUrl = mediaRaw
+        ? (mediaRaw.startsWith('http') ? mediaRaw : `${apiBase}/media/video/${mediaRaw}`)
         : '';
 
     const localPath = (videoUrls?.local_path || '').trim();
     // Derive a relative /media/video URL from the local absolute path as fallback
     const localFilename = localPath ? localPath.replace(/\\/g, '/').split('/').pop() : '';
-    const localUrl = (!cosUrl && localFilename) ? `${apiBase}/media/video/${localFilename}` : '';
+    const localUrl = (!mediaUrl && localFilename) ? `${apiBase}/media/video/${localFilename}` : '';
 
-    const videoSrc = cosUrl || localUrl;
+    const videoSrc = mediaUrl || localUrl;
     const hasVideo = !!(youtubeId || videoSrc);
 
     return (

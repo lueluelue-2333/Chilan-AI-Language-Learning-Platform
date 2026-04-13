@@ -9,7 +9,7 @@ test_cosyvoice.py — DashScope CosyVoice TTS 测试
 
 运行方式：
     cd backend/content_builder
-    python test_cosyvoice.py
+    python scripts/test_cosyvoice.py
 
 输出文件保存到 test_tts_output/ 目录
 """
@@ -20,7 +20,8 @@ import json
 import requests
 from pathlib import Path
 
-BACKEND_DIR = Path(__file__).resolve().parents[1]
+CONTENT_BUILDER_DIR = Path(__file__).resolve().parents[1]
+BACKEND_DIR = CONTENT_BUILDER_DIR.parent
 sys.path.insert(0, str(BACKEND_DIR))
 
 from dotenv import load_dotenv
@@ -35,7 +36,7 @@ ENDPOINT = "https://dashscope.aliyuncs.com/api/v1/services/audio/tts/SpeechSynth
 MODEL = "cosyvoice-v3-plus"
 VOICE = "longanyang"   # 系统音色，可替换为其他 v3-plus 支持的音色
 
-OUTPUT_DIR = Path(__file__).parent / "test_tts_output"
+OUTPUT_DIR = CONTENT_BUILDER_DIR / "artifacts" / "test_tts_output"
 
 # 测试文本（模拟旁白常见的中英混合场景）
 SENTENCE = '"你" means You, while "好" means Good. Together, 你好 is the most common Chinese greeting.'

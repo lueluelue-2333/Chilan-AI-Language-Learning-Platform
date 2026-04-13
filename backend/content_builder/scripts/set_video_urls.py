@@ -3,7 +3,7 @@ set_video_urls.py — Update video URLs for a lesson's explanation video.
 
 Usage:
     python set_video_urls.py 101 --show
-    python set_video_urls.py 101 --cos-key "videos/lesson101_explanation_final.mp4"
+    python set_video_urls.py 101 --cos-key "zh/video/en/lesson101_explanation_final.mp4"
     python set_video_urls.py 101 --youtube "https://youtu.be/xxxxx"
     python set_video_urls.py 101 --bilibili "https://b23.tv/xxxxx"
 """
@@ -13,8 +13,10 @@ import json
 import sys
 from pathlib import Path
 
-CURRENT_DIR = Path(__file__).resolve().parent   # backend/content_builder/
-BACKEND_DIR = CURRENT_DIR.parent                # backend/
+CURRENT_DIR = Path(__file__).resolve().parent   # backend/content_builder/scripts/
+CONTENT_BUILDER_DIR = CURRENT_DIR.parent        # backend/content_builder/
+ARTIFACTS_DIR = CONTENT_BUILDER_DIR / "artifacts"
+BACKEND_DIR = CONTENT_BUILDER_DIR.parent        # backend/
 sys.path.insert(0, str(BACKEND_DIR))
 
 from dotenv import load_dotenv
@@ -25,7 +27,7 @@ from psycopg2.extras import Json
 
 
 def _get_lesson_json_path(lesson_id: int) -> Path:
-    return CURRENT_DIR / "output_json" / f"lesson{lesson_id}_data.json"
+    return ARTIFACTS_DIR / "output_json" / f"lesson{lesson_id}_data.json"
 
 
 def show_current(lesson_id: int):
@@ -44,7 +46,7 @@ def show_current(lesson_id: int):
         return
     urls = row["explanation_video_urls"] or {}
     print(f"\nLesson {lesson_id} — explanation_video_urls:")
-    print(f"  cos_url:        {urls.get('cos_url', '(empty)')}")
+    print(f"  media_url:      {urls.get('media_url', '(empty)')}")
     print(f"  youtube_url:    {urls.get('youtube_url', '(empty)')}")
     print(f"  bilibili_url:   {urls.get('bilibili_url', '(empty)')}")
     print(f"  local_path:     {urls.get('local_path', '(empty)')}\n")
@@ -70,9 +72,9 @@ def update_urls(lesson_id: int, youtube_url: str | None, bilibili_url: str | Non
 
     if cos_key is not None:
         # Store only the object key; the study router generates signed URLs on every request
-        video_urls["cos_object_key"] = cos_key.strip()
-        video_urls["cos_url"] = ""   # cleared — backend hydrates this dynamically
-        print(f"  ✅ cos_object_key → {cos_key.strip()}")
+        video_urls["object_key"] = cos_key.strip()
+        video_urls["media_url"] = ""   # cleared — backend hydrates this dynamically
+        print(f"  ✅ object_key → {cos_key.strip()}")
 
     if youtube_url is not None:
         video_urls["youtube_url"] = youtube_url.strip()
@@ -96,7 +98,7 @@ def update_urls(lesson_id: int, youtube_url: str | None, bilibili_url: str | Non
         with open(json_path, "r", encoding="utf-8") as f:
             data = json.load(f)
         existing = data.get("explanation_video_urls") or {}
-        existing.update({k: v for k, v in video_urls.items() if k in ("cos_url", "cos_object_key", "youtube_url", "bilibili_url")})
+        existing.update({k: v for k, v in video_urls.items() if k in ("media_url", "object_key", "youtube_url", "bilibili_url")})
         data["explanation_video_urls"] = existing
         with open(json_path, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
@@ -108,7 +110,7 @@ def main():
         description="Update YouTube / Bilibili URLs for a lesson's explanation video."
     )
     parser.add_argument("lesson_id", type=int, help="Lesson ID (e.g. 101)")
-    parser.add_argument("--cos-key",  type=str, default=None, help="COS object key (e.g. videos/lesson101_explanation_final.mp4)")
+    parser.add_argument("--cos-key",  type=str, default=None, help="R2 object key (e.g. zh/video/en/lesson101_explanation_final.mp4)")
     parser.add_argument("--youtube",  type=str, default=None, help="YouTube video URL")
     parser.add_argument("--bilibili", type=str, default=None, help="Bilibili video URL")
     parser.add_argument("--show",     action="store_true", help="Show current URLs and exit")

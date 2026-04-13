@@ -36,14 +36,14 @@ def _normalize_teaching_video(payload: Any) -> Dict[str, Any]:
 
 
 def _normalize_explanation_video_urls(payload: Any) -> Dict[str, Any]:
-    empty = {"cos_url": "", "cos_object_key": "", "local_path": "", "youtube_url": "", "bilibili_url": ""}
+    empty = {"media_url": "", "object_key": "", "local_path": "", "youtube_url": "", "bilibili_url": ""}
     if not isinstance(payload, dict):
         return empty
     return {
-        "cos_url": (payload.get("cos_url") or "").strip(),
-        "cos_object_key": (payload.get("cos_object_key") or "").strip(),
+        "media_url":  (payload.get("media_url") or "").strip(),
+        "object_key": (payload.get("object_key") or "").strip(),
         "local_path": (payload.get("local_path") or "").strip(),
-        "youtube_url": (payload.get("youtube_url") or "").strip(),
+        "youtube_url":  (payload.get("youtube_url") or "").strip(),
         "bilibili_url": (payload.get("bilibili_url") or "").strip(),
     }
 
@@ -53,12 +53,12 @@ def _hydrate_explanation_video_urls(payload: Any, cos_media_storage=None) -> Dic
     if not cos_media_storage:
         return urls
 
-    object_key = urls.get("cos_object_key", "").strip()
+    object_key = urls.get("object_key", "").strip()
     if object_key:
         try:
-            urls["cos_url"] = cos_media_storage.resolve_url(object_key)
+            urls["media_url"] = cos_media_storage.resolve_url(object_key)
         except Exception as e:
-            print(f"⚠️ COS video 签名 URL 生成失败: {e}")
+            print(f"⚠️ R2 video 签名 URL 生成失败: {e}")
     return urls
 
 

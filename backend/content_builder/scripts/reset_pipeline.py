@@ -2,24 +2,25 @@ import os
 import sys
 import shutil
 import json
-import argparse
 from pathlib import Path
 from dotenv import load_dotenv
 
 # ==========================================
 # 1. 跨目录导入设置
 # ==========================================
-# 获取当前脚本所在目录 (content_builder)
+# 获取当前脚本所在目录 (content_builder/scripts)
 CURRENT_DIR = Path(__file__).resolve().parent
+CONTENT_BUILDER_DIR = CURRENT_DIR.parent
+ARTIFACTS_DIR = CONTENT_BUILDER_DIR / "artifacts"
 # 获取父目录 (backend)
-BACKEND_DIR = CURRENT_DIR.parent
+BACKEND_DIR = CONTENT_BUILDER_DIR.parent
 
 # 将 backend 目录加入系统路径，以便导入 database 文件夹下的模块
 sys.path.append(str(BACKEND_DIR))
 
 try:
     from database.connection import get_connection
-    from services.storage.tencent_cos_storage import TencentCOSStorage
+    from services.storage.media_storage import get_media_storage
 except ImportError:
     print("❌ 导入失败: 无法找到 database.connection。请确保文件夹结构正确。")
     sys.exit(1)
@@ -31,13 +32,13 @@ except ImportError:
 load_dotenv(BACKEND_DIR / ".env")
 
 # 文件夹定义
-RAW_MATERIALS_DIR = CURRENT_DIR / "raw_materials"
-ARCHIVE_PDFS_DIR = CURRENT_DIR / "archive_pdfs"
-SYNCED_JSON_DIR = CURRENT_DIR / "synced_json"
-OUTPUT_JSON_DIR = CURRENT_DIR / "output_json"
-OUTPUT_AUDIO_DIR = CURRENT_DIR / "output_audio"
-OUTPUT_VIDEO_DIR = CURRENT_DIR / "output_video"
-VOCAB_MEMORY_FILE = CURRENT_DIR / "global_vocab_memory.json"
+RAW_MATERIALS_DIR = ARTIFACTS_DIR / "raw_materials"
+ARCHIVE_PDFS_DIR = ARTIFACTS_DIR / "archive_pdfs"
+SYNCED_JSON_DIR = ARTIFACTS_DIR / "synced_json"
+OUTPUT_JSON_DIR = ARTIFACTS_DIR / "output_json"
+OUTPUT_AUDIO_DIR = ARTIFACTS_DIR / "output_audio"
+OUTPUT_VIDEO_DIR = ARTIFACTS_DIR / "output_video"
+VOCAB_MEMORY_FILE = ARTIFACTS_DIR / "global_vocab_memory.json"
 
 def _extract_object_keys(payload):
     keys = set()
@@ -57,7 +58,7 @@ def _extract_object_keys(payload):
     return keys
 
 
-def _collect_local_cos_object_keys():
+def _collect_local_object_keys():
     keys = set()
     for folder in [OUTPUT_JSON_DIR, SYNCED_JSON_DIR]:
         if not folder.exists():
@@ -71,7 +72,7 @@ def _collect_local_cos_object_keys():
     return keys
 
 
-def _collect_db_cos_object_keys(cur):
+def _collect_db_object_keys(cur):
     keys = set()
     try:
         cur.execute("""
@@ -97,36 +98,36 @@ def _collect_db_cos_object_keys(cur):
     return keys
 
 
-def _purge_cos_objects(object_keys):
+def _purge_media_objects(object_keys):
     if not object_keys:
         print("ℹ️ 未检测到需要删除的 COS 媒体对象。")
         return
 
-    storage = TencentCOSStorage.from_env(optional=True)
+    storage = get_media_storage(optional=True)
     if not storage:
-        print("⚠️ 未配置 STORAGE_COS_* 环境变量，跳过 COS 清理。")
+        print("⚠️ 未配置 STORAGE_R2_* 环境变量，跳过云端媒体清理。")
         return
 
     deleted = 0
     failed = 0
-    print(f"☁️ 正在清理 COS 媒体对象，共 {len(object_keys)} 个...")
+    print(f"☁️ 正在清理 R2 媒体对象，共 {len(object_keys)} 个...")
     for object_key in sorted(object_keys):
         try:
             storage.delete_object(object_key)
             deleted += 1
         except Exception as e:
             failed += 1
-            print(f"⚠️ COS 删除失败: {object_key} | {e}")
+            print(f"⚠️ R2 删除失败: {object_key} | {e}")
 
-    print(f"✅ COS 清理完成：成功 {deleted} 个，失败 {failed} 个。")
+    print(f"✅ R2 清理完成：成功 {deleted} 个，失败 {failed} 个。")
 
 
 def reset_pipeline(with_cos: bool = True):
     print(f"🧹 [全系统重置] 正在清理测试数据...")
-    print(f"☁️ 云端媒体清理: {'开启' if with_cos else '关闭 (--skip-cos)'}")
+    print(f"☁️ 云端媒体清理: {'开启' if with_cos else '关闭'}")
     print("---------------------------------------------")
 
-    local_cos_object_keys = _collect_local_cos_object_keys() if with_cos else set()
+    local_object_keys = _collect_local_object_keys() if with_cos else set()
 
     # --- 1. 删除本地词汇记忆库 ---
     if VOCAB_MEMORY_FILE.exists():
@@ -192,13 +193,13 @@ def reset_pipeline(with_cos: bool = True):
     # --- 6. 数据库清空 (课程/题目/学习进度) ---
     conn = None
     cur = None
-    db_cos_object_keys = set()
+    db_object_keys = set()
     try:
         conn = get_connection()
         cur = conn.cursor()
 
         if with_cos:
-            db_cos_object_keys = _collect_db_cos_object_keys(cur)
+            db_object_keys = _collect_db_object_keys(cur)
 
         print("🎯 正在清空数据库表 [lessons]、[language_items]、[vocabulary_knowledge]、[user_progress_of_lessons] 和 [user_progress_of_language_items]...")
         # TRUNCATE 是最干净的方式，RESTART IDENTITY 会让自增 ID 回到 1
@@ -222,25 +223,72 @@ def reset_pipeline(with_cos: bool = True):
         if conn: conn.close()
 
     if with_cos:
-        _purge_cos_objects(local_cos_object_keys.union(db_cos_object_keys))
+        _purge_media_objects(local_object_keys.union(db_object_keys))
 
     print("---------------------------------------------")
     print("✨ [重置完成] 系统已恢复初始状态。")
 
+
+def reset_narration():
+    """仅清除 Stage 2 旁白音轨产物（*_narration/ 目录），保留 Stage 1 内容不动。"""
+    print("🎙️ [旁白重置] 正在清理旁白音轨产物...")
+    print("---------------------------------------------")
+
+    if not OUTPUT_AUDIO_DIR.exists():
+        print("ℹ️ output_audio 目录不存在，无需清理。")
+        return
+
+    narration_dirs = [p for p in OUTPUT_AUDIO_DIR.iterdir() if p.is_dir() and p.name.endswith("_narration")]
+    if not narration_dirs:
+        print("ℹ️ 未发现旁白音轨目录，无需清理。")
+        return
+
+    for d in narration_dirs:
+        shutil.rmtree(d, ignore_errors=True)
+
+    print(f"✅ 已清除 {len(narration_dirs)} 个旁白目录: {', '.join(d.name for d in narration_dirs)}")
+    print("---------------------------------------------")
+    print("✨ [旁白重置完成] Stage 1 内容保持不变，可重新运行 render_narration.py。")
+
+
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Reset content builder outputs and lesson database records.")
-    parser.add_argument(
-        "--skip-cos",
-        action="store_true",
-        help="跳过腾讯云 COS 媒体对象的清理（默认会一并清理）。",
-    )
-    args = parser.parse_args()
+    print("=" * 48)
+    print("  🧹 Content Builder 重置工具")
+    print("=" * 48)
+    print()
+    print("  [1] 全量重置（含 COS 云端媒体）")
+    print("      清除: JSON / 音频 / 视频 / 数据库 / COS")
+    print()
+    print("  [2] 全量重置（跳过 COS）")
+    print("      清除: JSON / 音频 / 视频 / 数据库")
+    print()
+    print("  [3] 仅重置旁白（Stage 2）")
+    print("      清除: output_audio/*_narration/ 目录")
+    print()
+    print("  [0] 取消")
+    print()
 
-    with_cos = not args.skip_cos
-    target_scope = "JSON、音频文件、数据库记录" + ("、COS 云端媒体对象" if with_cos else "")
+    choice = input("  请输入选项: ").strip()
 
-    confirm = input(f"⚠️  注意：此操作将物理删除所有生成的 {target_scope}！确定继续？(y/n): ")
-    if confirm.lower() == 'y':
-        reset_pipeline(with_cos=with_cos)
-    else:
+    if choice == "0" or choice == "":
         print("🚪 已取消操作。")
+    elif choice == "1":
+        confirm = input("⚠️  将物理删除所有 JSON、音频、视频、数据库记录及 COS 媒体对象！确定继续？(y/n): ")
+        if confirm.lower() == "y":
+            reset_pipeline(with_cos=True)
+        else:
+            print("🚪 已取消操作。")
+    elif choice == "2":
+        confirm = input("⚠️  将物理删除所有 JSON、音频、视频及数据库记录！确定继续？(y/n): ")
+        if confirm.lower() == "y":
+            reset_pipeline(with_cos=False)
+        else:
+            print("🚪 已取消操作。")
+    elif choice == "3":
+        confirm = input("⚠️  将删除所有旁白音轨目录（*_narration/），Stage 1 内容保持不变。确定继续？(y/n): ")
+        if confirm.lower() == "y":
+            reset_narration()
+        else:
+            print("🚪 已取消操作。")
+    else:
+        print("❌ 无效选项，已退出。")
