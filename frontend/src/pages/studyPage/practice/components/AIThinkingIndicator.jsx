@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
-export default function AIThinkingIndicator({ label = 'AI 导师正在分析你的回答...' }) {
+export default function AIThinkingIndicator({ label }) {
+    const { t } = useTranslation();
     return (
         <div className="rounded-[2rem] border border-slate-200 bg-slate-50/70 px-6 py-5">
             <div className="flex items-center gap-4">
@@ -22,9 +24,9 @@ export default function AIThinkingIndicator({ label = 'AI 导师正在分析你�
                 </div>
 
                 <div className="flex-1">
-                    <p className="text-sm font-black uppercase tracking-[0.22em] text-slate-400">AI FEEDBACK</p>
+                    <p className="text-sm font-black uppercase tracking-[0.22em] text-slate-400">{t('practice_ai_feedback_title')}</p>
                     <div className="mt-2 flex items-center gap-3">
-                        <p className="text-lg font-bold text-slate-700">{label}</p>
+                        <p className="text-lg font-bold text-slate-700">{label ?? t('practice_ai_analyzing')}</p>
                         <div className="flex items-center gap-1.5">
                             {[0, 1, 2].map((dot) => (
                                 <motion.span
