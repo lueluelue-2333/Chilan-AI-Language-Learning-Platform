@@ -150,13 +150,13 @@ export default function WordContextCard({ word, pinyin, metadata, knowledgeData 
                                         onClick={() => togglePinyin(key)}
                                         className={`px-3 py-2 rounded-xl text-xs font-black uppercase tracking-[0.18em] transition-colors ${pinyinOn ? 'bg-orange-100 text-orange-500' : 'bg-slate-100 text-slate-400 hover:bg-slate-200'}`}
                                     >
-                                        拼音
+                                        {t('word_pinyin_btn')}
                                     </button>
                                     <button
                                         onClick={() => toggleTranslation(key)}
                                         className={`px-3 py-2 rounded-xl text-xs font-black uppercase tracking-[0.18em] transition-colors ${translationOn ? 'bg-blue-100 text-blue-500' : 'bg-slate-100 text-slate-400 hover:bg-slate-200'}`}
                                     >
-                                        译
+                                        {t('word_translation_btn')}
                                     </button>
                                 </div>
                             </div>

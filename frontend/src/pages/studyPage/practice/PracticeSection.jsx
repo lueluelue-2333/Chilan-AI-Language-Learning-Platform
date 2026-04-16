@@ -381,7 +381,7 @@ export default function PracticeSection({ questions, isReview, onAllDone, userId
                                         disabled={isEvaluating}
                                         className={`w-full py-5 rounded-[1.2rem] font-black text-xl transition-all flex items-center justify-center gap-3 shadow-lg ${secondaryButtonClass}`}
                                     >
-                                        不会，查看答案
+                                        {t('practice_forfeit')}
                                         <span className="text-xs font-normal opacity-50 tracking-widest uppercase">Tab+Enter</span>
                                     </button>
                                 </motion.div>
@@ -416,7 +416,7 @@ export default function PracticeSection({ questions, isReview, onAllDone, userId
                                 transition={{ duration: 0.28, ease: 'easeOut' }}
                                 className="space-y-5"
                             >
-                                <AIThinkingIndicator label="AI 导师正在分析你的回答..." />
+                                <AIThinkingIndicator />
                             </motion.div>
                         )}
                     </AnimatePresence>

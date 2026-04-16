@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Loader2, RefreshCcw, Sparkles } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import WordContextCard from './WordContextCard';
 
 const splitFeedbackParagraphs = (message = '') =>
@@ -29,6 +30,7 @@ export default function PracticeFeedbackPanel({
     currentQuestion,
     knowledgeDetails,
 }) {
+    const { t } = useTranslation();
     const [activeAction, setActiveAction] = React.useState(feedback.level === 1 ? 'retry' : 'next');
 
     React.useEffect(() => {
@@ -46,16 +48,12 @@ export default function PracticeFeedbackPanel({
 
     return (
         <motion.div ref={actionsRef} key="feedback-area" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-5">
-            {feedback.forfeited && (
-                <div className="rounded-[2rem] border border-amber-200 bg-amber-50/80 px-6 py-5">
-                    <p className="text-xs font-black uppercase tracking-widest text-amber-500 mb-3">标准答案</p>
-                    <div className="space-y-1.5">
-                        {(currentQuestion.standard_answers || []).map((ans, i) => (
-                            <p key={i} className="text-2xl font-black text-slate-800">{ans}</p>
-                        ))}
-                    </div>
-                </div>
-            )}
+            <div className="rounded-2xl border border-slate-200 bg-white/80 px-5 py-4">
+                <p className="text-[11px] font-black uppercase tracking-widest text-slate-400 mb-2">{t('practice_std_answer')}</p>
+                <p className="text-xl font-black text-slate-800">
+                    {(currentQuestion.standard_answers || []).join(' · ')}
+                </p>
+            </div>
 
             {!isPerfectFeedback && !feedback.forfeited && (
                 <div className="rounded-[2rem] border border-slate-200 bg-slate-50/70 px-6 py-5">
@@ -78,7 +76,7 @@ export default function PracticeFeedbackPanel({
                                         </motion.div>
                                     </div>
                                     <p className="text-xs font-black uppercase tracking-[0.22em] text-slate-400">
-                                        AI 导师正在生成反馈
+                                        {t('practice_ai_thinking')}
                                     </p>
                                 </motion.div>
                             )}
@@ -101,23 +99,12 @@ export default function PracticeFeedbackPanel({
                         </div>
                         {speechMode && feedback.recognizedText && (
                             <div className="rounded-2xl bg-white/90 px-4 py-3">
-                                <p className="text-[11px] font-black uppercase tracking-[0.18em] text-slate-400">本次识别文本</p>
+                                <p className="text-[11px] font-black uppercase tracking-[0.18em] text-slate-400">{t('practice_asr_recognized')}</p>
                                 <p className="mt-1 text-base font-semibold text-slate-700">
                                     "{feedback.recognizedText}"
                                 </p>
                             </div>
                         )}
-                    </div>
-                </div>
-            )}
-
-            {!feedback.forfeited && (
-                <div className="rounded-2xl border border-slate-200 bg-white/80 px-5 py-4">
-                    <p className="text-[11px] font-black uppercase tracking-widest text-slate-400 mb-2">标准答案</p>
-                    <div className="space-y-1">
-                        {(currentQuestion.standard_answers || []).map((ans, i) => (
-                            <p key={i} className="text-xl font-black text-slate-800">{ans}</p>
-                        ))}
                     </div>
                 </div>
             )}
@@ -133,7 +120,7 @@ export default function PracticeFeedbackPanel({
                             className={`w-full py-5 rounded-[1.2rem] font-black text-xl transition-all flex items-center justify-center gap-3 shadow-lg disabled:bg-slate-200 disabled:text-slate-400 ${resolveButtonClass('retry')}`}
                         >
                             {isBusy ? <Loader2 className="animate-spin" /> : <RefreshCcw size={22} />}
-                            {speechMode ? '重新录音' : '重新作答'}
+                            {speechMode ? t('practice_retry_speech') : t('practice_retry_text')}
                             <span className={`ml-2 font-normal text-xs uppercase tracking-widest opacity-70 ${enterHintClass('retry')}`}>Enter</span>
                         </button>
                         <button
@@ -141,7 +128,7 @@ export default function PracticeFeedbackPanel({
                             onFocus={() => setActiveAction('skip')}
                             className={`w-full py-5 rounded-[1.2rem] font-black text-xl transition-all flex items-center justify-center gap-3 shadow-lg ${resolveButtonClass('skip')}`}
                         >
-                            跳过本题
+                            {t('practice_skip_question')}
                             <ArrowRight size={22} />
                         </button>
                     </>
@@ -152,7 +139,7 @@ export default function PracticeFeedbackPanel({
                         onFocus={() => setActiveAction('next')}
                         className={`w-full py-5 rounded-[1.2rem] font-black text-xl transition-all flex items-center justify-center shadow-lg ${resolveButtonClass('next')}`}
                     >
-                        {currentIndex === totalQuestions - 1 ? '完成本轮练习' : '下一题'}
+                        {currentIndex === totalQuestions - 1 ? t('practice_finish_round') : t('practice_next_question')}
                         <span className={`ml-3 font-normal text-xs uppercase tracking-widest opacity-70 ${enterHintClass('next')}`}>Enter</span>
                     </button>
                 )}
